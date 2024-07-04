@@ -15,7 +15,13 @@ const Topbar = () => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   return (
-    <Box display="flex" justifyContent="space-between" paddingX={"30px"}>
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      // alignItems="start"
+      paddingX={"30px"}
+      sx={{ justifyContent: "space-between" }}
+    >
       <SearchBar />
 
       <Box display={"flex"}>
