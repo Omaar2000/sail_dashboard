@@ -5,12 +5,18 @@ import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { Menu, MenuItem, Sidebar, useProSidebar } from "react-pro-sidebar";
+import {
+  Menu,
+  MenuItem,
+  Sidebar,
+  SubMenu,
+  useProSidebar,
+} from "react-pro-sidebar";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Item = ({
   icon,
@@ -29,14 +35,19 @@ const Item = ({
         active={selected === title}
         icon={icon}
         onClick={() => {
-          setSelected(title);
+          setSelected(to);
         }}
         onMouseEnter={() => setHovered(title)}
         onMouseLeave={() => setHovered(null)}
         style={{
-          textAlign: "center",
+          textAlign: "left",
           color: colors.grey[100],
-          background: hovered === title ? "red" : "transparent",
+          backgroundColor:
+            selected === to
+              ? colors.primary[700]
+              : hovered === title
+              ? colors.primary[800]
+              : colors.primary[400],
         }}
       >
         {title}
@@ -48,9 +59,19 @@ const Item = ({
 const SidebarComponent = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  console.log(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(true);
-  const [Selected, setSelected] = useState("Dashboard");
+  const [providerHover, setProviderdHover] = useState(false);
+  const [boatHover, setBoatHover] = useState(false);
+  const params = useParams();
+  console.log(params["*"]);
+  const [Selected, setSelected] = useState(
+    params["*"] === "" ? "/" : params["*"]
+  );
+  console.log(Selected);
+
   const [hovered, setHovered] = useState(null);
+
   return (
     <Sidebar
       collapsed={isCollapsed}
@@ -109,75 +130,171 @@ const SidebarComponent = () => {
           )}
         </Box>
 
-        {/* <MenuItem
-          active={Selected === "Dashboard"}
+        <Item
+          title={"Home"}
           icon={<MenuOutlinedIcon />}
-          onClick={() => {
-            setSelected("Dashboard");
-          }}
-          onMouseEnter={() => setHovered("Dashboard")}
-          onMouseLeave={() => setHovered(null)}
-          style={{
-            textAlign: "center",
-            color: colors.grey[100],
-            background: hovered === "Dashboard" ? "red" : "transparent",
-            "&::hover": {
-              background: "red",
-            },
-          }}
-        >
-          Dashboard
-        </MenuItem> */}
+          to={"/"}
+          selected={Selected}
+          setSelected={setSelected}
+          hovered={hovered}
+          setHovered={setHovered}
+        />
         <Item
           title={"Users"}
           icon={<MenuOutlinedIcon />}
-          to={"/users"}
+          to={"users"}
           selected={Selected}
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
         />
-
-        <Item
-          title={"Boat Data"}
+        <SubMenu
+          label="Boats Data"
           icon={<MenuOutlinedIcon />}
-          to={"/boatdata"}
+          // style={{ backgroundColor: boatHover }}
+          style={{
+            backgroundColor: boatHover
+              ? colors.primary[800]
+              : colors.primary[400],
+          }}
+          onMouseEnter={() => setBoatHover(true)}
+          onMouseLeave={() => setBoatHover(false)}
+        >
+          <Item
+            title={"Categories"}
+            icon={<MenuOutlinedIcon />}
+            to={"categories"}
+            selected={Selected}
+            setSelected={setSelected}
+            hovered={hovered}
+            setHovered={setHovered}
+          />
+          <Item
+            title={"Boats Routes"}
+            icon={<MenuOutlinedIcon />}
+            to={"boatroutes"}
+            selected={Selected}
+            setSelected={setSelected}
+            hovered={hovered}
+            setHovered={setHovered}
+          />
+        </SubMenu>
+        <Item
+          title={"Reviews"}
+          icon={<MenuOutlinedIcon />}
+          to={"reviews"}
           selected={Selected}
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
         />
         <Item
-          title={"Ratings"}
+          title={"Covers"}
           icon={<MenuOutlinedIcon />}
-          to={"/ratings"}
+          to={"covers"}
+          selected={Selected}
+          setSelected={setSelected}
+          hovered={hovered}
+          setHovered={setHovered}
+        />
+        <SubMenu
+          label="Providers"
+          icon={<MenuOutlinedIcon />}
+          // style={{ backgroundColor: providerHover }}
+          style={{
+            backgroundColor: providerHover
+              ? colors.primary[800]
+              : colors.primary[400],
+          }}
+          onMouseEnter={() => setProviderdHover(true)}
+          onMouseLeave={() => setProviderdHover(false)}
+        >
+          <Item
+            title={"All Providers"}
+            icon={<MenuOutlinedIcon />}
+            to={"allproviders"}
+            selected={Selected}
+            setSelected={setSelected}
+            hovered={hovered}
+            setHovered={setHovered}
+          />
+          <Item
+            title={"Providers Requests"}
+            icon={<MenuOutlinedIcon />}
+            to={"providersrequests"}
+            selected={Selected}
+            setSelected={setSelected}
+            hovered={hovered}
+            setHovered={setHovered}
+          />
+          <Item
+            title={"Payout Requests"}
+            icon={<MenuOutlinedIcon />}
+            to={"payoutrequests"}
+            selected={Selected}
+            setSelected={setSelected}
+            hovered={hovered}
+            setHovered={setHovered}
+          />
+        </SubMenu>
+        <Item
+          title={"Orders"}
+          icon={<MenuOutlinedIcon />}
+          to={"orders"}
           selected={Selected}
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
         />
         <Item
-          title={"Advertising"}
+          title={"Supervisors"}
           icon={<MenuOutlinedIcon />}
-          to={"/advertising"}
+          to={"supervisors"}
           selected={Selected}
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
         />
         <Item
-          title={"Service Providers"}
+          title={"Notifications"}
           icon={<MenuOutlinedIcon />}
-          to={"/providers"}
+          to={"notifications"}
           selected={Selected}
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
         />
         <Item
-          title={"Requests"}
+          title={"Complaints"}
           icon={<MenuOutlinedIcon />}
-          to={"/requests"}
+          to={"complaints"}
+          selected={Selected}
+          setSelected={setSelected}
+          hovered={hovered}
+          setHovered={setHovered}
+        />
+        <Item
+          title={"Transactions"}
+          icon={<MenuOutlinedIcon />}
+          to={"transactions"}
+          selected={Selected}
+          setSelected={setSelected}
+          hovered={hovered}
+          setHovered={setHovered}
+        />
+        <Item
+          title={"Payouts"}
+          icon={<MenuOutlinedIcon />}
+          to={"payouts"}
+          selected={Selected}
+          setSelected={setSelected}
+          hovered={hovered}
+          setHovered={setHovered}
+        />
+        <Item
+          title={"Settings"}
+          icon={<MenuOutlinedIcon />}
+          to={"settings"}
           selected={Selected}
           setSelected={setSelected}
           hovered={hovered}

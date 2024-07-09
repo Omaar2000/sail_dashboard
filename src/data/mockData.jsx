@@ -1,13 +1,103 @@
+import {
+  AdminPanelSettingsOutlined,
+  LockOpenOutlined,
+  SecurityOutlined,
+} from "@mui/icons-material";
+import ImageModal from "../components/ImageModal";
 import { tokens } from "../theme";
+import { Box, Typography } from "@mui/material";
+import AccessCell from "../components/Access";
+import EditBtn from "../components/EditBtn";
+
+export const userColumns = [
+  {
+    field: "name",
+    headerName: "Name",
+    flex: 0,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "id",
+    headerName: "ID",
+    flex: 0,
+    cellClassName: "name-column--cell",
+  },
+  {
+    field: "age",
+    headerName: "Age",
+    type: "number",
+    headerAlign: "left",
+    align: "left",
+    editable: true,
+  },
+  {
+    field: "phone",
+    headerName: "Phone Number",
+    flex: 1,
+    editable: true,
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    flex: 1,
+  },
+  {
+    field: "access",
+    headerName: "Access Level",
+    type: "select",
+    flex: 1,
+    required: true,
+    renderCell: ({ row: { access } }) => <AccessCell access={access} />,
+  },
+  {
+    field: "edit",
+    headerName: "Edit",
+    flex: 1,
+    renderCell: ({ row }) => <EditBtn row={row} />,
+  },
+];
+
+export const categoriesColumns = [
+  {
+    field: "title",
+    headerName: "Title",
+    flex: 0,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "type",
+    headerName: "Type",
+    flex: 1,
+  },
+  {
+    field: "image_url",
+    headerName: "Image",
+    flex: 1,
+    required: true,
+    renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
+  },
+];
 
 export const mockDataTeam = [
+  // {
+  //   id: "NO ROW DATA",
+  //   name: "NO ROW DATA",
+  //   email: "NO ROW DATA",
+  //   age: "NO ROW DATA",
+  //   phone: "NO ROW DATA",
+  //   access: "NO ROW DATA",
+  //   study: "NO ROW DATA",
+  // },
   {
     id: 1,
-    name: "Jon Snow",
-    email: "jonsnow@gmail.com",
-    age: 35,
-    phone: "(665)121-5454",
-    access: "admin",
+    name: "yosef sherif",
+    email: "youssef123@gmail.com",
+    age: 13,
+    phone: "01206809456",
+    access: "manager",
+    study: "student",
   },
   {
     id: 2,
@@ -51,11 +141,11 @@ export const mockDataTeam = [
   },
   {
     id: 7,
-    name: "Ferrara Clifford",
-    email: "ferraraclifford@gmail.com",
-    age: 44,
-    phone: "(543)124-0123",
-    access: "user",
+    name: "Mohamed mehani",
+    email: "mohamedmehani@gmail.com",
+    age: 13,
+    phone: "01221885346",
+    access: "manager",
   },
   {
     id: 8,

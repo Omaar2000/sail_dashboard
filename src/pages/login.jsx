@@ -13,25 +13,58 @@ import { Label } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useUserStore from "../stores/useUserStore";
+import axios from "axios";
 
 const Login = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { user, login, logout } = useUserStore();
 
   const navigate = useNavigate();
-  const login = useUserStore((state) => state.login);
+  // const login = useUserStore((state) => state.login);
   // const history = history();
+
+  // const login = async (username, password) => {
+  //   try {
+  //     const response = await fetch("api/admin/auth/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         user_name: "MartinzzSam",
+  //         password: "Test1234@",
+  //       }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+
+  //     const data = await response.json();
+  //     console.log(data);
+  //     return data; // Assuming response data contains the token
+  //   } catch (error) {
+  //     console.error("Login API call failed:", error);
+  //     throw error; // Rethrow the error to be handled by the caller
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("Username:", username);
+    console.log("Password:", password);
+
     try {
-      await login(username, password); // Call the login function from the store
+      const res = await login(username, password);
+      console.log("Login successful, token:", res);
       navigate("/dashboard"); // Redirect to the dashboard after successful login
     } catch (error) {
+      console.error("Login failed. Error details:", error);
       // setError("Login failed. Please check your credentials and try again.");
-      console.log(error, "errrrrrrrrrrrrrrrrrrrrrrrrrorr");
       // Handle login failure (show error message, clear form, etc.)
     }
   };
@@ -62,12 +95,14 @@ const Login = () => {
           flexDirection="column"
           alignItems={"center"}
           gap={"10px"}
+          required
         >
           <h2 style={{ color: `${colors.primary[400]}` }}>Login to Continue</h2>
           <Box>
             <InputLabel
               sx={{ color: "black", fontSize: "12px", pl: "6px" }}
               htmlFor="username"
+              required
             >
               Username
             </InputLabel>

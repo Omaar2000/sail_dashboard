@@ -10,8 +10,10 @@ import {
   SettingsOutlined,
 } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
+import useUserStore from "../../stores/useUserStore";
 
 const Topbar = () => {
+  const { logout } = useUserStore();
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   return (
@@ -38,7 +40,7 @@ const Topbar = () => {
         <IconButton>
           <SettingsOutlined />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={logout}>
           <PersonOutlineOutlined />
         </IconButton>
       </Box>
