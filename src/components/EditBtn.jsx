@@ -3,12 +3,14 @@ import EditModal from "./editModal";
 import { useState } from "react";
 import { mockDataTeam, userColumns } from "../data/mockData";
 import AddModal from "./addModal";
+import { useNavigate } from "react-router-dom";
 
-const EditBtn = ({ row }) => {
+const EditBtn = ({ to, row }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [data, setData] = useState([]);
-  const handleAddClick = () => {
-    setOpenAddModal(true);
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(to, { state: row });
   };
 
   const handleCloseAddModal = () => {
@@ -21,14 +23,13 @@ const EditBtn = ({ row }) => {
     ];
     setData(updatedData);
   };
-  console.log(row);
   return (
     <>
       <Button
         variant="contained"
         color="primary"
         type="button"
-        onClick={handleAddClick}
+        onClick={handleClick}
       >
         Edit
       </Button>

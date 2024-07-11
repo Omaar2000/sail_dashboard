@@ -9,10 +9,14 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import SidebarComponent from "./components/layout/Sidebar";
 import Login from "./pages/login";
 import PrivateRoute from "./pages/privateRoute/PrivateRoute";
-import TableComponent, { getAllCategories } from "./components/Table";
-import { mockDataTeam } from "./data/mockData";
+import TableComponent from "./components/Table";
+import { mockDataTeam, userColumns } from "./data/mockData";
 import useUserStore from "./stores/useUserStore";
 import Home from "./pages/Home";
+import Categories from "./pages/Categories";
+import EditCategoryPage from "./pages/EditCategoryPage";
+import AddCategoryPage from "./pages/AddCategoryPage";
+import Covers from "./pages/Covers";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -41,7 +45,7 @@ function App() {
           <Routes>
             <Route
               path="/login"
-              element={token ? <Navigate to="/dashboard" /> : <Login />}
+              element={token ? <Navigate to="/" /> : <Login />}
             />
             <Route
               path="/*"
@@ -54,14 +58,12 @@ function App() {
               <Route path="" element={<Home />} />
               <Route
                 path="users"
-                element={
-                  <TableComponent
-                    formInputs={formInputs}
-                    data={data}
-                    loading={loading}
-                  />
-                }
+                element={<TableComponent rows={data} columns={userColumns} />}
               />
+              <Route path="covers" element={<Covers />} />
+              <Route path="categories" element={<Categories />} />
+              <Route path="editcategory" element={<EditCategoryPage />} />
+              <Route path="addcategory" element={<AddCategoryPage />} />
               {/* Add more nested routes here */}
             </Route>
           </Routes>

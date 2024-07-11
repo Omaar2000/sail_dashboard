@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
-import { getAllCategories } from "../network/categoriesServices";
-import { categoriesColumns } from "../data/mockData";
+import { coversColumns } from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
+import { getAllCovers } from "../network/coverServices";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -24,7 +24,7 @@ export const deleteCategory = async (id) => {
   return res.data;
 };
 
-const Categories = () => {
+const Covers = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
@@ -32,12 +32,12 @@ const Categories = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getAllCategories(token, logout);
+        const data = await getAllCovers(token, logout);
         setRows(data);
         console.log(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching covers:", error);
       }
     };
 
@@ -47,13 +47,13 @@ const Categories = () => {
   return (
     <>
       <TableComponent
-        to="/addcategory"
+        to="/addcover"
         rows={rows}
-        columns={categoriesColumns}
+        columns={coversColumns}
         loading={loading}
       />
     </>
   );
 };
 
-export default Categories;
+export default Covers;

@@ -23,34 +23,6 @@ const Login = () => {
   const { user, login, logout } = useUserStore();
 
   const navigate = useNavigate();
-  // const login = useUserStore((state) => state.login);
-  // const history = history();
-
-  // const login = async (username, password) => {
-  //   try {
-  //     const response = await fetch("api/admin/auth/login", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         user_name: "MartinzzSam",
-  //         password: "Test1234@",
-  //       }),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-
-  //     const data = await response.json();
-  //     console.log(data);
-  //     return data; // Assuming response data contains the token
-  //   } catch (error) {
-  //     console.error("Login API call failed:", error);
-  //     throw error; // Rethrow the error to be handled by the caller
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +33,7 @@ const Login = () => {
     try {
       const res = await login(username, password);
       console.log("Login successful, token:", res);
-      navigate("/dashboard"); // Redirect to the dashboard after successful login
+      navigate("/"); // Redirect to the dashboard after successful login
     } catch (error) {
       console.error("Login failed. Error details:", error);
       // setError("Login failed. Please check your credentials and try again.");
@@ -185,3 +157,33 @@ const Login = () => {
 };
 
 export default Login;
+
+//-----------------------------------------------------------------------------------------------------------------
+// const login = useUserStore((state) => state.login);
+// const history = history();
+
+// const login = async (username, password) => {
+//   try {
+//     const response = await fetch("api/admin/auth/login", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         user_name: "MartinzzSam",
+//         password: "Test1234@",
+//       }),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error! status: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+//     console.log(data);
+//     return data; // Assuming response data contains the token
+//   } catch (error) {
+//     console.error("Login API call failed:", error);
+//     throw error; // Rethrow the error to be handled by the caller
+//   }
+// };

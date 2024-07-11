@@ -9,14 +9,13 @@ const StatBox = ({ title, subtitle, icon, progress, increase }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const data = [
-    { id: 0, value: 1, label: "series A" },
-    { id: 1, value: 0, label: "series B" },
-    { id: 2, value: 20 },
+    { id: 0, value: 20, label: "series A" },
+    { id: 1, value: 20, label: "series B" },
   ];
   return (
     <Box width="100%" m="0 30px">
       <Box display="flex" justifyContent="space-between">
-        <Box>
+        {/* <Box>
           {icon}
           <Typography
             variant="h4"
@@ -25,7 +24,7 @@ const StatBox = ({ title, subtitle, icon, progress, increase }) => {
           >
             {title}
           </Typography>
-        </Box>
+        </Box> */}
         {/* <Box> */}
         <PieChart
           series={[
@@ -33,13 +32,13 @@ const StatBox = ({ title, subtitle, icon, progress, increase }) => {
               data,
               highlightScope: { faded: "global", highlighted: "item" },
               faded: {
-                innerRadius: 40,
-                additionalRadius: -40,
+                innerRadius: 30,
+                additionalRadius: -30,
                 color: "gray",
               },
             },
           ]}
-          height={80}
+          height={120}
           width={"180"}
         />
         {/* </Box> */}

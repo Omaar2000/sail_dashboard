@@ -29,13 +29,11 @@ export const userColumns = [
     type: "number",
     headerAlign: "left",
     align: "left",
-    editable: true,
   },
   {
     field: "phone",
     headerName: "Phone Number",
     flex: 1,
-    editable: true,
   },
   {
     field: "email",
@@ -60,9 +58,16 @@ export const userColumns = [
 
 export const categoriesColumns = [
   {
-    field: "title",
-    headerName: "Title",
-    flex: 0,
+    field: "title_ar",
+    headerName: "Title AR",
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "title_en",
+    headerName: "Title EN",
+    flex: 1,
     cellClassName: "name-column--cell",
     required: true,
   },
@@ -77,6 +82,39 @@ export const categoriesColumns = [
     flex: 1,
     required: true,
     renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
+  },
+  {
+    field: "edit",
+    headerName: "Edit",
+    flex: 1,
+    renderCell: ({ row }) => <EditBtn to="/editcategory" row={row} />,
+  },
+];
+export const coversColumns = [
+  {
+    field: "id",
+    headerName: "ID",
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "type",
+    headerName: "Type",
+    flex: 1,
+  },
+  {
+    field: "image_url",
+    headerName: "Image",
+    flex: 1,
+    required: true,
+    renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
+  },
+  {
+    field: "edit",
+    headerName: "Edit",
+    flex: 1,
+    renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
   },
 ];
 

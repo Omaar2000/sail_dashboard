@@ -1,3 +1,6 @@
+// image previewer
+// add category
+// make edit and add generic
 import { useTheme } from "@emotion/react";
 import { tokens } from "../theme";
 import {
@@ -16,30 +19,33 @@ import {
   mockTransactions,
 } from "../data/mockData.jsx";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AddModal from "./addModal";
 import axios from "axios";
+import useUserStore from "../stores/useUserStore";
 
-export const getAllCategories = async () => {
-  const res = await axios.get("api/admin/categories?limit=10", {
-    headers: { "x-custom-lang": "ar" },
-  });
-  // setRows();
-  console.log(res.data);
-  return res.data.data;
-};
-
-const TableComponent = ({ formInputs, data, loading }) => {
+const TableComponent = ({ to, rows, columns, loading }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [filterValues, setFilterValues] = useState([]);
-  const [mockTeam, setData] = useState(data);
+  // const [rows, setRows] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [openAddModal, setOpenAddModal] = useState(false);
-  const [rows, setRows] = useState([]);
-  // useEffect(() => {
-  //   setData(getAllCategories());
-  // }, []);
+  const navigate = useNavigate();
+
+  /*
+  // const {
+    data,
+    isLoading,
+    isError,
+    error 
+  } = useQuery({
+    fetchFn: getAll
+  })
+  
+
+  */
+  const { token, logout } = useUserStore();
 
   const handleDelete = () => {
     console.log(selectedItems);
@@ -62,7 +68,7 @@ const TableComponent = ({ formInputs, data, loading }) => {
   };
 
   const handleAddClick = () => {
-    setOpenAddModal(true);
+    navigate(to);
   };
 
   const handleCloseAddModal = () => {
@@ -70,8 +76,8 @@ const TableComponent = ({ formInputs, data, loading }) => {
   };
 
   const handleSaveNewRow = (newRow) => {
-    const updatedData = [...mockTeam, { id: mockTeam.length + 1, ...newRow }];
-    setData(updatedData);
+    const updatedData = [...rows, { id: rows.length + 1, ...newRow }];
+    setRows(updatedData);
 
     // Optionally, make an API call to save the new row to the server
     // saveNewRowToServer(newRow);
@@ -135,7 +141,7 @@ const TableComponent = ({ formInputs, data, loading }) => {
             color="success"
             style={{ margin: "0 20px" }}
           >
-            Add New Item
+            Add New Row
           </Button>
         </Box>
       ) : (
@@ -155,7 +161,7 @@ const TableComponent = ({ formInputs, data, loading }) => {
             color="success"
             // style={{ margin: "20px" }}
           >
-            Add New Item
+            Add New Row
           </Button>
         </Box>
       )}
@@ -205,15 +211,14 @@ const TableComponent = ({ formInputs, data, loading }) => {
       >
         <DataGrid
           checkboxSelection
-          rows={mockTeam}
-          // pageSize="5"
-          columns={userColumns}
-          // filterMode="server"
+          rows={rows}
+          pageSize="5"
+          columns={columns}
           onFilterModelChange={handleFilterModelChange}
           onRowSelectionModelChange={(newSelection) =>
             handleSelectionChange(newSelection)
           }
-          components={{ Toolbar: GridToolbar }}
+          // components={{ Toolbar: GridToolbar }}
           sx={{ width: "98" }}
           loading={loading}
           // paginationMode="server"
@@ -221,13 +226,13 @@ const TableComponent = ({ formInputs, data, loading }) => {
         />
       </Box>
 
-      <AddModal
+      {/* <AddModal
         open={openAddModal}
         handleClose={handleCloseAddModal}
         handleSave={handleSaveNewRow}
-        formInputs={formInputs}
+        // formInputs={formInputs}
         columns={userColumns}
-      />
+      /> */}
     </Box>
   );
 };

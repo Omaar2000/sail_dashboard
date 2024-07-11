@@ -30,3 +30,31 @@ export const login = async (username, password) => {
 //     throw error.response.data; // Throw error for handling in components
 //   }
 // };
+
+export const api = axios.create();
+
+api.interceptors.request.use(
+  (config) => {
+    console.log(`Request:`, config);
+    console.log(`Request URL: ${config.url}`);
+    console.log(`Request Method: ${config.method}`);
+    console.log(`Request Data:`, config.data);
+    console.log(`Auth Token: ${JSON.stringify(config.headers.Authorization)}`);
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+    console.log("Response Status:", response.status);
+    console.log("Response Data:", response.data);
+    // console.log("Response Headers:", response.headers);
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
