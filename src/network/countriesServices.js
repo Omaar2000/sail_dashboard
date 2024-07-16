@@ -1,11 +1,9 @@
-// import axios from "axios";
 import { api } from "./api";
 
-export const getAllCategories = async (token, logout) => {
+export const getAllCountries = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/categories?limit=10", {
+    const res = await api.get("api/admin/app_settings/countries", {
       headers: {
-        "x-custom-lang": "ar",
         Authorization: `Bearer ${token}`, // Add the token here
       },
     });

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import TableComponent from "../components/Table";
-import { getAllCategories } from "../network/categoriesServices";
-import { categoriesColumns } from "../data/mockData";
-import useUserStore from "../stores/useUserStore";
+import TableComponent from "../../components/Table";
+import { getAllCategories } from "../../network/categoriesServices";
+import { categoriesColumns } from "../../data/mockData";
+import useUserStore from "../../stores/useUserStore";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");

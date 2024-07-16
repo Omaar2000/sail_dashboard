@@ -6,10 +6,10 @@ const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your bac
 
 export const login = async (username, password) => {
   try {
-    const response = await axios
+    const response = await api
       .post(`api/admin/auth/login`, {
-        user_name: "MartinzzSam",
-        password: "Test1234@",
+        user_name: username,
+        password: password,
       })
       .then((response) => response.data);
     return response; // Assuming response data contains the token
@@ -31,6 +31,7 @@ export const login = async (username, password) => {
 //   }
 // };
 
+// ---------------------- Interceptor ---------------------
 export const api = axios.create();
 
 api.interceptors.request.use(
@@ -48,9 +49,10 @@ api.interceptors.request.use(
 );
 
 api.interceptors.response.use(
-  (response) => {
+  (response, error) => {
     console.log("Response Status:", response.status);
     console.log("Response Data:", response.data);
+    console.log("Error", error);
     // console.log("Response Headers:", response.headers);
     return response;
   },

@@ -11,13 +11,13 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
-import { tokens } from "../theme";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { tokens } from "../../theme";
 import { useRef, useState } from "react";
-import axios from "axios";
-import useUserStore from "../stores/useUserStore";
+import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
-import { api } from "../network/api";
+import { api } from "../../network/api";
+import { useTranslation } from "react-i18next";
 
 const AddCategoryPage = () => {
   const theme = useTheme();
@@ -30,7 +30,8 @@ const AddCategoryPage = () => {
   const [type, setType] = useState(null);
   const [title_ar, setTitle_ar] = useState(null);
   const [title_en, setTitle_en] = useState(null);
-  // const row = location.state;
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { token } = useUserStore();
 
@@ -49,7 +50,7 @@ const AddCategoryPage = () => {
       type,
     };
 
-    updateCategory(category);
+    addCategory(category);
   };
 
   const handleImageChange = (e) => {
@@ -67,7 +68,7 @@ const AddCategoryPage = () => {
     }
   };
 
-  const updateCategory = async (category) => {
+  const addCategory = async (category) => {
     try {
       const res = await api.post(`api/admin/categories`, category, {
         headers: {
@@ -76,6 +77,7 @@ const AddCategoryPage = () => {
         },
       });
       console.log(res);
+      navigate("/categories");
       return res.data;
     } catch (error) {
       console.error("Error adding category:", error);
@@ -102,7 +104,7 @@ const AddCategoryPage = () => {
   //   };
   //   console.log(category);
   //   // Call the function to handle the category data
-  //   updateCategory(row.id, category);
+  //   addCategory(row.id, category);
   // };
 
   // const handleImageChange = (e) => {
@@ -123,7 +125,7 @@ const AddCategoryPage = () => {
 
   // const { token } = useUserStore();
   // console.log(token);
-  // const updateCategory = async (id, category) => {
+  // const addCategory = async (id, category) => {
   //   const res = await axios.patch(
   //     `api/admin/categories/${id}`,
   //     category, // Send the category data here
@@ -137,22 +139,18 @@ const AddCategoryPage = () => {
   //   return res.data;
   // };
   return (
-    <Box m={"2rem"}>
-      <h1>Add Category</h1>
+    <Box>
+      <h1 style={{ margin: "2rem" }}>{t("Add Category")}</h1>
       <form onSubmit={handleFormSubmit}>
-        <Box
-          style={{ margin: "10px 0" }}
-          spacing={2}
-          display={"flex"}
-          gap={"10px"}
-        >
+        <Box style={{ margin: "2rem" }} spacing={2} gap={"10px"}>
           <TextField
-            label="Title (English)"
+            label={t("Title (English)")}
             variant="outlined"
             onChange={(e) => {
               setTitle_en(e.target.value);
             }}
             fullWidth
+            required
             sx={{
               mb: 2,
               "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
@@ -163,7 +161,7 @@ const AddCategoryPage = () => {
             }}
           />
           <TextField
-            label="العنوان (بالعربية)"
+            label={t("Title (Arabic)")}
             variant="outlined"
             onChange={(e) => {
               setTitle_ar(e.target.value);
@@ -179,13 +177,12 @@ const AddCategoryPage = () => {
               },
             }}
           />
-          {/* <TextField
-            label="Type"
-            variant="outlined"
-            onChange={(e) => {}}
+
+          <FormControl
             fullWidth
-            required
+            margin="normal"
             sx={{
+              mt: 0,
               mb: 2,
               "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
                 { borderColor: colors.primary[100] },
@@ -193,31 +190,38 @@ const AddCategoryPage = () => {
                 color: colors.primary[100],
               },
             }}
-          /> */}
-          <FormControl fullWidth required margin="normal">
-            <InputLabel required id="type-label">
-              Type
-            </InputLabel>
+          >
+            <InputLabel id="type-label">{t("Type")}</InputLabel>
+
             <Select
               labelId="type-label"
               name="type"
-              onChange={(e) => setType(e.target.value)}
+              onChange={(e) => {
+                setType(e.target.value);
+              }}
+              required
               label="Type"
             >
-              <MenuItem value="TOUR">TOUR</MenuItem>
-              <MenuItem value="FISHING">FISHING</MenuItem>
-              <MenuItem value="JET_SKI">JET_SKI</MenuItem>
-              <MenuItem value="BANANA">BANANA</MenuItem>
+              <MenuItem value="BANANA">{t("Banana Boat")}</MenuItem>
+              <MenuItem value="TOUR">{t("Touring")}</MenuItem>
+              <MenuItem value="FISHING">{t("Fishing")}</MenuItem>
+              <MenuItem value="JET_SKI">{t("Jet Ski")}</MenuItem>
             </Select>
           </FormControl>
         </Box>
-        <Box>
+        <Box
+          // display={"flex"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          marginBottom="5rem"
+        >
           <Box
-            style={{ margin: "10px 0" }}
+            style={{}}
             spacing={2}
             display={"flex"}
+            flexDirection={"column"}
             gap={"10px"}
-            alignItems={"center"}
+            alignItems={"start"}
           >
             <input
               accept="image/png"
@@ -225,36 +229,26 @@ const AddCategoryPage = () => {
               // multiple
               type="file"
               onChange={handleImageChange}
-              // style={{ display: "none" }}
+              style={{ display: "none" }}
               ref={fileRef}
               // required
             />
-            <label required htmlFor="contained-button-file">
-              <Button
-                variant="contained"
-                color="info"
-                component="span"
-                required
-              >
-                Upload Image
-              </Button>
-            </label>
             {image ? (
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "start",
                   mt: 2,
-                  position: "relative",
+                  // position: "relative",
                 }}
               >
                 <img
                   src={URL.createObjectURL(image)}
                   alt="Preview"
                   style={{
-                    maxWidth: "50px",
-                    maxHeight: "50px",
-                    // marginRight: "10px",
+                    maxWidth: "500px",
+                    maxHeight: "500px",
+                    marginInlineStart: "2rem",
                   }}
                 />
                 <IconButton onClick={handleRemoveImage}>
@@ -262,7 +256,7 @@ const AddCategoryPage = () => {
                     sx={{
                       color: "red",
                       position: "absolute",
-                      right: "20%",
+                      right: "-40%",
                       top: "-20%",
                       background: "white",
                       borderRadius: "50%",
@@ -270,38 +264,53 @@ const AddCategoryPage = () => {
                   />
                 </IconButton>
                 {/* <IconButton
-                // color="secondary"
-                // sx={{ position: "absolute", right: "-30%", top: "-20%" }}
-                ></IconButton> */}
+                    // color="secondary"
+                    // sx={{ position: "absolute", right: "-30%", top: "-20%" }}
+                    ></IconButton> */}
               </Box>
             ) : imageError ? (
-              <Typography
-                variant="body1"
-                color={"red"}
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                sx={{ verticalAlign: "middle", mt: 2 }}
-              >
-                IMAGE IS REQUIRED*
+              <Typography marginInlineStart={"2rem"} color={"red"}>
+                {t("IMAGE IS REQUIRED*")}
               </Typography>
             ) : (
-              <Typography
-                variant="body1"
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                sx={{ verticalAlign: "middle", mt: 2 }}
-              >
-                No Image Selected
+              <Typography marginInlineStart={"2rem"}>
+                {t("No Image Selected")}
               </Typography>
             )}
-            {/* /* Add more fields as necessary */}
+            <label required htmlFor="contained-button-file">
+              <Button
+                variant="contained"
+                color="info"
+                component="span"
+                required
+                style={{ marginInlineStart: "2rem" }}
+              >
+                {t("Upload Image")}
+              </Button>
+            </label>
           </Box>
+          {/* /* Add more fields as necessary */}
         </Box>
-        <Button type="submit" variant="contained" color="success">
-          Save
-        </Button>
+        <Box
+          sx={{
+            background: colors.primary[400],
+            position: "fixed",
+            bottom: "0",
+            width: "100%",
+            display: "flex",
+            // justifyContent: "end",
+          }}
+        >
+          <Button
+            type="submit"
+            variant="contained"
+            color="success"
+            size="large"
+            // style={{ fontSize: "18px" }}
+          >
+            {t("Save")}
+          </Button>
+        </Box>
       </form>
     </Box>
   );

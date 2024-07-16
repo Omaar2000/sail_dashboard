@@ -18,19 +18,19 @@ import {
   userColumns,
   mockTransactions,
 } from "../data/mockData.jsx";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import AddModal from "./addModal";
-import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useUserStore from "../stores/useUserStore";
+import { useTranslation } from "react-i18next";
+import "./layout/style.css";
 
 const TableComponent = ({ to, rows, columns, loading }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [filterValues, setFilterValues] = useState([]);
+  const { t } = useTranslation();
   // const [rows, setRows] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [openAddModal, setOpenAddModal] = useState(false);
+
   const navigate = useNavigate();
 
   /*
@@ -104,28 +104,6 @@ const TableComponent = ({ to, rows, columns, loading }) => {
             alignItems: "center",
           }}
         >
-          {/* <Link
-            style={{
-              textDecoration: "none",
-              backgroundColor: "red",
-
-              color: "white",
-              padding: "8px 16px",
-              fontSize: "18px",
-              marginInlineEnd: "1rem",
-              borderRadius: "10px",
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.backgroundColor = colors.redAccent[500]; // Original color
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.backgroundColor = "red"; // Darker shade for hover
-            }}
-            onClick={handleDelete}
-          >
-            Delete
-          </Link> */}
-
           <Button
             onClick={handleDelete}
             variant="contained"
@@ -141,7 +119,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
             color="success"
             style={{ margin: "0 20px" }}
           >
-            Add New Row
+            {t("Add New Row")}
           </Button>
         </Box>
       ) : (
@@ -161,7 +139,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
             color="success"
             // style={{ margin: "20px" }}
           >
-            Add New Row
+            {t("Add New Row")}
           </Button>
         </Box>
       )}
@@ -219,7 +197,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
             handleSelectionChange(newSelection)
           }
           // components={{ Toolbar: GridToolbar }}
-          sx={{ width: "98" }}
+          // sx={{ width: "100%" }}
           loading={loading}
           // paginationMode="server"
           pageSizeOptions={[1, 10, 20, 50, 100]}

@@ -1,0 +1,64 @@
+.ps-sidebar-container::-webkit-scrollbar,
+.MuiDataGrid-main::-webkit-scrollbar {
+  width: 5px !important;
+}
+.ps-sidebar-container::-webkit-scrollbar-track,
+.MuiDataGrid-main::-webkit-scrollbar-track {
+  background: #555 !important;
+}
+.ps-sidebar-container::-webkit-scrollbar-thumb,
+.MuiDataGrid-main::-webkit-scrollbar-thumb {
+  background: #999; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+}
+
+body[dir="rtl"] .ps-menu-label {
+  text-align: right;
+}
+
+body[dir="rtl"] .pro-sidebar .pro-menu-item {
+  flex-direction: row-reverse;
+}
+
+body[dir="rtl"] .pro-sidebar .pro-icon-wrapper {
+  margin-left: 8px;
+}
+
+body[dir="ltr"] .pro-sidebar .pro-icon-wrapper {
+  margin-right: 8px;
+}
+
+body[dir="rtl"] .MuiDataGrid-root {
+  direction: rtl;
+}
+
+body[dir="rtl"] .MuiDataGrid-cell,
+body[dir="rtl"] .MuiDataGrid-columnHeaderTitleContainer {
+  text-align: right;
+}
+
+body[dir="rtl"] .MuiDataGrid-cell--textLeft {
+  text-align: right;
+}
+
+body[dir="rtl"] .MuiDataGrid-cell--textRight {
+  text-align: left;
+}
+
+body[dir="ltr"] .MuiDataGrid-cell,
+body[dir="ltr"] .MuiDataGrid-columnHeaderTitleContainer {
+  text-align: left;
+}
+
+body[dir="ltr"] .MuiDataGrid-cell--textLeft {
+  text-align: left;
+}
+
+[data-theme="ltr"] .MuiDataGrid-cell--textRight {
+  text-align: right;
+}

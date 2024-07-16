@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import TableComponent from "../components/Table";
-import { coversColumns } from "../data/mockData";
-import useUserStore from "../stores/useUserStore";
-import { getAllCovers } from "../network/coverServices";
+import TableComponent from "../../components/Table";
+import { getAllCategories } from "../../network/categoriesServices";
+import { categoriesColumns, countriesColumns } from "../../data/mockData";
+import useUserStore from "../../stores/useUserStore";
+import { getAllCountries } from "../../network/countriesServices";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -24,7 +25,7 @@ export const deleteCategory = async (id) => {
   return res.data;
 };
 
-const Covers = () => {
+const Countries = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
@@ -32,12 +33,12 @@ const Covers = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getAllCovers(token, logout);
+        const data = await getAllCountries(token, logout);
         setRows(data);
         console.log(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching covers:", error);
+        console.error("Error fetching countries:", error);
       }
     };
 
@@ -47,13 +48,13 @@ const Covers = () => {
   return (
     <>
       <TableComponent
-        to="/addcover"
+        to="/addcountry"
         rows={rows}
-        columns={coversColumns}
+        columns={countriesColumns}
         loading={loading}
       />
     </>
   );
 };
 
-export default Covers;
+export default Countries;

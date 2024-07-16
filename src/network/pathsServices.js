@@ -1,17 +1,15 @@
-// import axios from "axios";
 import { api } from "./api";
 
-export const getAllCategories = async (token, logout) => {
+export const getAllPaths = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/categories?limit=10", {
+    const res = await api.get("api/admin/trip_path", {
       headers: {
         "x-custom-lang": "ar",
         Authorization: `Bearer ${token}`, // Add the token here
       },
     });
 
-    console.log(res);
-
+    console.log(res.data);
     return res.data.data;
   } catch (error) {
     console.log(error.response.status);

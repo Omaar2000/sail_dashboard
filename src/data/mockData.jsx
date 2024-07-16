@@ -8,6 +8,7 @@ import { tokens } from "../theme";
 import { Box, Typography } from "@mui/material";
 import AccessCell from "../components/Access";
 import EditBtn from "../components/EditBtn";
+import i18n from "../i18n";
 
 export const userColumns = [
   {
@@ -59,33 +60,41 @@ export const userColumns = [
 export const categoriesColumns = [
   {
     field: "title_ar",
-    headerName: "Title AR",
+    headerName: i18n.t("Title (Arabic)"),
     flex: 1,
     cellClassName: "name-column--cell",
     required: true,
   },
   {
     field: "title_en",
-    headerName: "Title EN",
+    headerName: i18n.t("Title (English)"),
     flex: 1,
     cellClassName: "name-column--cell",
     required: true,
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: i18n.t("Type"),
     flex: 1,
+    renderCell: ({ row }) =>
+      row.type === "FISHING"
+        ? i18n.t("Fishing")
+        : row.type === "JET_SKI"
+        ? i18n.t("Jet Ski")
+        : row.type === "TOUR"
+        ? i18n.t("Touring")
+        : i18n.t("Banana Boat"),
   },
   {
     field: "image_url",
-    headerName: "Image",
+    headerName: i18n.t("Image"),
     flex: 1,
     required: true,
     renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
   },
   {
     field: "edit",
-    headerName: "Edit",
+    headerName: i18n.t("Edit"),
     flex: 1,
     renderCell: ({ row }) => <EditBtn to="/editcategory" row={row} />,
   },
@@ -100,22 +109,102 @@ export const coversColumns = [
   },
   {
     field: "type",
-    headerName: "Type",
+    headerName: i18n.t("Type"),
     flex: 1,
   },
   {
     field: "image_url",
-    headerName: "Image",
+    headerName: i18n.t("Image"),
     flex: 1,
     required: true,
     renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
   },
   {
     field: "edit",
-    headerName: "Edit",
+    headerName: i18n.t("Edit"),
     flex: 1,
     renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
   },
+];
+export const pathsColumns = [
+  {
+    field: "title_ar",
+    headerName: i18n.t("Title (Arabic)"),
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "title_en",
+    headerName: i18n.t("Title (English)"),
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "edit",
+    headerName: i18n.t("Edit"),
+    flex: 1,
+    renderCell: ({ row }) => <EditBtn to="/editpath" row={row} />,
+  },
+];
+export const countriesColumns = [
+  {
+    field: "title_ar",
+    headerName: i18n.t("Title (Arabic)"),
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "title_en",
+    headerName: i18n.t("Title (English)"),
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "edit",
+    headerName: i18n.t("Edit"),
+    flex: 1,
+    renderCell: ({ row }) => <EditBtn to="/editcountry" row={row} />,
+  },
+];
+export const citiesColumns = [
+  {
+    field: "title_ar",
+    headerName: i18n.t("Title (Arabic)"),
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "title_en",
+    headerName: i18n.t("Title (English)"),
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "countryId",
+    headerName: i18n.t("ID"),
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "edit",
+    headerName: i18n.t("Edit"),
+    flex: 1,
+    renderCell: ({ row }) => <EditBtn to="/editcity" row={row} />,
+  },
+];
+
+export const countries = [
+  { name: "Egypt", code: "EG" },
+  { name: "United States", code: "US" },
+  { name: "Canada", code: "CA" },
+  // Add more countries here
 ];
 
 export const mockDataTeam = [

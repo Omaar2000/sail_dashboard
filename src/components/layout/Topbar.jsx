@@ -11,11 +11,16 @@ import {
 } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import useUserStore from "../../stores/useUserStore";
+import i18n from "../../i18n";
 
 const Topbar = () => {
   const { logout } = useUserStore();
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
+  const { toggleLanguage, language } = useUserStore();
+  const changeLanguage = () => {
+    toggleLanguage();
+  };
   return (
     <Box
       display="flex"
@@ -34,7 +39,7 @@ const Topbar = () => {
             <LightModeOutlined />
           )}
         </IconButton>
-        <IconButton>
+        <IconButton onClick={changeLanguage}>
           <NotificationAddOutlined />
         </IconButton>
         <IconButton>
