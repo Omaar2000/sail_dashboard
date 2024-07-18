@@ -35,6 +35,7 @@ import {
   Star,
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
+import useUserStore from "../../stores/useUserStore";
 
 const Item = ({
   icon,
@@ -77,8 +78,8 @@ const Item = ({
 };
 
 const SidebarComponent = ({
-  pinned,
-  setPinned,
+  // pinned,
+  // setPinned,
   isCollapsed,
   setIsCollapsed,
 }) => {
@@ -98,6 +99,7 @@ const SidebarComponent = ({
   );
   console.log(Selected);
   const { t } = useTranslation();
+  const { pinned, toggleSidebar } = useUserStore();
 
   const [hovered, setHovered] = useState(null);
   // const StyledSidebar = styled(Sidebar)`
@@ -109,11 +111,21 @@ const SidebarComponent = ({
   //     scrollbar-width: none; /* Firefox */
   //   }
   // `;
+  {
+    console.log(pinned);
+    console.log("pinned ", !pinned);
+  }
   return (
     <Sidebar
       collapsed={!pinned && isCollapsed}
-      onMouseEnter={() => setIsCollapsed(false)}
-      onMouseLeave={() => setIsCollapsed(true)}
+      onMouseEnter={() => {
+        setIsCollapsed(false);
+        localStorage.setItem("collapsed", false);
+      }}
+      onMouseLeave={() => {
+        setIsCollapsed(true);
+        localStorage.setItem("collapsed", true);
+      }}
       style={{
         height: "100vh",
         border: "none",
@@ -160,10 +172,7 @@ const SidebarComponent = ({
                   alignItems: "center",
                   border: "none",
                 }}
-                onClick={() => {
-                  setPinned(!pinned);
-                  localStorage.setItem("pinned", pinned);
-                }}
+                onClick={toggleSidebar}
               >
                 {pinned ? <PushPin /> : <PushPinOutlined />}
               </IconButton>
@@ -305,9 +314,9 @@ const SidebarComponent = ({
           onMouseLeave={() => setProviderdHover(false)}
         >
           <Item
-            title={"All Providers"}
+            title={"Providers List"}
             icon={<MenuOutlinedIcon />}
-            to={"allproviders"}
+            to={"providerlist"}
             selected={Selected}
             setSelected={setSelected}
             hovered={hovered}

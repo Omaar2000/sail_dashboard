@@ -27,6 +27,12 @@ import AddCountryPage from "./pages/country/AddCountryPage";
 import EditCountryPage from "./pages/country/EditCountryPage";
 import Cities from "./pages/cities/Cities";
 import AddCityPage from "./pages/cities/AddCityPage";
+import EditCityPage from "./pages/cities/EditCityPage";
+import Codes from "./pages/codes/Codes";
+import AddCodePage from "./pages/codes/AddCodePage";
+import EditCodePage from "./pages/codes/EditCodePage";
+import Users from "./pages/Users";
+import ProviderList from "./pages/ProvidersList";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -71,9 +77,11 @@ function App() {
             >
               <Route path="" element={<Home />} />
               <Route
-                path="users"
+                path="usersDummy"
                 element={<TableComponent rows={data} columns={userColumns} />}
               />
+              <Route path="users" element={<Users />} />
+              <Route path="providerlist" element={<ProviderList />} />
               <Route path="covers" element={<Covers />} />
               <Route path="addcover" element={<AddCoverPage />} />
               <Route path="editcover" element={<EditCoverPage />} />
@@ -82,6 +90,10 @@ function App() {
               <Route path="editcountry" element={<EditCountryPage />} />
               <Route path="cities" element={<Cities />} />
               <Route path="addcity" element={<AddCityPage />} />
+              <Route path="editcity" element={<EditCityPage />} />
+              <Route path="codes" element={<Codes />} />
+              <Route path="addcode" element={<AddCodePage />} />
+              <Route path="editcode" element={<EditCodePage />} />
               {/* <Route path="editcity" element={<EditCountryPage />} /> */}
               <Route path="categories" element={<Categories />} />
               <Route path="editcategory" element={<EditCategoryPage />} />
@@ -89,7 +101,6 @@ function App() {
               <Route path="boatroutes" element={<TripPaths />} />
               <Route path="editpath" element={<EditPathPage />} />
               <Route path="addpath" element={<AddPathPage />} />
-              {/* Add more nested routes here */}
             </Route>
           </Routes>
         </ThemeProvider>

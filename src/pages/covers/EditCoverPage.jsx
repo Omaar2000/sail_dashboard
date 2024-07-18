@@ -2,6 +2,7 @@ import { useTheme } from "@emotion/react";
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   IconButton,
   InputLabel,
@@ -17,6 +18,7 @@ import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
+import { toast, ToastContainer } from "react-toastify";
 
 const EditCoverPage = () => {
   const theme = useTheme();
@@ -31,8 +33,9 @@ const EditCoverPage = () => {
   const { t } = useTranslation();
 
   const { token } = useUserStore();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(image);
 
@@ -41,7 +44,9 @@ const EditCoverPage = () => {
       type,
     };
 
-    updateCover(row.id, cover);
+    setIsLoading(true);
+    await updateCover(row.id, cover);
+    setIsLoading(false);
   };
 
   const handleImageChange = (e) => {
@@ -69,9 +74,11 @@ const EditCoverPage = () => {
       });
       console.log(res);
 
+      toast.success(t("Cover Added successfully!"));
       navigate("/covers");
       return res.data;
     } catch (error) {
+      toast.error(`Error Editing Cover`);
       console.error("Error updating cover:", error);
     }
   };
@@ -219,11 +226,16 @@ const EditCoverPage = () => {
             color="success"
             size="large"
             // style={{ fontSize: "18px" }}
+            disabled={isLoading} // Disable the button while loading
+            startIcon={
+              isLoading ? <CircularProgress size={20} color="inherit" /> : null
+            }
           >
-            {t("Save")}
+            {isLoading ? t("Loading") : t("Save")}
           </Button>
         </Box>
       </form>
+      <ToastContainer position="top-center" autoClose="3000" />
     </Box>
   );
 };

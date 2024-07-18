@@ -2,6 +2,7 @@ import { useTheme } from "@emotion/react";
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   IconButton,
   InputLabel,
@@ -19,6 +20,7 @@ import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddCountryPage = () => {
   const theme = useTheme();
@@ -31,8 +33,9 @@ const AddCountryPage = () => {
   const { t } = useTranslation();
 
   const { token } = useUserStore();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     const country = {
@@ -40,7 +43,9 @@ const AddCountryPage = () => {
       title_en,
     };
 
-    addCountry(country);
+    setIsLoading(true);
+    await addCountry(country);
+    setIsLoading(false);
   };
 
   const addCountry = async (country) => {
@@ -51,16 +56,18 @@ const AddCountryPage = () => {
         },
       });
       console.log(res);
+      toast.success(t("Country Added Successfully!"));
       navigate("/countries");
       return res.data;
     } catch (error) {
+      toast.error(`Error Adding Country`);
       console.error("Error adding country:", error);
     }
   };
 
   return (
     <Box>
-      <h1 style={{ margin: "2rem" }}>{t("Edit Path")}</h1>
+      <h1 style={{ margin: "2rem" }}>{t("Add Country")}</h1>
       <form onSubmit={handleFormSubmit}>
         <Box style={{ margin: "2rem" }} spacing={2} gap={"10px"}>
           <TextField
@@ -121,11 +128,16 @@ const AddCountryPage = () => {
             color="success"
             size="large"
             style={{ fontSize: "15px" }}
+            disabled={isLoading} // Disable the button while loading
+            startIcon={
+              isLoading ? <CircularProgress size={20} color="inherit" /> : null
+            }
           >
-            {t("Save")}
+            {isLoading ? t("Loading") : t("Save")}
           </Button>
         </Box>
       </form>
+      <ToastContainer position="top-center" autoClose="3000" />
     </Box>
   );
 };

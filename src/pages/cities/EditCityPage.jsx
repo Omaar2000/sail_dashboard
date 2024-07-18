@@ -1,73 +1,98 @@
 import { useTheme } from "@emotion/react";
-import { Box, Button, CircularProgress, TextField } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
-import { useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import useUserStore from "../../stores/useUserStore";
+import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
+import { getAllCountries } from "../../network/countriesServices";
+import { countries } from "../../data/mockData";
+import Flag from "react-world-flags";
 import { toast, ToastContainer } from "react-toastify";
 
-const EditCountryPage = () => {
+const EditCityPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [rows, setRows] = useState([]);
   const location = useLocation();
   const row = location.state;
-  const [title_ar, setTitleAR] = useState(row.title_ar);
-  const [title_en, setTitleEN] = useState(row.title_en);
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+  const [title_ar, setTitle_ar] = useState(row.title_ar);
+  const [title_en, setTitle_en] = useState(row.title_en);
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { token } = useUserStore();
+  // row.country_id = ID.toString();
+  // setID(row.country_id + "");
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const { token, language, pinned } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const country = {
+    const city = {
       title_ar,
       title_en,
     };
 
     setIsLoading(true);
-    await editCountry(row.id, country);
+    await editCity(row.id, city);
     setIsLoading(false);
   };
 
-  const editCountry = async (id, country) => {
+  const editCity = async (id, city) => {
     try {
-      const res = await api.patch(
-        `api/admin/app_settings/countries/${id}`,
-        country,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await api.patch(`api/admin/app_settings/cities/${id}`, city, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(res);
-
-      toast.success(t("Country Updated successfully!"));
-      navigate("/countries");
+      toast.success(t("City Edited successfully!"));
+      navigate("/cities");
       return res.data;
     } catch (error) {
-      toast.error(`Error updating country`);
-      console.error("Error updating country:", error);
+      toast.error(`Error editing city`);
+      console.error("Error editing city:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllCountries();
+      setRows(data);
+    };
+    fetchData();
+  }, []);
+  console.log(row.id);
+
   return (
     <Box>
-      <h1 style={{ margin: "2rem" }}>{t("Edit Country")}</h1>
+      <h1 style={{ margin: "2rem" }}>{t("Edit City")}</h1>
       <form onSubmit={handleFormSubmit}>
         <Box style={{ margin: "2rem" }} spacing={2} gap={"10px"}>
           <TextField
             label={t("Title (English)")}
-            defaultValue={row.title_en}
             variant="outlined"
+            defaultValue={title_en}
             onChange={(e) => {
-              setTitleEN(e.target.value);
+              setTitle_en(e.target.value);
             }}
             fullWidth
             required
@@ -82,10 +107,10 @@ const EditCountryPage = () => {
           />
           <TextField
             label={t("Title (Arabic)")}
-            defaultValue={row.title_ar}
             variant="outlined"
+            defaultValue={title_ar}
             onChange={(e) => {
-              setTitleAR(e.target.value);
+              setTitle_ar(e.target.value);
             }}
             fullWidth
             required
@@ -112,9 +137,9 @@ const EditCountryPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
-            // justifyContent: "end",
+            justifyContent: "end",
           }}
         >
           <Button
@@ -137,4 +162,4 @@ const EditCountryPage = () => {
   );
 };
 
-export default EditCountryPage;
+export default EditCityPage;

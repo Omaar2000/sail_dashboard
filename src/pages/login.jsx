@@ -2,6 +2,7 @@ import { useTheme } from "@emotion/react";
 import {
   Box,
   Button,
+  CircularProgress,
   Input,
   InputBase,
   InputLabel,
@@ -14,6 +15,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useUserStore from "../stores/useUserStore";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const theme = useTheme();
@@ -22,7 +25,9 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const { user, login, logout } = useUserStore();
 
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +36,7 @@ const Login = () => {
     console.log("Password:", password);
 
     try {
+      setIsLoading(true);
       const res = await login(username, password);
       console.log("Login successful, token:", res);
       navigate("/"); // Redirect to the dashboard after successful login
@@ -38,6 +44,8 @@ const Login = () => {
       console.error("Login failed. Error details:", error);
       // setError("Login failed. Please check your credentials and try again.");
       // Handle login failure (show error message, clear form, etc.)
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -133,8 +141,12 @@ const Login = () => {
               color: `${colors.blueAccent[100]}`,
             }}
             onClick={handleSubmit}
+            disabled={isLoading} // Disable the button while loading
+            startIcon={
+              isLoading ? <CircularProgress size={20} color="inherit" /> : null
+            }
           >
-            Login
+            {isLoading ? t("Loading") : t("Login")}
           </Button>
           <Link
             to={"/"}
@@ -152,6 +164,7 @@ const Login = () => {
           </Link>
         </Box>
       </Box>
+      <ToastContainer position="top-center" autoClose="3000" />
     </div>
   );
 };

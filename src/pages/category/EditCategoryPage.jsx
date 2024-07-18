@@ -2,6 +2,7 @@ import { useTheme } from "@emotion/react";
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   IconButton,
   InputLabel,
@@ -19,6 +20,7 @@ import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
+import { toast, ToastContainer } from "react-toastify";
 
 const EditCategoryPage = () => {
   const { t } = useTranslation();
@@ -34,7 +36,9 @@ const EditCategoryPage = () => {
 
   const { token } = useUserStore();
 
-  const handleFormSubmit = (e) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(image);
 
@@ -45,7 +49,9 @@ const EditCategoryPage = () => {
       type: row.type,
     };
 
-    updateCategory(row.id, category);
+    setIsLoading(true);
+    await updateCategory(row.id, category);
+    setIsLoading(false);
   };
 
   const handleImageChange = (e) => {
@@ -73,9 +79,12 @@ const EditCategoryPage = () => {
       });
       console.log(res);
 
+      toast.success(t("Category Updated successfully!"));
       navigate("/categories");
+
       return res.data;
     } catch (error) {
+      toast.error(`Error Updating Category`);
       console.error("Error updating category:", error);
     }
   };
@@ -263,11 +272,16 @@ const EditCategoryPage = () => {
             color="success"
             size="large"
             // style={{ fontSize: "18px" }}
+            disabled={isLoading} // Disable the button while loading
+            startIcon={
+              isLoading ? <CircularProgress size={20} color="inherit" /> : null
+            }
           >
-            {t("Save")}
+            {isLoading ? t("Loading") : t("Save")}
           </Button>
         </Box>
       </form>
+      <ToastContainer position="top-center" autoClose="3000" />
     </Box>
   );
 };

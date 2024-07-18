@@ -2,6 +2,7 @@ import { useTheme } from "@emotion/react";
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   IconButton,
   InputLabel,
@@ -18,6 +19,7 @@ import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddCategoryPage = () => {
   const theme = useTheme();
@@ -30,12 +32,13 @@ const AddCategoryPage = () => {
   const [type, setType] = useState(null);
   const [title_ar, setTitle_ar] = useState(null);
   const [title_en, setTitle_en] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const { token } = useUserStore();
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(image);
     if (!image) {
@@ -50,7 +53,26 @@ const AddCategoryPage = () => {
       type,
     };
 
-    addCategory(category);
+    setIsLoading(true);
+    await addCategory(category);
+    setIsLoading(false);
+  };
+  const addCategory = async (category) => {
+    try {
+      const res = await api.post(`api/admin/categories`, category, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(res);
+      toast.success(t("Category added successfully!"));
+      navigate("/categories");
+      return res.data;
+    } catch (error) {
+      toast.error(`Error adding Category`);
+      console.error("Error adding category:", error);
+    }
   };
 
   const handleImageChange = (e) => {
@@ -68,76 +90,6 @@ const AddCategoryPage = () => {
     }
   };
 
-  const addCategory = async (category) => {
-    try {
-      const res = await api.post(`api/admin/categories`, category, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(res);
-      navigate("/categories");
-      return res.data;
-    } catch (error) {
-      console.error("Error adding category:", error);
-    }
-  };
-
-  // console.log(row);
-
-  // const handleFormSubmit = (e) => {
-  //   e.preventDefault();
-  //   // setTouched(true);
-
-  //   if (!image) {
-  //     setImageError(false);
-  //     setImageError(true);
-  //     return;
-  //   }
-
-  //   const category = {
-  //     image,
-  //     title_en: row.title_en,
-  //     title_ar: row.title_ar,
-  //     type: row.type,
-  //   };
-  //   console.log(category);
-  //   // Call the function to handle the category data
-  //   addCategory(row.id, category);
-  // };
-
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-
-  //   if (file) {
-  //     setImage(file);
-  //     setImageError(false);
-  //   }
-  // };
-
-  // const handleRemoveImage = () => {
-  //   setImage(null);
-  //   if (fileRef.current) {
-  //     fileRef.current.value = ""; // Reset the file input value
-  //   }
-  // };
-
-  // const { token } = useUserStore();
-  // console.log(token);
-  // const addCategory = async (id, category) => {
-  //   const res = await axios.patch(
-  //     `api/admin/categories/${id}`,
-  //     category, // Send the category data here
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`, // Add the token here
-  //       },
-  //     }
-  //   );
-  //   console.log(res);
-  //   return res.data;
-  // };
   return (
     <Box>
       <h1 style={{ margin: "2rem" }}>{t("Add Category")}</h1>
@@ -307,11 +259,16 @@ const AddCategoryPage = () => {
             color="success"
             size="large"
             // style={{ fontSize: "18px" }}
+            disabled={isLoading} // Disable the button while loading
+            startIcon={
+              isLoading ? <CircularProgress size={20} color="inherit" /> : null
+            }
           >
-            {t("Save")}
+            {isLoading ? t("Loading") : t("Save")}
           </Button>
         </Box>
       </form>
+      <ToastContainer position="top-center" autoClose="3000" />
     </Box>
   );
 };

@@ -1,5 +1,5 @@
 import { useTheme } from "@emotion/react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import useUserStore from "../../stores/useUserStore";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
+import { toast, ToastContainer } from "react-toastify";
 
 const EditPathPage = () => {
   const theme = useTheme();
@@ -20,7 +21,9 @@ const EditPathPage = () => {
 
   const { token } = useUserStore();
 
-  const handleFormSubmit = (e) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     const path = {
@@ -28,7 +31,9 @@ const EditPathPage = () => {
       title_en,
     };
 
-    editPath(row.id, path);
+    setIsLoading(true);
+    await editPath(row.id, path);
+    setIsLoading(false);
   };
 
   const editPath = async (id, path) => {
@@ -40,9 +45,11 @@ const EditPathPage = () => {
       });
       console.log(res);
 
+      toast.success(t("Path added successfully!"));
       navigate("/boatroutes");
       return res.data;
     } catch (error) {
+      toast.error(`Error updating path`);
       console.error("Error updating path:", error);
     }
   };
@@ -112,11 +119,16 @@ const EditPathPage = () => {
             color="success"
             size="large"
             style={{ fontSize: "15px" }}
+            disabled={isLoading} // Disable the button while loading
+            startIcon={
+              isLoading ? <CircularProgress size={20} color="inherit" /> : null
+            }
           >
-            {t("Save")}
+            {isLoading ? t("Loading") : t("Save")}
           </Button>
         </Box>
       </form>
+      <ToastContainer position="top-center" autoClose="3000" />
     </Box>
   );
 };

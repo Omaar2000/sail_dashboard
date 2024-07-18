@@ -9,8 +9,8 @@ import {
   LockOpenOutlined,
   SecurityOutlined,
 } from "@mui/icons-material";
-import { Box, Button, Typography } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { DataGrid, GridOverlay, GridToolbar } from "@mui/x-data-grid";
 import {
   mockDataContacts,
   mockDataTeam,
@@ -160,6 +160,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
           },
           "& .name-column--cell": {
             color: colors.greenAccent[300],
+            // textAlign: "start !important",
           },
           "& .MuiDataGrid-headerContainer": {
             backgroundColor: colors.blueAccent[700],
@@ -200,6 +201,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
           // sx={{ width: "100%" }}
           loading={loading}
           // paginationMode="server"
+          sx={{ direction: "ltr !important", textAlign: "start" }}
           pageSizeOptions={[1, 10, 20, 50, 100]}
         />
       </Box>

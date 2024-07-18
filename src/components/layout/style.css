@@ -32,7 +32,7 @@ body[dir="rtl"] .pro-sidebar .pro-icon-wrapper {
 body[dir="ltr"] .pro-sidebar .pro-icon-wrapper {
   margin-right: 8px;
 }
-
+/* 
 body[dir="rtl"] .MuiDataGrid-root {
   direction: rtl;
 }
@@ -61,4 +61,9 @@ body[dir="ltr"] .MuiDataGrid-cell--textLeft {
 
 [data-theme="ltr"] .MuiDataGrid-cell--textRight {
   text-align: right;
+} */
+
+/* MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle */
+.MuiCircularProgress-circle {
+  color: #888 !important;
 }

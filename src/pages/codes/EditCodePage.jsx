@@ -25,66 +25,61 @@ import { countries } from "../../data/mockData";
 import Flag from "react-world-flags";
 import { toast, ToastContainer } from "react-toastify";
 
-const AddCityPage = () => {
+const EditCodePage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [rows, setRows] = useState([]);
-  // const location = useLocation();
-  const [title_ar, setTitle_ar] = useState("");
-  const [title_en, setTitle_en] = useState("");
-  const [ID, setID] = useState("");
-  const navigate = useNavigate();
-  // const row = location.state;
-  const { t } = useTranslation();
-
+  // const [rows, setRows] = useState([]);
+  const location = useLocation();
+  const row = location.state;
+  const [title_ar, setTitle_ar] = useState(row.title_ar);
+  const [title_en, setTitle_en] = useState(row.title_en);
+  const [flag, setFlag] = useState(row.flag);
+  const [code, setCode] = useState(row.country_code);
   const [isLoading, setIsLoading] = useState(false);
-
-  const { token, language, pinned } = useUserStore();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+  console.log(code);
+  const { token, pinned } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const city = {
+    const countryCode = {
       title_ar,
       title_en,
-      country_id: Number(ID),
+      flag,
+      country_code: code,
     };
 
     setIsLoading(true);
-    await addCity(city);
+    await editCode(row.id, countryCode);
     setIsLoading(false);
   };
 
-  const addCity = async (city) => {
+  const editCode = async (id, countryCode) => {
     try {
-      const res = await api.post(`api/admin/app_settings/cities`, city, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await api.patch(
+        `api/admin/app_settings/country_code/${id}`,
+        countryCode,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log(res);
-      toast.success(t("City added successfully!"));
-      setTimeout(() => {
-        navigate("/cities");
-      }, 1000);
+      toast.success(t("Country code added successfully!"));
+      navigate("/codes");
       return res.data;
     } catch (error) {
-      toast.error(`Error adding city`);
-      console.error("Error adding city:", error);
+      toast.error(`Error editing country code`);
+      console.error("Error editing code:", error);
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAllCountries();
-      setRows(data);
-    };
-    fetchData();
-  }, []);
-
   return (
     <Box>
-      <h1 style={{ margin: "2rem" }}>{t("Add City")}</h1>
+      <h1 style={{ margin: "2rem" }}>{t("Edit Country Code")}</h1>
       <form onSubmit={handleFormSubmit}>
         <Box style={{ margin: "2rem" }} spacing={2} gap={"10px"}>
           <TextField
@@ -93,6 +88,7 @@ const AddCityPage = () => {
             onChange={(e) => {
               setTitle_en(e.target.value);
             }}
+            defaultValue={row.title_en}
             fullWidth
             required
             sx={{
@@ -107,6 +103,7 @@ const AddCityPage = () => {
           <TextField
             label={t("Title (Arabic)")}
             variant="outlined"
+            defaultValue={row.title_ar}
             onChange={(e) => {
               setTitle_ar(e.target.value);
             }}
@@ -134,33 +131,79 @@ const AddCityPage = () => {
               },
             }}
           >
-            <InputLabel id="type-label">{t("Country")}</InputLabel>
+            <InputLabel id="flag-label">{t("Flag")}</InputLabel>
 
             <Select
-              labelId="country-label"
-              name="country"
+              labelId="flag-label"
+              name="flag"
               onChange={(e) => {
-                setID(e.target.value);
+                setFlag(e.target.value);
               }}
+              defaultValue={flag}
               required
-              label="Country"
+              label="Flag"
             >
-              {rows.map((country) => (
-                <MenuItem value={`${country.id}`}>
-                  {t(`${country.id} - `)}
-                  {t(language === "ar" ? country.title_ar : country.title_en)}
+              {countries.map((country) => (
+                <MenuItem
+                  value={country.code}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    alignItems: "center",
+                  }}
+                >
+                  <Flag
+                    code={country.code}
+                    style={{
+                      width: "40px",
+                      height: "25px",
+                      marginInlineEnd: "1rem",
+                    }}
+                  />
+                  <span style={{ verticalAlign: "top" }}>{country.name}</span>
                 </MenuItem>
               ))}
             </Select>
           </FormControl>
-        </Box>
-        <Box
-          // display={"flex"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-          marginBottom="5rem"
-        >
-          {/* /* Add more fields as necessary */}
+          <FormControl
+            fullWidth
+            margin="normal"
+            sx={{
+              mt: 0,
+              mb: 2,
+              "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                { borderColor: colors.primary[100] },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: colors.primary[100],
+              },
+            }}
+          >
+            <InputLabel id="code-label">{t("Country Code")}</InputLabel>
+
+            <Select
+              labelId="code-label"
+              name="code"
+              defaultValue={code}
+              onChange={(e) => {
+                setCode(e.target.value);
+              }}
+              required
+              label="country code"
+            >
+              {countries.map((country) => (
+                <MenuItem value={`${country.phoneCode}`}>
+                  <span
+                    style={{
+                      marginInlineEnd: "1rem",
+                    }}
+                  >
+                    {country.phoneCode}
+                  </span>
+                  <span style={{ verticalAlign: "top" }}>{country.name}</span>
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
         <Box
           sx={{
@@ -187,51 +230,9 @@ const AddCityPage = () => {
           </Button>
         </Box>
       </form>
-      <ToastContainer position="top-center" autoClose="3000" />
+      <ToastContainer position="top-center" autoClose={2000} />
     </Box>
   );
 };
 
-export default AddCityPage;
-
-// <FormControl
-//             fullWidth
-//             margin="normal"
-//             sx={{
-//               mt: 0,
-//               mb: 2,
-//               "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-//                 { borderColor: colors.primary[100] },
-//               "& .MuiInputLabel-root.Mui-focused": {
-//                 color: colors.primary[100],
-//               },
-//             }}
-//           >
-//             <InputLabel id="type-label">{t("Type")}</InputLabel>
-
-//             <Select
-//               labelId="type-label"
-//               name="type"
-//               onChange={(e) => {
-//                 setType(e.target.value);
-//               }}
-//               required
-//               label="Type"
-//             >
-//               {countries.map((country) => (
-//                 <div key={country.code}>
-//                   <MenuItem value={country.code}>
-//                     <Flag
-//                       code={country.code}
-//                       style={{
-//                         width: "50px",
-//                         height: "30px",
-//                         marginInlineEnd: "1rem",
-//                       }}
-//                     />
-//                     <span>{country.name}</span>
-//                   </MenuItem>
-//                 </div>
-//               ))}
-//             </Select>
-//           </FormControl>
+export default EditCodePage;

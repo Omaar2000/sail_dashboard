@@ -2,6 +2,7 @@ import { useTheme } from "@emotion/react";
 import {
   Box,
   Button,
+  CircularProgress,
   FormControl,
   IconButton,
   InputLabel,
@@ -19,6 +20,7 @@ import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
+import { toast, ToastContainer } from "react-toastify";
 
 const AddCoverPage = () => {
   const theme = useTheme();
@@ -32,10 +34,11 @@ const AddCoverPage = () => {
   const navigate = useNavigate();
   // const row = location.state;
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { token } = useUserStore();
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log(image);
     if (!image) {
@@ -48,7 +51,9 @@ const AddCoverPage = () => {
       type,
     };
 
-    addSlider(category);
+    setIsLoading(true);
+    await addSlider(category);
+    setIsLoading(false);
   };
 
   const handleImageChange = (e) => {
@@ -75,9 +80,11 @@ const AddCoverPage = () => {
         },
       });
       console.log(res);
+      toast.success(t("Cover Added Successfully!"));
       navigate("/covers");
       return res.data;
     } catch (error) {
+      toast.error(t(`Error adding cover`));
       console.error("Error adding category:", error);
     }
   };
@@ -211,11 +218,16 @@ const AddCoverPage = () => {
             variant="contained"
             color="success"
             size="large"
+            disabled={isLoading} // Disable the button while loading
+            startIcon={
+              isLoading ? <CircularProgress size={20} color="inherit" /> : null
+            }
           >
-            {t("Save")}
+            {isLoading ? t("Loading") : t("Save")}
           </Button>
         </Box>
       </form>
+      <ToastContainer position="top-center" autoClose="3000" />
     </Box>
   );
 };
