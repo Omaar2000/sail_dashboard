@@ -8,6 +8,7 @@ import useUserStore from "../../stores/useUserStore";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
+import { editPath } from "../../network/pathsServices";
 
 const EditPathPage = () => {
   const theme = useTheme();
@@ -19,7 +20,7 @@ const EditPathPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { token } = useUserStore();
+  const { token, pinned } = useUserStore();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,29 +31,19 @@ const EditPathPage = () => {
       title_ar,
       title_en,
     };
-
-    setIsLoading(true);
-    await editPath(row.id, path);
-    setIsLoading(false);
-  };
-
-  const editPath = async (id, path) => {
     try {
-      const res = await api.patch(`api/admin/trip_path/${id}`, path, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(res);
-
-      toast.success(t("Path added successfully!"));
-      navigate("/boatroutes");
-      return res.data;
+      setIsLoading(true);
+      await editPath(row.id, path, token);
+      setTimeout(() => {
+        navigate("/boatroutes");
+      }, 500);
     } catch (error) {
-      toast.error(`Error updating path`);
-      console.error("Error updating path:", error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <Box>
       <h1 style={{ margin: "2rem" }}>{t("Edit Path")}</h1>
@@ -108,9 +99,9 @@ const EditPathPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
-            // justifyContent: "end",
+            justifyContent: "end",
           }}
         >
           <Button

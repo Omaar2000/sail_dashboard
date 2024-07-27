@@ -21,6 +21,8 @@ import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
+import { editCountry } from "../../network/countriesServices";
+import { addSlider } from "../../network/coverServices";
 
 const AddCoverPage = () => {
   const theme = useTheme();
@@ -35,26 +37,7 @@ const AddCoverPage = () => {
   // const row = location.state;
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-
-  const { token } = useUserStore();
-
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    console.log(image);
-    if (!image) {
-      setImageError(true);
-      return;
-    }
-
-    const category = {
-      image,
-      type,
-    };
-
-    setIsLoading(true);
-    await addSlider(category);
-    setIsLoading(false);
-  };
+  const { token, pinned } = useUserStore();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -70,24 +53,32 @@ const AddCoverPage = () => {
       fileRef.current.value = ""; // Reset the file input value
     }
   };
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log(image);
+    if (!image) {
+      setImageError(true);
+      return;
+    }
 
-  const addSlider = async (slider) => {
+    const category = {
+      image,
+      type,
+    };
+
     try {
-      const res = await api.post(`api/admin/sliders`, slider, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(res);
-      toast.success(t("Cover Added Successfully!"));
-      navigate("/covers");
-      return res.data;
+      setIsLoading(true);
+      await addSlider(category, token);
+      setTimeout(() => {
+        navigate("/covers");
+      }, 500);
     } catch (error) {
-      toast.error(t(`Error adding cover`));
-      console.error("Error adding category:", error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <Box>
       <h1 style={{ margin: "2rem" }}>{t("Add Cover")}</h1>
@@ -129,7 +120,6 @@ const AddCoverPage = () => {
           marginBottom="5rem"
         >
           <Box
-            style={{}}
             spacing={2}
             display={"flex"}
             flexDirection={"column"}
@@ -209,8 +199,9 @@ const AddCoverPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
+            justifyContent: "end",
           }}
         >
           <Button
@@ -218,6 +209,7 @@ const AddCoverPage = () => {
             variant="contained"
             color="success"
             size="large"
+            style={{ fontSize: "15px" }}
             disabled={isLoading} // Disable the button while loading
             startIcon={
               isLoading ? <CircularProgress size={20} color="inherit" /> : null

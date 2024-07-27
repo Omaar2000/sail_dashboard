@@ -24,6 +24,7 @@ import { getAllCountries } from "../../network/countriesServices";
 import { countries } from "../../data/mockData";
 import Flag from "react-world-flags";
 import { toast, ToastContainer } from "react-toastify";
+import { editCity } from "../../network/citiesServices";
 
 const EditCityPage = () => {
   const theme = useTheme();
@@ -50,26 +51,16 @@ const EditCityPage = () => {
       title_ar,
       title_en,
     };
-
-    setIsLoading(true);
-    await editCity(row.id, city);
-    setIsLoading(false);
-  };
-
-  const editCity = async (id, city) => {
     try {
-      const res = await api.patch(`api/admin/app_settings/cities/${id}`, city, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(res);
-      toast.success(t("City Edited successfully!"));
-      navigate("/cities");
-      return res.data;
+      setIsLoading(true);
+      await editCity(row.id, city, token);
+      setTimeout(() => {
+        navigate("/cities");
+      }, 1000);
     } catch (error) {
-      toast.error(`Error editing city`);
-      console.error("Error editing city:", error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -124,14 +115,7 @@ const EditCityPage = () => {
             }}
           />
         </Box>
-        <Box
-          // display={"flex"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-          marginBottom="5rem"
-        >
-          {/* /* Add more fields as necessary */}
-        </Box>
+
         <Box
           sx={{
             background: colors.primary[400],

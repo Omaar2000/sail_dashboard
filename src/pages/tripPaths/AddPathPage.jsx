@@ -21,6 +21,7 @@ import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
+import { addPath } from "../../network/pathsServices";
 
 const AddPathPage = () => {
   const theme = useTheme();
@@ -33,7 +34,7 @@ const AddPathPage = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { token } = useUserStore();
+  const { token, pinned } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -42,26 +43,16 @@ const AddPathPage = () => {
       title_ar,
       title_en,
     };
-
-    setIsLoading(true);
-    await addPath(path);
-    setIsLoading(false);
-  };
-
-  const addPath = async (path) => {
     try {
-      const res = await api.post(`api/admin/trip_path`, path, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(res);
-      toast.success(t("Path added successfully!"));
-      navigate("/boatroutes");
-      return res.data;
+      setIsLoading(true);
+      await addPath(path, token);
+      setTimeout(() => {
+        navigate("/boatroutes");
+      }, 500);
     } catch (error) {
-      toast.error(`Error adding path`);
-      console.error("Error adding path:", error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -117,9 +108,9 @@ const AddPathPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
-            // justifyContent: "end",
+            justifyContent: "end",
           }}
         >
           <Button

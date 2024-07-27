@@ -36,6 +36,7 @@ const Dashboard = () => {
             marginInlineStart: `${pinned ? "250px" : "80px"}`,
             transition: "all 0.5s ease-in-out, all 0.5s ease-in-out",
             // position: "relative",
+            marginTop: "1rem",
           }}
         >
           <div>

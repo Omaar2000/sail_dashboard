@@ -19,6 +19,7 @@ import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
+import { updateCover } from "../../network/coverServices";
 
 const EditCoverPage = () => {
   const theme = useTheme();
@@ -32,7 +33,7 @@ const EditCoverPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { token } = useUserStore();
+  const { token, pinned } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (e) => {
@@ -43,10 +44,17 @@ const EditCoverPage = () => {
       image: image ? image : null,
       type,
     };
-
-    setIsLoading(true);
-    await updateCover(row.id, cover);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      await updateCover(row.id, cover, token);
+      setTimeout(() => {
+        navigate("/covers");
+      }, 500);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleImageChange = (e) => {
@@ -61,25 +69,6 @@ const EditCoverPage = () => {
     setImage(null);
     if (fileRef.current) {
       fileRef.current.value = ""; // Reset the file input value
-    }
-  };
-
-  const updateCover = async (id, cover) => {
-    try {
-      const res = await api.patch(`api/admin/sliders/${id}`, cover, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(res);
-
-      toast.success(t("Cover Added successfully!"));
-      navigate("/covers");
-      return res.data;
-    } catch (error) {
-      toast.error(`Error Editing Cover`);
-      console.error("Error updating cover:", error);
     }
   };
 
@@ -215,9 +204,9 @@ const EditCoverPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
-            // justifyContent: "end",
+            justifyContent: "end",
           }}
         >
           <Button
@@ -225,7 +214,7 @@ const EditCoverPage = () => {
             variant="contained"
             color="success"
             size="large"
-            // style={{ fontSize: "18px" }}
+            style={{ fontSize: "15px" }}
             disabled={isLoading} // Disable the button while loading
             startIcon={
               isLoading ? <CircularProgress size={20} color="inherit" /> : null

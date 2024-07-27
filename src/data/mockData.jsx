@@ -10,6 +10,7 @@ import AccessCell from "../components/Access";
 import EditBtn from "../components/EditBtn";
 import i18n from "../i18n";
 import Flag from "react-world-flags";
+import Control from "../components/Control";
 
 export const userColumns = [
   // {
@@ -136,29 +137,379 @@ export const coversColumns = [
   {
     field: "id",
     headerName: "ID",
-    flex: 1,
+    flex: 0,
     cellClassName: "name-column--cell",
     required: true,
   },
   {
     field: "type",
     headerName: i18n.t("Type"),
-    flex: 1,
+    flex: 0,
   },
   {
     field: "image_url",
     headerName: i18n.t("Image"),
-    flex: 1,
+    flex: 0,
     required: true,
     renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
   },
   {
     field: "edit",
     headerName: i18n.t("Edit"),
-    flex: 1,
+    flex: 0,
     renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
   },
+  {
+    field: "control",
+    headerName: i18n.t(""),
+    flex: 1,
+    renderCell: ({ row }) => <Control row={row} />,
+  },
 ];
+export const reviewsColumns = [
+  { field: "boatId", headerName: "Boat Id", flex: 1 },
+  { field: "reviewText", headerName: "Review Text", flex: 2 },
+  { field: "starsCount", headerName: "Stars Count", flex: 1 },
+  { field: "date", headerName: "Date", flex: 1 },
+  { field: "byUser", headerName: "By User", flex: 1 },
+];
+export const reviewsData = [
+  {
+    id: 1,
+    boatId: "B001",
+    reviewText: "Great experience!",
+    starsCount: 5,
+    date: "2023-06-01",
+    byUser: "User1",
+  },
+
+  {
+    id: 2,
+    boatId: "B002",
+    reviewText: "Good service, but the boat was a bit small.",
+    starsCount: 4,
+    date: "2023-06-02",
+    byUser: "User2",
+  },
+  {
+    id: 3,
+    boatId: "B003",
+    reviewText: "Not satisfied with the trip.",
+    starsCount: 2,
+    date: "2023-06-03",
+    byUser: "User3",
+  },
+  {
+    id: 4,
+    boatId: "B004",
+    reviewText: "Excellent trip, friendly staff!",
+    starsCount: 5,
+    date: "2023-06-04",
+    byUser: "User4",
+  },
+  {
+    id: 5,
+    boatId: "B005",
+    reviewText: "Average experience.",
+    starsCount: 3,
+    date: "2023-06-05",
+    byUser: "User5",
+  },
+];
+
+export const supervisorsColumns = [
+  { field: "name", headerName: "Name", flex: 1 },
+  { field: "phone", headerName: "Phone", flex: 1 },
+  { field: "email", headerName: "Email", flex: 1 },
+];
+
+export const supervisorsData = [
+  {
+    id: 1,
+    name: "John Doe",
+    phone: "+1234567890",
+    email: "john.doe@example.com",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    phone: "+0987654321",
+    email: "jane.smith@example.com",
+  },
+  {
+    id: 3,
+    name: "Emily Johnson",
+    phone: "+1122334455",
+    email: "emily.johnson@example.com",
+  },
+  {
+    id: 4,
+    name: "Michael Brown",
+    phone: "+1223344556",
+    email: "michael.brown@example.com",
+  },
+  {
+    id: 5,
+    name: "Linda Davis",
+    phone: "+1334455667",
+    email: "linda.davis@example.com",
+  },
+];
+
+export const complaintsColumns = [
+  { field: "orderId", headerName: "OrderId", flex: 1 },
+  { field: "date", headerName: "Date", flex: 1 },
+  { field: "user", headerName: "User", flex: 1 },
+  { field: "complaint", headerName: "Complaint", flex: 2 },
+];
+
+export const complaintsData = [
+  {
+    id: 1,
+    orderId: "O001",
+    date: "2023-06-01",
+    user: "User1",
+    complaint: "Late arrival of the boat.",
+  },
+  {
+    id: 2,
+    orderId: "O002",
+    date: "2023-06-02",
+    user: "User2",
+    complaint: "Unfriendly staff.",
+  },
+  {
+    id: 3,
+    orderId: "O003",
+    date: "2023-06-03",
+    user: "User3",
+    complaint: "Boat was not clean.",
+  },
+  {
+    id: 4,
+    orderId: "O004",
+    date: "2023-06-04",
+    user: "User4",
+    complaint: "Noisy environment.",
+  },
+  {
+    id: 5,
+    orderId: "O005",
+    date: "2023-06-05",
+    user: "User5",
+    complaint: "Poor service.",
+  },
+];
+
+export const payoutsColumns = [
+  { field: "paymentMethod", headerName: "Payment Method", flex: 1 },
+  { field: "amount", headerName: "Amount", type: "number", flex: 1 },
+  { field: "user", headerName: "User", flex: 1 },
+  { field: "status", headerName: "Status", flex: 1 },
+];
+export const payoutsData = [
+  {
+    id: 1,
+    paymentMethod: "Credit Card",
+    amount: 250.0,
+    user: "User1",
+    status: "Completed",
+  },
+  {
+    id: 2,
+    paymentMethod: "PayPal",
+    amount: 500.0,
+    user: "User2",
+    status: "Pending",
+  },
+  {
+    id: 3,
+    paymentMethod: "Bank Transfer",
+    amount: 150.0,
+    user: "User3",
+    status: "Completed",
+  },
+  {
+    id: 4,
+    paymentMethod: "Credit Card",
+    amount: 300.0,
+    user: "User4",
+    status: "Failed",
+  },
+  {
+    id: 5,
+    paymentMethod: "PayPal",
+    amount: 450.0,
+    user: "User5",
+    status: "Completed",
+  },
+];
+
+export const providerRequestsColumns = [
+  { field: "name", headerName: "Name", flex: 1 },
+  {
+    field: "photo",
+    headerName: "Photo",
+    flex: 1,
+    renderCell: (params) => (
+      <ImageModal imageUrl={params.value} alt="Provider" />
+    ),
+  },
+  { field: "country", headerName: "Country", flex: 1 },
+  { field: "email", headerName: "Email", flex: 1 },
+  { field: "phone", headerName: "Phone", flex: 1 },
+];
+
+export const providerRequestsData = [
+  {
+    id: 1,
+    name: "Provider A",
+    photo: "https://via.placeholder.com/150",
+    country: "Country A",
+    email: "providerA@example.com",
+    phone: "+1234567890",
+  },
+  {
+    id: 2,
+    name: "Provider B",
+    photo: "https://via.placeholder.com/150",
+    country: "Country B",
+    email: "providerB@example.com",
+    phone: "+0987654321",
+  },
+  {
+    id: 3,
+    name: "Provider C",
+    photo: "https://via.placeholder.com/150",
+    country: "Country C",
+    email: "providerC@example.com",
+    phone: "+1122334455",
+  },
+  {
+    id: 4,
+    name: "Provider D",
+    photo: "https://via.placeholder.com/150",
+    country: "Country D",
+    email: "providerD@example.com",
+    phone: "+1223344556",
+  },
+  {
+    id: 5,
+    name: "Provider E",
+    photo: "https://via.placeholder.com/150",
+    country: "Country E",
+    email: "providerE@example.com",
+    phone: "+1334455667",
+  },
+];
+
+export const featuresListColumns = [
+  {
+    field: "icon",
+    headerName: "Icon",
+    flex: 1,
+    renderCell: (params) => <img src={params.value} alt="Icon" />,
+  },
+  { field: "nameAr", headerName: "Name AR", flex: 1 },
+  { field: "nameEn", headerName: "Name EN", flex: 1 },
+];
+
+export const featuresListData = [
+  {
+    id: 1,
+    icon: "https://via.placeholder.com/150",
+    nameAr: "ميزة 1",
+    nameEn: "Feature 1",
+  },
+  {
+    id: 2,
+    icon: "https://via.placeholder.com/150",
+    nameAr: "ميزة 2",
+    nameEn: "Feature 2",
+  },
+  {
+    id: 3,
+    icon: "https://via.placeholder.com/150",
+    nameAr: "ميزة 3",
+    nameEn: "Feature 3",
+  },
+  {
+    id: 4,
+    icon: "https://via.placeholder.com/150",
+    nameAr: "ميزة 4",
+    nameEn: "Feature 4",
+  },
+  {
+    id: 5,
+    icon: "https://via.placeholder.com/150",
+    nameAr: "ميزة 5",
+    nameEn: "Feature 5",
+  },
+];
+
+export const transactionsColumns = [
+  { field: "trxId", headerName: "TRX Id", flex: 1 },
+  { field: "date", headerName: "Date", flex: 1 },
+  { field: "amount", headerName: "Amount", type: "number", flex: 1 },
+  { field: "tripId", headerName: "Trip Id", flex: 1 },
+  { field: "tripType", headerName: "Trip Type", flex: 1 },
+  { field: "user", headerName: "User", flex: 1 },
+  { field: "provider", headerName: "Provider", flex: 1 },
+];
+
+export const transactionsData = [
+  {
+    id: 1,
+    trxId: "TRX001",
+    date: "2023-06-01",
+    amount: 100.0,
+    tripId: "T001",
+    tripType: "Boat",
+    user: "User1",
+    provider: "ProviderA",
+  },
+  {
+    id: 2,
+    trxId: "TRX002",
+    date: "2023-06-02",
+    amount: 200.0,
+    tripId: "T002",
+    tripType: "Banana Boat",
+    user: "User2",
+    provider: "ProviderB",
+  },
+  {
+    id: 3,
+    trxId: "TRX003",
+    date: "2023-06-03",
+    amount: 150.0,
+    tripId: "T003",
+    tripType: "Boat",
+    user: "User3",
+    provider: "ProviderC",
+  },
+  {
+    id: 4,
+    trxId: "TRX004",
+    date: "2023-06-04",
+    amount: 180.0,
+    tripId: "T004",
+    tripType: "Banana Boat",
+    user: "User4",
+    provider: "ProviderA",
+  },
+  {
+    id: 5,
+    trxId: "TRX005",
+    date: "2023-06-05",
+    amount: 220.0,
+    tripId: "T005",
+    tripType: "Boat",
+    user: "User5",
+    provider: "ProviderB",
+  },
+];
+
 export const pathsColumns = [
   {
     field: "title_ar",

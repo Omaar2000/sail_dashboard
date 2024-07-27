@@ -9,7 +9,17 @@ import {
   LockOpenOutlined,
   SecurityOutlined,
 } from "@mui/icons-material";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
 import { DataGrid, GridOverlay, GridToolbar } from "@mui/x-data-grid";
 import {
   mockDataContacts,
@@ -30,6 +40,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
   const { t } = useTranslation();
   // const [rows, setRows] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -93,7 +104,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
       //   justifyContent: "center",
       // }}
     >
-      {selectedItems.length !== 0 ? (
+      {selectedItems.length !== 0 && to !== "" ? (
         <Box
           sx={{
             marginBottom: "1px",
@@ -105,7 +116,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
           }}
         >
           <Button
-            onClick={handleDelete}
+            onClick={() => setDialogIsOpen(true)}
             variant="contained"
             color="error"
             // style={{ margin: "0 20px" }}
@@ -122,7 +133,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
             {t("Add New Row")}
           </Button>
         </Box>
-      ) : (
+      ) : to !== "" ? (
         <Box
           sx={{
             marginBottom: "1px",
@@ -142,6 +153,29 @@ const TableComponent = ({ to, rows, columns, loading }) => {
             {t("Add New Row")}
           </Button>
         </Box>
+      ) : (
+        selectedItems.length !== 0 &&
+        to === "" && (
+          <Box
+            sx={{
+              marginBottom: "1px",
+              marginInlineEnd: "10px",
+              display: "flex",
+              flexShrink: "1",
+              justifyContent: "end",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              onClick={() => setDialogIsOpen(true)}
+              variant="contained"
+              color="error"
+              // style={{ margin: "0 20px" }}
+            >
+              Delete
+            </Button>
+          </Box>
+        )
       )}
       <Box
         // m={selectedItems.length === 0 && "54px 0 0 0"}
@@ -205,14 +239,35 @@ const TableComponent = ({ to, rows, columns, loading }) => {
           pageSizeOptions={[1, 10, 20, 50, 100]}
         />
       </Box>
-
-      {/* <AddModal
-        open={openAddModal}
-        handleClose={handleCloseAddModal}
-        handleSave={handleSaveNewRow}
-        // formInputs={formInputs}
-        columns={userColumns}
-      /> */}
+      <Dialog
+        open={dialogIsOpen}
+        onClose={() => setDialogIsOpen(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Let Google help apps determine location. This means sending
+            anonymous location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDialogIsOpen(false)} color="info">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => setDialogIsOpen(false)}
+            color="error"
+            autoFocus
+            variant="contained"
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
@@ -312,3 +367,11 @@ export default TableComponent;
 //     </Box>
 //   </Box>
 // );
+
+/* <AddModal
+        open={openAddModal}
+        handleClose={handleCloseAddModal}
+        handleSave={handleSaveNewRow}
+        // formInputs={formInputs}
+        columns={userColumns}
+      /> */

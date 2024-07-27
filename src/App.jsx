@@ -1,12 +1,9 @@
 import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { useEffect, useState } from "react";
-import { themeSettings } from "./theme";
 import { ColorModeContext, useMode } from "./theme";
-import Topbar from "./components/layout/Topbar";
 import Dashboard from "./pages/dashboard";
 import { Navigate, Route, Routes } from "react-router-dom";
-import SidebarComponent from "./components/layout/Sidebar";
 import Login from "./pages/login";
 import PrivateRoute from "./pages/privateRoute/PrivateRoute";
 import TableComponent from "./components/Table";
@@ -33,6 +30,18 @@ import AddCodePage from "./pages/codes/AddCodePage";
 import EditCodePage from "./pages/codes/EditCodePage";
 import Users from "./pages/Users";
 import ProviderList from "./pages/ProvidersList";
+import Settings from "./pages/Settings";
+import Notifications from "./pages/Notifications";
+import Reviews from "./pages/Reviews";
+import Complaints from "./pages/Complaints";
+import Transactions from "./pages/Transactions";
+import Payouts from "./pages/Payouts";
+import Orders from "./pages/Orders";
+import FeatureList from "./pages/FeatureList";
+import Supervisors from "./pages/Supervisors";
+import ProvidersPayouts from "./pages/ProvidersPayouts";
+import PayoutsRequests from "./pages/ProvidersPayouts";
+import ProvidersRequests from "./pages/ProvidersRequests";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -49,11 +58,6 @@ function App() {
   useEffect(() => {
     document.body.dir = language === "ar" ? "rtl" : "ltr";
   }, [language]);
-  // useEffect(() => {
-  //   setLoading(true);
-  //   getAllCategories();
-  //   setLoading(false);
-  // }, []);
 
   return (
     <div
@@ -82,6 +86,13 @@ function App() {
               />
               <Route path="users" element={<Users />} />
               <Route path="providerlist" element={<ProviderList />} />
+              <Route path="reviews" element={<Reviews />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="complaints" element={<Complaints />} />
+              <Route path="transactions" element={<Transactions />} />
+              <Route path="payouts" element={<Payouts />} />
+              <Route path="payoutrequests" element={<PayoutsRequests />} />
+              <Route path="providersrequests" element={<ProvidersRequests />} />
               <Route path="covers" element={<Covers />} />
               <Route path="addcover" element={<AddCoverPage />} />
               <Route path="editcover" element={<EditCoverPage />} />
@@ -94,13 +105,16 @@ function App() {
               <Route path="codes" element={<Codes />} />
               <Route path="addcode" element={<AddCodePage />} />
               <Route path="editcode" element={<EditCodePage />} />
-              {/* <Route path="editcity" element={<EditCountryPage />} /> */}
               <Route path="categories" element={<Categories />} />
               <Route path="editcategory" element={<EditCategoryPage />} />
               <Route path="addcategory" element={<AddCategoryPage />} />
               <Route path="boatroutes" element={<TripPaths />} />
               <Route path="editpath" element={<EditPathPage />} />
               <Route path="addpath" element={<AddPathPage />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="notifications" element={<Notifications />} />
+              <Route path="featurelist" element={<FeatureList />} />
+              <Route path="supervisors" element={<Supervisors />} />
             </Route>
           </Routes>
         </ThemeProvider>

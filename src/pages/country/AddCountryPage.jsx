@@ -9,6 +9,7 @@ import {
   MenuItem,
   Select,
   Stack,
+  TextareaAutosize,
   TextField,
   Typography,
 } from "@mui/material";
@@ -21,6 +22,7 @@ import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
+import { addCountry } from "../../network/countriesServices";
 
 const AddCountryPage = () => {
   const theme = useTheme();
@@ -32,8 +34,9 @@ const AddCountryPage = () => {
   // const row = location.state;
   const { t } = useTranslation();
 
-  const { token } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
+
+  const { token, pinned } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -43,25 +46,16 @@ const AddCountryPage = () => {
       title_en,
     };
 
-    setIsLoading(true);
-    await addCountry(country);
-    setIsLoading(false);
-  };
-
-  const addCountry = async (country) => {
     try {
-      const res = await api.post(`api/admin/app_settings/countries`, country, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(res);
-      toast.success(t("Country Added Successfully!"));
-      navigate("/countries");
-      return res.data;
+      setIsLoading(true);
+      await addCountry(country, token);
+      setTimeout(() => {
+        navigate("/countries");
+      }, 500);
     } catch (error) {
-      toast.error(`Error Adding Country`);
-      console.error("Error adding country:", error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -117,9 +111,9 @@ const AddCountryPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
-            // justifyContent: "end",
+            justifyContent: "end",
           }}
         >
           <Button

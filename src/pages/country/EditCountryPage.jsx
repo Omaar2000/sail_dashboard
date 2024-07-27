@@ -8,6 +8,7 @@ import useUserStore from "../../stores/useUserStore";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
+import { editCountry } from "../../network/countriesServices";
 
 const EditCountryPage = () => {
   const theme = useTheme();
@@ -21,7 +22,7 @@ const EditCountryPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { token } = useUserStore();
+  const { token, pinned } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -31,32 +32,19 @@ const EditCountryPage = () => {
       title_en,
     };
 
-    setIsLoading(true);
-    await editCountry(row.id, country);
-    setIsLoading(false);
-  };
-
-  const editCountry = async (id, country) => {
     try {
-      const res = await api.patch(
-        `api/admin/app_settings/countries/${id}`,
-        country,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(res);
-
-      toast.success(t("Country Updated successfully!"));
-      navigate("/countries");
-      return res.data;
+      setIsLoading(true);
+      await editCountry(row.id, country, token);
+      setTimeout(() => {
+        navigate("/countries");
+      }, 500);
     } catch (error) {
-      toast.error(`Error updating country`);
-      console.error("Error updating country:", error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+
   return (
     <Box>
       <h1 style={{ margin: "2rem" }}>{t("Edit Country")}</h1>
@@ -112,9 +100,9 @@ const EditCountryPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
-            // justifyContent: "end",
+            justifyContent: "end",
           }}
         >
           <Button

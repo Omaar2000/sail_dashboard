@@ -21,6 +21,7 @@ import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
+import { updateCategory } from "../../network/categoriesServices";
 
 const EditCategoryPage = () => {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ const EditCategoryPage = () => {
   const row = location.state;
   const navigate = useNavigate();
 
-  const { token } = useUserStore();
+  const { token, pinned } = useUserStore();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -48,10 +49,17 @@ const EditCategoryPage = () => {
       title_ar: row.title_ar,
       type: row.type,
     };
-
-    setIsLoading(true);
-    await updateCategory(row.id, category);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      await updateCategory(row.id, category, token);
+      setTimeout(() => {
+        navigate("/categories");
+      }, 500);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleImageChange = (e) => {
@@ -66,26 +74,6 @@ const EditCategoryPage = () => {
     setImage(null);
     if (fileRef.current) {
       fileRef.current.value = ""; // Reset the file input value
-    }
-  };
-
-  const updateCategory = async (id, category) => {
-    try {
-      const res = await api.patch(`api/admin/categories/${id}`, category, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(res);
-
-      toast.success(t("Category Updated successfully!"));
-      navigate("/categories");
-
-      return res.data;
-    } catch (error) {
-      toast.error(`Error Updating Category`);
-      console.error("Error updating category:", error);
     }
   };
 
@@ -261,9 +249,9 @@ const EditCategoryPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
-            // justifyContent: "end",
+            justifyContent: "end",
           }}
         >
           <Button
@@ -271,7 +259,7 @@ const EditCategoryPage = () => {
             variant="contained"
             color="success"
             size="large"
-            // style={{ fontSize: "18px" }}
+            style={{ fontSize: "15px" }}
             disabled={isLoading} // Disable the button while loading
             startIcon={
               isLoading ? <CircularProgress size={20} color="inherit" /> : null

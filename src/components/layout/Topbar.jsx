@@ -4,6 +4,7 @@ import { useContext } from "react";
 import SearchBar from "../searchBar";
 import {
   DarkModeOutlined,
+  Language,
   LightModeOutlined,
   NotificationAddOutlined,
   PersonOutlineOutlined,
@@ -40,7 +41,7 @@ const Topbar = () => {
           )}
         </IconButton>
         <IconButton onClick={changeLanguage}>
-          <NotificationAddOutlined />
+          <Language />
         </IconButton>
         <IconButton>
           <SettingsOutlined />

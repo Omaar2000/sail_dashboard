@@ -8,7 +8,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -20,6 +19,7 @@ import { Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
+import { addCategory } from "../../network/categoriesServices";
 
 const AddCategoryPage = () => {
   const theme = useTheme();
@@ -35,8 +35,7 @@ const AddCategoryPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const { token } = useUserStore();
+  const { token, pinned } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -53,25 +52,16 @@ const AddCategoryPage = () => {
       type,
     };
 
-    setIsLoading(true);
-    await addCategory(category);
-    setIsLoading(false);
-  };
-  const addCategory = async (category) => {
     try {
-      const res = await api.post(`api/admin/categories`, category, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(res);
-      toast.success(t("Category added successfully!"));
-      navigate("/categories");
-      return res.data;
+      setIsLoading(true);
+      await addCategory(category, token);
+      setTimeout(() => {
+        navigate("/categories");
+      }, 500);
     } catch (error) {
-      toast.error(`Error adding Category`);
-      console.error("Error adding category:", error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -248,9 +238,9 @@ const AddCategoryPage = () => {
             background: colors.primary[400],
             position: "fixed",
             bottom: "0",
-            width: "100%",
+            width: pinned ? "calc(100% - 250px)" : "calc(100% - 80px)",
             display: "flex",
-            // justifyContent: "end",
+            justifyContent: "end",
           }}
         >
           <Button
@@ -258,7 +248,7 @@ const AddCategoryPage = () => {
             variant="contained"
             color="success"
             size="large"
-            // style={{ fontSize: "18px" }}
+            style={{ fontSize: "15px" }}
             disabled={isLoading} // Disable the button while loading
             startIcon={
               isLoading ? <CircularProgress size={20} color="inherit" /> : null

@@ -12,18 +12,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import useUserStore from "../../stores/useUserStore";
-import { Close } from "@mui/icons-material";
-import { api } from "../../network/api";
+
 import { useTranslation } from "react-i18next";
 import { getAllCountries } from "../../network/countriesServices";
-import { countries } from "../../data/mockData";
-import Flag from "react-world-flags";
 import { toast, ToastContainer } from "react-toastify";
+import { addCity } from "../../network/citiesServices";
 
 const AddCityPage = () => {
   const theme = useTheme();
@@ -49,28 +46,16 @@ const AddCityPage = () => {
       title_en,
       country_id: Number(ID),
     };
-
-    setIsLoading(true);
-    await addCity(city);
-    setIsLoading(false);
-  };
-
-  const addCity = async (city) => {
     try {
-      const res = await api.post(`api/admin/app_settings/cities`, city, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(res);
-      toast.success(t("City added successfully!"));
+      setIsLoading(true);
+      await addCity(city, token);
       setTimeout(() => {
         navigate("/cities");
-      }, 1000);
-      return res.data;
+      }, 500);
     } catch (error) {
-      toast.error(`Error adding city`);
-      console.error("Error adding city:", error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -67,3 +67,13 @@ body[dir="ltr"] .MuiDataGrid-cell--textLeft {
 .MuiCircularProgress-circle {
   color: #888 !important;
 }
+
+[data-reactroot] {
+  height: 100% !important;
+}
+
+.ql-editor,
+.ql-container {
+  /* background-color: black !important; */
+  min-height: 10rem !important;
+}

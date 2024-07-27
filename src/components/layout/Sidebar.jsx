@@ -1,37 +1,31 @@
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import {
-  Menu,
-  MenuItem,
-  Sidebar,
-  SubMenu,
-  useProSidebar,
-} from "react-pro-sidebar";
+import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
-import { useEffect, useState } from "react";
-import { Box, Button, IconButton, styled, Typography } from "@mui/material";
+import { useState } from "react";
+import { Box, IconButton, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import "./style.css";
 import {
+  Call,
   Category,
   ChecklistRtl,
-  DataArray,
-  DataObject,
+  Feedback,
   ForkRight,
+  Group,
   Groups,
-  GroupsOutlined,
-  Height,
   Image,
   Info,
-  LineAxis,
+  Language,
+  LocationCity,
+  ManageAccounts,
+  NotificationAdd,
+  Payment,
   PushPin,
   PushPinOutlined,
+  Receipt,
+  Settings,
+  StackedLineChart,
   Star,
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
@@ -49,6 +43,7 @@ const Item = ({
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { t } = useTranslation();
+
   return (
     <Link to={to} style={{ textDecoration: "none" }}>
       <MenuItem
@@ -62,7 +57,10 @@ const Item = ({
         onMouseLeave={() => setHovered(null)}
         style={{
           textAlign: "left",
-          color: colors.grey[100],
+          borderRadius: "10px",
+          transition: "background 0.1s ease-out",
+          color:
+            selected === to || hovered === title ? "#FFF" : colors.grey[100],
           backgroundColor:
             selected === to
               ? colors.primary[700]
@@ -111,10 +109,7 @@ const SidebarComponent = ({
   //     scrollbar-width: none; /* Firefox */
   //   }
   // `;
-  {
-    console.log(pinned);
-    console.log("pinned ", !pinned);
-  }
+
   return (
     <Sidebar
       collapsed={!pinned && isCollapsed}
@@ -132,6 +127,7 @@ const SidebarComponent = ({
         // position: "absolute",
         position: "fixed",
         zIndex: "1000",
+        transition: "all 0.2s ease-out",
         // ".ps-sidebar-container": {
         //   "&::-webkit-scrollbar": {
         //     display: "none !important",
@@ -159,6 +155,7 @@ const SidebarComponent = ({
                 alignItems: "center",
                 width: "100%",
                 mb: "21.5px",
+                transition: "all 0.2s ease-out",
               }}
               // alignItems={"center"}
             >
@@ -189,7 +186,7 @@ const SidebarComponent = ({
                 height="30px"
                 src="../../../public/vite.svg"
                 alt="profile picture"
-                style={{ borderRadius: "50%" }}
+                style={{ borderRadius: "10%" }}
               /> */}
               {/* <Typography variant="h6" color={colors.grey[100]}>
                 ADMIN
@@ -199,8 +196,8 @@ const SidebarComponent = ({
         </Box>
 
         <Item
-          title={"Home"}
-          icon={<MenuOutlinedIcon />}
+          title={"Dashboard"}
+          icon={<StackedLineChart />}
           to={"/"}
           selected={Selected}
           setSelected={setSelected}
@@ -212,8 +209,8 @@ const SidebarComponent = ({
           icon={<Groups />}
           to={"users"}
           selected={Selected}
-          setSelected={setSelected}
           hovered={hovered}
+          setSelected={setSelected}
           setHovered={setHovered}
         />
         <SubMenu
@@ -221,40 +218,45 @@ const SidebarComponent = ({
           icon={<Info />}
           // style={{ backgroundColor: boatHover }}
           style={{
+            borderRadius: "10px",
+            transition: "all 0.1s ease-out",
             backgroundColor: boatHover
               ? colors.primary[800]
               : colors.primary[400],
+            color: boatHover && "#FFF",
           }}
           onMouseEnter={() => setBoatHover(true)}
           onMouseLeave={() => setBoatHover(false)}
         >
-          <Item
-            title={"Categories"}
-            icon={<Category />}
-            to={"categories"}
-            selected={Selected}
-            setSelected={setSelected}
-            hovered={hovered}
-            setHovered={setHovered}
-          />
-          <Item
-            title={"Boats Routes"}
-            icon={<ForkRight />}
-            to={"boatroutes"}
-            selected={Selected}
-            setSelected={setSelected}
-            hovered={hovered}
-            setHovered={setHovered}
-          />
-          <Item
-            title={"Feature List"}
-            icon={<ChecklistRtl />}
-            to={"featurelist"}
-            selected={Selected}
-            setSelected={setSelected}
-            hovered={hovered}
-            setHovered={setHovered}
-          />
+          <Box sx={{ backgroundColor: colors.primary[400] }}>
+            <Item
+              title={"Categories"}
+              icon={<Category />}
+              to={"categories"}
+              selected={Selected}
+              setSelected={setSelected}
+              hovered={hovered}
+              setHovered={setHovered}
+            />
+            <Item
+              title={"Boats Routes"}
+              icon={<ForkRight />}
+              to={"boatroutes"}
+              selected={Selected}
+              setSelected={setSelected}
+              hovered={hovered}
+              setHovered={setHovered}
+            />
+            <Item
+              title={"Feature List"}
+              icon={<ChecklistRtl />}
+              to={"featurelist"}
+              selected={Selected}
+              setSelected={setSelected}
+              hovered={hovered}
+              setHovered={setHovered}
+            />
+          </Box>
         </SubMenu>
         <Item
           title={"Reviews"}
@@ -267,7 +269,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Countries"}
-          icon={<Star />}
+          icon={<Language />}
           to={"countries"}
           selected={Selected}
           setSelected={setSelected}
@@ -276,7 +278,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Cities"}
-          icon={<Star />}
+          icon={<LocationCity />}
           to={"cities"}
           selected={Selected}
           setSelected={setSelected}
@@ -285,7 +287,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Country Codes"}
-          icon={<Star />}
+          icon={<Call />}
           to={"codes"}
           selected={Selected}
           setSelected={setSelected}
@@ -303,9 +305,11 @@ const SidebarComponent = ({
         />
         <SubMenu
           label={t("Providers")}
-          icon={<MenuOutlinedIcon />}
+          icon={<Group />}
           // style={{ backgroundColor: providerHover }}
           style={{
+            borderRadius: "10px",
+            // transition: "all 0.1s ease-out",
             backgroundColor: providerHover
               ? colors.primary[800]
               : colors.primary[400],
@@ -313,33 +317,35 @@ const SidebarComponent = ({
           onMouseEnter={() => setProviderdHover(true)}
           onMouseLeave={() => setProviderdHover(false)}
         >
-          <Item
-            title={"Providers List"}
-            icon={<MenuOutlinedIcon />}
-            to={"providerlist"}
-            selected={Selected}
-            setSelected={setSelected}
-            hovered={hovered}
-            setHovered={setHovered}
-          />
-          <Item
-            title={"Providers Requests"}
-            icon={<MenuOutlinedIcon />}
-            to={"providersrequests"}
-            selected={Selected}
-            setSelected={setSelected}
-            hovered={hovered}
-            setHovered={setHovered}
-          />
-          <Item
-            title={"Payout Requests"}
-            icon={<MenuOutlinedIcon />}
-            to={"payoutrequests"}
-            selected={Selected}
-            setSelected={setSelected}
-            hovered={hovered}
-            setHovered={setHovered}
-          />
+          <Box sx={{ backgroundColor: colors.primary[400] }}>
+            <Item
+              title={"Providers List"}
+              icon={<Group />}
+              to={"providerlist"}
+              selected={Selected}
+              setSelected={setSelected}
+              hovered={hovered}
+              setHovered={setHovered}
+            />
+            <Item
+              title={"Providers Requests"}
+              icon={<MenuOutlinedIcon />}
+              to={"providersrequests"}
+              selected={Selected}
+              setSelected={setSelected}
+              hovered={hovered}
+              setHovered={setHovered}
+            />
+            <Item
+              title={"Payout Requests"}
+              icon={<MenuOutlinedIcon />}
+              to={"payoutrequests"}
+              selected={Selected}
+              setSelected={setSelected}
+              hovered={hovered}
+              setHovered={setHovered}
+            />
+          </Box>
         </SubMenu>
         <Item
           title={"Orders"}
@@ -352,7 +358,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Supervisors"}
-          icon={<MenuOutlinedIcon />}
+          icon={<ManageAccounts />}
           to={"supervisors"}
           selected={Selected}
           setSelected={setSelected}
@@ -361,7 +367,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Notifications"}
-          icon={<MenuOutlinedIcon />}
+          icon={<NotificationAdd />}
           to={"notifications"}
           selected={Selected}
           setSelected={setSelected}
@@ -370,7 +376,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Complaints"}
-          icon={<MenuOutlinedIcon />}
+          icon={<Feedback />}
           to={"complaints"}
           selected={Selected}
           setSelected={setSelected}
@@ -379,7 +385,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Transactions"}
-          icon={<MenuOutlinedIcon />}
+          icon={<Receipt />}
           to={"transactions"}
           selected={Selected}
           setSelected={setSelected}
@@ -388,7 +394,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Payouts"}
-          icon={<MenuOutlinedIcon />}
+          icon={<Payment />}
           to={"payouts"}
           selected={Selected}
           setSelected={setSelected}
@@ -397,7 +403,7 @@ const SidebarComponent = ({
         />
         <Item
           title={"Settings"}
-          icon={<MenuOutlinedIcon />}
+          icon={<Settings />}
           to={"settings"}
           selected={Selected}
           setSelected={setSelected}

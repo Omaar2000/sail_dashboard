@@ -17,13 +17,14 @@ import { tokens } from "../../theme";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import useUserStore from "../../stores/useUserStore";
-import { Close } from "@mui/icons-material";
+import { ArrowBackIosNew, ArrowForwardIos, Close } from "@mui/icons-material";
 import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
 import { getAllCountries } from "../../network/countriesServices";
 import { countries } from "../../data/mockData";
 import Flag from "react-world-flags";
 import { toast, ToastContainer } from "react-toastify";
+import { editCode } from "../../network/codesServices";
 
 const EditCodePage = () => {
   const theme = useTheme();
@@ -41,6 +42,18 @@ const EditCodePage = () => {
   console.log(code);
   const { token, pinned } = useUserStore();
 
+  const ITEMS_PER_PAGE = 11;
+  const [flagPage, setFlagPage] = useState(0);
+  const [codePage, setCodePage] = useState(0);
+  // Calculate current page items
+
+  const flagStart = flagPage * ITEMS_PER_PAGE;
+  const flagEnd = flagStart + ITEMS_PER_PAGE;
+  const codeStart = codePage * ITEMS_PER_PAGE;
+  const codeEnd = codeStart + ITEMS_PER_PAGE;
+  const flagItems = countries.slice(flagStart, flagEnd);
+  const codeItems = countries.slice(codeStart, codeEnd);
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -50,31 +63,36 @@ const EditCodePage = () => {
       flag,
       country_code: code,
     };
-
-    setIsLoading(true);
-    await editCode(row.id, countryCode);
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      await editCode(row.id, countryCode, token);
+      setTimeout(() => {
+        navigate("/codes");
+      }, 500);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const editCode = async (id, countryCode) => {
-    try {
-      const res = await api.patch(
-        `api/admin/app_settings/country_code/${id}`,
-        countryCode,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(res);
-      toast.success(t("Country code added successfully!"));
-      navigate("/codes");
-      return res.data;
-    } catch (error) {
-      toast.error(`Error editing country code`);
-      console.error("Error editing code:", error);
-    }
+  const handleFlagPageChange = (newPage) => {
+    setFlagPage(newPage);
+    setFlag(null); // Reset selected country on page change
+  };
+  const handleFlagChange = (event) => {
+    const selectedIndex = event.target.value;
+    console.log(selectedIndex);
+    setFlag(selectedIndex);
+  };
+  const handleCodePageChange = (newPage) => {
+    setCodePage(newPage);
+    setCode(null); // Reset selected country on page change
+  };
+
+  const handleCodeChange = (event) => {
+    const selectedIndex = event.target.value;
+    setCode(codeItems[selectedIndex]);
   };
 
   return (
@@ -120,7 +138,6 @@ const EditCodePage = () => {
           />
           <FormControl
             fullWidth
-            margin="normal"
             sx={{
               mt: 0,
               mb: 2,
@@ -131,19 +148,17 @@ const EditCodePage = () => {
               },
             }}
           >
-            <InputLabel id="flag-label">{t("Flag")}</InputLabel>
-
+            <InputLabel id="selected-country-label">Country Flag</InputLabel>
             <Select
-              labelId="flag-label"
-              name="flag"
-              onChange={(e) => {
-                setFlag(e.target.value);
+              labelId="selected-country-label"
+              onChange={handleFlagChange}
+              sx={{
+                textTransform: "none",
               }}
-              defaultValue={flag}
               required
-              label="Flag"
+              label="Country Flag"
             >
-              {countries.map((country) => (
+              {flagItems.map((country) => (
                 <MenuItem
                   value={country.code}
                   sx={{
@@ -151,6 +166,7 @@ const EditCodePage = () => {
                     justifyContent: "start",
                     alignItems: "center",
                   }}
+                  key={country.code}
                 >
                   <Flag
                     code={country.code}
@@ -163,8 +179,35 @@ const EditCodePage = () => {
                   <span style={{ verticalAlign: "top" }}>{country.name}</span>
                 </MenuItem>
               ))}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "end",
+                  // marginTop: 2,
+                }}
+              >
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleFlagPageChange(flagPage - 1);
+                  }}
+                  disabled={flagPage === 0}
+                >
+                  <ArrowBackIosNew />
+                </IconButton>
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleFlagPageChange(flagPage + 1);
+                  }}
+                  disabled={flagEnd >= countries.length}
+                >
+                  <ArrowForwardIos />
+                </IconButton>
+              </Box>
             </Select>
           </FormControl>
+
           <FormControl
             fullWidth
             margin="normal"
@@ -183,25 +226,51 @@ const EditCodePage = () => {
             <Select
               labelId="code-label"
               name="code"
-              defaultValue={code}
-              onChange={(e) => {
-                setCode(e.target.value);
-              }}
+              onChange={handleCodeChange}
               required
               label="country code"
             >
-              {countries.map((country) => (
+              {codeItems.map((country) => (
                 <MenuItem value={`${country.phoneCode}`}>
                   <span
-                    style={{
-                      marginInlineEnd: "1rem",
-                    }}
+                    style={{ verticalAlign: "top", marginInlineStart: "1rem" }}
+                  >
+                    {country.name}
+                  </span>
+                  <span
+                    style={{ verticalAlign: "top", marginInlineStart: "1rem" }}
                   >
                     {country.phoneCode}
                   </span>
-                  <span style={{ verticalAlign: "top" }}>{country.name}</span>
                 </MenuItem>
               ))}
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "end",
+                  marginTop: 2,
+                  direction: "ltr",
+                }}
+              >
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCodePageChange(codePage - 1);
+                  }}
+                  disabled={codePage === 0}
+                >
+                  <ArrowBackIosNew />
+                </IconButton>
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCodePageChange(codePage + 1);
+                  }}
+                  disabled={codeEnd >= countries.length}
+                >
+                  <ArrowForwardIos />
+                </IconButton>
+              </Box>
             </Select>
           </FormControl>
         </Box>

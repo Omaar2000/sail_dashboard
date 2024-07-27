@@ -15,20 +15,20 @@ import { getAllCities } from "../../network/citiesServices";
 //   return res.data;
 // };
 
-export const addCategory = async (category) => {
-  const res = await axios.post("/api/categories", category);
-  return res.data;
-};
+// export const addCategory = async (category) => {
+//   const res = await axios.post("/api/categories", category);
+//   return res.data;
+// };
 
-export const updateCategory = async (id, category) => {
-  const res = await axios.patch(`/api/categories/${id}`, category);
-  return res.data;
-};
+// export const updateCategory = async (id, category) => {
+//   const res = await axios.patch(`/api/categories/${id}`, category);
+//   return res.data;
+// };
 
-export const deleteCategory = async (id) => {
-  const res = await axios.delete(`/api/categories/${id}`);
-  return res.data;
-};
+// export const deleteCategory = async (id) => {
+//   const res = await axios.delete(`/api/categories/${id}`);
+//   return res.data;
+// };
 
 const Cities = () => {
   const [rows, setRows] = useState([]);
