@@ -29,7 +29,7 @@ import Codes from "./pages/codes/Codes";
 import AddCodePage from "./pages/codes/AddCodePage";
 import EditCodePage from "./pages/codes/EditCodePage";
 import Users from "./pages/Users";
-import ProviderList from "./pages/ProvidersList";
+import ProviderList from "./pages/providers/ProvidersList";
 import Settings from "./pages/Settings";
 import Notifications from "./pages/Notifications";
 import Reviews from "./pages/Reviews";

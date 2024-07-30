@@ -57,113 +57,119 @@ const Login = () => {
         alignContent: "center",
       }}
     >
-      <Box
-        m={"100px auto"}
-        borderRadius="20px"
-        sx={{
-          padding: "2rem 3rem",
-          boxShadow:
-            "0 4px 80px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1)",
-        }}
-        bgcolor="#fff"
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={""}
-      >
+      <form onSubmit={handleSubmit}>
         <Box
-          display="flex"
-          flexDirection="column"
-          alignItems={"center"}
-          gap={"10px"}
-          required
+          m={"100px auto"}
+          borderRadius="20px"
+          sx={{
+            padding: "2rem 3rem",
+            boxShadow:
+              "0 4px 80px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1)",
+          }}
+          bgcolor="#fff"
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={""}
         >
-          <h2 style={{ color: `${colors.primary[400]}` }}>Login to Continue</h2>
-          <Box>
-            <InputLabel
-              sx={{ color: "black", fontSize: "12px", pl: "6px" }}
-              htmlFor="username"
-              required
-            >
-              Username
-            </InputLabel>
-            <InputBase
-              id="username"
-              label="Username"
-              variant="outlined"
-              placeholder="Username"
-              required
-              autoFocus
-              // Set text color to black
-              sx={{
-                border: `1px solid ${colors.grey[200]}`,
-                color: "black",
-                p: "6px 12px",
-                borderRadius: "10px",
-              }}
-              onChange={(e) => {
-                setUsername(e.target.value);
-                console.log(username, "   SFDFSGSDFG", password);
-              }}
-            />
-          </Box>
-          <Box>
-            <InputLabel
-              sx={{ color: "black", fontSize: "12px", pl: "6px" }}
-              htmlFor="password"
-            >
-              Password
-            </InputLabel>
-            <InputBase
-              id="password"
-              label="Password"
-              variant="outlined"
-              placeholder="Password"
-              // Set text color to black
-              required
-              type="password"
-              sx={{
-                border: `1px solid ${colors.grey[200]}`,
-                color: "black",
-                p: "6px 12px",
-                borderRadius: "10px",
-              }}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </Box>
-          <Button
-            variant="contained"
-            sx={{
-              bgcolor: `${colors.blueAccent[600]}`,
-            }}
-            style={{
-              color: `${colors.blueAccent[100]}`,
-            }}
-            onClick={handleSubmit}
-            disabled={isLoading} // Disable the button while loading
-            startIcon={
-              isLoading ? <CircularProgress size={20} color="inherit" /> : null
-            }
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems={"center"}
+            gap={"10px"}
+            required
           >
-            {isLoading ? t("Loading") : t("Login")}
-          </Button>
-          <Link
-            to={"/"}
-            style={{ flexGrow: "0", justifySelf: "center" }}
-            flexGrow="0"
-            flexShrink="1"
-          >
-            <Typography
-              sx={{ color: `${colors.primary[400]}` }}
-              variant="body2"
-              component="span"
+            <h2 style={{ color: `${colors.primary[400]}` }}>
+              Login to Continue
+            </h2>
+            <Box>
+              <InputLabel
+                sx={{ color: "black", fontSize: "12px", pl: "6px" }}
+                htmlFor="username"
+                required
+              >
+                Username
+              </InputLabel>
+              <InputBase
+                id="username"
+                label="Username"
+                variant="outlined"
+                placeholder="Username"
+                required
+                autoFocus
+                // Set text color to black
+                sx={{
+                  border: `1px solid ${colors.grey[200]}`,
+                  color: "black",
+                  p: "6px 12px",
+                  borderRadius: "10px",
+                }}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  console.log(username, "   SFDFSGSDFG", password);
+                }}
+              />
+            </Box>
+            <Box>
+              <InputLabel
+                sx={{ color: "black", fontSize: "12px", pl: "6px" }}
+                htmlFor="password"
+              >
+                Password
+              </InputLabel>
+              <InputBase
+                id="password"
+                label="Password"
+                variant="outlined"
+                placeholder="Password"
+                // Set text color to black
+                required
+                type="password"
+                sx={{
+                  border: `1px solid ${colors.grey[200]}`,
+                  color: "black",
+                  p: "6px 12px",
+                  borderRadius: "10px",
+                }}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+            </Box>
+            <Button
+              variant="contained"
+              sx={{
+                bgcolor: `${colors.blueAccent[600]}`,
+              }}
+              style={{
+                color: `${colors.blueAccent[100]}`,
+              }}
+              disabled={isLoading} // Disable the button while loading
+              startIcon={
+                isLoading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : null
+              }
+              type="submit"
             >
-              Forgot password?
-            </Typography>
-          </Link>
+              {isLoading ? t("Loading") : t("Login")}
+            </Button>
+            <Link
+              to={"/"}
+              style={{ flexGrow: "0", justifySelf: "center" }}
+              flexGrow="0"
+              flexShrink="1"
+            >
+              <Typography
+                sx={{ color: `${colors.primary[400]}` }}
+                variant="body2"
+                component="span"
+              >
+                Forgot password?
+              </Typography>
+            </Link>
+          </Box>
         </Box>
-      </Box>
+      </form>
       <ToastContainer position="top-center" autoClose="3000" />
     </div>
   );

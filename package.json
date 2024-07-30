@@ -21,7 +21,7 @@
     "@mui/icons-material": "^5.15.21",
     "@mui/material": "^5.16.0",
     "@mui/x-charts": "^7.9.0",
-    "@mui/x-data-grid": "^7.8.0",
+    "@mui/x-data-grid": "^7.11.1",
     "@nivo/bar": "^0.87.0",
     "@nivo/line": "^0.87.0",
     "@nivo/pie": "^0.87.0",

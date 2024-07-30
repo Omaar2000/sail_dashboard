@@ -9,30 +9,31 @@ import useUserStore from "../../stores/useUserStore";
 //   return res.data;
 // };
 
-export const addCategory = async (category) => {
-  const res = await axios.post("/api/categories", category);
-  return res.data;
-};
+// export const addCategory = async (category) => {
+//   const res = await axios.post("/api/categories", category);
+//   return res.data;
+// };
 
-export const updateCategory = async (id, category) => {
-  const res = await axios.patch(`/api/categories/${id}`, category);
-  return res.data;
-};
+// export const updateCategory = async (id, category) => {
+//   const res = await axios.patch(`/api/categories/${id}`, category);
+//   return res.data;
+// };
 
-export const deleteCategory = async (id) => {
-  const res = await axios.delete(`/api/categories/${id}`);
-  return res.data;
-};
+// export const deleteCategory = async (id) => {
+//   const res = await axios.delete(`/api/categories/${id}`);
+//   return res.data;
+// };
 
 const Categories = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
+  const [pageNo, setPageNo] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getAllCategories(token, logout);
+        const data = await getAllCategories(token, logout, pageNo);
         setRows(data);
         console.log(data);
         setLoading(false);
@@ -51,6 +52,8 @@ const Categories = () => {
         rows={rows}
         columns={categoriesColumns}
         loading={loading}
+        pageNo={pageNo}
+        setPageNo={setPageNo}
       />
     </>
   );

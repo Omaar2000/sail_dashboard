@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../../components/Table";
 import useUserStore from "../../stores/useUserStore";
-import { getAllPaths } from "../../network/pathsServices";
+import { deletePath, getAllPaths } from "../../network/pathsServices";
 import { pathsColumns } from "../../data/mockData";
+import { ToastContainer } from "react-toastify";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -47,11 +48,13 @@ const TripPaths = () => {
   return (
     <>
       <TableComponent
+        Delete={deletePath}
         to="/addpath"
         rows={rows}
         columns={pathsColumns}
         loading={loading}
       />
+      <ToastContainer autoClose="3000" position="top-center" />
     </>
   );
 };

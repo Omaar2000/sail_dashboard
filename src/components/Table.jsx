@@ -20,7 +20,12 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import { DataGrid, GridOverlay, GridToolbar } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridLogicOperator,
+  GridOverlay,
+  GridToolbar,
+} from "@mui/x-data-grid";
 import {
   mockDataContacts,
   mockDataTeam,
@@ -28,21 +33,34 @@ import {
   userColumns,
   mockTransactions,
 } from "../data/mockData.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../stores/useUserStore";
 import { useTranslation } from "react-i18next";
 import "./layout/style.css";
 
-const TableComponent = ({ to, rows, columns, loading }) => {
+const TableComponent = ({
+  Delete,
+  to,
+  rows,
+  columns,
+  loading,
+  pageNo,
+  setPageNo,
+}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { t } = useTranslation();
-  // const [rows, setRows] = useState([]);
+  const [data, setRows] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
+  const [filterValues, setFilterValues] = useState(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setRows([...rows]);
+  }, [rows]);
 
   /*
   // const {
@@ -59,13 +77,21 @@ const TableComponent = ({ to, rows, columns, loading }) => {
   const { token, logout } = useUserStore();
 
   const handleDelete = () => {
-    console.log(selectedItems);
-    setRows(rows.filter((row) => !selectedItems.includes(row)) || []);
+    try {
+      selectedItems.map((row) => {
+        Delete(token, logout, row.id);
+      });
+      window.location.reload();
+      // console.log(selectedItems);
+      // setRows(data.filter((row) => !selectedItems.includes(row)) || []);
+    } catch (error) {
+      console.error("errrrrrrrrrorrrrrrrrrrrrrrrrr");
+    }
   };
   const handleSelectionChange = (newSelection) => {
     console.log(newSelection);
     const selectedRowData = newSelection.map((id) =>
-      rows.find((row) => row.id === id)
+      data.find((row) => row.id === id)
     );
     setSelectedItems(selectedRowData);
     console.log(selectedItems);
@@ -87,7 +113,7 @@ const TableComponent = ({ to, rows, columns, loading }) => {
   };
 
   const handleSaveNewRow = (newRow) => {
-    const updatedData = [...rows, { id: rows.length + 1, ...newRow }];
+    const updatedData = [...data, { id: data.length + 1, ...newRow }];
     setRows(updatedData);
 
     // Optionally, make an API call to save the new row to the server
@@ -224,19 +250,23 @@ const TableComponent = ({ to, rows, columns, loading }) => {
       >
         <DataGrid
           checkboxSelection
-          rows={rows}
-          pageSize="5"
+          disableRowSelectionOnClick
+          rows={data}
           columns={columns}
+          pagination
+          paginationMode="server"
+          page={0}
+          rowCount={2 * 10}
+          onPageChange={(params) => console.log(params.data)}
+          onPageSizeChange={(params) => console.log(params)}
           onFilterModelChange={handleFilterModelChange}
           onRowSelectionModelChange={(newSelection) =>
             handleSelectionChange(newSelection)
           }
-          // components={{ Toolbar: GridToolbar }}
-          // sx={{ width: "100%" }}
           loading={loading}
           // paginationMode="server"
           sx={{ direction: "ltr !important", textAlign: "start" }}
-          pageSizeOptions={[1, 10, 20, 50, 100]}
+          pageSizeOptions={[5, 10, 25, 100]}
         />
       </Box>
       <Dialog
@@ -259,7 +289,10 @@ const TableComponent = ({ to, rows, columns, loading }) => {
             Cancel
           </Button>
           <Button
-            onClick={() => setDialogIsOpen(false)}
+            onClick={() => {
+              handleDelete();
+              setDialogIsOpen(false);
+            }}
             color="error"
             autoFocus
             variant="contained"

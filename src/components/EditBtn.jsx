@@ -15,16 +15,6 @@ const EditBtn = ({ to, row }) => {
     navigate(to, { state: row });
   };
 
-  const handleCloseAddModal = () => {
-    setOpenAddModal(false);
-  };
-  const handleSaveNewRow = (newRow) => {
-    const updatedData = [
-      ...mockDataTeam,
-      { id: mockDataTeam.length + 1, ...newRow },
-    ];
-    setData(updatedData);
-  };
   return (
     <>
       <Button
@@ -35,13 +25,6 @@ const EditBtn = ({ to, row }) => {
       >
         {t("Edit")}
       </Button>
-      <AddModal
-        open={openAddModal}
-        handleClose={handleCloseAddModal}
-        handleSave={handleSaveNewRow}
-        formInputs={row}
-        columns={userColumns}
-      />
     </>
   );
 };

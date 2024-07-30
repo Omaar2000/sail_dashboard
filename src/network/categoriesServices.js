@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 import i18n from "../i18n";
 import { api } from "./api";
 
-export const getAllCategories = async (token, logout) => {
+export const getAllCategories = async (token, logout, pageNo) => {
   try {
-    const res = await api.get("api/admin/categories?limit=10", {
+    const res = await api.get(`api/admin/categories?limit=10`, {
       headers: {
         "x-custom-lang": "ar",
         Authorization: `Bearer ${token}`, // Add the token here

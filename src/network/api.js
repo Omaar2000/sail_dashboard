@@ -12,10 +12,10 @@ export const login = async (username, password) => {
         password: password,
       })
       .then((response) => response.data);
-    return response; // Assuming response data contains the token
+    return response; //Assuming response data contains the token
   } catch (error) {
     console.error("Login API call failed:", error);
-    throw error; // Rethrow the error to be handled by the caller
+    throw error; //Rethrow the error to be handled by the caller
   }
 };
 // Function to handle register API call

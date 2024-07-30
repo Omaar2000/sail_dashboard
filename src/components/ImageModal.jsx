@@ -1,4 +1,11 @@
-import { Backdrop, ClickAwayListener, Fade, Modal } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  ClickAwayListener,
+  Fade,
+  Modal,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 
 const ImageModal = ({ imageUrl }) => {
@@ -18,29 +25,22 @@ const ImageModal = ({ imageUrl }) => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="image-modal-title"
-        aria-describedby="image-modal-description"
-        BackdropComponent={Backdrop}
-        BackdropProps={{ invisible: true }}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh", // Adjust height as needed
+        }}
       >
-        <ClickAwayListener onClickAway={handleClose}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100vh", // Adjust height as needed
-            }}
-          >
-            <Fade in={open}>
-              <img
-                src={imageUrl}
-                alt="Full Size"
-                style={{ maxWidth: "80vw", maxHeight: "80vh" }} // Adjust size as needed
-              />
-            </Fade>
-          </div>
-        </ClickAwayListener>
+        <Box>
+          <img
+            src={imageUrl}
+            alt="Full Size"
+            style={{ maxWidth: "80vw", maxHeight: "80vh" }} // Adjust size as needed
+          />
+        </Box>
       </Modal>
     </>
   );

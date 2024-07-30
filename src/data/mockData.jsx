@@ -11,59 +11,81 @@ import EditBtn from "../components/EditBtn";
 import i18n from "../i18n";
 import Flag from "react-world-flags";
 import Control from "../components/Control";
+import Ban from "../components/Ban";
+import { banUser, unbanUser } from "../network/usersServices";
+import { banProvider, unbanProvider } from "../network/providersServices";
+
+// Ban and Unban for users and providers
+// verify user and provider
 
 export const userColumns = [
-  // {
-  //   field: "name",
-  //   headerName: "Name",
-  //   flex: 0,
-  //   cellClassName: "name-column--cell",
-  //   required: true,
-  // },
   {
     field: "id",
     headerName: "ID",
     flex: 0,
     cellClassName: "name-column--cell",
+    filterable: true,
+    filterOperators: ["contains"],
+  },
+  {
+    field: "user_name",
+    headerName: "Name",
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
   },
   {
     field: "phone_number",
     headerName: "Phone Number",
     flex: 1,
+    filterOperators: ["contains"],
+    filterable: true,
   },
   {
     field: "email",
     headerName: "Email",
+
     flex: 1,
+    filterable: true,
+    filterOperators: ["contains"],
   },
-  // {
-  //   field: "access",
-  //   headerName: "Access Level",
-  //   type: "select",
-  //   flex: 1,
-  //   required: true,
-  //   renderCell: ({ row: { access } }) => <AccessCell access={access} />,
-  // },
-  // {
-  //   field: "edit",
-  //   headerName: "Edit",
-  //   flex: 1,
-  //   renderCell: ({ row }) => <EditBtn row={row} />,
-  // },
+  {
+    field: "country_code",
+    headerName: "Country",
+
+    flex: 1,
+    required: true,
+    renderCell: ({ row: { country_code } }) => (
+      <Flag
+        code={country_code}
+        style={{
+          width: "40px",
+          height: "25px",
+          marginInlineEnd: "1rem",
+          marginTop: "1rem",
+        }}
+      />
+    ),
+  },
+  {
+    headerName: "Ban User",
+    flex: 1,
+    renderCell: ({ row }) => <Ban ban={banUser} unban={unbanUser} row={row} />,
+  },
 ];
 export const providerColumns = [
-  // {
-  //   field: "name",
-  //   headerName: "Name",
-  //   flex: 0,
-  //   cellClassName: "name-column--cell",
-  //   required: true,
-  // },
   {
     field: "id",
     headerName: "ID",
     flex: 0,
     cellClassName: "name-column--cell",
+  },
+  {
+    field: "full_name",
+    headerName: "Name",
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
   },
   {
     field: "phone_number",
@@ -75,20 +97,21 @@ export const providerColumns = [
     headerName: "Email",
     flex: 1,
   },
-  // {
-  //   field: "access",
-  //   headerName: "Access Level",
-  //   type: "select",
-  //   flex: 1,
-  //   required: true,
-  //   renderCell: ({ row: { access } }) => <AccessCell access={access} />,
-  // },
-  // {
-  //   field: "edit",
-  //   headerName: "Edit",
-  //   flex: 1,
-  //   renderCell: ({ row }) => <EditBtn row={row} />,
-  // },
+
+  {
+    field: "status",
+    headerName: "Verify",
+    flex: 1,
+    renderCell: ({ row }) => <Control row={row} />,
+  },
+  {
+    field: "Ban",
+    headerName: "Ban Provider",
+    flex: 1,
+    renderCell: ({ row }) => (
+      <Ban ban={banProvider} unban={unbanProvider} row={row} />
+    ),
+  },
 ];
 
 export const categoriesColumns = [
@@ -158,12 +181,6 @@ export const coversColumns = [
     headerName: i18n.t("Edit"),
     flex: 0,
     renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
-  },
-  {
-    field: "control",
-    headerName: i18n.t(""),
-    flex: 1,
-    renderCell: ({ row }) => <Control row={row} />,
   },
 ];
 export const reviewsColumns = [

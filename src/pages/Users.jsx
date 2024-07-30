@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
 import useUserStore from "../stores/useUserStore";
 import { userColumns } from "../data/mockData";
-import { getAllUsers } from "../network/usersServices";
+import { deleteUser, getAllUsers } from "../network/usersServices";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -48,6 +48,7 @@ const Users = () => {
     <>
       <TableComponent
         to=""
+        Delete={deleteUser}
         rows={rows}
         columns={userColumns}
         loading={loading}

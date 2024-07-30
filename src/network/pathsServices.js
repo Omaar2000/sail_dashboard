@@ -55,3 +55,25 @@ export const addPath = async (path, token) => {
     console.error("Error adding path:", error);
   }
 };
+
+export const deletePath = async (token, logout, id) => {
+  try {
+    const res = await api.delete(`api/admin/trip_path/delete/${id}`, {
+      headers: {
+        "x-custom-lang": "ar",
+        Authorization: `Bearer ${token}`, // Add the token here
+      },
+    });
+
+    toast.success(i18n.t("Path deleted successfully!"));
+    console.log(res);
+
+    return res.data.data;
+  } catch (error) {
+    toast.error(`Error deleting path`);
+    console.log(error.response.status);
+    if (error.response.status === 401) logout();
+
+    throw error; // Optionally re-throw the error if you want to handle it elsewhere
+  }
+};

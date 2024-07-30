@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import TableComponent from "../components/Table";
-import useUserStore from "../stores/useUserStore";
-import { getAllProviders } from "../network/providersServices";
-import { providerColumns } from "../data/mockData";
+import TableComponent from "../../components/Table";
+import useUserStore from "../../stores/useUserStore";
+import {
+  deleteOneProvider,
+  getAllProviders,
+} from "../../network/providersServices";
+import { providerColumns } from "../../data/mockData";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -47,7 +50,9 @@ const ProviderList = () => {
   return (
     <>
       <TableComponent
+        Delete={deleteOneProvider}
         to=""
+        setRows={setRows}
         rows={rows}
         columns={providerColumns}
         loading={loading}
