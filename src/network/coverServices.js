@@ -6,7 +6,6 @@ export const getAllCovers = async (token, logout) => {
   try {
     const res = await api.get("api/admin/sliders", {
       headers: {
-        "x-custom-lang": "ar",
         Authorization: `Bearer ${token}`, // Add the token here
       },
     });

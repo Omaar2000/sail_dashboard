@@ -30,8 +30,6 @@ const Topbar = () => {
       paddingX={"30px"}
       sx={{ justifyContent: "space-between" }}
     >
-      <SearchBar />
-
       <Box display={"flex"}>
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (

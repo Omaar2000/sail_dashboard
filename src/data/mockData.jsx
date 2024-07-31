@@ -1,19 +1,15 @@
-import {
-  AdminPanelSettingsOutlined,
-  LockOpenOutlined,
-  SecurityOutlined,
-} from "@mui/icons-material";
+// import {
+//   AdminPanelSettingsOutlined,
+//   LockOpenOutlined,
+//   SecurityOutlined,
+// } from "@mui/icons-material";
 import ImageModal from "../components/ImageModal";
 import { tokens } from "../theme";
-import { Box, Typography } from "@mui/material";
-import AccessCell from "../components/Access";
 import EditBtn from "../components/EditBtn";
 import i18n from "../i18n";
 import Flag from "react-world-flags";
 import Control from "../components/Control";
 import Ban from "../components/Ban";
-import { banUser, unbanUser } from "../network/usersServices";
-import { banProvider, unbanProvider } from "../network/providersServices";
 
 // Ban and Unban for users and providers
 // verify user and provider
@@ -70,7 +66,13 @@ export const userColumns = [
   {
     headerName: "Ban User",
     flex: 1,
-    renderCell: ({ row }) => <Ban ban={banUser} unban={unbanUser} row={row} />,
+    renderCell: ({ row }) => (
+      <Ban
+        banEndpoint={`api/admin/clients/ban/${row.id}`}
+        unbanEndpoint={`api/admin/clients/unban/${row.id}`}
+        row={row}
+      />
+    ),
   },
 ];
 export const providerColumns = [
@@ -109,7 +111,11 @@ export const providerColumns = [
     headerName: "Ban Provider",
     flex: 1,
     renderCell: ({ row }) => (
-      <Ban ban={banProvider} unban={unbanProvider} row={row} />
+      <Ban
+        banEndpoint={`api/admin/providers/ban/${row.id}`}
+        unbanEndpoint={`api/admin/providers/unban/${row.id}`}
+        row={row}
+      />
     ),
   },
 ];

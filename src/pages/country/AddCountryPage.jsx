@@ -1,28 +1,12 @@
 import { useTheme } from "@emotion/react";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextareaAutosize,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
-import { useRef, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import useUserStore from "../../stores/useUserStore";
-import { Close } from "@mui/icons-material";
-import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
-import { addCountry } from "../../network/countriesServices";
+import { ToastContainer } from "react-toastify";
+import { addItem } from "../../network/categoriesServices";
 
 const AddCountryPage = () => {
   const theme = useTheme();
@@ -36,7 +20,7 @@ const AddCountryPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { token, pinned } = useUserStore();
+  const { token, pinned, logout } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +32,9 @@ const AddCountryPage = () => {
 
     try {
       setIsLoading(true);
-      await addCountry(country, token);
+
+      await addItem(token, logout, `api/admin/app_settings/countries`, country);
+
       setTimeout(() => {
         navigate("/countries");
       }, 500);

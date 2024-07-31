@@ -1,5 +1,7 @@
 // import axios from "axios";
+import { toast } from "react-toastify";
 import { api } from "./api";
+import i18n from "../i18n";
 
 export const getAllProviders = async (token, logout) => {
   try {
@@ -40,13 +42,17 @@ export const deleteOneProvider = async (token, logout, id) => {
     throw error; // Optionally re-throw the error if you want to handle it elsewhere
   }
 };
-export const banProvider = async (token, id) => {
+export const banProvider = async (token, logout, id) => {
   try {
-    const res = await api.post(`api/admin/providers/ban/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.post(
+      `api/admin/providers/ban/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
     toast.success(i18n.t("User banned successfully!"));
@@ -62,12 +68,16 @@ export const banProvider = async (token, id) => {
 };
 export const unbanProvider = async (token, logout, id) => {
   try {
-    const res = await api.post(`api/admin/providers/unban/${id}`, {
-      headers: {
-        "x-custom-lang": "ar",
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.post(
+      `api/admin/providers/unban/${id}`,
+      {},
+      {
+        headers: {
+          "x-custom-lang": "ar",
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
     toast.success(i18n.t("User unbanned successfully!"));
@@ -82,11 +92,15 @@ export const unbanProvider = async (token, logout, id) => {
 };
 export const verifyProvider = async (token, logout, id) => {
   try {
-    const res = await api.post(`api/admin/providers/verify/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.post(
+      `api/admin/providers/verify/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
     toast.success(i18n.t("User verified successfully!"));

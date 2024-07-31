@@ -8,24 +8,20 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Stack,
   TextField,
-  Typography,
 } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+
 import useUserStore from "../../stores/useUserStore";
-import { ArrowBackIosNew, ArrowForwardIos, Close } from "@mui/icons-material";
-import { api } from "../../network/api";
+import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import { getAllCountries } from "../../network/countriesServices";
 import { countries } from "../../data/mockData";
 import Flag from "react-world-flags";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { addCode } from "../../network/codesServices";
+import { addItem } from "../../network/categoriesServices";
 
 const AddCodePage = () => {
   const theme = useTheme();
@@ -50,7 +46,7 @@ const AddCodePage = () => {
   const flagItems = countries.slice(flagStart, flagEnd);
   const codeItems = countries.slice(codeStart, codeEnd);
 
-  const { token, pinned } = useUserStore();
+  const { token, pinned, logout } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -63,7 +59,14 @@ const AddCodePage = () => {
     };
     try {
       setIsLoading(true);
-      await addCode(countryCode, token);
+
+      await addItem(
+        token,
+        logout,
+        `api/admin/app_settings/country_code`,
+        countryCode
+      );
+
       setTimeout(() => {
         navigate("/codes");
       }, 500);
@@ -226,7 +229,10 @@ const AddCodePage = () => {
               label="country code"
             >
               {codeItems.map((country) => (
-                <MenuItem value={`${country.phoneCode}`}>
+                <MenuItem
+                  value={`${country.phoneCode}`}
+                  key={country.phoneCode}
+                >
                   <span
                     style={{ verticalAlign: "top", marginInlineStart: "1rem" }}
                   >

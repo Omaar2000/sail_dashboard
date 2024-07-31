@@ -8,21 +8,16 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Stack,
-  TextField,
   Typography,
 } from "@mui/material";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import { useRef, useState } from "react";
-import axios from "axios";
 import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
-import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
-import { editCountry } from "../../network/countriesServices";
-import { addSlider } from "../../network/coverServices";
+import { ToastContainer } from "react-toastify";
+import { addItem } from "../../network/categoriesServices";
 
 const AddCoverPage = () => {
   const theme = useTheme();
@@ -37,7 +32,7 @@ const AddCoverPage = () => {
   // const row = location.state;
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const { token, pinned } = useUserStore();
+  const { token, pinned, logout } = useUserStore();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -61,14 +56,15 @@ const AddCoverPage = () => {
       return;
     }
 
-    const category = {
+    const cover = {
       image,
       type,
     };
 
     try {
       setIsLoading(true);
-      await addSlider(category, token);
+      await addItem(token, logout, `api/admin/sliders`, cover);
+
       setTimeout(() => {
         navigate("/covers");
       }, 500);

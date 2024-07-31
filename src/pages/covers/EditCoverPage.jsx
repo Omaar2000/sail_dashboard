@@ -8,32 +8,28 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Typography,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import { useRef, useState } from "react";
-import axios from "axios";
 import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
-import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
-import { updateCover } from "../../network/coverServices";
+import { ToastContainer } from "react-toastify";
+import { updateItem } from "../../network/categoriesServices";
 
 const EditCoverPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const location = useLocation();
   const [type, setType] = useState(null);
-  const [imageError, setImageError] = useState(false);
   const fileRef = useRef(null);
   const [image, setImage] = useState(null);
   const row = location.state;
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { token, pinned } = useUserStore();
+  const { token, pinned, logout } = useUserStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (e) => {
@@ -46,7 +42,8 @@ const EditCoverPage = () => {
     };
     try {
       setIsLoading(true);
-      await updateCover(row.id, cover, token);
+
+      await updateItem(token, logout, `api/admin/sliders/${row.id}`, cover);
       setTimeout(() => {
         navigate("/covers");
       }, 500);
@@ -61,7 +58,6 @@ const EditCoverPage = () => {
     const file = e.target.files[0];
     if (file) {
       setImage(file);
-      setImageError(false);
     }
   };
 

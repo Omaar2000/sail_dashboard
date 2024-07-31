@@ -9,6 +9,7 @@
 .ps-sidebar-container::-webkit-scrollbar-thumb,
 .MuiDataGrid-main::-webkit-scrollbar-thumb {
   background: #999; /* Color of the scrollbar thumb */
+  /* background: #83ff63; Color of the scrollbar thumb */
   border-radius: 10px; /* Rounded corners */
 }
 

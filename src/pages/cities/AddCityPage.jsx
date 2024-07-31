@@ -4,23 +4,20 @@ import {
   Button,
   CircularProgress,
   FormControl,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
-  Stack,
   TextField,
-  Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useUserStore from "../../stores/useUserStore";
 
 import { useTranslation } from "react-i18next";
-import { getAllCountries } from "../../network/countriesServices";
-import { toast, ToastContainer } from "react-toastify";
-import { addCity } from "../../network/citiesServices";
+
+import { ToastContainer } from "react-toastify";
+import { addItem, getAll } from "../../network/categoriesServices";
 
 const AddCityPage = () => {
   const theme = useTheme();
@@ -36,7 +33,7 @@ const AddCityPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { token, language, pinned } = useUserStore();
+  const { token, language, pinned, logout } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +45,9 @@ const AddCityPage = () => {
     };
     try {
       setIsLoading(true);
-      await addCity(city, token);
+
+      await addItem(token, logout, `api/admin/app_settings/cities`, city);
+
       setTimeout(() => {
         navigate("/cities");
       }, 500);
@@ -61,8 +60,13 @@ const AddCityPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllCountries();
-      setRows(data);
+      const data = await getAll(
+        token,
+        logout,
+        `api/admin/app_settings/countries`
+      );
+
+      setRows(data.data);
     };
     fetchData();
   }, []);
@@ -131,7 +135,7 @@ const AddCityPage = () => {
               label="Country"
             >
               {rows.map((country) => (
-                <MenuItem value={`${country.id}`}>
+                <MenuItem value={`${country.id}`} key={country.id}>
                   {t(`${country.id} - `)}
                   {t(language === "ar" ? country.title_ar : country.title_en)}
                 </MenuItem>

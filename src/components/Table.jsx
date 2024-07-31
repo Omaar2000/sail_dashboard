@@ -38,16 +38,11 @@ import { useNavigate } from "react-router-dom";
 import useUserStore from "../stores/useUserStore";
 import { useTranslation } from "react-i18next";
 import "./layout/style.css";
+import CustomFooter from "./Pagination.jsx";
+import usePaginationStore from "../stores/usePaginationStore.js";
+import SearchBar from "./searchBar.jsx";
 
-const TableComponent = ({
-  Delete,
-  to,
-  rows,
-  columns,
-  loading,
-  pageNo,
-  setPageNo,
-}) => {
+const TableComponent = ({ Delete, to, rows, columns, loading }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { t } = useTranslation();
@@ -56,37 +51,26 @@ const TableComponent = ({
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
   const [filterValues, setFilterValues] = useState(null);
 
+  const { page, setPageSize, setPage } = usePaginationStore();
+
   const navigate = useNavigate();
 
   useEffect(() => {
     setRows([...rows]);
-  }, [rows]);
+  }, [rows, page]);
 
-  /*
-  // const {
-    data,
-    isLoading,
-    isError,
-    error 
-  } = useQuery({
-    fetchFn: getAll
-  })
-  
-
-  */
   const { token, logout } = useUserStore();
 
   const handleDelete = () => {
-    try {
-      selectedItems.map((row) => {
-        Delete(token, logout, row.id);
-      });
-      window.location.reload();
-      // console.log(selectedItems);
-      // setRows(data.filter((row) => !selectedItems.includes(row)) || []);
-    } catch (error) {
-      console.error("errrrrrrrrrorrrrrrrrrrrrrrrrr");
-    }
+    selectedItems.map(async (row) => {
+      try {
+        await Delete(token, logout, row.id);
+        setPage(page);
+        setRows(data.filter((row) => !selectedItems.includes(row)) || []);
+      } catch (error) {
+        console.error("error");
+      }
+    });
   };
   const handleSelectionChange = (newSelection) => {
     console.log(newSelection);
@@ -108,80 +92,22 @@ const TableComponent = ({
     navigate(to);
   };
 
-  const handleCloseAddModal = () => {
-    setOpenAddModal(false);
-  };
-
-  const handleSaveNewRow = (newRow) => {
-    const updatedData = [...data, { id: data.length + 1, ...newRow }];
-    setRows(updatedData);
-
-    // Optionally, make an API call to save the new row to the server
-    // saveNewRowToServer(newRow);
+  const handlePageSizeChange = (newPageSize) => {
+    setPageSize(newPageSize);
+    setPage(1); // Reset to the first page whenever the page size changes
   };
 
   return (
-    <Box
-      m="10px"
-      // display={"flex"}
-      // sx={{
-      //   flexDirection: "column",
-      //   alignItems: "center",
-      //   justifyContent: "center",
-      // }}
-    >
-      {selectedItems.length !== 0 && to !== "" ? (
-        <Box
-          sx={{
-            marginBottom: "1px",
-            marginInlineEnd: "10px",
-            display: "flex",
-            flexShrink: "1",
-            justifyContent: "end",
-            alignItems: "center",
-          }}
-        >
-          <Button
-            onClick={() => setDialogIsOpen(true)}
-            variant="contained"
-            color="error"
-            // style={{ margin: "0 20px" }}
-          >
-            Delete
-          </Button>
-
-          <Button
-            onClick={handleAddClick}
-            variant="contained"
-            color="success"
-            style={{ margin: "0 20px" }}
-          >
-            {t("Add New Row")}
-          </Button>
-        </Box>
-      ) : to !== "" ? (
-        <Box
-          sx={{
-            marginBottom: "1px",
-            display: "flex",
-            flexShrink: "1",
-            justifyContent: "end",
-            alignItems: "center",
-            marginInlineEnd: "30px",
-          }}
-        >
-          <Button
-            onClick={handleAddClick}
-            variant="contained"
-            color="success"
-            // style={{ margin: "20px" }}
-          >
-            {t("Add New Row")}
-          </Button>
-        </Box>
-      ) : (
-        selectedItems.length !== 0 &&
-        to === "" && (
+    <Box m="10px">
+      <Box
+        display="flex"
+        justifyContent={
+          selectedItems.length !== 0 || to !== "" ? "space-between" : "start"
+        }
+        mx="1rem"
+      >
+        <SearchBar />
+        {selectedItems.length !== 0 && to !== "" ? (
           <Box
             sx={{
               marginBottom: "1px",
@@ -200,9 +126,61 @@ const TableComponent = ({
             >
               Delete
             </Button>
+
+            <Button
+              onClick={handleAddClick}
+              variant="contained"
+              color="success"
+              style={{ margin: "0 20px" }}
+            >
+              {t("Add New Row")}
+            </Button>
           </Box>
-        )
-      )}
+        ) : to !== "" ? (
+          <Box
+            sx={{
+              marginBottom: "1px",
+              display: "flex",
+              flexShrink: "1",
+              justifyContent: "end",
+              alignItems: "center",
+              marginInlineEnd: "30px",
+            }}
+          >
+            <Button
+              onClick={handleAddClick}
+              variant="contained"
+              color="success"
+              // style={{ margin: "20px" }}
+            >
+              {t("Add New Row")}
+            </Button>
+          </Box>
+        ) : (
+          selectedItems.length !== 0 &&
+          to === "" && (
+            <Box
+              sx={{
+                marginBottom: "1px",
+                marginInlineEnd: "10px",
+                display: "flex",
+                flexShrink: "1",
+                justifyContent: "end",
+                alignItems: "center",
+              }}
+            >
+              <Button
+                onClick={() => setDialogIsOpen(true)}
+                variant="contained"
+                color="error"
+                // style={{ margin: "0 20px" }}
+              >
+                Delete
+              </Button>
+            </Box>
+          )
+        )}
+      </Box>
       <Box
         // m={selectedItems.length === 0 && "54px 0 0 0"}
         // height="85vh"
@@ -210,8 +188,7 @@ const TableComponent = ({
         // maxHeight: "10px",
         // maxWidth="100%"
         sx={{
-          // maxHeight: "10px",
-          height: "85vh",
+          height: "74vh",
           "& .MuiDataGrid-root": {
             border: "none",
           },
@@ -230,7 +207,7 @@ const TableComponent = ({
             backgroundColor: `${colors.primary[400]} !important`,
           },
           ".MuiDataGrid-footerContainer": {
-            borderTop: "none",
+            display: "none",
             // marginTop: "200px",
             backgroundColor: colors.blueAccent[700],
           },
@@ -255,10 +232,6 @@ const TableComponent = ({
           columns={columns}
           pagination
           paginationMode="server"
-          page={0}
-          rowCount={2 * 10}
-          onPageChange={(params) => console.log(params.data)}
-          onPageSizeChange={(params) => console.log(params)}
           onFilterModelChange={handleFilterModelChange}
           onRowSelectionModelChange={(newSelection) =>
             handleSelectionChange(newSelection)
@@ -266,8 +239,10 @@ const TableComponent = ({
           loading={loading}
           // paginationMode="server"
           sx={{ direction: "ltr !important", textAlign: "start" }}
-          pageSizeOptions={[5, 10, 25, 100]}
         />
+        {to !== "/addcover" && (
+          <CustomFooter handlePageSizeChange={handlePageSizeChange} />
+        )}
       </Box>
       <Dialog
         open={dialogIsOpen}
@@ -306,105 +281,3 @@ const TableComponent = ({
 };
 
 export default TableComponent;
-
-//------------------------------------------------------------------------------------------------
-// const theme = useTheme();
-// const colors = tokens(theme.palette.mode);
-
-// const columns = [
-//   { field: "id", headerName: "ID", flex: 0.5 },
-//   { field: "registrarId", headerName: "Registrar ID" },
-//   {
-//     field: "name",
-//     headerName: "Name",
-//     flex: 1,
-//     cellClassName: "name-column--cell",
-//   },
-//   {
-//     field: "age",
-//     headerName: "Age",
-//     type: "number",
-//     headerAlign: "left",
-//     align: "left",
-//   },
-//   {
-//     field: "phone",
-//     headerName: "Phone Number",
-//     flex: 1,
-//   },
-//   {
-//     field: "email",
-//     headerName: "Email",
-//     flex: 1,
-//   },
-//   {
-//     field: "address",
-//     headerName: "Address",
-//     flex: 1,
-//   },
-//   {
-//     field: "city",
-//     headerName: "City",
-//     flex: 1,
-//   },
-//   {
-//     field: "zipCode",
-//     headerName: "Zip Code",
-//     flex: 1,
-//   },
-// ];
-
-// return (
-//   <Box m="20px">
-//     {/* <Header
-//       title="CONTACTS"
-//       subtitle="List of Contacts for Future Reference"
-//     /> */}
-//     <Box
-//       m="40px 0 0 0"
-//       height="75vh"
-//       sx={{
-//         "& .MuiDataGrid-root": {
-//           border: "none",
-//         },
-//         "& .MuiDataGrid-cell": {
-//           borderBottom: "none",
-//         },
-//         "& .name-column--cell": {
-//           color: colors.greenAccent[300],
-//         },
-//         "& .MuiDataGrid-columnHeaders": {
-//           backgroundColor: colors.blueAccent[700],
-//           borderBottom: "none",
-//         },
-//         "& .MuiDataGrid-virtualScroller": {
-//           backgroundColor: colors.primary[400],
-//         },
-//         "& .MuiDataGrid-footerContainer": {
-//           borderTop: "none",
-//           backgroundColor: colors.blueAccent[700],
-//         },
-//         "& .MuiCheckbox-root": {
-//           color: `${colors.greenAccent[200]} !important`,
-//         },
-//         "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
-//           color: `${colors.grey[100]} !important`,
-//         },
-//       }}
-//     >
-//       <DataGrid
-//         rows={mockDataContacts}
-//         columns={columns}
-//         components={{ Toolbar: GridToolbar }}
-//       />
-//     </Box>
-//   </Box>
-// );
-
-/* <AddModal
-        open={openAddModal}
-        handleClose={handleCloseAddModal}
-        handleSave={handleSaveNewRow}
-        // formInputs={formInputs}
-        columns={userColumns}
-      /> */

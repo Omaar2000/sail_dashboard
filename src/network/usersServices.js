@@ -4,18 +4,18 @@ import { api } from "./api";
 import i18n from "../i18n";
 import axios from "axios";
 
-export const getAllUsers = async (token, logout) => {
+export const getAllUsers = async (token, logout, page = 1, pageSize = 10) => {
   try {
-    const res = await api.get("api/admin/clients/users?limit=6", {
-      headers: {
-        "x-custom-lang": "ar",
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.get(
+      `api/admin/clients/users?limit=${pageSize}&page=${page}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
-    console.log(res);
-
-    return res.data.data;
+    return res.data;
   } catch (error) {
     console.log(error.response.status);
     if (error.response.status === 401) logout();
@@ -46,11 +46,15 @@ export const deleteUser = async (token, logout, id) => {
 };
 export const banUser = async (token, logout, id) => {
   try {
-    const res = await api.post(`api/admin/clients/ban/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.post(
+      `api/admin/clients/ban/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
     toast.success(i18n.t("User banned successfully!"));
@@ -67,11 +71,15 @@ export const banUser = async (token, logout, id) => {
 };
 export const unbanUser = async (token, logout, id) => {
   try {
-    const res = await api.post(`api/admin/clients/unban/${id}`, id, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.post(
+      `api/admin/clients/unban/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
     toast.success(i18n.t("User banned successfully!"));

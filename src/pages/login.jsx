@@ -3,18 +3,14 @@ import {
   Box,
   Button,
   CircularProgress,
-  Input,
   InputBase,
   InputLabel,
-  TextField,
   Typography,
 } from "@mui/material";
 import { tokens } from "../theme";
-import { Label } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useUserStore from "../stores/useUserStore";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
@@ -23,7 +19,7 @@ const Login = () => {
   const colors = tokens(theme.palette.mode);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { user, login, logout } = useUserStore();
+  const { login } = useUserStore();
 
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();

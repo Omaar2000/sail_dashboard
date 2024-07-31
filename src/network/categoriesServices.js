@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 import i18n from "../i18n";
 import { api } from "./api";
 
-export const getAllCategories = async (token, logout, pageNo) => {
+export const getAll = async (token, logout, endpoint) => {
   try {
-    const res = await api.get(`api/admin/categories?limit=10`, {
+    const res = await api.get(endpoint, {
       headers: {
         "x-custom-lang": "ar",
         Authorization: `Bearer ${token}`, // Add the token here
@@ -14,7 +14,7 @@ export const getAllCategories = async (token, logout, pageNo) => {
 
     console.log(res);
 
-    return res.data.data;
+    return res.data;
   } catch (error) {
     console.log(error.response.status);
     if (error.response.status === 401) logout();
@@ -23,9 +23,9 @@ export const getAllCategories = async (token, logout, pageNo) => {
   }
 };
 
-export const updateCategory = async (id, category, token) => {
+export const updateItem = async (token, logout, endpoint, BODY) => {
   try {
-    const res = await api.patch(`api/admin/categories/${id}`, category, {
+    const res = await api.patch(endpoint, BODY, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -42,9 +42,9 @@ export const updateCategory = async (id, category, token) => {
   }
 };
 
-export const addCategory = async (category, token) => {
+export const addItem = async (token, logout, endpoint, BODY) => {
   try {
-    const res = await api.post(`api/admin/categories`, category, {
+    const res = await api.post(endpoint, BODY, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
@@ -60,9 +60,9 @@ export const addCategory = async (category, token) => {
   }
 };
 
-export const deleteCategory = async (id, token) => {
+export const deleteItem = async (token, logout, endpoint, BODY) => {
   try {
-    const res = await api.delete(`api/admin/categories/${id}`, {
+    const res = await api.delete(endpoint, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

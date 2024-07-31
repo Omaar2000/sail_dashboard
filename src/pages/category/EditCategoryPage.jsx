@@ -8,20 +8,16 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  Stack,
   TextField,
-  Typography,
 } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import { useRef, useState } from "react";
-import axios from "axios";
 import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
-import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
-import { updateCategory } from "../../network/categoriesServices";
+import { ToastContainer } from "react-toastify";
+import { updateItem } from "../../network/categoriesServices";
 
 const EditCategoryPage = () => {
   const { t } = useTranslation();
@@ -29,13 +25,12 @@ const EditCategoryPage = () => {
   const colors = tokens(theme.palette.mode);
   const location = useLocation();
 
-  const [imageError, setImageError] = useState(false);
   const fileRef = useRef(null);
   const [image, setImage] = useState(null);
   const row = location.state;
   const navigate = useNavigate();
 
-  const { token, pinned } = useUserStore();
+  const { token, pinned, logout } = useUserStore();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -51,7 +46,13 @@ const EditCategoryPage = () => {
     };
     try {
       setIsLoading(true);
-      await updateCategory(row.id, category, token);
+
+      await updateItem(
+        token,
+        logout,
+        `api/admin/categories/${row.id}`,
+        category
+      );
       setTimeout(() => {
         navigate("/categories");
       }, 500);
@@ -66,7 +67,6 @@ const EditCategoryPage = () => {
     const file = e.target.files[0];
     if (file) {
       setImage(file);
-      setImageError(false);
     }
   };
 

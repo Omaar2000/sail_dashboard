@@ -5,10 +5,9 @@ import { tokens } from "../../theme";
 import { useState } from "react";
 
 import useUserStore from "../../stores/useUserStore";
-import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
-import { editCountry } from "../../network/countriesServices";
+import { ToastContainer } from "react-toastify";
+import { updateItem } from "../../network/categoriesServices";
 
 const EditCountryPage = () => {
   const theme = useTheme();
@@ -22,7 +21,7 @@ const EditCountryPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { token, pinned } = useUserStore();
+  const { token, logout, pinned } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +33,13 @@ const EditCountryPage = () => {
 
     try {
       setIsLoading(true);
-      await editCountry(row.id, country, token);
+
+      await updateItem(
+        token,
+        logout,
+        `api/admin/app_settings/countries/${row.id}`,
+        country
+      );
       setTimeout(() => {
         navigate("/countries");
       }, 500);

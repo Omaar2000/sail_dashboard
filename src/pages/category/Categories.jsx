@@ -1,40 +1,28 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../../components/Table";
-import { getAllCategories } from "../../network/categoriesServices";
+import { getAll } from "../../network/categoriesServices";
 import { categoriesColumns } from "../../data/mockData";
 import useUserStore from "../../stores/useUserStore";
-
-// export const getAllCategories = async () => {
-//   const res = await axios.get("/api/categories");
-//   return res.data;
-// };
-
-// export const addCategory = async (category) => {
-//   const res = await axios.post("/api/categories", category);
-//   return res.data;
-// };
-
-// export const updateCategory = async (id, category) => {
-//   const res = await axios.patch(`/api/categories/${id}`, category);
-//   return res.data;
-// };
-
-// export const deleteCategory = async (id) => {
-//   const res = await axios.delete(`/api/categories/${id}`);
-//   return res.data;
-// };
+import usePaginationStore from "../../stores/usePaginationStore";
 
 const Categories = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
-  const [pageNo, setPageNo] = useState(0);
+  const { pageSize, page, setTotalPages, keyword } = usePaginationStore();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getAllCategories(token, logout, pageNo);
-        setRows(data);
+        const data = await getAll(
+          token,
+          logout,
+          `api/admin/categories?limit=${pageSize}&page=${page}&keyword=${keyword}`
+        );
+        setRows(data.data);
+        setTotalPages(data.page_count);
+
         console.log(data);
         setLoading(false);
       } catch (error) {
@@ -43,7 +31,7 @@ const Categories = () => {
     };
 
     fetchData();
-  }, []);
+  }, [pageSize, page, keyword]);
 
   return (
     <>
@@ -52,8 +40,6 @@ const Categories = () => {
         rows={rows}
         columns={categoriesColumns}
         loading={loading}
-        pageNo={pageNo}
-        setPageNo={setPageNo}
       />
     </>
   );

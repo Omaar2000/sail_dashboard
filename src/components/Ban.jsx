@@ -7,18 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { banUser, unbanUser } from "../network/usersServices";
 import useUserStore from "../stores/useUserStore";
+import { addItem } from "../network/categoriesServices";
 
-const Ban = ({ row, ban, unban }) => {
+const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
   const { t } = useTranslation();
   // const navigate = useNavigate();
   const { token, logout } = useUserStore();
   const [isBanned, setIsBanned] = useState(row.is_banned);
   const [loading, setLoading] = useState(false);
   const handleBan = async () => {
-    // console.log("TOKEN ", token);
     try {
       setLoading(true);
-      await ban(token, logout, row.id);
+      await addItem(token, logout, banEndpoint, {});
+
       setIsBanned(!isBanned);
     } catch (error) {
       return;
@@ -29,7 +30,7 @@ const Ban = ({ row, ban, unban }) => {
   const handleUnban = async () => {
     try {
       setLoading(true);
-      await unban(token, logout, row.id);
+      await addItem(token, logout, unbanEndpoint, {});
       setIsBanned(!isBanned);
     } catch (error) {
       return;

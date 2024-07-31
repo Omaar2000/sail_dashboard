@@ -1,35 +1,17 @@
 import { useTheme } from "@emotion/react";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
-import { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import useUserStore from "../../stores/useUserStore";
-import { Close } from "@mui/icons-material";
-import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
-import { getAllCountries } from "../../network/countriesServices";
-import { countries } from "../../data/mockData";
-import Flag from "react-world-flags";
-import { toast, ToastContainer } from "react-toastify";
-import { editCity } from "../../network/citiesServices";
+
+import { ToastContainer } from "react-toastify";
+import { updateItem } from "../../network/categoriesServices";
 
 const EditCityPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [rows, setRows] = useState([]);
   const location = useLocation();
   const row = location.state;
   const [title_ar, setTitle_ar] = useState(row.title_ar);
@@ -42,7 +24,7 @@ const EditCityPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { token, language, pinned } = useUserStore();
+  const { logout, token, pinned } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -53,7 +35,13 @@ const EditCityPage = () => {
     };
     try {
       setIsLoading(true);
-      await editCity(row.id, city, token);
+
+      await updateItem(
+        token,
+        logout,
+        `api/admin/app_settings/cities/${row.id}`,
+        city
+      );
       setTimeout(() => {
         navigate("/cities");
       }, 1000);
@@ -63,15 +51,6 @@ const EditCityPage = () => {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAllCountries();
-      setRows(data);
-    };
-    fetchData();
-  }, []);
-  console.log(row.id);
 
   return (
     <Box>

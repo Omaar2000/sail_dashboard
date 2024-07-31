@@ -5,10 +5,10 @@ import { tokens } from "../../theme";
 import { useState } from "react";
 
 import useUserStore from "../../stores/useUserStore";
-import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
-import { editPath } from "../../network/pathsServices";
+import { ToastContainer } from "react-toastify";
+
+import { updateItem } from "../../network/categoriesServices";
 
 const EditPathPage = () => {
   const theme = useTheme();
@@ -20,7 +20,7 @@ const EditPathPage = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const { token, pinned } = useUserStore();
+  const { token, pinned, logout } = useUserStore();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +33,8 @@ const EditPathPage = () => {
     };
     try {
       setIsLoading(true);
-      await editPath(row.id, path, token);
+
+      await updateItem(token, logout, `api/admin/trip_path/${row.id}`, path);
       setTimeout(() => {
         navigate("/boatroutes");
       }, 500);

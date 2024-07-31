@@ -1,4 +1,9 @@
-import { Button, ButtonGroup, CircularProgress } from "@mui/material";
+import {
+  Button,
+  ButtonGroup,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { verifyProvider } from "../network/providersServices";
@@ -13,7 +18,7 @@ const Control = ({ row }) => {
     try {
       setLoading(true);
       await verifyProvider(token, logout, row.id);
-      setIsVerified(!isBanned);
+      setIsVerified(!isVerified);
     } catch (error) {
       return;
     } finally {
@@ -37,7 +42,14 @@ const Control = ({ row }) => {
           </Button>
         </ButtonGroup>
       ) : (
-        <h3>Verified</h3>
+        <Typography
+          mt="0.8rem"
+          fontSize="16px"
+          fontWeight="bold"
+          color="#83ff63"
+        >
+          Verified
+        </Typography>
       )}
     </>
   );

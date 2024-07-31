@@ -11,15 +11,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { tokens } from "../../theme";
 import { useRef, useState } from "react";
 import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
-import { api } from "../../network/api";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
-import { addCategory } from "../../network/categoriesServices";
+import { ToastContainer } from "react-toastify";
+import { addItem } from "../../network/categoriesServices";
 
 const AddCategoryPage = () => {
   const theme = useTheme();
@@ -35,7 +34,7 @@ const AddCategoryPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { token, pinned } = useUserStore();
+  const { token, pinned, logout } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +53,7 @@ const AddCategoryPage = () => {
 
     try {
       setIsLoading(true);
-      await addCategory(category, token);
+      await addItem(token, logout, `api/admin/categories`, category);
       setTimeout(() => {
         navigate("/categories");
       }, 500);
