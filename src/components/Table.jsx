@@ -18,6 +18,10 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   Typography,
 } from "@mui/material";
 import {
@@ -41,14 +45,23 @@ import "./layout/style.css";
 import CustomFooter from "./Pagination.jsx";
 import usePaginationStore from "../stores/usePaginationStore.js";
 import SearchBar from "./searchBar.jsx";
+import { assignAdmin, deleteItem } from "../network/network.js";
+import AdminModal from "./adminDropdown.jsx";
+import RandomModal from "./RandomModal.jsx";
+import ApproveModal from "./ApproveModal.jsx";
 
-const TableComponent = ({ Delete, to, rows, columns, loading }) => {
+const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { t } = useTranslation();
   const [data, setRows] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedIDs, setSelectedIDs] = useState([]);
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
+  const [adminIsOpen, setAdminIsOpen] = useState(false);
+  const [verifyIsOpen, setVerifyIsOpen] = useState(false);
+  const [adminRandomIsOpen, setAdminRandomIsOpen] = useState(false);
+
   const [filterValues, setFilterValues] = useState(null);
 
   const { page, setPageSize, setPage } = usePaginationStore();
@@ -64,7 +77,7 @@ const TableComponent = ({ Delete, to, rows, columns, loading }) => {
   const handleDelete = () => {
     selectedItems.map(async (row) => {
       try {
-        await Delete(token, logout, row.id);
+        await deleteItem(token, logout, Endpoint + row.id);
         setPage(page);
         setRows(data.filter((row) => !selectedItems.includes(row)) || []);
       } catch (error) {
@@ -74,6 +87,7 @@ const TableComponent = ({ Delete, to, rows, columns, loading }) => {
   };
   const handleSelectionChange = (newSelection) => {
     console.log(newSelection);
+    setSelectedIDs(newSelection);
     const selectedRowData = newSelection.map((id) =>
       data.find((row) => row.id === id)
     );
@@ -91,6 +105,15 @@ const TableComponent = ({ Delete, to, rows, columns, loading }) => {
   const handleAddClick = () => {
     navigate(to);
   };
+  const handleAssignClick = () => {
+    setAdminIsOpen(true);
+  };
+  const handleVerifyClick = () => {
+    setVerifyIsOpen(true);
+  };
+  const handleAssignRandom = () => {
+    setAdminRandomIsOpen(true);
+  };
 
   const handlePageSizeChange = (newPageSize) => {
     setPageSize(newPageSize);
@@ -107,7 +130,48 @@ const TableComponent = ({ Delete, to, rows, columns, loading }) => {
         mx="1rem"
       >
         <SearchBar />
-        {selectedItems.length !== 0 && to !== "" ? (
+
+        {to === "/admin" ? (
+          <Box
+            sx={{
+              marginBottom: "1px",
+              display: "flex",
+              flexShrink: "1",
+              // justifyContent: "space-between",
+              alignItems: "center",
+              gap: "1rem",
+              marginInlineEnd: "30px",
+            }}
+          >
+            <Button
+              onClick={handleVerifyClick}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Verify Selected")}
+            </Button>
+            {/* <Button
+              onClick={handleAssignClick}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Assign")}
+            </Button>
+            <Button
+              onClick={handleAssignRandom}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Assign Random")}
+            </Button> */}
+          </Box>
+        ) : selectedItems.length !== 0 && to !== "" ? (
           <Box
             sx={{
               marginBottom: "1px",
@@ -133,7 +197,7 @@ const TableComponent = ({ Delete, to, rows, columns, loading }) => {
               color="success"
               style={{ margin: "0 20px" }}
             >
-              {t("Add New Row")}
+              {t(add)}
             </Button>
           </Box>
         ) : to !== "" ? (
@@ -153,7 +217,7 @@ const TableComponent = ({ Delete, to, rows, columns, loading }) => {
               color="success"
               // style={{ margin: "20px" }}
             >
-              {t("Add New Row")}
+              {t(add)}
             </Button>
           </Box>
         ) : (
@@ -276,6 +340,21 @@ const TableComponent = ({ Delete, to, rows, columns, loading }) => {
           </Button>
         </DialogActions>
       </Dialog>
+      <ApproveModal
+        verifyIsOpen={verifyIsOpen}
+        setVerifyIsOpen={setVerifyIsOpen}
+        selectedItems={selectedIDs}
+      />
+      <AdminModal
+        adminIsOpen={adminIsOpen}
+        setAdminIsOpen={setAdminIsOpen}
+        selectedItems={selectedIDs}
+      />
+      <RandomModal
+        adminRandomIsOpen={adminRandomIsOpen}
+        setAdminRandomIsOpen={setAdminRandomIsOpen}
+        selectedItems={selectedIDs}
+      />
     </Box>
   );
 };

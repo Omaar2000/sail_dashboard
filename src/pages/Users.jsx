@@ -4,7 +4,7 @@ import useUserStore from "../stores/useUserStore";
 import { userColumns } from "../data/mockData";
 import { deleteUser } from "../network/usersServices";
 import usePaginationStore from "../stores/usePaginationStore";
-import { getAll } from "../network/categoriesServices";
+import { getAll } from "../network/network";
 
 const Users = () => {
   const [rows, setRows] = useState([]);
@@ -38,7 +38,7 @@ const Users = () => {
     <>
       <TableComponent
         to=""
-        Delete={deleteUser}
+        Endpoint={`api/admin/clients/delete/`}
         rows={rows}
         columns={userColumns}
         loading={loading}

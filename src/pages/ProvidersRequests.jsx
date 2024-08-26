@@ -8,8 +8,8 @@ import {
   providerRequestsData,
 } from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
-import { getAllCovers } from "../network/coverServices";
-import { reviewsColumns } from "../data/mockData";
+import usePaginationStore from "../stores/usePaginationStore";
+import { getAll } from "../network/network";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -20,11 +20,31 @@ const ProvidersRequests = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
+  const { pageSize, page, setTotalPages, keyword } = usePaginationStore();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        const data = await getAll(token, logout, `api/admin/provider-requests`);
+        setRows(data.data);
+        setTotalPages(data.page_count);
+
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error getting Providers:", error);
+      }
+    };
+
+    fetchData();
+  }, [pageSize, page, keyword]);
 
   return (
     <>
       <TableComponent
-        to=""
+        to={true ? "/admin" : ""}
         rows={providerRequestsData}
         columns={providerRequestsColumns}
         loading={loading}

@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 import { countries } from "../../data/mockData";
 import Flag from "react-world-flags";
 import { ToastContainer } from "react-toastify";
-import { updateItem } from "../../network/categoriesServices";
+import { updateItem } from "../../network/network";
 
 const EditCodePage = () => {
   const theme = useTheme();

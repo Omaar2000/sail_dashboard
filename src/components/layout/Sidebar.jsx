@@ -9,24 +9,19 @@ import "./style.css";
 import {
   Call,
   Category,
-  ChecklistRtl,
-  Feedback,
   ForkRight,
   Group,
   Groups,
   Image,
   Info,
   Language,
-  LocationCity,
   ManageAccounts,
   NotificationAdd,
   Payment,
   PushPin,
   PushPinOutlined,
   Receipt,
-  Settings,
   StackedLineChart,
-  Star,
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import useUserStore from "../../stores/useUserStore";
@@ -59,6 +54,8 @@ const Item = ({
           textAlign: "left",
           borderRadius: "10px",
           transition: "background 0.1s ease-out",
+          outline: "none",
+
           color:
             selected === to || hovered === title ? "#FFF" : colors.grey[100],
           backgroundColor:
@@ -66,6 +63,12 @@ const Item = ({
               ? colors.primary[700]
               : hovered === title
               ? colors.primary[800]
+              : title === "Providers List" ||
+                title === "Providers Requests" ||
+                title === "Payout Requests" ||
+                title === "Boats Routes" ||
+                title === "Categories"
+              ? colors.primary[400]
               : colors.primary[400],
         }}
       >
@@ -83,19 +86,17 @@ const SidebarComponent = ({
 }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  console.log(theme.palette.mode);
+
   const [providerHover, setProviderdHover] = useState(false);
   const [boatHover, setBoatHover] = useState(false);
   const params = useParams();
-  console.log(params["*"]);
   const [Selected, setSelected] = useState(
     params["*"] === ""
       ? "/"
       : localStorage.getItem("selected")
-      ? `${localStorage.getItem("selected")}`
+      ? params["*"] || `${localStorage.getItem("selected")}`
       : params["*"]
   );
-  console.log(Selected);
   const { t } = useTranslation();
   const { pinned, toggleSidebar } = useUserStore();
 
@@ -128,6 +129,7 @@ const SidebarComponent = ({
         position: "fixed",
         zIndex: "1000",
         transition: "all 0.2s ease-out",
+        // padding: "1rem",
         // ".ps-sidebar-container": {
         //   "&::-webkit-scrollbar": {
         //     display: "none !important",
@@ -139,7 +141,7 @@ const SidebarComponent = ({
       backgroundColor={colors.primary[400]}
       // transitionDuration={"3000"}
     >
-      <Menu>
+      <Menu style={{ padding: "1rem 0.3rem" }}>
         <Box
           display="flex"
           pt="20px"
@@ -220,15 +222,24 @@ const SidebarComponent = ({
           style={{
             borderRadius: "10px",
             transition: "all 0.1s ease-out",
-            backgroundColor: boatHover
-              ? colors.primary[800]
-              : colors.primary[400],
+            outline: "none",
+            backgroundColor:
+              Selected === "categories" || Selected === "boatroutes"
+                ? colors.blueAccent[600]
+                : boatHover
+                ? colors.primary[800]
+                : colors.primary[400],
             color: boatHover && "#FFF",
           }}
           onMouseEnter={() => setBoatHover(true)}
           onMouseLeave={() => setBoatHover(false)}
         >
-          <Box sx={{ backgroundColor: colors.primary[400] }}>
+          <Box
+            sx={{
+              backgroundColor: colors.primary[400],
+              // border: `1px ${colors.blueAccent[400]} dashed`,
+            }}
+          >
             <Item
               title={"Categories"}
               icon={<Category />}
@@ -247,7 +258,7 @@ const SidebarComponent = ({
               hovered={hovered}
               setHovered={setHovered}
             />
-            <Item
+            {/* <Item
               title={"Feature List"}
               icon={<ChecklistRtl />}
               to={"featurelist"}
@@ -255,10 +266,10 @@ const SidebarComponent = ({
               setSelected={setSelected}
               hovered={hovered}
               setHovered={setHovered}
-            />
+            /> */}
           </Box>
         </SubMenu>
-        <Item
+        {/* <Item
           title={"Reviews"}
           icon={<Star />}
           to={"reviews"}
@@ -266,7 +277,7 @@ const SidebarComponent = ({
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
-        />
+        /> */}
         <Item
           title={"Countries"}
           icon={<Language />}
@@ -276,7 +287,7 @@ const SidebarComponent = ({
           hovered={hovered}
           setHovered={setHovered}
         />
-        <Item
+        {/* <Item
           title={"Cities"}
           icon={<LocationCity />}
           to={"cities"}
@@ -284,7 +295,7 @@ const SidebarComponent = ({
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
-        />
+        /> */}
         <Item
           title={"Country Codes"}
           icon={<Call />}
@@ -310,9 +321,16 @@ const SidebarComponent = ({
           style={{
             borderRadius: "10px",
             // transition: "all 0.1s ease-out",
-            backgroundColor: providerHover
-              ? colors.primary[800]
-              : colors.primary[400],
+            outline: "none",
+
+            backgroundColor:
+              Selected === "providersrequests" ||
+              Selected === "providerlist" ||
+              Selected === "payoutrequests"
+                ? colors.blueAccent[600]
+                : providerHover
+                ? colors.primary[800]
+                : colors.primary[400],
           }}
           onMouseEnter={() => setProviderdHover(true)}
           onMouseLeave={() => setProviderdHover(false)}
@@ -374,7 +392,7 @@ const SidebarComponent = ({
           hovered={hovered}
           setHovered={setHovered}
         />
-        <Item
+        {/* <Item
           title={"Complaints"}
           icon={<Feedback />}
           to={"complaints"}
@@ -382,7 +400,7 @@ const SidebarComponent = ({
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
-        />
+        /> */}
         <Item
           title={"Transactions"}
           icon={<Receipt />}
@@ -401,7 +419,7 @@ const SidebarComponent = ({
           hovered={hovered}
           setHovered={setHovered}
         />
-        <Item
+        {/* <Item
           title={"Settings"}
           icon={<Settings />}
           to={"settings"}
@@ -409,7 +427,7 @@ const SidebarComponent = ({
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
-        />
+        /> */}
       </Menu>
     </Sidebar>
   );

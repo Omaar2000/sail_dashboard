@@ -18,7 +18,7 @@ import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
-import { addItem } from "../../network/categoriesServices";
+import { addItem, addMultipartItem } from "../../network/network";
 
 const AddCategoryPage = () => {
   const theme = useTheme();
@@ -53,7 +53,7 @@ const AddCategoryPage = () => {
 
     try {
       setIsLoading(true);
-      await addItem(token, logout, `api/admin/categories`, category);
+      await addMultipartItem(token, logout, `api/admin/categories`, category);
       setTimeout(() => {
         navigate("/categories");
       }, 500);

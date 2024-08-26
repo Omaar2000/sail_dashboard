@@ -3,7 +3,7 @@ import TableComponent from "../../components/Table";
 import { codesColumns } from "../../data/mockData";
 import useUserStore from "../../stores/useUserStore";
 import usePaginationStore from "../../stores/usePaginationStore";
-import { getAll } from "../../network/categoriesServices";
+import { getAll } from "../../network/network";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -46,9 +46,11 @@ const Codes = () => {
     <>
       <TableComponent
         to="/addcode"
+        // Endpoint={`api/admin/providers/delete/`}
         rows={rows}
         columns={codesColumns}
         loading={loading}
+        add={"ADD NEW Code"}
       />
     </>
   );

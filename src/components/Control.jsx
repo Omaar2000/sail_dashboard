@@ -48,7 +48,7 @@ const Control = ({ row }) => {
           fontWeight="bold"
           color="#83ff63"
         >
-          Verified
+          {t("Verified")}
         </Typography>
       )}
     </>

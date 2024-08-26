@@ -21,7 +21,7 @@ import { countries } from "../../data/mockData";
 import Flag from "react-world-flags";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { addItem } from "../../network/categoriesServices";
+import { addItem } from "../../network/network";
 
 const AddCodePage = () => {
   const theme = useTheme();

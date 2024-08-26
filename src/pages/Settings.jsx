@@ -26,7 +26,7 @@ const SettingItem = ({ title, selected, setSelected, hovered, setHovered }) => {
       style={{
         background:
           selected === title && hovered === title
-            ? colors.grey[700]
+            ? colors.blueAccent[700]
             : selected === title
             ? colors.blueAccent[500]
             : hovered === title
@@ -40,7 +40,6 @@ const SettingItem = ({ title, selected, setSelected, hovered, setHovered }) => {
       }}
       onMouseEnter={() => setHovered(title)}
       onMouseLeave={() => setHovered("")}
-      variant="contained"
       onClick={() => setSelected(title)}
     >
       {t(title)}
@@ -73,70 +72,70 @@ const Settings = () => {
         // textAlign={"left"}
       >
         <SettingItem
-          title={"General"}
+          title={t("General")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"SEO"}
+          title={t("SEO")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"App Settings"}
+          title={t("App Settings")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"Terms and Conditions"}
+          title={t("Terms and Conditions")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"About the Platform"}
+          title={t("About the Platform")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"About the Site"}
+          title={t("About the Site")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"Privacy Policy"}
+          title={t("Privacy Policy")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"Email Data"}
+          title={t("Email Data")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"Notifications Data"}
+          title={t("Notifications Data")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}
           selected={selected}
         />
         <SettingItem
-          title={"API Data"}
+          title={t("API Data")}
           setSelected={setSelected}
           setHovered={setHovered}
           hovered={hovered}

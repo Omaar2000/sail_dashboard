@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { banUser, unbanUser } from "../network/usersServices";
 import useUserStore from "../stores/useUserStore";
-import { addItem } from "../network/categoriesServices";
+import { addItem } from "../network/network";
 
 const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
   const { t } = useTranslation();

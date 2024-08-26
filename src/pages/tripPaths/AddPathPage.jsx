@@ -6,7 +6,7 @@ import { useState } from "react";
 import useUserStore from "../../stores/useUserStore";
 import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
-import { addItem } from "../../network/categoriesServices";
+import { addItem } from "../../network/network";
 
 const AddPathPage = () => {
   const theme = useTheme();
@@ -21,13 +21,13 @@ const AddPathPage = () => {
 
   const { token, pinned, logout } = useUserStore();
 
+  const path = {
+    title_ar,
+    title_en,
+  };
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    const path = {
-      title_ar,
-      title_en,
-    };
     try {
       setIsLoading(true);
 

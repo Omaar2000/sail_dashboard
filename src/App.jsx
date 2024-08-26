@@ -42,6 +42,7 @@ import Supervisors from "./pages/Supervisors";
 import ProvidersPayouts from "./pages/ProvidersPayouts";
 import PayoutsRequests from "./pages/ProvidersPayouts";
 import ProvidersRequests from "./pages/ProvidersRequests";
+import ProviderDetails from "./pages/providers/ProviderDetailsPage";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -86,6 +87,7 @@ function App() {
               />
               <Route path="users" element={<Users />} />
               <Route path="providerlist" element={<ProviderList />} />
+              <Route path="providerdetails" element={<ProviderDetails />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="orders" element={<Orders />} />
               <Route path="complaints" element={<Complaints />} />

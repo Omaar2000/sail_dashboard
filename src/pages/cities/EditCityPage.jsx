@@ -7,7 +7,7 @@ import useUserStore from "../../stores/useUserStore";
 import { useTranslation } from "react-i18next";
 
 import { ToastContainer } from "react-toastify";
-import { updateItem } from "../../network/categoriesServices";
+import { updateItem } from "../../network/network";
 
 const EditCityPage = () => {
   const theme = useTheme();

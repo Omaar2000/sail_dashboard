@@ -6,9 +6,6 @@ import i18n from "../i18n";
 import { toast } from "react-toastify";
 
 const useUserStore = create((set, get) => ({
-  currentPage: 1,
-  currentPage: 1,
-  currentPage: 1,
   token: localStorage.getItem("token"), // Initialize token from localStorage
   user: localStorage.getItem("token")
     ? jwtDecode(localStorage.getItem("token"))

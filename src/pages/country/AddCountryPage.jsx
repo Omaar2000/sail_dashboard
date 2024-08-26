@@ -6,7 +6,7 @@ import { useState } from "react";
 import useUserStore from "../../stores/useUserStore";
 import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
-import { addItem } from "../../network/categoriesServices";
+import { addItem } from "../../network/network";
 
 const AddCountryPage = () => {
   const theme = useTheme();

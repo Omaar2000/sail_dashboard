@@ -16,7 +16,7 @@ import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
-import { updateItem } from "../../network/categoriesServices";
+import { updateItem, updateMultipartItem } from "../../network/network";
 
 const EditCoverPage = () => {
   const theme = useTheme();
@@ -43,7 +43,7 @@ const EditCoverPage = () => {
     try {
       setIsLoading(true);
 
-      await updateItem(token, logout, `api/admin/sliders/${row.id}`, cover);
+      await updateMultipartItem(token, logout, `api/admin/sliders/${row.id}`, cover);
       setTimeout(() => {
         navigate("/covers");
       }, 500);

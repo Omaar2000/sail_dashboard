@@ -4,6 +4,7 @@ import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../theme";
 import usePaginationStore from "../stores/usePaginationStore";
+import { useTranslation } from "react-i18next";
 
 const CustomFooter = ({ handlePageSizeChange }) => {
   const { totalPages, pageSize, setPage, page } = usePaginationStore();
@@ -11,6 +12,7 @@ const CustomFooter = ({ handlePageSizeChange }) => {
   // const totalPages = Math.ceil(totalRowCount / pageSize);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { t } = useTranslation();
   return (
     <Box
       display="flex"
@@ -19,10 +21,11 @@ const CustomFooter = ({ handlePageSizeChange }) => {
       alignItems="center"
       padding="10px"
       bgcolor={colors.blueAccent[700]}
+      sx={{ direction: "ltr" }}
     >
       <Box display="flex" alignItems="center">
         <Typography variant="body2" style={{ marginRight: 8 }}>
-          Rows per page:
+          {t("Rows per page:")}
         </Typography>
         <Select
           value={pageSize}
@@ -48,10 +51,15 @@ const CustomFooter = ({ handlePageSizeChange }) => {
         </IconButton>
       </Box>
       <Typography variant="body2">
-        Page {page} of {totalPages}
+        {t("Page ")}
+        {page}
+        {t(" of ")}
+        {totalPages}
       </Typography>
     </Box>
   );
 };
 
 export default CustomFooter;
+
+// Rows per page:

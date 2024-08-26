@@ -1,34 +1,34 @@
-import { Box, IconButton, InputBase, useTheme } from "@mui/material";
-import { ColorModeContext, tokens } from "../../theme";
+import { Box, IconButton, useTheme } from "@mui/material";
+import { ColorModeContext } from "../../theme";
 import { useContext } from "react";
-import SearchBar from "../searchBar";
+// import SearchBar from "../searchBar";
 import {
   DarkModeOutlined,
   Language,
   LightModeOutlined,
-  NotificationAddOutlined,
+  // NotificationAddOutlined,
   PersonOutlineOutlined,
   SettingsOutlined,
 } from "@mui/icons-material";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import useUserStore from "../../stores/useUserStore";
-import i18n from "../../i18n";
+// import i18n from "../../i18n";
 
 const Topbar = () => {
   const { logout } = useUserStore();
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
-  const { toggleLanguage, language } = useUserStore();
+  const { toggleLanguage } = useUserStore();
   const changeLanguage = () => {
     toggleLanguage();
   };
   return (
     <Box
       display="flex"
-      justifyContent="space-between"
+      justifyContent="end"
       // alignItems="start"
       paddingX={"30px"}
-      sx={{ justifyContent: "space-between" }}
+      // sx={{ justifyContent: "space-between" }}
     >
       <Box display={"flex"}>
         <IconButton onClick={colorMode.toggleColorMode}>

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../../components/Table";
 import useUserStore from "../../stores/useUserStore";
-import { deleteOneProvider } from "../../network/providersServices";
 import { providerColumns } from "../../data/mockData";
-import { getAll } from "../../network/categoriesServices";
+import { getAll } from "../../network/network";
 import usePaginationStore from "../../stores/usePaginationStore";
 
 const ProviderList = () => {
@@ -38,7 +37,7 @@ const ProviderList = () => {
   return (
     <>
       <TableComponent
-        Delete={deleteOneProvider}
+        Endpoint={`api/admin/providers/delete/`}
         to=""
         setRows={setRows}
         rows={rows}

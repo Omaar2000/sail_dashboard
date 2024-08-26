@@ -4,7 +4,7 @@ import useUserStore from "../../stores/useUserStore";
 import { deletePath } from "../../network/pathsServices";
 import { pathsColumns } from "../../data/mockData";
 import { ToastContainer } from "react-toastify";
-import { getAll } from "../../network/categoriesServices";
+import { getAll } from "../../network/network";
 import usePaginationStore from "../../stores/usePaginationStore";
 
 const TripPaths = () => {
@@ -39,11 +39,12 @@ const TripPaths = () => {
   return (
     <>
       <TableComponent
-        Delete={deletePath}
         to="/addpath"
+        Endpoint={`api/admin/trip_path/delete/`}
         rows={rows}
         columns={pathsColumns}
         loading={loading}
+        add={"ADD NEW Path"}
       />
       <ToastContainer autoClose="3000" position="top-center" />
     </>

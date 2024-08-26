@@ -17,7 +17,7 @@ import useUserStore from "../../stores/useUserStore";
 import { useTranslation } from "react-i18next";
 
 import { ToastContainer } from "react-toastify";
-import { addItem, getAll } from "../../network/categoriesServices";
+import { addItem, getAll } from "../../network/network";
 
 const AddCityPage = () => {
   const theme = useTheme();

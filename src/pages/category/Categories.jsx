@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../../components/Table";
-import { getAll } from "../../network/categoriesServices";
+import { getAll } from "../../network/network";
 import { categoriesColumns } from "../../data/mockData";
 import useUserStore from "../../stores/useUserStore";
 import usePaginationStore from "../../stores/usePaginationStore";
@@ -37,9 +37,11 @@ const Categories = () => {
     <>
       <TableComponent
         to="/addcategory"
+        // Endpoint={`api/admin/providers/delete/`}
         rows={rows}
         columns={categoriesColumns}
         loading={loading}
+        add={"ADD NEW CATEGORY"}
       />
     </>
   );

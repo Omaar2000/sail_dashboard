@@ -10,6 +10,10 @@ import i18n from "../i18n";
 import Flag from "react-world-flags";
 import Control from "../components/Control";
 import Ban from "../components/Ban";
+import EditModal from "../components/editModal";
+import AdminDropdown from "../components/adminDropdown";
+import DetailsButton from "../components/Details";
+import Verified from "../components/Verified";
 
 // Ban and Unban for users and providers
 // verify user and provider
@@ -17,7 +21,8 @@ import Ban from "../components/Ban";
 export const userColumns = [
   {
     field: "id",
-    headerName: "ID",
+    headerName: i18n.t("ID"),
+
     flex: 0,
     cellClassName: "name-column--cell",
     filterable: true,
@@ -25,21 +30,22 @@ export const userColumns = [
   },
   {
     field: "user_name",
-    headerName: "Name",
+    headerName: i18n.t("Name"),
+
     flex: 1,
     cellClassName: "name-column--cell",
     required: true,
   },
   {
     field: "phone_number",
-    headerName: "Phone Number",
+    headerName: i18n.t("Phone Number"),
     flex: 1,
     filterOperators: ["contains"],
     filterable: true,
   },
   {
     field: "email",
-    headerName: "Email",
+    headerName: i18n.t("Email"),
 
     flex: 1,
     filterable: true,
@@ -47,7 +53,7 @@ export const userColumns = [
   },
   {
     field: "country_code",
-    headerName: "Country",
+    headerName: i18n.t("Country"),
 
     flex: 1,
     required: true,
@@ -64,7 +70,8 @@ export const userColumns = [
     ),
   },
   {
-    headerName: "Ban User",
+    headerName: i18n.t("Ban User"),
+
     flex: 1,
     renderCell: ({ row }) => (
       <Ban
@@ -78,37 +85,49 @@ export const userColumns = [
 export const providerColumns = [
   {
     field: "id",
-    headerName: "ID",
+
+    headerName: i18n.t("ID"),
+
     flex: 0,
     cellClassName: "name-column--cell",
   },
   {
     field: "full_name",
-    headerName: "Name",
+    headerName: i18n.t("Name"),
+
     flex: 1,
     cellClassName: "name-column--cell",
     required: true,
   },
   {
     field: "phone_number",
-    headerName: "Phone Number",
+    headerName: i18n.t("Phone Number"),
+
     flex: 1,
   },
   {
     field: "email",
-    headerName: "Email",
+    headerName: i18n.t("Email"),
     flex: 1,
+  },
+  {
+    field: "status",
+    headerName: i18n.t("Verify"),
+
+    flex: 1,
+    renderCell: ({ row }) => <Verified row={row} />,
+  },
+  {
+    field: "details",
+    headerName: i18n.t("Info"),
+    flex: 1,
+    renderCell: ({ row }) => <DetailsButton row={row} />,
   },
 
   {
-    field: "status",
-    headerName: "Verify",
-    flex: 1,
-    renderCell: ({ row }) => <Control row={row} />,
-  },
-  {
     field: "Ban",
-    headerName: "Ban Provider",
+    headerName: i18n.t("Ban Provider"),
+
     flex: 1,
     renderCell: ({ row }) => (
       <Ban
@@ -122,14 +141,14 @@ export const providerColumns = [
 
 export const categoriesColumns = [
   {
-    field: "title_ar",
+    field: "nameAr",
     headerName: i18n.t("Title (Arabic)"),
     flex: 1,
     cellClassName: "name-column--cell",
     required: true,
   },
   {
-    field: "title_en",
+    field: "nameEn",
     headerName: i18n.t("Title (English)"),
     flex: 1,
     cellClassName: "name-column--cell",
@@ -153,7 +172,7 @@ export const categoriesColumns = [
     headerName: i18n.t("Image"),
     flex: 1,
     required: true,
-    renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
+    renderCell: ({ row }) => <ImageModal imageUrl={row.imageUrl} />,
   },
   {
     field: "edit",
@@ -165,7 +184,8 @@ export const categoriesColumns = [
 export const coversColumns = [
   {
     field: "id",
-    headerName: "ID",
+    headerName: i18n.t("ID"),
+
     flex: 0,
     cellClassName: "name-column--cell",
     required: true,
@@ -190,11 +210,11 @@ export const coversColumns = [
   },
 ];
 export const reviewsColumns = [
-  { field: "boatId", headerName: "Boat Id", flex: 1 },
-  { field: "reviewText", headerName: "Review Text", flex: 2 },
-  { field: "starsCount", headerName: "Stars Count", flex: 1 },
-  { field: "date", headerName: "Date", flex: 1 },
-  { field: "byUser", headerName: "By User", flex: 1 },
+  { field: "boatId", headerName: i18n.t("Boat Id"), flex: 1 },
+  { field: "reviewText", headerName: i18n.t("Review Text"), flex: 2 },
+  { field: "starsCount", headerName: i18n.t("Stars Count"), flex: 1 },
+  { field: "date", headerName: i18n.t("Date"), flex: 1 },
+  { field: "byUser", headerName: i18n.t("By User"), flex: 1 },
 ];
 export const reviewsData = [
   {
@@ -241,9 +261,9 @@ export const reviewsData = [
 ];
 
 export const supervisorsColumns = [
-  { field: "name", headerName: "Name", flex: 1 },
-  { field: "phone", headerName: "Phone", flex: 1 },
-  { field: "email", headerName: "Email", flex: 1 },
+  { field: "name", headerName: i18n.t("Name"), flex: 1 },
+  { field: "phone", headerName: i18n.t("Phone"), flex: 1 },
+  { field: "email", headerName: i18n.t("Email"), flex: 1 },
 ];
 
 export const supervisorsData = [
@@ -280,10 +300,10 @@ export const supervisorsData = [
 ];
 
 export const complaintsColumns = [
-  { field: "orderId", headerName: "OrderId", flex: 1 },
-  { field: "date", headerName: "Date", flex: 1 },
-  { field: "user", headerName: "User", flex: 1 },
-  { field: "complaint", headerName: "Complaint", flex: 2 },
+  { field: "orderId", headerName: i18n.t("OrderId"), flex: 1 },
+  { field: "date", headerName: i18n.t("Date"), flex: 1 },
+  { field: "user", headerName: i18n.t("User"), flex: 1 },
+  { field: "complaint", headerName: i18n.t("Complaint"), flex: 2 },
 ];
 
 export const complaintsData = [
@@ -325,10 +345,10 @@ export const complaintsData = [
 ];
 
 export const payoutsColumns = [
-  { field: "paymentMethod", headerName: "Payment Method", flex: 1 },
-  { field: "amount", headerName: "Amount", type: "number", flex: 1 },
-  { field: "user", headerName: "User", flex: 1 },
-  { field: "status", headerName: "Status", flex: 1 },
+  { field: "paymentMethod", headerName: i18n.t("Payment Method"), flex: 1 },
+  { field: "amount", headerName: i18n.t("Amount"), type: "number", flex: 1 },
+  { field: "user", headerName: i18n.t("User"), flex: 1 },
+  { field: "status", headerName: i18n.t("Status"), flex: 1 },
 ];
 export const payoutsData = [
   {
@@ -368,20 +388,72 @@ export const payoutsData = [
   },
 ];
 
-export const providerRequestsColumns = [
-  { field: "name", headerName: "Name", flex: 1 },
+export const roviderRequestsColumns = [
+  { field: "providerId", headerName: "ID", flex: 1 },
+  // { field: "assignedTo", headerName: "Assigned To", flex: 1 },
   {
-    field: "photo",
-    headerName: "Photo",
+    field: "details",
+    headerName: "Details",
     flex: 1,
-    renderCell: (params) => (
-      <ImageModal imageUrl={params.value} alt="Provider" />
-    ),
+    renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
   },
-  { field: "country", headerName: "Country", flex: 1 },
-  { field: "email", headerName: "Email", flex: 1 },
-  { field: "phone", headerName: "Phone", flex: 1 },
 ];
+export const providerRequestsColumns = [
+  { field: "providerId", headerName: i18n.t("ID"), flex: 1 },
+  {
+    field: "assignedTo",
+    headerName: i18n.t("Assigned To"),
+    flex: 1,
+    // renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+  },
+  {
+    field: "assign",
+    headerName: i18n.t("Assign"),
+    flex: 1,
+    renderCell: ({ row }) => <AdminDropdown />,
+  },
+  {
+    field: "status",
+    headerName: i18n.t("Verify"),
+
+    flex: 1,
+    renderCell: ({ row }) => <Control row={row} />,
+  },
+  {
+    field: "details",
+    headerName: i18n.t("Details"),
+    flex: 1,
+    renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+  },
+];
+// export const boatsColumns = [
+//   { field: "providerId", headerName: i18n.t("ID"), flex: 1 },
+//   {
+//     field: "assignedTo",
+//     headerName: i18n.t("Assigned To"),
+//     flex: 1,
+//     // renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+//   },
+//   {
+//     field: "assign",
+//     headerName: i18n.t("Assign"),
+//     flex: 1,
+//     renderCell: ({ row }) => <AdminDropdown />,
+//   },
+//   {
+//     field: "status",
+//     headerName: i18n.t("Verify"),
+
+//     flex: 1,
+//     renderCell: ({ row }) => <Control row={row} />,
+//   },
+//   {
+//     field: "details",
+//     headerName: i18n.t("Details"),
+//     flex: 1,
+//     renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+//   },
+// ];
 
 export const providerRequestsData = [
   {
@@ -429,12 +501,12 @@ export const providerRequestsData = [
 export const featuresListColumns = [
   {
     field: "icon",
-    headerName: "Icon",
+    headerName: i18n.t("Icon"),
     flex: 1,
     renderCell: (params) => <img src={params.value} alt="Icon" />,
   },
-  { field: "nameAr", headerName: "Name AR", flex: 1 },
-  { field: "nameEn", headerName: "Name EN", flex: 1 },
+  { field: "nameAr", headerName: i18n.t("Name AR"), flex: 1 },
+  { field: "nameEn", headerName: i18n.t("Name EN"), flex: 1 },
 ];
 
 export const featuresListData = [
@@ -471,13 +543,13 @@ export const featuresListData = [
 ];
 
 export const transactionsColumns = [
-  { field: "trxId", headerName: "TRX Id", flex: 1 },
-  { field: "date", headerName: "Date", flex: 1 },
-  { field: "amount", headerName: "Amount", type: "number", flex: 1 },
-  { field: "tripId", headerName: "Trip Id", flex: 1 },
-  { field: "tripType", headerName: "Trip Type", flex: 1 },
-  { field: "user", headerName: "User", flex: 1 },
-  { field: "provider", headerName: "Provider", flex: 1 },
+  { field: "trxId", headerName: i18n.t("TRX Id"), flex: 1 },
+  { field: "date", headerName: i18n.t("Date"), flex: 1 },
+  { field: "amount", headerName: i18n.t("Amount"), type: "number", flex: 1 },
+  { field: "tripId", headerName: i18n.t("Trip Id"), flex: 1 },
+  { field: "tripType", headerName: i18n.t("Trip Type"), flex: 1 },
+  { field: "user", headerName: i18n.t("User"), flex: 1 },
+  { field: "provider", headerName: i18n.t("Provider"), flex: 1 },
 ];
 
 export const transactionsData = [

@@ -17,7 +17,7 @@ import useUserStore from "../../stores/useUserStore";
 import { Close } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
-import { updateItem } from "../../network/categoriesServices";
+import { updateItem, updateMultipartItem } from "../../network/network";
 
 const EditCategoryPage = () => {
   const { t } = useTranslation();
@@ -40,14 +40,14 @@ const EditCategoryPage = () => {
 
     const category = {
       image: image,
-      title_en: row.title_en,
-      title_ar: row.title_ar,
+      nameEn: row.nameEn,
+      nameAr: row.nameAr,
       type: row.type,
     };
     try {
       setIsLoading(true);
 
-      await updateItem(
+      await updateMultipartItem(
         token,
         logout,
         `api/admin/categories/${row.id}`,
@@ -85,10 +85,10 @@ const EditCategoryPage = () => {
         <Box style={{ margin: "2rem" }} spacing={2} gap={"10px"}>
           <TextField
             label={t("Title (English)")}
-            defaultValue={row.title_en}
+            defaultValue={row.nameEn}
             variant="outlined"
             onChange={(e) => {
-              row.title_en = e.target.value;
+              row.nameEn = e.target.value;
             }}
             fullWidth
             sx={{
@@ -102,10 +102,10 @@ const EditCategoryPage = () => {
           />
           <TextField
             label={t("Title (Arabic)")}
-            defaultValue={row.title_ar}
+            defaultValue={row.nameAr}
             variant="outlined"
             onChange={(e) => {
-              row.title_ar = e.target.value;
+              row.nameAr = e.target.value;
 
               console.log(row.type);
             }}

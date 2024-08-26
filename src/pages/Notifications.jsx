@@ -4,6 +4,10 @@ import {
   Button,
   ButtonGroup,
   CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   FormControl,
   IconButton,
   InputLabel,
@@ -28,14 +32,16 @@ const Notifications = () => {
   const colors = tokens(theme.palette.mode);
   const [title_ar, setTitleAR] = useState(null);
   const [title_en, setTitleEN] = useState(null);
+  const [messageAR, setMessageAR] = useState(null);
+  const [messageEN, setMessageEN] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
 
   const { token, pinned, logout } = useUserStore();
-  const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState("Pending");
+  const [IsOpen, setIsOpen] = useState(false);
 
   const handleFormSubmit = async (e) => {
     // e.preventDefault();
@@ -61,7 +67,11 @@ const Notifications = () => {
       <h1 style={{ margin: "2rem" }}>{t("Notifications")}</h1>
       <form onSubmit={handleFormSubmit}>
         <Box display="flex" justifyContent="center" alignItems="center">
-          <ButtonGroup variant="contained" aria-label="Basic button group">
+          <ButtonGroup
+            variant="contained"
+            aria-label="Basic button group"
+            sx={{ direction: "ltr" }}
+          >
             <Button
               onClick={() => setSelected("Pending")}
               style={{
@@ -123,10 +133,10 @@ const Notifications = () => {
           </Box>
           <Box gap={"10px"} gridColumn="span 6">
             <TextField
-              label={t("Title (English)")}
+              label={t("Title (Arabic)")}
               variant="outlined"
               onChange={(e) => {
-                setTitleEN(e.target.value);
+                setTitleAR(e.target.value);
               }}
               fullWidth
               required
@@ -140,14 +150,15 @@ const Notifications = () => {
               }}
             />
           </Box>
+
           <Box gridColumn="span 6">
             <TextField
               size="huge"
-              label={t("Title (English)")}
+              label={t("Message (English)")}
               defaultValue={"Marsol new"}
               variant="outlined"
               onChange={(e) => {
-                // setTitleEN(e.target.value);
+                setMessageEN(e.target.value);
               }}
               fullWidth
               multiline
@@ -174,11 +185,11 @@ const Notifications = () => {
           <Box gridColumn="span 6">
             <TextField
               size="huge"
-              label={t("Title (English)")}
+              label={t("Message (Arabic)")}
               defaultValue={"Marsol new"}
               variant="outlined"
               onChange={(e) => {
-                // setTitleEN(e.target.value);
+                setMessageAR(e.target.value);
               }}
               fullWidth
               multiline
@@ -225,53 +236,26 @@ const Notifications = () => {
                 required
                 label="For"
               >
-                {countries.map((country) => (
-                  <MenuItem value={`${country.phoneCode}`}>
-                    <span
-                      style={{
-                        verticalAlign: "top",
-                        marginInlineStart: "1rem",
-                      }}
-                    >
-                      {country.name}
-                    </span>
-                    <span
-                      style={{
-                        verticalAlign: "top",
-                        marginInlineStart: "1rem",
-                      }}
-                    >
-                      {country.phoneCode}
-                    </span>
-                  </MenuItem>
-                ))}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "end",
-                    marginTop: 2,
-                    direction: "ltr",
-                  }}
-                >
-                  <IconButton
-                  // onClick={(e) => {
-                  //   e.stopPropagation();
-                  //   handleCodePageChange(codePage - 1);
-                  // }}
-                  // disabled={codePage === 0}
+                <MenuItem value={`Providers`}>
+                  <span
+                    style={{
+                      verticalAlign: "top",
+                      marginInlineStart: "1rem",
+                    }}
                   >
-                    <ArrowBackIosNew />
-                  </IconButton>
-                  <IconButton
-                  // onClick={(e) => {
-                  //   e.stopPropagation();
-                  //   handleCodePageChange(codePage + 1);
-                  // }}
-                  // disabled={codeEnd >= countries.length}
+                    {"Providers"}
+                  </span>
+                </MenuItem>
+                <MenuItem value={`Users`}>
+                  <span
+                    style={{
+                      verticalAlign: "top",
+                      marginInlineStart: "1rem",
+                    }}
                   >
-                    <ArrowForwardIos />
-                  </IconButton>
-                </Box>
+                    {"Users"}
+                  </span>
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -287,19 +271,48 @@ const Notifications = () => {
           }}
         >
           <Button
-            type="submit"
+            onClick={() => setIsOpen(true)}
             variant="contained"
             color="success"
             size="large"
             style={{ fontSize: "15px" }}
-            disabled={isLoading} // Disable the button while loading
-            startIcon={
-              isLoading ? <CircularProgress size={20} color="inherit" /> : null
-            }
           >
-            {isLoading ? t("Loading") : t("Save")}
+            {t("Save")}
           </Button>
         </Box>
+        <Dialog
+          open={IsOpen}
+          onClose={() => {
+            // set
+            setIsOpen(false);
+          }}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle sx={{ minWidth: "15rem" }} id="alert-dialog-title">
+            {t("Assign to Random admins ??")}
+          </DialogTitle>
+          <DialogContent></DialogContent>
+          <DialogActions>
+            {/* <Button onClick={() => setAdminRandomIsOpen(false)} color="info">
+            Cancel
+          </Button> */}
+            <Button
+              type="submit"
+              color="success"
+              autoFocus
+              variant="contained"
+              disabled={isLoading}
+              startIcon={
+                isLoading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : null
+              }
+            >
+              {isLoading ? t("Loading") : t("Save")}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </form>
       <ToastContainer position="top-center" autoClose="3000" />
     </Box>

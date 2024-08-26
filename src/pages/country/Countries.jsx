@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import TableComponent from "../../components/Table";
 import { countriesColumns } from "../../data/mockData";
 import useUserStore from "../../stores/useUserStore";
-import { getAll } from "../../network/categoriesServices";
+import { getAll } from "../../network/network";
 import usePaginationStore from "../../stores/usePaginationStore";
 
 const Countries = () => {
@@ -40,8 +40,10 @@ const Countries = () => {
       <TableComponent
         to="/addcountry"
         rows={rows}
+        // Endpoint={`api/admin/providers/delete/`}
         columns={countriesColumns}
         loading={loading}
+        add={"ADD NEW Country"}
       />
     </>
   );
