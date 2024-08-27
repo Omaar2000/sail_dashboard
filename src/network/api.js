@@ -32,7 +32,14 @@ export const login = async (username, password) => {
 // };
 
 // ---------------------- Interceptor ---------------------
-export const api = axios.create();
+export const api = axios.create(
+{
+  headers : {
+    "Access-Control-Allow-Origin" : "*"
+  },
+  baseURL : "https://dev.sailgloble.com"
+}
+);
 
 api.interceptors.request.use(
   (config) => {

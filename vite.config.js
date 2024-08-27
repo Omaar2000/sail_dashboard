@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://92.205.230.83:8080",
+        target: "https://dev.sailgloble.com",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
