@@ -27,7 +27,11 @@ const ProvidersRequests = () => {
       try {
         setLoading(true);
 
-        const data = await getAll(token, logout, `api/admin/provider-requests`);
+        const data = await getAll(
+          token,
+          logout,
+          `https://dev.sailgloble.com/admin/provider-requests`
+        );
         setRows(data.data);
         setTotalPages(data.page_count);
 

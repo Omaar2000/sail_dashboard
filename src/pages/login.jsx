@@ -179,7 +179,7 @@ export default Login;
 
 // const login = async (username, password) => {
 //   try {
-//     const response = await fetch("api/admin/auth/login", {
+//     const response = await fetch("https://dev.sailgloble.com/admin/auth/login", {
 //       method: "POST",
 //       headers: {
 //         "Content-Type": "application/json",

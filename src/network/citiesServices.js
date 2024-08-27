@@ -5,11 +5,14 @@ import i18n from "../i18n";
 
 export const getAllCities = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/app_settings/cities", {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.get(
+      "https://dev.sailgloble.com/admin/app_settings/cities",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
 
@@ -24,11 +27,15 @@ export const getAllCities = async (token, logout) => {
 
 export const addCity = async (city, token) => {
   try {
-    const res = await api.post(`api/admin/app_settings/cities`, city, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.post(
+      `https://dev.sailgloble.com/admin/app_settings/cities`,
+      city,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(res);
     toast.success(i18n.t("City added successfully!"));
     return res.data;
@@ -40,11 +47,15 @@ export const addCity = async (city, token) => {
 
 export const editCity = async (id, city, token) => {
   try {
-    const res = await api.patch(`api/admin/app_settings/cities/${id}`, city, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.patch(
+      `https://dev.sailgloble.com/admin/app_settings/cities/${id}`,
+      city,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(res);
     toast.success(i18n.t("City Edited successfully!"));
     return res.data;

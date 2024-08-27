@@ -4,7 +4,7 @@ import i18n from "../i18n";
 
 export const getAllPaths = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/trip_path", {
+    const res = await api.get("https://dev.sailgloble.com/admin/trip_path", {
       headers: {
         "x-custom-lang": "ar",
         Authorization: `Bearer ${token}`, // Add the token here
@@ -23,11 +23,15 @@ export const getAllPaths = async (token, logout) => {
 
 export const editPath = async (id, path, token) => {
   try {
-    const res = await api.patch(`api/admin/trip_path/${id}`, path, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.patch(
+      `https://dev.sailgloble.com/admin/trip_path/${id}`,
+      path,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(res);
 
     toast.success(i18n.t("Path edited successfully!"));
@@ -41,11 +45,15 @@ export const editPath = async (id, path, token) => {
 
 export const addPath = async (path, token) => {
   try {
-    const res = await api.post(`api/admin/trip_path`, path, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.post(
+      `https://dev.sailgloble.com/admin/trip_path`,
+      path,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(res);
     toast.success(i18n.t("Path added successfully!"));
 
@@ -58,12 +66,15 @@ export const addPath = async (path, token) => {
 
 export const deletePath = async (token, logout, id) => {
   try {
-    const res = await api.delete(`api/admin/trip_path/delete/${id}`, {
-      headers: {
-        "x-custom-lang": "ar",
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.delete(
+      `https://dev.sailgloble.com/admin/trip_path/delete/${id}`,
+      {
+        headers: {
+          "x-custom-lang": "ar",
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     toast.success(i18n.t("Path deleted successfully!"));
     console.log(res);
