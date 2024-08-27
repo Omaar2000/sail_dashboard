@@ -7,7 +7,7 @@ const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your bac
 export const login = async (username, password) => {
   try {
     const response = await api
-      .post(`api/admin/auth/login`, {
+      .post( `api/admin/auth/login`, {
         user_name: username,
         password: password,
       })
@@ -32,7 +32,9 @@ export const login = async (username, password) => {
 // };
 
 // ---------------------- Interceptor ---------------------
-export const api = axios.create();
+export const api = axios.create({
+  baseURL: 'http://92.205.230.83:8080/'
+});
 
 api.interceptors.request.use(
   (config) => {
