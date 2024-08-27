@@ -22,7 +22,11 @@ const Covers = () => {
       try {
         setLoading(true);
 
-        const data = await getAll(token, logout, `api/admin/sliders`);
+        const data = await getAll(
+          token,
+          logout,
+          `https://dev.sailgloble.com/admin/sliders`
+        );
 
         setRows(data.data);
         setTotalPages(data.page_count);
@@ -41,7 +45,7 @@ const Covers = () => {
     <>
       <TableComponent
         to="/addcover"
-        // Endpoint={`api/admin/providers/delete/`}
+        // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
         rows={rows}
         columns={coversColumns}
         loading={loading}

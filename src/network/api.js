@@ -7,7 +7,7 @@ const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your bac
 export const login = async (username, password) => {
   try {
     const response = await api
-      .post(`api/admin/auth/login`, {
+      .post(`https://92.205.230.83:8080/admin/auth/login`, {
         user_name: username,
         password: password,
       })

@@ -37,7 +37,7 @@ const EditCountryPage = () => {
       await updateItem(
         token,
         logout,
-        `api/admin/app_settings/countries/${row.id}`,
+        `https://dev.sailgloble.com/admin/app_settings/countries/${row.id}`,
         country
       );
       setTimeout(() => {

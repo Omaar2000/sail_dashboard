@@ -63,7 +63,12 @@ const AddCoverPage = () => {
 
     try {
       setIsLoading(true);
-      await addMultipartItem(token, logout, `api/admin/sliders`, cover);
+      await addMultipartItem(
+        token,
+        logout,
+        `https://dev.sailgloble.com/admin/sliders`,
+        cover
+      );
 
       setTimeout(() => {
         navigate("/covers");

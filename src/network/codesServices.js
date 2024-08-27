@@ -4,11 +4,14 @@ import i18n from "../i18n";
 
 export const getAllCodes = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/app_settings/country_code", {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.get(
+      "https://dev.sailgloble.com/admin/app_settings/country_code",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
 
@@ -24,7 +27,7 @@ export const getAllCodes = async (token, logout) => {
 export const addCode = async (countryCode, token) => {
   try {
     const res = await api.post(
-      `api/admin/app_settings/country_code`,
+      `https://dev.sailgloble.com/admin/app_settings/country_code`,
       countryCode,
       {
         headers: {
@@ -44,7 +47,7 @@ export const addCode = async (countryCode, token) => {
 export const editCode = async (id, countryCode, token) => {
   try {
     const res = await api.patch(
-      `api/admin/app_settings/country_code/${id}`,
+      `https://dev.sailgloble.com/admin/app_settings/country_code/${id}`,
       countryCode,
       {
         headers: {

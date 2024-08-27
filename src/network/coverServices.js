@@ -4,7 +4,7 @@ import i18n from "../i18n";
 
 export const getAllCovers = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/sliders", {
+    const res = await api.get("https://dev.sailgloble.com/admin/sliders", {
       headers: {
         Authorization: `Bearer ${token}`, // Add the token here
       },
@@ -22,12 +22,16 @@ export const getAllCovers = async (token, logout) => {
 
 export const addSlider = async (slider, token) => {
   try {
-    const res = await api.post(`api/admin/sliders`, slider, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const res = await api.post(
+      `https://dev.sailgloble.com/admin/sliders`,
+      slider,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     console.log(res);
     toast.success(i18n.t("Cover Added Successfully!"));
     return res.data;
@@ -39,12 +43,16 @@ export const addSlider = async (slider, token) => {
 
 export const updateCover = async (id, cover, token) => {
   try {
-    const res = await api.patch(`api/admin/sliders/${id}`, cover, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const res = await api.patch(
+      `https://dev.sailgloble.com/admin/sliders/${id}`,
+      cover,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     console.log(res);
 
     toast.success(i18n.t("Cover Added successfully!"));

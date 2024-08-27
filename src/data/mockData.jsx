@@ -75,8 +75,8 @@ export const userColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Ban
-        banEndpoint={`api/admin/clients/ban/${row.id}`}
-        unbanEndpoint={`api/admin/clients/unban/${row.id}`}
+        banEndpoint={`https://dev.sailgloble.com/admin/clients/ban/${row.id}`}
+        unbanEndpoint={`https://dev.sailgloble.com/admin/clients/unban/${row.id}`}
         row={row}
       />
     ),
@@ -131,8 +131,8 @@ export const providerColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Ban
-        banEndpoint={`api/admin/providers/ban/${row.id}`}
-        unbanEndpoint={`api/admin/providers/unban/${row.id}`}
+        banEndpoint={`https://dev.sailgloble.com/admin/providers/ban/${row.id}`}
+        unbanEndpoint={`https://dev.sailgloble.com/admin/providers/unban/${row.id}`}
         row={row}
       />
     ),
