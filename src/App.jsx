@@ -69,8 +69,8 @@ function App() {
           <CssBaseline />
           <Routes>
             <Route
-              element={token ? <Navigate to="/" /> : <Login />}
               path="/login"
+              element={token ? <Navigate to="/" /> : <Login />}
             />
             <Route
               path="/*"
