@@ -1,5 +1,4 @@
 import axios from "axios";
-import { headers } from "next/headers";
 
 const API_URL = "https://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL
 
