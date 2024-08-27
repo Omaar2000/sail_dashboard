@@ -7,10 +7,13 @@ const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your bac
 export const login = async (username, password) => {
   try {
     const response = await api
-      .post(`http://92.205.230.83:8080/admin/auth/login`, {
-        user_name: username,
-        password: password,
-      })
+      .post(
+        `https://cors-anywhere.herokuapp.com/http://92.205.230.83:8080/admin/auth/login`,
+        {
+          user_name: username,
+          password: password,
+        }
+      )
       .then((response) => response.data);
     return response; //Assuming response data contains the token
   } catch (error) {
