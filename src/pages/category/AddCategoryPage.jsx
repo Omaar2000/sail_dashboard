@@ -53,12 +53,16 @@ const AddCategoryPage = () => {
 
     try {
       setIsLoading(true);
+<<<<<<< HEAD
       await addMultipartItem(
         token,
         logout,
         `https://dev.sailgloble.com/admin/categories`,
         category
       );
+=======
+      await addMultipartItem(token, logout, `https://dev.sailgloble.com/admin/categories`, category);
+>>>>>>> main
       setTimeout(() => {
         navigate("/categories");
       }, 500);
