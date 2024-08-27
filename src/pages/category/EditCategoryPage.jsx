@@ -50,7 +50,7 @@ const EditCategoryPage = () => {
       await updateMultipartItem(
         token,
         logout,
-        `api/admin/categories/${row.id}`,
+        `https://dev.sailgloble.com/admin/categories/${row.id}`,
         category
       );
       setTimeout(() => {

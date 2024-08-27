@@ -21,7 +21,7 @@ const TripPaths = () => {
         const data = await getAll(
           token,
           logout,
-          `api/admin/trip_path?limit=${pageSize}&page=${page}&keyword=${keyword}`
+          `https://dev.sailgloble.com/admin/trip_path?limit=${pageSize}&page=${page}&keyword=${keyword}`
         );
 
         setRows(data.data);
@@ -40,7 +40,7 @@ const TripPaths = () => {
     <>
       <TableComponent
         to="/addpath"
-        Endpoint={`api/admin/trip_path/delete/`}
+        Endpoint={`https://dev.sailgloble.com/admin/trip_path/delete/`}
         rows={rows}
         columns={pathsColumns}
         loading={loading}

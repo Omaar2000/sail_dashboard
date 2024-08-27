@@ -46,7 +46,12 @@ const AddCityPage = () => {
     try {
       setIsLoading(true);
 
-      await addItem(token, logout, `api/admin/app_settings/cities`, city);
+      await addItem(
+        token,
+        logout,
+        `https://dev.sailgloble.com/admin/app_settings/cities`,
+        city
+      );
 
       setTimeout(() => {
         navigate("/cities");
@@ -63,7 +68,7 @@ const AddCityPage = () => {
       const data = await getAll(
         token,
         logout,
-        `api/admin/app_settings/countries`
+        `https://dev.sailgloble.com/admin/app_settings/countries`
       );
 
       setRows(data.data);

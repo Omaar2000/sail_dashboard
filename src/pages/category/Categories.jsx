@@ -18,7 +18,7 @@ const Categories = () => {
         const data = await getAll(
           token,
           logout,
-          `api/admin/categories?limit=${pageSize}&page=${page}&keyword=${keyword}`
+          `https://dev.sailgloble.com/admin/categories?limit=${pageSize}&page=${page}&keyword=${keyword}`
         );
         setRows(data.data);
         setTotalPages(data.page_count);

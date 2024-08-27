@@ -31,7 +31,7 @@ const AddPathPage = () => {
     try {
       setIsLoading(true);
 
-      await addItem(token, logout, `api/admin/trip_path`, path);
+      await addItem(token, logout, `https://dev.sailgloble.com/admin/trip_path`, path);
 
       setTimeout(() => {
         navigate("/boatroutes");

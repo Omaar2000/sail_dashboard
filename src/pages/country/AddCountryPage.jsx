@@ -33,7 +33,7 @@ const AddCountryPage = () => {
     try {
       setIsLoading(true);
 
-      await addItem(token, logout, `api/admin/app_settings/countries`, country);
+      await addItem(token, logout, `https://dev.sailgloble.com/admin/app_settings/countries`, country);
 
       setTimeout(() => {
         navigate("/countries");

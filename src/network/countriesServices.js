@@ -23,11 +23,15 @@ export const getAllCountries = async (token, logout) => {
 
 export const addCountry = async (country, token) => {
   try {
-    const res = await api.post(`api/admin/app_settings/countries`, country, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.post(
+      `https://dev.sailgloble.com/admin/app_settings/countries`,
+      country,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(res);
     toast.success(i18n.t("Country Added Successfully!"));
     return res.data;
@@ -40,7 +44,7 @@ export const addCountry = async (country, token) => {
 export const editCountry = async (id, country, token) => {
   try {
     const res = await api.patch(
-      `api/admin/app_settings/countries/${id}`,
+      `https://dev.sailgloble.com/admin/app_settings/countries/${id}`,
       country,
       {
         headers: {
