@@ -33,7 +33,7 @@ export const login = async (username, password) => {
 
 // ---------------------- Interceptor ---------------------
 export const api = axios.create({
-  baseURL: 'http://92.205.230.83:8080/'
+  baseURL: API_URL
 });
 
 api.interceptors.request.use(
