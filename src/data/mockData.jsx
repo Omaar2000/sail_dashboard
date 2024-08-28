@@ -186,27 +186,55 @@ export const coversColumns = [
     field: "id",
     headerName: i18n.t("ID"),
 
-    flex: 0,
+    flex: 1,
     cellClassName: "name-column--cell",
     required: true,
   },
   {
     field: "type",
     headerName: i18n.t("Type"),
-    flex: 0,
+    flex: 1,
   },
   {
     field: "image_url",
     headerName: i18n.t("Image"),
-    flex: 0,
+    flex: 1,
     required: true,
     renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
   },
   {
     field: "edit",
     headerName: i18n.t("Edit"),
-    flex: 0,
+    flex: 1,
     renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+  },
+];
+export const featuresColumns = [
+  {
+    field: "nameAr",
+    headerName: i18n.t("ID"),
+
+    flex: 1,
+    cellClassName: "name-column--cell",
+    required: true,
+  },
+  {
+    field: "nameEn",
+    headerName: i18n.t("Type"),
+    flex: 1,
+  },
+  {
+    field: "image",
+    headerName: i18n.t("Image"),
+    flex: 1,
+    required: true,
+    renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
+  },
+  {
+    field: "edit",
+    headerName: i18n.t("Edit"),
+    flex: 1,
+    renderCell: ({ row }) => <EditBtn to="/editfeature" row={row} />,
   },
 ];
 export const reviewsColumns = [

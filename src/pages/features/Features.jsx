@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../../components/Table";
-import { coversColumns } from "../../data/mockData";
+import { coversColumns, featuresColumns } from "../../data/mockData";
 import useUserStore from "../../stores/useUserStore";
 import usePaginationStore from "../../stores/usePaginationStore";
 import { getAll } from "../../network/network";
@@ -10,7 +10,7 @@ import { getAll } from "../../network/network";
 //   return res.data;
 // };
 
-const Covers = () => {
+const Features = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const Covers = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/sliders`
+          `https://dev.sailgloble.com/admin/app_settings/features`
         );
 
         setRows(data.data);
@@ -41,15 +41,15 @@ const Covers = () => {
   return (
     <>
       <TableComponent
-        to="/addcover"
+        to="/addfeature"
         // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
         rows={rows}
-        columns={coversColumns}
+        columns={featuresColumns}
         loading={loading}
-        add={"ADD NEW Cover"}
+        add={"ADD NEW Feature"}
       />
     </>
   );
 };
 
-export default Covers;
+export default Features;

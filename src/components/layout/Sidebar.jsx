@@ -9,6 +9,7 @@ import "./style.css";
 import {
   Call,
   Category,
+  ChecklistRtl,
   ForkRight,
   Group,
   Groups,
@@ -258,15 +259,15 @@ const SidebarComponent = ({
               hovered={hovered}
               setHovered={setHovered}
             />
-            {/* <Item
+            <Item
               title={"Feature List"}
               icon={<ChecklistRtl />}
-              to={"featurelist"}
+              to={"features"}
               selected={Selected}
               setSelected={setSelected}
               hovered={hovered}
               setHovered={setHovered}
-            /> */}
+            />
           </Box>
         </SubMenu>
         {/* <Item

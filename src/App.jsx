@@ -43,6 +43,7 @@ import ProvidersPayouts from "./pages/ProvidersPayouts";
 import PayoutsRequests from "./pages/ProvidersPayouts";
 import ProvidersRequests from "./pages/ProvidersRequests";
 import ProviderDetails from "./pages/providers/ProviderDetailsPage";
+import Features from "./pages/features/Features";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -115,7 +116,7 @@ function App() {
               <Route path="addpath" element={<AddPathPage />} />
               <Route path="settings" element={<Settings />} />
               <Route path="notifications" element={<Notifications />} />
-              <Route path="featurelist" element={<FeatureList />} />
+              <Route path="features" element={<Features />} />
               <Route path="supervisors" element={<Supervisors />} />
             </Route>
           </Routes>
