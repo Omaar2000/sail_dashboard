@@ -7,10 +7,19 @@ const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your bac
 export const login = async (username, password) => {
   try {
     const response = await api
-      .post(`https://dev.sailgloble.com/admin/auth/login`, {
-        user_name: username,
-        password: password,
-      })
+      .post(
+        `https://dev.sailgloble.com/admin/auth/login`,
+        {
+          user_name: username,
+          password: password,
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin":
+              "https://sail-dashboard-git-main-omaar2000s-projects.vercel.app",
+          },
+        }
+      )
       .then((response) => response.data);
     return response; //Assuming response data contains the token
   } catch (error) {
