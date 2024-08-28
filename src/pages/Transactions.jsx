@@ -4,6 +4,7 @@ import { transactionsColumns, transactionsData } from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
 import { getAllCovers } from "../network/coverServices";
 import usePaginationStore from "../stores/usePaginationStore";
+import { getAll } from "../network/network";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -20,13 +21,18 @@ const Transactions = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getAllCovers(token, logout, page, pageSize);
+
+        const data = await getAll(
+          token,
+          logout,
+          `https://dev.sailgloble.com/admin/transactions?limit=${pageSize}&page=${page}`
+        );
         setRows(data.data);
         setTotalPages(data.page_count);
         console.log(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching covers:", error);
+        console.error("Error fetching transactions:", error);
       }
     };
 
@@ -37,7 +43,7 @@ const Transactions = () => {
     <>
       <TableComponent
         to=""
-        rows={transactionsData}
+        rows={rows}
         columns={transactionsColumns}
         loading={loading}
       />
