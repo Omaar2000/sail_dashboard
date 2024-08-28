@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL
+//const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL
 
 // Function to handle login API call
 
@@ -41,7 +41,14 @@ export const login = async (username, password) => {
 // };
 
 // ---------------------- Interceptor ---------------------
-export const api = axios.create();
+export const api = axios.create(
+{
+  // headers : {
+  //   "Access-Control-Allow-Origin" : "https://sail-dashboard-evjl.vercel.app"
+  // },
+  baseURL : "https://dev.sailgloble.com"
+}
+);
 
 api.interceptors.request.use(
   (config) => {

@@ -37,7 +37,7 @@ const Categories = () => {
     <>
       <TableComponent
         to="/addcategory"
-        // Endpoint={`api/admin/providers/delete/`}
+        // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
         rows={rows}
         columns={categoriesColumns}
         loading={loading}

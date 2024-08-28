@@ -5,11 +5,14 @@ import i18n from "../i18n";
 
 export const getAllCities = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/app_settings/cities", {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.get(
+      "https://dev.sailgloble.com/admin/app_settings/cities",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
 
