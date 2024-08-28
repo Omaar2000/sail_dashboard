@@ -4,9 +4,16 @@
       "src": "/[^.]+",
       "dest": "/",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      }
+      "headers": [
+        {
+          "source": "/(.*)",
+          "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+        },
+        {
+          "source": "/https://sail-dashboard-git-main-omaar2000s-projects.vercel.app//(.*)",
+          "headers": [{ "key": "Access-Control-Allow-Origin", "value": "*" }]
+        }
+      ]
     }
   ]
 }
