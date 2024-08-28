@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL
+//const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL
 
 // Function to handle login API call
 
 export const login = async (username, password) => {
   try {
     const response = await api
-      .post(`https://92.205.230.83:8080/admin/auth/login`, {
+      .post(`https://dev.sailgloble.com/admin/auth/login`, {
         user_name: username,
         password: password,
       })
