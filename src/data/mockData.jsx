@@ -212,7 +212,7 @@ export const coversColumns = [
 export const featuresColumns = [
   {
     field: "nameAr",
-    headerName: i18n.t("ID"),
+    headerName: i18n.t("Name (Arabic)"),
 
     flex: 1,
     cellClassName: "name-column--cell",
@@ -220,7 +220,7 @@ export const featuresColumns = [
   },
   {
     field: "nameEn",
-    headerName: i18n.t("Type"),
+    headerName: i18n.t("Name (English)"),
     flex: 1,
   },
   {
