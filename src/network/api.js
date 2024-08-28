@@ -7,19 +7,10 @@ import axios from "axios";
 export const login = async (username, password) => {
   try {
     const response = await api
-      .post(
-        `https://dev.sailgloble.com/admin/auth/login`,
-        {
-          user_name: username,
-          password: password,
-        },
-        {
-          headers: {
-            "Access-Control-Allow-Origin":
-              "https://sail-dashboard-git-main-omaar2000s-projects.vercel.app",
-          },
-        }
-      )
+      .post(`https://dev.sailgloble.com/admin/auth/login`, {
+        user_name: username,
+        password: password,
+      })
       .then((response) => response.data);
     return response; //Assuming response data contains the token
   } catch (error) {
@@ -41,14 +32,12 @@ export const login = async (username, password) => {
 // };
 
 // ---------------------- Interceptor ---------------------
-export const api = axios.create(
-{
+export const api = axios.create({
   // headers : {
   //   "Access-Control-Allow-Origin" : "https://sail-dashboard-evjl.vercel.app"
   // },
-  baseURL : "https://dev.sailgloble.com"
-}
-);
+  baseURL: "https://dev.sailgloble.com",
+});
 
 api.interceptors.request.use(
   (config) => {

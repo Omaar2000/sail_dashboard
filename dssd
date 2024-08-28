@@ -1,0 +1,640 @@
+[1mdiff --git a/LICENSE b/LICENSE[m
+[1mnew file mode 100644[m
+[1mindex 0000000..261eeb9[m
+[1m--- /dev/null[m
+[1m+++ b/LICENSE[m
+[36m@@ -0,0 +1,201 @@[m
+[32m+[m[32m                                 Apache License[m
+[32m+[m[32m                           Version 2.0, January 2004[m
+[32m+[m[32m                        http://www.apache.org/licenses/[m
+[32m+[m
+[32m+[m[32m   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION[m
+[32m+[m
+[32m+[m[32m   1. Definitions.[m
+[32m+[m
+[32m+[m[32m      "License" shall mean the terms and conditions for use, reproduction,[m
+[32m+[m[32m      and distribution as defined by Sections 1 through 9 of this document.[m
+[32m+[m
+[32m+[m[32m      "Licensor" shall mean the copyright owner or entity authorized by[m
+[32m+[m[32m      the copyright owner that is granting the License.[m
+[32m+[m
+[32m+[m[32m      "Legal Entity" shall mean the union of the acting entity and all[m
+[32m+[m[32m      other entities that control, are controlled by, or are under common[m
+[32m+[m[32m      control with that entity. For the purposes of this definition,[m
+[32m+[m[32m      "control" means (i) the power, direct or indirect, to cause the[m
+[32m+[m[32m      direction or management of such entity, whether by contract or[m
+[32m+[m[32m      otherwise, or (ii) ownership of fifty percent (50%) or more of the[m
+[32m+[m[32m      outstanding shares, or (iii) beneficial ownership of such entity.[m
+[32m+[m
+[32m+[m[32m      "You" (or "Your") shall mean an individual or Legal Entity[m
+[32m+[m[32m      exercising permissions granted by this License.[m
+[32m+[m
+[32m+[m[32m      "Source" form shall mean the preferred form for making modifications,[m
+[32m+[m[32m      including but not limited to software source code, documentation[m
+[32m+[m[32m      source, and configuration files.[m
+[32m+[m
+[32m+[m[32m      "Object" form shall mean any form resulting from mechanical[m
+[32m+[m[32m      transformation or translation of a Source form, including but[m
+[32m+[m[32m      not limited to compiled object code, generated documentation,[m
+[32m+[m[32m      and conversions to other media types.[m
+[32m+[m
+[32m+[m[32m      "Work" shall mean the work of authorship, whether in Source or[m
+[32m+[m[32m      Object form, made available under the License, as indicated by a[m
+[32m+[m[32m      copyright notice that is included in or attached to the work[m
+[32m+[m[32m      (an example is provided in the Appendix below).[m
+[32m+[m
+[32m+[m[32m      "Derivative Works" shall mean any work, whether in Source or Object[m
+[32m+[m[32m      form, that is based on (or derived from) the Work and for which the[m
+[32m+[m[32m      editorial revisions, annotations, elaborations, or other modifications[m
+[32m+[m[32m      represent, as a whole, an original work of authorship. For the purposes[m
+[32m+[m[32m      of this License, Derivative Works shall not include works that remain[m
+[32m+[m[32m      separable from, or merely link (or bind by name) to the interfaces of,[m
+[32m+[m[32m      the Work and Derivative Works thereof.[m
+[32m+[m
+[32m+[m[32m      "Contribution" shall mean any work of authorship, including[m
+[32m+[m[32m      the original version of the Work and any modifications or additions[m
+[32m+[m[32m      to that Work or Derivative Works thereof, that is intentionally[m
+[32m+[m[32m      submitted to Licensor for inclusion in the Work by the copyright owner[m
+[32m+[m[32m      or by an individual or Legal Entity authorized to submit on behalf of[m
+[32m+[m[32m      the copyright owner. For the purposes of this definition, "submitted"[m
+[32m+[m[32m      means any form of electronic, verbal, or written communication sent[m
+[32m+[m[32m      to the Licensor or its representatives, including but not limited to[m
+[32m+[m[32m      communication on electronic mailing lists, source code control systems,[m
+[32m+[m[32m      and issue tracking systems that are managed by, or on behalf of, the[m
+[32m+[m[32m      Licensor for the purpose of discussing and improving the Work, but[m
+[32m+[m[32m      excluding communication that is conspicuously marked or otherwise[m
+[32m+[m[32m      designated in writing by the copyright owner as "Not a Contribution."[m
+[32m+[m
+[32m+[m[32m      "Contributor" shall mean Licensor and any individual or Legal Entity[m
+[32m+[m[32m      on behalf of whom a Contribution has been received by Licensor and[m
+[32m+[m[32m      subsequently incorporated within the Work.[m
+[32m+[m
+[32m+[m[32m   2. Grant of Copyright License. Subject to the terms and conditions of[m
+[32m+[m[32m      this License, each Contributor hereby grants to You a perpetual,[m
+[32m+[m[32m      worldwide, non-exclusive, no-charge, royalty-free, irrevocable[m
+[32m+[m[32m      copyright license to reproduce, prepare Derivative Works of,[m
+[32m+[m[32m      publicly display, publicly perform, sublicense, and distribute the[m
+[32m+[m[32m      Work and such Derivative Works in Source or Object form.[m
+[32m+[m
+[32m+[m[32m   3. Grant of Patent License. Subject to the terms and conditions of[m
+[32m+[m[32m      this License, each Contributor hereby grants to You a perpetual,[m
+[32m+[m[32m      worldwide, non-exclusive, no-charge, royalty-free, irrevocable[m
+[32m+[m[32m      (except as stated in this section) patent license to make, have made,[m
+[32m+[m[32m      use, offer to sell, sell, import, and otherwise transfer the Work,[m
+[32m+[m[32m      where such license applies only to those patent claims licensable[m
+[32m+[m[32m      by such Contributor that are necessarily infringed by their[m
+[32m+[m[32m      Contribution(s) alone or by combination of their Contribution(s)[m
+[32m+[m[32m      with the Work to which such Contribution(s) was submitted. If You[m
+[32m+[m[32m      institute patent litigation against any entity (including a[m
+[32m+[m[32m      cross-claim or counterclaim in a lawsuit) alleging that the Work[m
+[32m+[m[32m      or a Contribution incorporated within the Work constitutes direct[m
+[32m+[m[32m      or contributory patent infringement, then any patent licenses[m
+[32m+[m[32m      granted to You under this License for that Work shall terminate[m
+[32m+[m[32m      as of the date such litigation is filed.[m
+[32m+[m
+[32m+[m[32m   4. Redistribution. You may reproduce and distribute copies of the[m
+[32m+[m[32m      Work or Derivative Works thereof in any medium, with or without[m
+[32m+[m[32m      modifications, and in Source or Object form, provided that You[m
+[32m+[m[32m      meet the following conditions:[m
+[32m+[m
+[32m+[m[32m      (a) You must give any other recipients of the Work or[m
+[32m+[m[32m          Derivative Works a copy of this License; and[m
+[32m+[m
+[32m+[m[32m      (b) You must cause any modified files to carry prominent notices[m
+[32m+[m[32m          stating that You changed the files; and[m
+[32m+[m
+[32m+[m[32m      (c) You must retain, in the Source form of any Derivative Works[m
+[32m+[m[32m          that You distribute, all copyright, patent, trademark, and[m
+[32m+[m[32m          attribution notices from the Source form of the Work,[m
+[32m+[m[32m          excluding those notices that do not pertain to any part of[m
+[32m+[m[32m          the Derivative Works; and[m
+[32m+[m
+[32m+[m[32m      (d) If the Work includes a "NOTICE" text file as part of its[m
+[32m+[m[32m          distribution, then any Derivative Works that You distribute must[m
+[32m+[m[32m          include a readable copy of the attribution notices contained[m
+[32m+[m[32m          within such NOTICE file, excluding those notices that do not[m
+[32m+[m[32m          pertain to any part of the Derivative Works, in at least one[m
+[32m+[m[32m          of the following places: within a NOTICE text file distributed[m
+[32m+[m[32m          as part of the Derivative Works; within the Source form or[m
+[32m+[m[32m          documentation, if provided along with the Derivative Works; or,[m
+[32m+[m[32m          within a display generated by the Derivative Works, if and[m
+[32m+[m[32m          wherever such third-party notices normally appear. The contents[m
+[32m+[m[32m          of the NOTICE file are for informational purposes only and[m
+[32m+[m[32m          do not modify the License. You may add Your own attribution[m
+[32m+[m[32m          notices within Derivative Works that You distribute, alongside[m
+[32m+[m[32m          or as an addendum to the NOTICE text from the Work, provided[m
+[32m+[m[32m          that such additional attribution notices cannot be construed[m
+[32m+[m[32m          as modifying the License.[m
+[32m+[m
+[32m+[m[32m      You may add Your own copyright statement to Your modifications and[m
+[32m+[m[32m      may provide additional or different license terms and conditions[m
+[32m+[m[32m      for use, reproduction, or distribution of Your modifications, or[m
+[32m+[m[32m      for any such Derivative Works as a whole, provided Your use,[m
+[32m+[m[32m      reproduction, and distribution of the Work otherwise complies with[m
+[32m+[m[32m      the conditions stated in this License.[m
+[32m+[m
+[32m+[m[32m   5. Submission of Contributions. Unless You explicitly state otherwise,[m
+[32m+[m[32m      any Contribution intentionally submitted for inclusion in the Work[m
+[32m+[m[32m      by You to the Licensor shall be under the terms and conditions of[m
+[32m+[m[32m      this License, without any additional terms or conditions.[m
+[32m+[m[32m      Notwithstanding the above, nothing herein shall supersede or modify[m
+[32m+[m[32m      the terms of any separate license agreement you may have executed[m
+[32m+[m[32m      with Licensor regarding such Contributions.[m
+[32m+[m
+[32m+[m[32m   6. Trademarks. This License does not grant permission to use the trade[m
+[32m+[m[32m      names, trademarks, service marks, or product names of the Licensor,[m
+[32m+[m[32m      except as required for reasonable and customary use in describing the[m
+[32m+[m[32m      origin of the Work and reproducing the content of the NOTICE file.[m
+[32m+[m
+[32m+[m[32m   7. Disclaimer of Warranty. Unless required by applicable law or[m
+[32m+[m[32m      agreed to in writing, Licensor provides the Work (and each[m
+[32m+[m[32m      Contributor provides its Contributions) on an "AS IS" BASIS,[m
+[32m+[m[32m      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or[m
+[32m+[m[32m      implied, including, without limitation, any warranties or conditions[m
+[32m+[m[32m      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A[m
+[32m+[m[32m      PARTICULAR PURPOSE. You are solely responsible for determining the[m
+[32m+[m[32m      appropriateness of using or redistributing the Work and assume any[m
+[32m+[m[32m      risks associated with Your exercise of permissions under this License.[m
+[32m+[m
+[32m+[m[32m   8. Limitation of Liability. In no event and under no legal theory,[m
+[32m+[m[32m      whether in tort (including negligence), contract, or otherwise,[m
+[32m+[m[32m      unless required by applicable law (such as deliberate and grossly[m
+[32m+[m[32m      negligent acts) or agreed to in writing, shall any Contributor be[m
+[32m+[m[32m      liable to You for damages, including any direct, indirect, special,[m
+[32m+[m[32m      incidental, or consequential damages of any character arising as a[m
+[32m+[m[32m      result of this License or out of the use or inability to use the[m
+[32m+[m[32m      Work (including but not limited to damages for loss of goodwill,[m
+[32m+[m[32m      work stoppage, computer failure or malfunction, or any and all[m
+[32m+[m[32m      other commercial damages or losses), even if such Contributor[m
+[32m+[m[32m      has been advised of the possibility of such damages.[m
+[32m+[m
+[32m+[m[32m   9. Accepting Warranty or Additional Liability. While redistributing[m
+[32m+[m[32m      the Work or Derivative Works thereof, You may choose to offer,[m
+[32m+[m[32m      and charge a fee for, acceptance of support, warranty, indemnity,[m
+[32m+[m[32m      or other liability obligations and/or rights consistent with this[m
+[32m+[m[32m      License. However, in accepting such obligations, You may act only[m
+[32m+[m[32m      on Your own behalf and on Your sole responsibility, not on behalf[m
+[32m+[m[32m      of any other Contributor, and only if You agree to indemnify,[m
+[32m+[m[32m      defend, and hold each Contributor harmless for any liability[m
+[32m+[m[32m      incurred by, or claims asserted against, such Contributor by reason[m
+[32m+[m[32m      of your accepting any such warranty or additional liability.[m
+[32m+[m
+[32m+[m[32m   END OF TERMS AND CONDITIONS[m
+[32m+[m
+[32m+[m[32m   APPENDIX: How to apply the Apache License to your work.[m
+[32m+[m
+[32m+[m[32m      To apply the Apache License to your work, attach the following[m
+[32m+[m[32m      boilerplate notice, with the fields enclosed by brackets "[]"[m
+[32m+[m[32m      replaced with your own identifying information. (Don't include[m
+[32m+[m[32m      the brackets!)  The text should be enclosed in the appropriate[m
+[32m+[m[32m      comment syntax for the file format. We also recommend that a[m
+[32m+[m[32m      file or class name and description of purpose be included on the[m
+[32m+[m[32m      same "printed page" as the copyright notice for easier[m
+[32m+[m[32m      identification within third-party archives.[m
+[32m+[m
+[32m+[m[32m   Copyright [yyyy] [name of copyright owner][m
+[32m+[m
+[32m+[m[32m   Licensed under the Apache License, Version 2.0 (the "License");[m
+[32m+[m[32m   you may not use this file except in compliance with the License.[m
+[32m+[m[32m   You may obtain a copy of the License at[m
+[32m+[m
+[32m+[m[32m       http://www.apache.org/licenses/LICENSE-2.0[m
+[32m+[m
+[32m+[m[32m   Unless required by applicable law or agreed to in writing, software[m
+[32m+[m[32m   distributed under the License is distributed on an "AS IS" BASIS,[m
+[32m+[m[32m   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.[m
+[32m+[m[32m   See the License for the specific language governing permissions and[m
+[32m+[m[32m   limitations under the License.[m
+[1mdiff --git a/README.md b/README.md[m
+[1mindex f768e33..059f0a1 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -1,3 +1,7 @@[m
+[32m+[m[32m<<<<<<< HEAD[m
+[32m+[m[32m# sail_dashboard[m
+[32m+[m[32mSail Web Dashboard[m
+[32m+[m[32m=======[m
+ # React + Vite[m
+ [m
+ This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.[m
+[36m@@ -6,3 +10,4 @@[m [mCurrently, two official plugins are available:[m
+ [m
+ - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh[m
+ - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh[m
+[32m+[m[32m>>>>>>> frontend[m
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex c3f6f0f..da19717 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -51,7 +51,7 @@[m
+         "eslint-plugin-react": "^7.34.2",[m
+         "eslint-plugin-react-hooks": "^4.6.2",[m
+         "eslint-plugin-react-refresh": "^0.4.7",[m
+[31m-        "vite": "^5.3.1"[m
+[32m+[m[32m        "vite": "^5.4.2"[m
+       }[m
+     },[m
+     "node_modules/@ampproject/remapping": {[m
+[36m@@ -1823,9 +1823,9 @@[m
+       }[m
+     },[m
+     "node_modules/@rollup/rollup-android-arm-eabi": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-Tya6xypR10giZV1XzxmH5wr25VcZSncG0pZIjfePT0OVBvqNEurzValetGNarVrGiq66EBVAFn15iYX4w6FKgQ==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-android-arm-eabi/-/rollup-android-arm-eabi-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-2thheikVEuU7ZxFXubPDOtspKn1x0yqaYQwvALVtEcvFhMifPADBrgRPyHV0TF3b+9BgvgjgagVyvA/UqPZHmg==",[m
+       "cpu": [[m
+         "arm"[m
+       ],[m
+[36m@@ -1836,9 +1836,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-android-arm64": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-avCea0RAP03lTsDhEyfy+hpfr85KfyTctMADqHVhLAF3MlIkq83CP8UfAHUssgXTYd+6er6PaAhx/QGv4L1EiA==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-android-arm64/-/rollup-android-arm64-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-t1lLYn4V9WgnIFHXy1d2Di/7gyzBWS8G5pQSXdZqfrdCGTwi1VasRMSS81DTYb+avDs/Zz4A6dzERki5oRYz1g==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[36m@@ -1849,9 +1849,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-darwin-arm64": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-IWfdwU7KDSm07Ty0PuA/W2JYoZ4iTj3TUQjkVsO/6U+4I1jN5lcR71ZEvRh52sDOERdnNhhHU57UITXz5jC1/w==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-AH/wNWSEEHvs6t4iJ3RANxW5ZCK3fUnmf0gyMxWCesY1AlUj8jY7GC+rQE4wd3gwmZ9XDOpL0kcFnCjtN7FXlA==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[36m@@ -1862,9 +1862,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-darwin-x64": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-n2LMsUz7Ynu7DoQrSQkBf8iNrjOGyPLrdSg802vk6XT3FtsgX6JbE8IHRvposskFm9SNxzkLYGSq9QdpLYpRNA==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-darwin-x64/-/rollup-darwin-x64-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-dO0BIz/+5ZdkLZrVgQrDdW7m2RkrLwYTh2YMFG9IpBtlC1x1NPNSXkfczhZieOlOLEqgXOFH3wYHB7PmBtf+Bg==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[36m@@ -1875,9 +1875,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-arm-gnueabihf": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-C/zbRYRXFjWvz9Z4haRxcTdnkPt1BtCkz+7RtBSuNmKzMzp3ZxdM28Mpccn6pt28/UWUCTXa+b0Mx1k3g6NOMA==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm-gnueabihf/-/rollup-linux-arm-gnueabihf-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-sWWgdQ1fq+XKrlda8PsMCfut8caFwZBmhYeoehJ05FdI0YZXk6ZyUjWLrIgbR/VgiGycrFKMMgp7eJ69HOF2pQ==",[m
+       "cpu": [[m
+         "arm"[m
+       ],[m
+[36m@@ -1888,9 +1888,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-arm-musleabihf": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm-musleabihf/-/rollup-linux-arm-musleabihf-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-l3m9ewPgjQSXrUMHg93vt0hYCGnrMOcUpTz6FLtbwljo2HluS4zTXFy2571YQbisTnfTKPZ01u/ukJdQTLGh9A==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm-musleabihf/-/rollup-linux-arm-musleabihf-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-9OIiSuj5EsYQlmwhmFRA0LRO0dRRjdCVZA3hnmZe1rEwRk11Jy3ECGGq3a7RrVEZ0/pCsYWx8jG3IvcrJ6RCew==",[m
+       "cpu": [[m
+         "arm"[m
+       ],[m
+[36m@@ -1901,9 +1901,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-arm64-gnu": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-rJ5D47d8WD7J+7STKdCUAgmQk49xuFrRi9pZkWoRD1UeSMakbcepWXPF8ycChBoAqs1pb2wzvbY6Q33WmN2ftw==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-gnu/-/rollup-linux-arm64-gnu-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-0kuAkRK4MeIUbzQYu63NrJmfoUVicajoRAL1bpwdYIYRcs57iyIV9NLcuyDyDXE2GiZCL4uhKSYAnyWpjZkWow==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[36m@@ -1914,9 +1914,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-arm64-musl": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-be6Yx37b24ZwxQ+wOQXXLZqpq4jTckJhtGlWGZs68TgdKXJgw54lUUoFYrg6Zs/kjzAQwEwYbp8JxZVzZLRepQ==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-arm64-musl/-/rollup-linux-arm64-musl-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-/6dYC9fZtfEY0vozpc5bx1RP4VrtEOhNQGb0HwvYNwXD1BBbwQ5cKIbUVVU7G2d5WRE90NfB922elN8ASXAJEA==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[36m@@ -1927,9 +1927,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-powerpc64le-gnu": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-powerpc64le-gnu/-/rollup-linux-powerpc64le-gnu-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-hNVMQK+qrA9Todu9+wqrXOHxFiD5YmdEi3paj6vP02Kx1hjd2LLYR2eaN7DsEshg09+9uzWi2W18MJDlG0cxJA==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-powerpc64le-gnu/-/rollup-linux-powerpc64le-gnu-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-ltUWy+sHeAh3YZ91NUsV4Xg3uBXAlscQe8ZOXRCVAKLsivGuJsrkawYPUEyCV3DYa9urgJugMLn8Z3Z/6CeyRQ==",[m
+       "cpu": [[m
+         "ppc64"[m
+       ],[m
+[36m@@ -1940,9 +1940,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-riscv64-gnu": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-ROCM7i+m1NfdrsmvwSzoxp9HFtmKGHEqu5NNDiZWQtXLA8S5HBCkVvKAxJ8U+CVctHwV2Gb5VUaK7UAkzhDjlg==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-riscv64-gnu/-/rollup-linux-riscv64-gnu-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-BggMndzI7Tlv4/abrgLwa/dxNEMn2gC61DCLrTzw8LkpSKel4o+O+gtjbnkevZ18SKkeN3ihRGPuBxjaetWzWg==",[m
+       "cpu": [[m
+         "riscv64"[m
+       ],[m
+[36m@@ -1953,9 +1953,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-s390x-gnu": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-s390x-gnu/-/rollup-linux-s390x-gnu-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-0UyyRHyDN42QL+NbqevXIIUnKA47A+45WyasO+y2bGJ1mhQrfrtXUpTxCOrfxCR4esV3/RLYyucGVPiUsO8xjg==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-s390x-gnu/-/rollup-linux-s390x-gnu-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-z/9rtlGd/OMv+gb1mNSjElasMf9yXusAxnRDrBaYB+eS1shFm6/4/xDH1SAISO5729fFKUkJ88TkGPRUh8WSAA==",[m
+       "cpu": [[m
+         "s390x"[m
+       ],[m
+[36m@@ -1966,9 +1966,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-x64-gnu": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-xuglR2rBVHA5UsI8h8UbX4VJ470PtGCf5Vpswh7p2ukaqBGFTnsfzxUBetoWBWymHMxbIG0Cmx7Y9qDZzr648w==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-kXQVcWqDcDKw0S2E0TmhlTLlUgAmMVqPrJZR+KpH/1ZaZhLSl23GZpQVmawBQGVhyP5WXIsIQ/zqbDBBYmxm5w==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[36m@@ -1979,9 +1979,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-linux-x64-musl": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-LKaqQL9osY/ir2geuLVvRRs+utWUNilzdE90TpyoX0eNqPzWjRm14oMEE+YLve4k/NAqCdPkGYDaDF5Sw+xBfg==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-CbFv/WMQsSdl+bpX6rVbzR4kAjSSBuDgCqb1l4J68UYsQNalz5wOqLGYj4ZI0thGpyX5kc+LLZ9CL+kpqDovZA==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[36m@@ -1992,9 +1992,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-win32-arm64-msvc": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-7J6TkZQFGo9qBKH0pk2cEVSRhJbL6MtfWxth7Y5YmZs57Pi+4x6c2dStAUvaQkHQLnEQv1jzBUW43GvZW8OFqA==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-arm64-msvc/-/rollup-win32-arm64-msvc-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-3Q3brDgA86gHXWHklrwdREKIrIbxC0ZgU8lwpj0eEKGBQH+31uPqr0P2v11pn0tSIxHvcdOWxa4j+YvLNx1i6g==",[m
+       "cpu": [[m
+         "arm64"[m
+       ],[m
+[36m@@ -2005,9 +2005,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-win32-ia32-msvc": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-Txjh+IxBPbkUB9+SXZMpv+b/vnTEtFyfWZgJ6iyCmt2tdx0OF5WhFowLmnh8ENGNpfUlUZkdI//4IEmhwPieNg==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-ia32-msvc/-/rollup-win32-ia32-msvc-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-tNg+jJcKR3Uwe4L0/wY3Ro0H+u3nrb04+tcq1GSYzBEmKLeOQF2emk1whxlzNqb6MMrQ2JOcQEpuuiPLyRcSIw==",[m
+       "cpu": [[m
+         "ia32"[m
+       ],[m
+[36m@@ -2018,9 +2018,9 @@[m
+       ][m
+     },[m
+     "node_modules/@rollup/rollup-win32-x64-msvc": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-UOo5FdvOL0+eIVTgS4tIdbW+TtnBLWg1YBCcU2KWM7nuNwRz9bksDX1bekJJCpu25N1DVWaCwnT39dVQxzqS8g==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-xGiIH95H1zU7naUyTKEyOA/I0aexNMUdO9qRv0bLKN3qu25bBdrxZHqA3PTJ24YNN/GdMzG4xkDcd/GvjuhfLg==",[m
+       "cpu": [[m
+         "x64"[m
+       ],[m
+[36m@@ -5145,9 +5145,9 @@[m
+       }[m
+     },[m
+     "node_modules/postcss": {[m
+[31m-      "version": "8.4.39",[m
+[31m-      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.4.39.tgz",[m
+[31m-      "integrity": "sha512-0vzE+lAiG7hZl1/9I8yzKLx3aR9Xbof3fBHKunvMfOCYAtMhrsnccJY2iTURb9EZd5+pLuiNV9/c/GZJOHsgIw==",[m
+[32m+[m[32m      "version": "8.4.41",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.4.41.tgz",[m
+[32m+[m[32m      "integrity": "sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==",[m
+       "dev": true,[m
+       "funding": [[m
+         {[m
+[36m@@ -5563,9 +5563,9 @@[m
+       "integrity": "sha512-IXgzBWvWQwE6PrDI05OvmXUIruQTcoMDzRsOd5CDvHCVLcLHMTSYvOK5Cm46kWqlV3yAbuSpBZdJ5oP5OUoStg=="[m
+     },[m
+     "node_modules/rollup": {[m
+[31m-      "version": "4.18.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/rollup/-/rollup-4.18.0.tgz",[m
+[31m-      "integrity": "sha512-QmJz14PX3rzbJCN1SG4Xe/bAAX2a6NpCP8ab2vfu2GiUr8AQcr2nCV/oEO3yneFarB67zk8ShlIyWb2LGTb3Sg==",[m
+[32m+[m[32m      "version": "4.21.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/rollup/-/rollup-4.21.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-ZnYyKvscThhgd3M5+Qt3pmhO4jIRR5RGzaSovB6Q7rGNrK5cUncrtLmcTTJVSdcKXyZjW8X8MB0JMSuH9bcAJg==",[m
+       "dev": true,[m
+       "dependencies": {[m
+         "@types/estree": "1.0.5"[m
+[36m@@ -5578,22 +5578,22 @@[m
+         "npm": ">=8.0.0"[m
+       },[m
+       "optionalDependencies": {[m
+[31m-        "@rollup/rollup-android-arm-eabi": "4.18.0",[m
+[31m-        "@rollup/rollup-android-arm64": "4.18.0",[m
+[31m-        "@rollup/rollup-darwin-arm64": "4.18.0",[m
+[31m-        "@rollup/rollup-darwin-x64": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-arm-gnueabihf": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-arm-musleabihf": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-arm64-gnu": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-arm64-musl": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-powerpc64le-gnu": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-riscv64-gnu": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-s390x-gnu": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-x64-gnu": "4.18.0",[m
+[31m-        "@rollup/rollup-linux-x64-musl": "4.18.0",[m
+[31m-        "@rollup/rollup-win32-arm64-msvc": "4.18.0",[m
+[31m-        "@rollup/rollup-win32-ia32-msvc": "4.18.0",[m
+[31m-        "@rollup/rollup-win32-x64-msvc": "4.18.0",[m
+[32m+[m[32m        "@rollup/rollup-android-arm-eabi": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-android-arm64": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-darwin-arm64": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-darwin-x64": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-arm-gnueabihf": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-arm-musleabihf": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-arm64-gnu": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-arm64-musl": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-powerpc64le-gnu": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-riscv64-gnu": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-s390x-gnu": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-x64-gnu": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-linux-x64-musl": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-win32-arm64-msvc": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-win32-ia32-msvc": "4.21.1",[m
+[32m+[m[32m        "@rollup/rollup-win32-x64-msvc": "4.21.1",[m
+         "fsevents": "~2.3.2"[m
+       }[m
+     },[m
+[36m@@ -6122,14 +6122,14 @@[m
+       }[m
+     },[m
+     "node_modules/vite": {[m
+[31m-      "version": "5.3.2",[m
+[31m-      "resolved": "https://registry.npmjs.org/vite/-/vite-5.3.2.tgz",[m
+[31m-      "integrity": "sha512-6lA7OBHBlXUxiJxbO5aAY2fsHHzDr1q7DvXYnyZycRs2Dz+dXBWuhpWHvmljTRTpQC2uvGmUFFkSHF2vGo90MA==",[m
+[32m+[m[32m      "version": "5.4.2",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/vite/-/vite-5.4.2.tgz",[m
+[32m+[m[32m      "integrity": "sha512-dDrQTRHp5C1fTFzcSaMxjk6vdpKvT+2/mIdE07Gw2ykehT49O0z/VHS3zZ8iV/Gh8BJJKHWOe5RjaNrW5xf/GA==",[m
+       "dev": true,[m
+       "dependencies": {[m
+         "esbuild": "^0.21.3",[m
+[31m-        "postcss": "^8.4.38",[m
+[31m-        "rollup": "^4.13.0"[m
+[32m+[m[32m        "postcss": "^8.4.41",[m
+[32m+[m[32m        "rollup": "^4.20.0"[m
+       },[m
+       "bin": {[m
+         "vite": "bin/vite.js"[m
+[36m@@ -6148,6 +6148,7 @@[m
+         "less": "*",[m
+         "lightningcss": "^1.21.0",[m
+         "sass": "*",[m
+[32m+[m[32m        "sass-embedded": "*",[m
+         "stylus": "*",[m
+         "sugarss": "*",[m
+         "terser": "^5.4.0"[m
+[36m@@ -6165,6 +6166,9 @@[m
+         "sass": {[m
+           "optional": true[m
+         },[m
+[32m+[m[32m        "sass-embedded": {[m
+[32m+[m[32m          "optional": true[m
+[32m+[m[32m        },[m
+         "stylus": {[m
+           "optional": true[m
+         },[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex 8134d5a..209be77 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -53,6 +53,6 @@[m
+     "eslint-plugin-react": "^7.34.2",[m
+     "eslint-plugin-react-hooks": "^4.6.2",[m
+     "eslint-plugin-react-refresh": "^0.4.7",[m
+[31m-    "vite": "^5.3.1"[m
+[32m+[m[32m    "vite": "^5.4.2"[m
+   }[m
+ }[m
+[1mdiff --git a/src/App.jsx b/src/App.jsx[m
+[1mindex 3955a61..de3e1e4 100644[m
+[1m--- a/src/App.jsx[m
+[1m+++ b/src/App.jsx[m
+[36m@@ -69,8 +69,8 @@[m [mfunction App() {[m
+           <CssBaseline />[m
+           <Routes>[m
+             <Route[m
+[31m-              element={token ? <Navigate to="/" /> : <Login />}[m
+               path="/login"[m
+[32m+[m[32m              element={token ? <Navigate to="/" /> : <Login />}[m
+             />[m
+             <Route[m
+               path="/*"[m
+[1mdiff --git a/src/network/api.js b/src/network/api.js[m
+[1mindex 0685261..fcf8332 100644[m
+[1m--- a/src/network/api.js[m
+[1m+++ b/src/network/api.js[m
+[36m@@ -1,25 +1,16 @@[m
+ import axios from "axios";[m
+ [m
+[31m-const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL[m
+[32m+[m[32m//const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL[m
+ [m
+ // Function to handle login API call[m
+ [m
+ export const login = async (username, password) => {[m
+   try {[m
+     const response = await api[m
+[31m-      .post([m
+[31m-        `https://dev.sailgloble.com/admin/auth/login`,[m
+[31m-        {[m
+[31m-          user_name: username,[m
+[31m-          password: password,[m
+[31m-        },[m
+[31m-        {[m
+[31m-          headers: {[m
+[31m-            "Access-Control-Allow-Origin":[m
+[31m-              "https://sail-dashboard-git-main-omaar2000s-projects.vercel.app",[m
+[31m-          },[m
+[31m-        }[m
+[31m-      )[m
+[32m+[m[32m      .post(`https://dev.sailgloble.com/admin/auth/login`, {[m
+[32m+[m[32m        user_name: username,[m
+[32m+[m[32m        password: password,[m
+[32m+[m[32m      })[m
+       .then((response) => response.data);[m
+     return response; //Assuming response data contains the token[m
+   } catch (error) {[m
+[36m@@ -41,7 +32,14 @@[m [mexport const login = async (username, password) => {[m
+ // };[m
+ [m
+ // ---------------------- Interceptor ---------------------[m
+[31m-export const api = axios.create();[m
+[32m+[m[32mexport const api = axios.create([m
+[32m+[m[32m{[m
+[32m+[m[32m  // headers : {[m
+[32m+[m[32m  //   "Access-Control-Allow-Origin" : "https://sail-dashboard-evjl.vercel.app"[m
+[32m+[m[32m  // },[m
+[32m+[m[32m  baseURL : "https://dev.sailgloble.com"[m
+[32m+[m[32m}[m
+[32m+[m[32m);[m
+ [m
+ api.interceptors.request.use([m
+   (config) => {[m
+[1mdiff --git a/src/network/citiesServices.js b/src/network/citiesServices.js[m
+[1mindex b42485d..a14aac3 100644[m
+[1m--- a/src/network/citiesServices.js[m
+[1m+++ b/src/network/citiesServices.js[m
+[36m@@ -5,11 +5,14 @@[m [mimport i18n from "../i18n";[m
+ [m
+ export const getAllCities = async (token, logout) => {[m
+   try {[m
+[31m-    const res = await api.get("api/admin/app_settings/cities", {[m
+[31m-      headers: {[m
+[31m-        Authorization: `Bearer ${token}`, // Add the token here[m
+[31m-      },[m
+[31m-    });[m
+[32m+[m[32m    const res = await api.get([m
+[32m+[m[32m      "https://dev.sailgloble.com/admin/app_settings/cities",
