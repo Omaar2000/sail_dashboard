@@ -4,11 +4,14 @@ import i18n from "../i18n";
 
 export const getAllCountries = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/app_settings/countries", {
-      headers: {
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.get(
+      "https://dev.sailgloble.com/admin/app_settings/countries",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
 
@@ -23,11 +26,15 @@ export const getAllCountries = async (token, logout) => {
 
 export const addCountry = async (country, token) => {
   try {
-    const res = await api.post(`api/admin/app_settings/countries`, country, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.post(
+      `https://dev.sailgloble.com/admin/app_settings/countries`,
+      country,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(res);
     toast.success(i18n.t("Country Added Successfully!"));
     return res.data;
@@ -40,7 +47,7 @@ export const addCountry = async (country, token) => {
 export const editCountry = async (id, country, token) => {
   try {
     const res = await api.patch(
-      `api/admin/app_settings/countries/${id}`,
+      `https://dev.sailgloble.com/admin/app_settings/countries/${id}`,
       country,
       {
         headers: {

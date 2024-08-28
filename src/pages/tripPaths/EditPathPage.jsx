@@ -34,7 +34,12 @@ const EditPathPage = () => {
     try {
       setIsLoading(true);
 
-      await updateItem(token, logout, `api/admin/trip_path/${row.id}`, path);
+      await updateItem(
+        token,
+        logout,
+        `https://dev.sailgloble.com/admin/trip_path/${row.id}`,
+        path
+      );
       setTimeout(() => {
         navigate("/boatroutes");
       }, 500);

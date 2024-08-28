@@ -19,7 +19,7 @@ const Countries = () => {
         const data = await getAll(
           token,
           logout,
-          `api/admin/app_settings/countries?limit=${pageSize}&page=${page}`
+          `https://dev.sailgloble.com/admin/app_settings/countries?limit=${pageSize}&page=${page}`
         );
 
         setRows(data.data);
@@ -40,7 +40,7 @@ const Countries = () => {
       <TableComponent
         to="/addcountry"
         rows={rows}
-        // Endpoint={`api/admin/providers/delete/`}
+        // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
         columns={countriesColumns}
         loading={loading}
         add={"ADD NEW Country"}

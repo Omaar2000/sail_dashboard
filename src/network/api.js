@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const API_URL = "https://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL
+//const API_URL = "http://92.205.230.83:8080/admin/auth"; // Replace with your backend API URL
 
 // Function to handle login API call
 
 export const login = async (username, password) => {
   try {
     const response = await api
-      .post( `api/admin/auth/login`, {
+      .post(`https://dev.sailgloble.com/admin/auth/login`, {
         user_name: username,
         password: password,
       })
@@ -32,12 +32,14 @@ export const login = async (username, password) => {
 // };
 
 // ---------------------- Interceptor ---------------------
-export const api = axios.create({
-  headers : {
-    "Access-Control-Allow-Origin" : "*"
-  },
-  baseURL: "https://92.205.230.83:8080"
-});
+export const api = axios.create(
+{
+  // headers : {
+  //   "Access-Control-Allow-Origin" : "*"
+  // },
+  baseURL : "https://dev.sailgloble.com"
+}
+);
 
 api.interceptors.request.use(
   (config) => {

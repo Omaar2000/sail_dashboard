@@ -7,7 +7,11 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
+<<<<<<< HEAD
         target: "https://92.205.230.83:8080",
+=======
+        target: "https://dev.sailgloble.com",
+>>>>>>> frontend
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },

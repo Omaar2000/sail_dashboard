@@ -63,7 +63,7 @@ const AddCodePage = () => {
       await addItem(
         token,
         logout,
-        `api/admin/app_settings/country_code`,
+        `https://dev.sailgloble.com/admin/app_settings/country_code`,
         countryCode
       );
 

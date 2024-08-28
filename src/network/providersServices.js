@@ -5,12 +5,15 @@ import i18n from "../i18n";
 
 export const getAllProviders = async (token, logout) => {
   try {
-    const res = await api.get("api/admin/clients/providers", {
-      headers: {
-        "x-custom-lang": "ar",
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.get(
+      "https://dev.sailgloble.com/admin/clients/providers",
+      {
+        headers: {
+          "x-custom-lang": "ar",
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
 
@@ -25,12 +28,15 @@ export const getAllProviders = async (token, logout) => {
 
 export const deleteOneProvider = async (token, logout, id) => {
   try {
-    const res = await api.delete(`api/admin/providers/delete/${id}`, {
-      headers: {
-        "x-custom-lang": "ar",
-        Authorization: `Bearer ${token}`, // Add the token here
-      },
-    });
+    const res = await api.delete(
+      `https://dev.sailgloble.com/admin/providers/delete/${id}`,
+      {
+        headers: {
+          "x-custom-lang": "ar",
+          Authorization: `Bearer ${token}`, // Add the token here
+        },
+      }
+    );
 
     console.log(res);
 
@@ -45,7 +51,7 @@ export const deleteOneProvider = async (token, logout, id) => {
 export const banProvider = async (token, logout, id) => {
   try {
     const res = await api.post(
-      `api/admin/providers/ban/${id}`,
+      `https://dev.sailgloble.com/admin/providers/ban/${id}`,
       {},
       {
         headers: {
@@ -69,7 +75,7 @@ export const banProvider = async (token, logout, id) => {
 export const unbanProvider = async (token, logout, id) => {
   try {
     const res = await api.post(
-      `api/admin/providers/unban/${id}`,
+      `https://dev.sailgloble.com/admin/providers/unban/${id}`,
       {},
       {
         headers: {
@@ -93,7 +99,7 @@ export const unbanProvider = async (token, logout, id) => {
 export const verifyProvider = async (token, logout, id) => {
   try {
     const res = await api.post(
-      `api/admin/providers/verify/${id}`,
+      `https://dev.sailgloble.com/admin/providers/verify/${id}`,
       {},
       {
         headers: {
