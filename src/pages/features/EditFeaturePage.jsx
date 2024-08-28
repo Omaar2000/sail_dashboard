@@ -38,8 +38,8 @@ const EditFeaturePage = () => {
     e.preventDefault();
     console.log(image);
 
-    const category = {
-      imageUrl: image,
+    const feature = {
+      image: image,
       nameEn: row.nameEn,
       nameAr: row.nameAr,
     };
@@ -50,7 +50,7 @@ const EditFeaturePage = () => {
         token,
         logout,
         `https://dev.sailgloble.com/admin/app_settings/features/${row.id}`,
-        category
+        feature
       );
       setTimeout(() => {
         navigate("/features");
