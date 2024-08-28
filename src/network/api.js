@@ -34,9 +34,9 @@ export const login = async (username, password) => {
 // ---------------------- Interceptor ---------------------
 export const api = axios.create(
 {
-  headers : {
-    "Access-Control-Allow-Origin" : "https://sail-dashboard-evjl.vercel.app"
-  },
+  // headers : {
+  //   "Access-Control-Allow-Origin" : "https://sail-dashboard-evjl.vercel.app"
+  // },
   baseURL : "https://dev.sailgloble.com"
 }
 );
