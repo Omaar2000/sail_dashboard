@@ -228,7 +228,7 @@ export const featuresColumns = [
     headerName: i18n.t("Image"),
     flex: 1,
     required: true,
-    renderCell: ({ row }) => <ImageModal imageUrl={row.image_url} />,
+    renderCell: ({ row }) => <ImageModal imageUrl={row.image} />,
   },
   {
     field: "edit",
