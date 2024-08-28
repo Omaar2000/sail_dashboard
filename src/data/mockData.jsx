@@ -224,11 +224,11 @@ export const featuresColumns = [
     flex: 1,
   },
   {
-    field: "image",
+    field: "imageUrl",
     headerName: i18n.t("Image"),
     flex: 1,
     required: true,
-    renderCell: ({ row }) => <ImageModal imageUrl={row.image} />,
+    renderCell: ({ row }) => <ImageModal imageUrl={row.imageUrl} />,
   },
   {
     field: "edit",
