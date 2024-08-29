@@ -449,7 +449,7 @@ export const boatRequestsColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Control
-        endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${row.id}`}
+        endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
         row={row}
       />
     ),
