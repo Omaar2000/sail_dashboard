@@ -228,7 +228,10 @@ const SidebarComponent = ({
             transition: "all 0.1s ease-out",
             outline: "none",
             backgroundColor:
-              Selected === "categories" || Selected === "boatroutes"
+              Selected === "categories" ||
+              Selected === "boatroutes" ||
+              Selected === "features" ||
+              Selected === "boatsrequests"
                 ? colors.blueAccent[600]
                 : boatHover
                 ? colors.primary[800]

@@ -61,6 +61,7 @@ const ApproveModal = ({
       });
       setTimeout(() => {
         setVerifyIsOpen(false);
+        window.location.reload();
       }, 500);
     } catch (error) {
       console.log(error);
