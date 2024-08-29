@@ -26,29 +26,30 @@ import { toast, ToastContainer } from "react-toastify";
 import { editCountry } from "../network/countriesServices";
 import { countries } from "../data/mockData";
 import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
+import { addItem } from "../network/network";
 
+// const [title_en, setTitleEN] = useState(null);
+// const [messageEN, setMessageEN] = useState(null);
 const SendNotifications = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [title_ar, setTitleAR] = useState(null);
-  const [title_en, setTitleEN] = useState(null);
-  const [messageAR, setMessageAR] = useState(null);
-  const [messageEN, setMessageEN] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [message, setMessage] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(false);
 
   const { token, pinned, logout } = useUserStore();
-  const [selected, setSelected] = useState("Pending");
+  // const [selected, setSelected] = useState("Pending");
   const [IsOpen, setIsOpen] = useState(false);
 
   const handleFormSubmit = async (e) => {
-    // e.preventDefault();
-    // const country = {
-    //   title_ar,
-    //   title_en,
-    // };
+    e.preventDefault();
+    const notification = {
+      title,
+      message,
+    };
     // try {
     //   setIsLoading(true);
     //   await editCountry(row.id, country, token);
@@ -60,61 +61,40 @@ const SendNotifications = () => {
     // } finally {
     //   setIsLoading(false);
     // }
+    e.preventDefault();
+    try {
+      setIsLoading(true);
+      await addItem(
+        token,
+        logout,
+        `https://dev.sailgloble.com/admin/notifications/send`,
+        notification
+      );
+      setTimeout(() => {
+        setIsOpen(false);
+        navigate("/notifications");
+      }, 500);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <Box>
       <h1 style={{ margin: "2rem" }}>{t("SendNotifications")}</h1>
       <form onSubmit={handleFormSubmit}>
-        <Box display="flex" justifyContent="center" alignItems="center">
-          {/* <ButtonGroup
-            variant="contained"
-            aria-label="Basic button group"
-            sx={{ direction: "ltr" }}
-          >
-            <Button
-              onClick={() => setSelected("Pending")}
-              style={{
-                backgroundColor: selected === "Pending" ? "green" : "black",
-              }}
-            >
-              {t("Pending")}
-            </Button>
-            <Button
-              onClick={() => setSelected("Confirmed")}
-              style={{
-                backgroundColor: selected === "Confirmed" ? "green" : "black",
-              }}
-            >
-              {t("Confirmed")}
-            </Button>
-            <Button
-              onClick={() => setSelected("Finished")}
-              style={{
-                backgroundColor: selected === "Finished" ? "green" : "black",
-              }}
-            >
-              {t("Finished")}
-            </Button>
-            <Button
-              onClick={() => setSelected("Cancelled")}
-              style={{
-                backgroundColor: selected === "Cancelled" ? "green" : "black",
-              }}
-            >
-              {t("Cancelled")}
-            </Button>
-          </ButtonGroup> */}
-        </Box>
+        <Box display="flex" justifyContent="center" alignItems="center"></Box>
         <Box
           display="grid"
           style={{ margin: "2rem" }}
           gap={"1rem"}
           gridTemplateColumns="repeat(12,1fr)"
         >
-          <Box gridColumn="span 6">
+          <Box gridColumn="span 12">
             <TextField
-              label={t("Title (English)")}
+              label={t("Title ")}
               variant="outlined"
               onChange={(e) => {
                 setTitleEN(e.target.value);
@@ -151,14 +131,14 @@ const SendNotifications = () => {
             />
           </Box> */}
 
-          <Box gridColumn="span 6">
+          <Box gridColumn="span 12">
             <TextField
               size="huge"
               label={t("Message (English)")}
               defaultValue={"Marsol new"}
               variant="outlined"
               onChange={(e) => {
-                setMessageEN(e.target.value);
+                setMessage(e.target.value);
               }}
               fullWidth
               multiline
@@ -182,10 +162,10 @@ const SendNotifications = () => {
               }}
             />
           </Box>
-          <Box gridColumn="span 6">
-            <TextField
+          <Box gridColumn="span 12">
+            {/* <TextField
               size="huge"
-              label={t("Message (Arabic)")}
+              label={t("Message")}
               defaultValue={"Marsol new"}
               variant="outlined"
               onChange={(e) => {
@@ -211,7 +191,7 @@ const SendNotifications = () => {
                     ? colors.primary[500]
                     : colors.grey[800],
               }}
-            />
+            /> */}
           </Box>
           <Box gridColumn="span 12">
             <FormControl
@@ -290,7 +270,7 @@ const SendNotifications = () => {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle sx={{ minWidth: "15rem" }} id="alert-dialog-title">
-            {t("Assign to Random admins ??")}
+            {t("Send Notification ??")}
           </DialogTitle>
           <DialogContent></DialogContent>
           <DialogActions>
@@ -309,7 +289,7 @@ const SendNotifications = () => {
                 ) : null
               }
             >
-              {isLoading ? t("Loading") : t("Save")}
+              {isLoading ? t("Loading") : t("Send")}
             </Button>
           </DialogActions>
         </Dialog>
@@ -320,3 +300,44 @@ const SendNotifications = () => {
 };
 
 export default SendNotifications;
+
+{
+  /* <ButtonGroup
+            variant="contained"
+            aria-label="Basic button group"
+            sx={{ direction: "ltr" }}
+          >
+            <Button
+              onClick={() => setSelected("Pending")}
+              style={{
+                backgroundColor: selected === "Pending" ? "green" : "black",
+              }}
+            >
+              {t("Pending")}
+            </Button>
+            <Button
+              onClick={() => setSelected("Confirmed")}
+              style={{
+                backgroundColor: selected === "Confirmed" ? "green" : "black",
+              }}
+            >
+              {t("Confirmed")}
+            </Button>
+            <Button
+              onClick={() => setSelected("Finished")}
+              style={{
+                backgroundColor: selected === "Finished" ? "green" : "black",
+              }}
+            >
+              {t("Finished")}
+            </Button>
+            <Button
+              onClick={() => setSelected("Cancelled")}
+              style={{
+                backgroundColor: selected === "Cancelled" ? "green" : "black",
+              }}
+            >
+              {t("Cancelled")}
+            </Button>
+          </ButtonGroup> */
+}

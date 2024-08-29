@@ -6,6 +6,7 @@ import {
   DarkModeOutlined,
   Language,
   LightModeOutlined,
+  Logout,
   // NotificationAddOutlined,
   PersonOutlineOutlined,
   SettingsOutlined,
@@ -41,11 +42,11 @@ const Topbar = () => {
         <IconButton onClick={changeLanguage}>
           <Language />
         </IconButton>
-        <IconButton>
+        {/* <IconButton>
           <SettingsOutlined />
-        </IconButton>
+        </IconButton> */}
         <IconButton onClick={logout}>
-          <PersonOutlineOutlined />
+          <Logout />
         </IconButton>
       </Box>
     </Box>
