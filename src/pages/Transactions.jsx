@@ -17,27 +17,27 @@ const Transactions = () => {
   const [loading, setLoading] = useState(false);
   const { pageSize, page, setTotalPages } = usePaginationStore();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setLoading(true);
 
-        const data = await getAll(
-          token,
-          logout,
-          `https://dev.sailgloble.com/admin/transactions?limit=${pageSize}&page=${page}`
-        );
-        setRows(data.data);
-        setTotalPages(data.page_count);
-        console.log(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching transactions:", error);
-      }
-    };
+  //       const data = await getAll(
+  //         token,
+  //         logout,
+  //         `https://dev.sailgloble.com/admin/transactions?limit=${pageSize}&page=${page}`
+  //       );
+  //       setRows(data.data);
+  //       setTotalPages(data.page_count);
+  //       console.log(data);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching transactions:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [pageSize, page]);
+  //   fetchData();
+  // }, [pageSize, page]);
 
   return (
     <>
