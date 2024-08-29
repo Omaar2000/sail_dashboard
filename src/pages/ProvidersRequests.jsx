@@ -30,7 +30,7 @@ const ProvidersRequests = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/provider-requests`
+          `https://dev.sailgloble.com/admin/provider-requests/account`
         );
         setRows(data.data);
         setTotalPages(data.pageCount);
