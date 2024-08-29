@@ -9,10 +9,12 @@ const Categories = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
-  const { pageSize, page, setTotalPages, keyword } = usePaginationStore();
+  const { pageSize, page, setTotalPages, keyword, setPage, setPageSize } =
+    usePaginationStore();
 
   useEffect(() => {
-    setTotalPages(0);
+    setPage(1);
+    setPageSize(10);
   }, []);
   console.log("pageSize", pageSize);
 
