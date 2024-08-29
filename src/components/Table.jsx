@@ -337,7 +337,7 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
       <ApproveModal
         verifyIsOpen={verifyIsOpen}
         setVerifyIsOpen={setVerifyIsOpen}
-        selectedItems={selectedIDs}
+        selectedItems={selectedItems}
         Endpoint={Endpoint}
       />
       <AdminModal

@@ -57,7 +57,7 @@ const ApproveModal = ({
     try {
       setLoading(true);
       selectedItems.forEach(async (element) => {
-        await addItem(token, logout, `${Endpoint}${element}`, {});
+        await addItem(token, logout, `${Endpoint}${element.requestTypeId}`, {});
       });
       setTimeout(() => {
         setVerifyIsOpen(false);
