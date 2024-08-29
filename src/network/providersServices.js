@@ -96,10 +96,10 @@ export const unbanProvider = async (token, logout, id) => {
     throw error; // Optionally re-throw the error if you want to handle it elsewhere
   }
 };
-export const verifyProvider = async (token, logout, id) => {
+export const verify = async (token, logout, endpoint) => {
   try {
     const res = await api.post(
-      `https://dev.sailgloble.com/admin/providers/verify/${id}`,
+      endpoint,
       {},
       {
         headers: {

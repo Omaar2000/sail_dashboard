@@ -6,10 +6,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { verifyProvider } from "../network/providersServices";
+import { verify } from "../network/providersServices";
 import useUserStore from "../stores/useUserStore";
 
-const Control = ({ row }) => {
+const Control = ({ endpoint }) => {
   const { t } = useTranslation();
   const { token, logout } = useUserStore();
   const [isVerified, setIsVerified] = useState(row.is_verified);
@@ -17,7 +17,7 @@ const Control = ({ row }) => {
   const handleClick = async () => {
     try {
       setLoading(true);
-      await verifyProvider(token, logout, row.id);
+      await verify(token, logout, endpoint);
       setIsVerified(!isVerified);
     } catch (error) {
       return;

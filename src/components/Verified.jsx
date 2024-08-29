@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { verifyProvider } from "../network/providersServices";
+import { verify } from "../network/providersServices";
 import useUserStore from "../stores/useUserStore";
 
 const Verified = ({ row }) => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
 import {
+  boatRequestsColumns,
   coversColumns,
   payoutsColumns,
   payoutsData,
@@ -56,7 +57,7 @@ const BoatsRequests = () => {
       <TableComponent
         to={"/admin"}
         rows={rows}
-        columns={providerRequestsColumns}
+        columns={boatRequestsColumns}
         loading={loading}
         Endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/`}
       />

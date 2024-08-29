@@ -427,6 +427,38 @@ export const roviderRequestsColumns = [
     renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
   },
 ];
+export const boatRequestsColumns = [
+  { field: "providerId", headerName: i18n.t("ID"), flex: 1 },
+  {
+    field: "assignedTo",
+    headerName: i18n.t("Assigned To"),
+    flex: 1,
+    // renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+  },
+  {
+    field: "assign",
+    headerName: i18n.t("Assign"),
+    flex: 1,
+    renderCell: ({ row }) => <AdminDropdown />,
+  },
+  {
+    field: "status",
+    headerName: i18n.t("Verify"),
+    flex: 1,
+    renderCell: ({ row }) => (
+      <Control
+        endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${row.id}`}
+      />
+    ),
+  },
+  // {
+  //   field: "details",
+  //   headerName: i18n.t("Details"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+  // },
+];
+
 export const providerRequestsColumns = [
   { field: "providerId", headerName: i18n.t("ID"), flex: 1 },
   {
