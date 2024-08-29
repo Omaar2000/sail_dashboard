@@ -81,7 +81,7 @@ const ApproveModal = ({
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle sx={{ minWidth: "15rem" }} id="alert-dialog-title">
-          {t("Approve admins ??")}
+          {t("Approve Requests ??")}
         </DialogTitle>
         <DialogActions>
           <Button onClick={() => setVerifyIsOpen(false)} color="info">
