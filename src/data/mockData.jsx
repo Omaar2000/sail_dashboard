@@ -14,7 +14,7 @@ import EditModal from "../components/editModal";
 import AdminDropdown from "../components/adminDropdown";
 import DetailsButton from "../components/Details";
 import Verified from "../components/Verified";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 // Ban and Unban for users and providers
 // verify user and provider
@@ -434,9 +434,11 @@ export const boatRequestsColumns = [
     headerName: i18n.t("Approved By"),
     flex: 1,
     renderCell: ({ row }) => (
-      <h3 style={{ marginBottom: "4px" }}>
-        {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
-      </h3>
+      <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
+        <h3 style={{ marginBottom: "4px" }}>
+          {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
+        </h3>
+      </Box>
     ),
   },
   // {
