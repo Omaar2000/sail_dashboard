@@ -49,6 +49,7 @@ import EditFeaturePage from "./pages/features/EditFeaturePage";
 import SendNotifications from "./pages/SendNotifications";
 import BoatssRequests from "./pages/BoatsRequests";
 import BoatsRequests from "./pages/BoatsRequests";
+import UsersRequests from "./pages/UsersPayouts";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -98,7 +99,7 @@ function App() {
               <Route path="orders" element={<Orders />} />
               <Route path="complaints" element={<Complaints />} />
               <Route path="transactions" element={<Transactions />} />
-              <Route path="payouts" element={<Payouts />} />
+              <Route path="payouts" element={<UsersRequests />} />
               <Route path="payoutrequests" element={<PayoutsRequests />} />
               <Route path="providersrequests" element={<ProvidersRequests />} />
               <Route path="covers" element={<Covers />} />

@@ -17,7 +17,7 @@ import { getAll } from "../network/network";
 //   return res.data;
 // };
 
-const PayoutsRequests = () => {
+const UsersRequests = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
@@ -65,4 +65,4 @@ const PayoutsRequests = () => {
   );
 };
 
-export default PayoutsRequests;
+export default UsersRequests;
