@@ -25,7 +25,7 @@ const Notifications = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/transactions?limit=${pageSize}&page=${page}`
+          `https://dev.sailgloble.com/admin/notifications?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.page_count);
@@ -42,10 +42,11 @@ const Notifications = () => {
   return (
     <>
       <TableComponent
-        to=""
+        to="/send"
         rows={rows}
         columns={transactionsColumns}
         loading={loading}
+        add={"Send a Notification"}
       />
     </>
   );
