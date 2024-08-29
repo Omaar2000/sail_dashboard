@@ -37,7 +37,7 @@ const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
     } finally {
       setLoading(false);
     }
-    setIsBanned(!isBanned);
+    // setIsBanned(!isBanned);
   };
 
   return (

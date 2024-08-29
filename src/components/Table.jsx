@@ -315,14 +315,8 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          {"Do you really want to confirm the deletion process?"}
         </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
         <DialogActions>
           <Button onClick={() => setDialogIsOpen(false)} color="info">
             Cancel

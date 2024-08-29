@@ -83,7 +83,7 @@ const SendNotifications = () => {
 
   return (
     <Box>
-      <h1 style={{ margin: "2rem" }}>{t("SendNotifications")}</h1>
+      <h1 style={{ margin: "2rem" }}>{t("Send Notifications")}</h1>
       <form onSubmit={handleFormSubmit}>
         <Box display="flex" justifyContent="center" alignItems="center"></Box>
         <Box
@@ -97,7 +97,7 @@ const SendNotifications = () => {
               label={t("Title ")}
               variant="outlined"
               onChange={(e) => {
-                setTitleEN(e.target.value);
+                setTitle(e.target.value);
               }}
               fullWidth
               required
