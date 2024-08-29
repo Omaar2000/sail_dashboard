@@ -338,6 +338,7 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
         verifyIsOpen={verifyIsOpen}
         setVerifyIsOpen={setVerifyIsOpen}
         selectedItems={selectedIDs}
+        Endpoint={Endpoint}
       />
       <AdminModal
         adminIsOpen={adminIsOpen}

@@ -16,7 +16,7 @@ import { getAll } from "../network/network";
 //   return res.data;
 // };
 
-const ProvidersRequests = () => {
+const BoatsRequests = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ const ProvidersRequests = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/provider-requests/account?limit=${pageSize}&page=${page}`
+          `https://dev.sailgloble.com/admin/provider-requests/boat?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.pageCount);
@@ -58,10 +58,10 @@ const ProvidersRequests = () => {
         rows={rows}
         columns={providerRequestsColumns}
         loading={loading}
-        Endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/account/`}
+        Endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/`}
       />
     </>
   );
 };
 
-export default ProvidersRequests;
+export default BoatsRequests;

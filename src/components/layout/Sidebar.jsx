@@ -22,6 +22,7 @@ import {
   PushPin,
   PushPinOutlined,
   Receipt,
+  RequestPage,
   StackedLineChart,
 } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
@@ -68,6 +69,8 @@ const Item = ({
                 title === "Providers Requests" ||
                 title === "Payout Requests" ||
                 title === "Boats Routes" ||
+                title === "Boats Requests" ||
+                title === "Feature List" ||
                 title === "Categories"
               ? colors.primary[400]
               : colors.primary[400],
@@ -254,6 +257,15 @@ const SidebarComponent = ({
               title={"Boats Routes"}
               icon={<ForkRight />}
               to={"boatroutes"}
+              selected={Selected}
+              setSelected={setSelected}
+              hovered={hovered}
+              setHovered={setHovered}
+            />
+            <Item
+              title={"Boats Requests"}
+              icon={<RequestPage />}
+              to={"boatsrequests"}
               selected={Selected}
               setSelected={setSelected}
               hovered={hovered}

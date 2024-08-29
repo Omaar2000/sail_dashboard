@@ -17,7 +17,12 @@ import { useTranslation } from "react-i18next";
 import { addItem, assignAdmin, getAll } from "../network/network";
 import useUserStore from "../stores/useUserStore";
 
-const ApproveModal = ({ verifyIsOpen, setVerifyIsOpen, selectedItems }) => {
+const ApproveModal = ({
+  verifyIsOpen,
+  setVerifyIsOpen,
+  selectedItems,
+  Endpoint,
+}) => {
   // const [adminIsOpen, setVerifyIsOpen] = useState(false);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -52,12 +57,7 @@ const ApproveModal = ({ verifyIsOpen, setVerifyIsOpen, selectedItems }) => {
     try {
       setLoading(true);
       selectedItems.forEach(async (element) => {
-        await addItem(
-          token,
-          logout,
-          `https://dev.sailgloble.com/admin/provider-requests/approve/account/${element}`,
-          {}
-        );
+        await addItem(token, logout, `${Endpoint}${element}`, {});
       });
       setTimeout(() => {
         setVerifyIsOpen(false);

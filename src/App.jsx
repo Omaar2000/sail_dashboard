@@ -47,6 +47,8 @@ import Features from "./pages/features/Features";
 import AddFeaturePage from "./pages/features/AddFeaturePage";
 import EditFeaturePage from "./pages/features/EditFeaturePage";
 import SendNotifications from "./pages/SendNotifications";
+import BoatssRequests from "./pages/BoatsRequests";
+import BoatsRequests from "./pages/BoatsRequests";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -115,6 +117,7 @@ function App() {
               <Route path="editcategory" element={<EditCategoryPage />} />
               <Route path="addcategory" element={<AddCategoryPage />} />
               <Route path="boatroutes" element={<TripPaths />} />
+              <Route path="boatsrequests" element={<BoatsRequests />} />
               <Route path="editpath" element={<EditPathPage />} />
               <Route path="addpath" element={<AddPathPage />} />
               <Route path="settings" element={<Settings />} />
