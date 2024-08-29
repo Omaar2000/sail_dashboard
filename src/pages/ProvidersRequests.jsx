@@ -33,7 +33,7 @@ const ProvidersRequests = () => {
           `https://dev.sailgloble.com/admin/provider-requests`
         );
         setRows(data.data);
-        setTotalPages(data.page_count);
+        setTotalPages(data.pageCount);
 
         console.log(data);
         setLoading(false);
@@ -48,8 +48,8 @@ const ProvidersRequests = () => {
   return (
     <>
       <TableComponent
-        to={true ? "/admin" : ""}
-        rows={providerRequestsData}
+        to={"/admin"}
+        rows={rows}
         columns={providerRequestsColumns}
         loading={loading}
       />
