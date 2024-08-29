@@ -434,7 +434,9 @@ export const boatRequestsColumns = [
     headerName: i18n.t("Approved By"),
     flex: 1,
     renderCell: ({ row }) => (
-      <h1>{row.approvedBy !== null ? row.approvedBy : "Not Approved"}</h1>
+      <h3 style={{ marginBottom: "4px" }}>
+        {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
+      </h3>
     ),
   },
   // {
