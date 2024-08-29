@@ -430,17 +430,19 @@ export const roviderRequestsColumns = [
 export const boatRequestsColumns = [
   { field: "id", headerName: i18n.t("ID"), flex: 1 },
   {
-    field: "assignedTo",
-    headerName: i18n.t("Assigned To"),
+    field: "approvedBy",
+    headerName: i18n.t("Approved By"),
     flex: 1,
-    // renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+    renderCell: ({ row }) => (
+      <h1>{row.approvedBy !== null ? row.approvedBy : "Not Approved"}</h1>
+    ),
   },
-  {
-    field: "assign",
-    headerName: i18n.t("Assign"),
-    flex: 1,
-    renderCell: ({ row }) => <AdminDropdown />,
-  },
+  // {
+  //   field: "assign",
+  //   headerName: i18n.t("Assign"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => <AdminDropdown />,
+  // },
   {
     field: "status",
     headerName: i18n.t("Verify"),
