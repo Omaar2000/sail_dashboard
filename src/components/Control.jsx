@@ -12,7 +12,7 @@ import useUserStore from "../stores/useUserStore";
 const Control = ({ endpoint, row }) => {
   const { t } = useTranslation();
   const { token, logout } = useUserStore();
-  const [isVerified, setIsVerified] = useState(row.is_verified);
+  const [isVerified, setIsVerified] = useState(row.approvedAt !== null);
   const [loading, setLoading] = useState(false);
   const handleClick = async () => {
     try {

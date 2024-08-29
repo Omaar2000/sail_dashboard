@@ -428,7 +428,7 @@ export const roviderRequestsColumns = [
   },
 ];
 export const boatRequestsColumns = [
-  { field: "providerId", headerName: i18n.t("ID"), flex: 1 },
+  { field: "id", headerName: i18n.t("ID"), flex: 1 },
   {
     field: "assignedTo",
     headerName: i18n.t("Assigned To"),
