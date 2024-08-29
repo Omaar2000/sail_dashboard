@@ -67,7 +67,7 @@ const Notifications = () => {
       <h1 style={{ margin: "2rem" }}>{t("Notifications")}</h1>
       <form onSubmit={handleFormSubmit}>
         <Box display="flex" justifyContent="center" alignItems="center">
-          <ButtonGroup
+          {/* <ButtonGroup
             variant="contained"
             aria-label="Basic button group"
             sx={{ direction: "ltr" }}
@@ -104,7 +104,7 @@ const Notifications = () => {
             >
               {t("Cancelled")}
             </Button>
-          </ButtonGroup>
+          </ButtonGroup> */}
         </Box>
         <Box
           display="grid"
@@ -131,7 +131,7 @@ const Notifications = () => {
               }}
             />
           </Box>
-          <Box gap={"10px"} gridColumn="span 6">
+          {/* <Box gap={"10px"} gridColumn="span 6">
             <TextField
               label={t("Title (Arabic)")}
               variant="outlined"
@@ -149,7 +149,7 @@ const Notifications = () => {
                 },
               }}
             />
-          </Box>
+          </Box> */}
 
           <Box gridColumn="span 6">
             <TextField
