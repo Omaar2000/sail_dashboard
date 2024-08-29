@@ -12,6 +12,11 @@ const Categories = () => {
   const { pageSize, page, setTotalPages, keyword } = usePaginationStore();
 
   useEffect(() => {
+    setTotalPages(0);
+  }, []);
+  console.log("pageSize", pageSize);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);

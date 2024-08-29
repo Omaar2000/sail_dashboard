@@ -46,6 +46,7 @@ import ProviderDetails from "./pages/providers/ProviderDetailsPage";
 import Features from "./pages/features/Features";
 import AddFeaturePage from "./pages/features/AddFeaturePage";
 import EditFeaturePage from "./pages/features/EditFeaturePage";
+import SendNotifications from "./pages/SendNotifications";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -118,6 +119,7 @@ function App() {
               <Route path="addpath" element={<AddPathPage />} />
               <Route path="settings" element={<Settings />} />
               <Route path="notifications" element={<Notifications />} />
+              <Route path="send" element={<SendNotifications />} />
               <Route path="features" element={<Features />} />
               <Route path="addfeature" element={<AddFeaturePage />} />
               <Route path="editfeature" element={<EditFeaturePage />} />
