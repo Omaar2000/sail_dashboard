@@ -726,11 +726,11 @@ export const featuresListData = [
     nameEn: "Feature 5",
   },
 ];
-export const notificationsColumns = [
-  { field: "userId", headerName: i18n.t("ID"), flex: 1 },
-  // { field: "createdAt", headerName: i18n.t("Date"), flex: 1 },
-  // { field: "isRead", headerName: i18n.t("Read?"), flex: 1 },
-];
+// export const notificationsColumns = [
+//   { field: "userId", headerName: i18n.t("ID"), flex: 1 },
+// { field: "createdAt", headerName: i18n.t("Date"), flex: 1 },
+// { field: "isRead", headerName: i18n.t("Read?"), flex: 1 },
+// ];
 
 export const transactionsColumns = [
   { field: "provider", headerName: i18n.t("Provider ID"), flex: 1 },

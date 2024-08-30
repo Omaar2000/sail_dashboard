@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
-import {
-  notificationsColumns,
-  notificationsData,
-  transactionsColumns,
-  transactionsData,
-} from "../data/mockData";
+import { boatRequestsColumns } from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
 import { getAllCovers } from "../network/coverServices";
 import usePaginationStore from "../stores/usePaginationStore";
@@ -49,7 +44,7 @@ const Notifications = () => {
       <TableComponent
         to="/send"
         rows={rows}
-        columns={notificationsColumns}
+        columns={boatRequestsColumns}
         loading={loading}
         add={"Send a Notification"}
       />
