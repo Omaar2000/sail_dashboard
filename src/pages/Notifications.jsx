@@ -10,7 +10,6 @@ import useUserStore from "../stores/useUserStore";
 import { getAllCovers } from "../network/coverServices";
 import usePaginationStore from "../stores/usePaginationStore";
 import { getAll } from "../network/network";
-import NotificationsData from "../components/NotificationsData";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -49,7 +48,7 @@ const Notifications = () => {
     <>
       <TableComponent
         to="/send"
-        rows={notificationsData}
+        rows={rows}
         columns={notificationsColumns}
         loading={loading}
         add={"Send a Notification"}
