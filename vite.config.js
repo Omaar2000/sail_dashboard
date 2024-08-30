@@ -7,9 +7,9 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://dev.sailgloble.co",
+        target: "https://dev.sailgloble.com",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        rewrite: (path) => path.replace(/^\/apivite/, ""),
       },
     },
   },
