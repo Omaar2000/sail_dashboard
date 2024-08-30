@@ -20,12 +20,8 @@ import { tokens } from "../theme";
 import { useState } from "react";
 
 import useUserStore from "../stores/useUserStore";
-import { api } from "../network/api";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
-import { editCountry } from "../network/countriesServices";
-import { countries } from "../data/mockData";
-import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import { addItem } from "../network/network";
 
 // const [title_en, setTitleEN] = useState(null);
