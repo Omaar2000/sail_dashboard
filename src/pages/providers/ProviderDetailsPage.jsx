@@ -300,28 +300,28 @@ const ProviderDetails = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // const exportToExcel = () => {
-  //   const data = [
-  //     {
-  //       Name: providerInfo.name,
-  //       Phone: providerInfo.phone,
-  //       "Bank Account": providerInfo.bankAccount,
-  //       ID: providerInfo.id,
-  //     },
-  //     {
-  //       Name: "OMAR",
-  //       Phone: "0100000000",
-  //       "Bank Account": "104554",
-  //       ID: 10,
-  //     },
-  //   ];
+  const exportToExcel = () => {
+    const data = [
+      {
+        Name: providerInfo.name,
+        Phone: providerInfo.phone,
+        "Bank Account": providerInfo.bankAccount,
+        ID: providerInfo.id,
+      },
+      {
+        Name: "OMAR",
+        Phone: "0100000000",
+        "Bank Account": "104554",
+        ID: 10,
+      },
+    ];
 
-  //   const worksheet = XLSX.utils.json_to_sheet(data);
-  //   const workbook = XLSX.utils.book_new();
-  //   XLSX.utils.book_append_sheet(workbook, worksheet, "Provider Details");
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Provider Details");
 
-  //   XLSX.writeFile(workbook, "provider_details.xlsx");
-  // };
+    XLSX.writeFile(workbook, "provider_details.xlsx");
+  };
 
   return (
     <Box sx={{ p: 3, display: "flex", justifyContent: "center" }}>
@@ -365,11 +365,11 @@ const ProviderDetails = () => {
             <Typography variant="body1">{row.id}</Typography>
           </Grid>
         </Grid>
-        {/* <Box sx={{ mt: 4, textAlign: "center" }}>
+        <Box sx={{ mt: 4, textAlign: "center" }}>
           <Button variant="contained" onClick={exportToExcel}>
             Export to Excel
           </Button>
-        </Box> */}
+        </Box>
       </Box>
     </Box>
   );
