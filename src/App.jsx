@@ -33,7 +33,6 @@ import ProviderList from "./pages/providers/ProvidersList";
 import Settings from "./pages/Settings";
 import Notifications from "./pages/Notifications";
 import Reviews from "./pages/Reviews";
-import Complaints from "./pages/Complaints";
 import Transactions from "./pages/Transactions";
 import Payouts from "./pages/Payouts";
 import Orders from "./pages/Orders";
@@ -50,6 +49,7 @@ import SendNotifications from "./pages/SendNotifications";
 import BoatssRequests from "./pages/BoatsRequests";
 import BoatsRequests from "./pages/BoatsRequests";
 import UsersRequests from "./pages/UsersPayouts";
+import ComplaintsComponent from "./pages/Complaints";
 import Respond from "./pages/ComplaintsResponse";
 function App() {
   const [theme, colorMode] = useMode();
@@ -89,17 +89,18 @@ function App() {
               }
             >
               <Route path="" element={<Home />} />
-              <Route
+              {/* <Route
                 path="usersDummy"
                 element={<TableComponent rows={data} columns={userColumns} />}
-              />
+              /> */}
               <Route path="users" element={<Users />} />
               <Route path="providerlist" element={<ProviderList />} />
               <Route path="providerdetails" element={<ProviderDetails />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="orders" element={<Orders />} />
-              {/* <Route path="complaints" element={<Complaints />} /> */}
+              {/* <Route path="complaints" element={<Co />} /> */}
               {/* <Route path="respond" element={<Respond />} /> */}
+              <Route path="complaints" element={<ComplaintsComponent />} />
               <Route path="transactions" element={<Transactions />} />
               <Route path="payouts" element={<UsersRequests />} />
               <Route path="payoutrequests" element={<PayoutsRequests />} />

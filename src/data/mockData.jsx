@@ -334,41 +334,41 @@ export const supervisorsData = [
   },
 ];
 
-// export const complaintsColumns = [
-//   { field: "id", headerName: i18n.t("ID"), flex: 1 },
-//   {
-//     field: "approvedBy",
-//     headerName: i18n.t("Approved By"),
-//     flex: 1,
-//     renderCell: ({ row }) => (
-//       <Box display={"flex"} justifyContent={"start"} alignItems={"center"}>
-//         <h3 style={{ marginBottom: "4px" }}>
-//           {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
-//         </h3>
-//       </Box>
-//     ),
-//   },
-//   // {
-//   //   field: "assign",
-//   //   headerName: i18n.t("Assign"),
-//   //   flex: 1,
-//   //   renderCell: ({ row }) => <AdminDropdown />,
-//   // },
-//   {
-//     field: "status",
-//     headerName: i18n.t("Respond"),
-//     flex: 1,
-//     renderCell: ({ row }) => (
-//       <EditBtn to="/respond" row={row} title={"Respond"} />
-//     ),
-//   },
-//   // {
-//   //   field: "details",
-//   //   headerName: i18n.t("Details"),
-//   //   flex: 1,
-//   //   renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
-//   // },
-// ];
+export const complaintsColumns = [
+  { field: "id", headerName: i18n.t("ID"), flex: 1 },
+  {
+    field: "approvedBy",
+    headerName: i18n.t("Approved By"),
+    flex: 1,
+    renderCell: ({ row }) => (
+      <Box display={"flex"} justifyContent={"start"} alignItems={"center"}>
+        <h3 style={{ marginBottom: "4px" }}>
+          {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
+        </h3>
+      </Box>
+    ),
+  },
+  // {
+  //   field: "assign",
+  //   headerName: i18n.t("Assign"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => <AdminDropdown />,
+  // },
+  {
+    field: "status",
+    headerName: i18n.t("Respond"),
+    flex: 1,
+    renderCell: ({ row }) => (
+      <EditBtn to="/respond" row={row} title={"Respond"} />
+    ),
+  },
+  // {
+  //   field: "details",
+  //   headerName: i18n.t("Details"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+  // },
+];
 
 export const complaintsData = [
   {

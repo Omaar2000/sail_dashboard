@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
-import {
-  complaintsColumns,
-  complaintsData,
-  coversColumns,
-} from "../data/mockData";
+
 import useUserStore from "../stores/useUserStore";
 import { getAllCovers } from "../network/coverServices";
-import { reviewsColumns } from "../data/mockData";
+import {
+  codesColumns,
+  mockDataContacts,
+  reviewsColumns,
+} from "../data/mockData";
 import { useTranslation } from "react-i18next";
 import { Box, Button, ButtonGroup } from "@mui/material";
 
@@ -79,8 +79,8 @@ const Orders = () => {
       {selected === "Pending" ? (
         <TableComponent
           to=""
-          rows={complaintsData}
-          columns={complaintsColumns}
+          rows={mockDataContacts}
+          columns={codesColumns}
           loading={loading}
         />
       ) : selected === "Confirmed" ? (
