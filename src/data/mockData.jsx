@@ -543,25 +543,25 @@ export const payoutsRequestsColumns = [
 ];
 
 export const providerRequestsColumns = [
-  { field: "providerId", headerName: i18n.t("ID"), flex: 1 },
+  { field: "id", headerName: i18n.t("ID"), flex: 1 },
   {
-    field: "assignedTo",
-    headerName: i18n.t("Assigned To"),
+    field: "approvedBy",
+    headerName: i18n.t("Approved By"),
     flex: 1,
     // renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
   },
-  {
-    field: "assign",
-    headerName: i18n.t("Assign"),
-    flex: 1,
-    renderCell: ({ row }) => <AdminDropdown />,
-  },
+
   {
     field: "status",
     headerName: i18n.t("Verify"),
 
     flex: 1,
-    renderCell: ({ row }) => <Control row={row} />,
+    renderCell: ({ row }) => (
+      <Control
+        endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/account/${row.requestTypeId}`}
+        row={row}
+      />
+    ),
   },
   {
     field: "details",
