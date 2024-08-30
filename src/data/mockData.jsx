@@ -730,22 +730,22 @@ export const notificationsColumns = [
   { field: "userId", headerName: i18n.t("ID"), flex: 1 },
   { field: "createdAt", headerName: i18n.t("Date"), flex: 1 },
   { field: "isRead", headerName: i18n.t("Read?"), flex: 1 },
-  {
-    field: "title",
-    headerName: i18n.t("Title"),
-    flex: 1,
-    renderCell: ({ row }) => (
-      <NotificationDetails text={row.notificationContent} title={true} />
-    ),
-  },
-  {
-    field: "message",
-    headerName: i18n.t("Message"),
-    flex: 1,
-    renderCell: ({ row }) => (
-      <NotificationDetails text={row.notificationContent} title={false} />
-    ),
-  },
+  // {
+  //   field: "title",
+  //   headerName: i18n.t("Title"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => (
+  //     <NotificationDetails text={row.notificationContent} title={true} />
+  //   ),
+  // },
+  // {
+  //   field: "message",
+  //   headerName: i18n.t("Message"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => (
+  //     <NotificationDetails text={row.notificationContent} title={false} />
+  //   ),
+  // },
   // { field: "orderId", headerName: i18n.t("Order ID"), flex: 1 },
   // {
   //   field: "providerTransactionId",
