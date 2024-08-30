@@ -1,49 +1,69 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
 import {
+  boatRequestsColumns,
   complaintsColumns,
-  complaintsData,
   coversColumns,
+  payoutsColumns,
+  payoutsData,
+  providerRequestsColumns,
+  providerRequestsData,
 } from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
-import { getAllCovers } from "../network/coverServices";
-import { reviewsColumns } from "../data/mockData";
+import usePaginationStore from "../stores/usePaginationStore";
+import { getAll } from "../network/network";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
 //   return res.data;
 // };
 
-const Complaints = () => {
+const BoatsRequests = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
+  const { pageSize, page, setTotalPages, setPage, setPageSize } =
+    usePaginationStore();
+
+  useEffect(() => {
+    setPage(1);
+    setPageSize(10);
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getAllCovers(token, logout);
-        setRows(data);
+
+        const data = await getAll(
+          token,
+          logout,
+          `https://dev.sailgloble.com/admin/provider-requests/complaints?limit=${pageSize}&page=${page}`
+        );
+        setRows(data.data);
+        setTotalPages(data.pageCount);
+
         console.log(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching covers:", error);
+        console.error("Error getting Complaints:", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [pageSize, page]);
 
   return (
     <>
       <TableComponent
-        to=""
-        rows={complaintsData}
+        to={"/admin"}
+        rows={rows}
         columns={complaintsColumns}
         loading={loading}
+        // Endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/`}
       />
     </>
   );
 };
 
-export default Complaints;
+export default BoatsRequests;

@@ -6,7 +6,7 @@ import AddModal from "./addModal";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const EditBtn = ({ to, row }) => {
+const EditBtn = ({ to, row, title }) => {
   const [openAddModal, setOpenAddModal] = useState(false);
   const [data, setData] = useState([]);
   const { t } = useTranslation();
@@ -23,7 +23,7 @@ const EditBtn = ({ to, row }) => {
         type="button"
         onClick={handleClick}
       >
-        {t("Edit")}
+        {t(title)}
       </Button>
     </>
   );

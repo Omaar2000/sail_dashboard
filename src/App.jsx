@@ -50,6 +50,7 @@ import SendNotifications from "./pages/SendNotifications";
 import BoatssRequests from "./pages/BoatsRequests";
 import BoatsRequests from "./pages/BoatsRequests";
 import UsersRequests from "./pages/UsersPayouts";
+import Respond from "./pages/ComplaintsResponse";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -98,6 +99,7 @@ function App() {
               <Route path="reviews" element={<Reviews />} />
               <Route path="orders" element={<Orders />} />
               <Route path="complaints" element={<Complaints />} />
+              <Route path="respond" element={<Respond />} />
               <Route path="transactions" element={<Transactions />} />
               <Route path="payouts" element={<UsersRequests />} />
               <Route path="payoutrequests" element={<PayoutsRequests />} />

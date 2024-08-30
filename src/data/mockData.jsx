@@ -179,7 +179,9 @@ export const categoriesColumns = [
     field: "edit",
     headerName: i18n.t("Edit"),
     flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editcategory" row={row} />,
+    renderCell: ({ row }) => (
+      <EditBtn to="/editcategory" row={row} title={"Edit"} />
+    ),
   },
 ];
 export const coversColumns = [
@@ -207,7 +209,9 @@ export const coversColumns = [
     field: "edit",
     headerName: i18n.t("Edit"),
     flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+    renderCell: ({ row }) => (
+      <EditBtn to="/editcover" row={row} title={"Edit"} />
+    ),
   },
 ];
 export const featuresColumns = [
@@ -235,7 +239,9 @@ export const featuresColumns = [
     field: "edit",
     headerName: i18n.t("Edit"),
     flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editfeature" row={row} />,
+    renderCell: ({ row }) => (
+      <EditBtn to="/editfeature" row={row} title={"Edit"} />
+    ),
   },
 ];
 export const reviewsColumns = [
@@ -329,10 +335,39 @@ export const supervisorsData = [
 ];
 
 export const complaintsColumns = [
-  { field: "orderId", headerName: i18n.t("OrderId"), flex: 1 },
-  { field: "date", headerName: i18n.t("Date"), flex: 1 },
-  { field: "user", headerName: i18n.t("User"), flex: 1 },
-  { field: "complaint", headerName: i18n.t("Complaint"), flex: 2 },
+  { field: "id", headerName: i18n.t("ID"), flex: 1 },
+  {
+    field: "approvedBy",
+    headerName: i18n.t("Approved By"),
+    flex: 1,
+    renderCell: ({ row }) => (
+      <Box display={"flex"} justifyContent={"start"} alignItems={"center"}>
+        <h3 style={{ marginBottom: "4px" }}>
+          {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
+        </h3>
+      </Box>
+    ),
+  },
+  // {
+  //   field: "assign",
+  //   headerName: i18n.t("Assign"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => <AdminDropdown />,
+  // },
+  {
+    field: "status",
+    headerName: i18n.t("Respond"),
+    flex: 1,
+    renderCell: ({ row }) => (
+      <EditBtn to="/respond" row={row} title={"Respond"} />
+    ),
+  },
+  // {
+  //   field: "details",
+  //   headerName: i18n.t("Details"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+  // },
 ];
 
 export const complaintsData = [
@@ -467,14 +502,16 @@ export const boatRequestsColumns = [
 ];
 export const usersRequestsColumns = [
   { field: "id", headerName: i18n.t("ID"), flex: 1 },
+
+  { field: "requestedAmount", headerName: i18n.t("Requested Amount"), flex: 1 },
   {
-    field: "approvedBy",
-    headerName: i18n.t("Approved By"),
+    field: "paidAt",
+    headerName: i18n.t("Paid At"),
     flex: 1,
     renderCell: ({ row }) => (
       <Box display={"flex"} justifyContent={"start"} alignItems={"center"}>
         <h3 style={{ marginBottom: "4px" }}>
-          {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
+          {row.paidAt !== null ? row.paidAt : i18n.t("Not Paid")}
         </h3>
       </Box>
     ),
@@ -563,12 +600,12 @@ export const providerRequestsColumns = [
       />
     ),
   },
-  {
-    field: "details",
-    headerName: i18n.t("Details"),
-    flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
-  },
+  // {
+  //   field: "details",
+  //   headerName: i18n.t("Details"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => <EditBtn to="/editcover" row={row} title={"Details"} />,
+  // },
 ];
 // export const boatsColumns = [
 //   { field: "providerId", headerName: i18n.t("ID"), flex: 1 },
@@ -689,7 +726,7 @@ export const featuresListData = [
 export const transactionsColumns = [
   { field: "provider", headerName: i18n.t("Provider ID"), flex: 1 },
   { field: "createdAt", headerName: i18n.t("Date"), flex: 1 },
-  { field: "amountInCents", headerName: i18n.t("Amount (Cents)"), flex: 1 },
+  { field: "amount", headerName: i18n.t("Amount"), flex: 1 },
   {
     field: "status",
     headerName: i18n.t("Status"),
@@ -830,7 +867,9 @@ export const pathsColumns = [
     field: "edit",
     headerName: i18n.t("Edit"),
     flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editpath" row={row} />,
+    renderCell: ({ row }) => (
+      <EditBtn to="/editpath" row={row} title={"Edit"} />
+    ),
   },
 ];
 export const countriesColumns = [
@@ -852,7 +891,9 @@ export const countriesColumns = [
     field: "edit",
     headerName: i18n.t("Edit"),
     flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editcountry" row={row} />,
+    renderCell: ({ row }) => (
+      <EditBtn to="/editcountry" row={row} title={"Edit"} />
+    ),
   },
 ];
 export const citiesColumns = [
@@ -881,7 +922,9 @@ export const citiesColumns = [
     field: "edit",
     headerName: i18n.t("Edit"),
     flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editcity" row={row} />,
+    renderCell: ({ row }) => (
+      <EditBtn to="/editcity" row={row} title={"Edit"} />
+    ),
   },
 ];
 export const codesColumns = [
@@ -929,7 +972,9 @@ export const codesColumns = [
     field: "edit",
     headerName: i18n.t("Edit"),
     flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editcode" row={row} />,
+    renderCell: ({ row }) => (
+      <EditBtn to="/editcode" row={row} title={"Edit"} />
+    ),
   },
 ];
 export const countries = [
