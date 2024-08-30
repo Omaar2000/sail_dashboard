@@ -341,11 +341,14 @@ export const complaintsColumns = [
     headerName: i18n.t("Approved By"),
     flex: 1,
     renderCell: ({ row }) => (
-      <Box display={"flex"} justifyContent={"start"} alignItems={"center"}>
-        <h3 style={{ marginBottom: "4px" }}>
-          {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
-        </h3>
-      </Box>
+      <Typography
+        mt="0.8rem"
+        fontSize="16px"
+        fontWeight="bold"
+        // color="#83ff63"
+      >
+        {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
+      </Typography>
     ),
   },
   // {
