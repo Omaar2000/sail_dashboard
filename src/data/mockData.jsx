@@ -734,7 +734,9 @@ export const notificationsColumns = [
     field: "title",
     headerName: i18n.t("Title"),
     flex: 1,
-    renderCell: ({ row }) => <NotificationDetails text={row} title={true} />,
+    renderCell: ({ row: { notificationContent } }) => (
+      <NotificationDetails text={notificationContent} title={true} />
+    ),
   },
   // {
   //   field: "message",
