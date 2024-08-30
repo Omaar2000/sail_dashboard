@@ -452,16 +452,16 @@ export const payoutsData = [
   },
 ];
 
-export const roviderRequestsColumns = [
-  { field: "providerId", headerName: "ID", flex: 1 },
-  // { field: "assignedTo", headerName: "Assigned To", flex: 1 },
-  {
-    field: "details",
-    headerName: "Details",
-    flex: 1,
-    renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
-  },
-];
+// export const roviderRequestsColumns = [
+//   { field: "providerId", headerName: "ID", flex: 1 },
+//   // { field: "assignedTo", headerName: "Assigned To", flex: 1 },
+//   {
+//     field: "details",
+//     headerName: "Details",
+//     flex: 1,
+//     renderCell: ({ row }) => <EditBtn to="/editcover" row={row} title={"Edit"}/>,
+//   },
+// ];
 export const boatRequestsColumns = [
   { field: "id", headerName: i18n.t("ID"), flex: 1 },
   {
