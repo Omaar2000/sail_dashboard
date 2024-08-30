@@ -11,11 +11,10 @@ import { addItem } from "../../network/network";
 const Respond = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  // const location = useLocation();
   const [response, setResponse] = useState(null);
-  // const [title_en, setTitle_en] = useState("");
   const navigate = useNavigate();
-  // const row = location.state;
+  const location = useLocation();
+  const row = location.state;
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +32,7 @@ const Respond = () => {
       await addItem(
         token,
         logout,
-        `/admin/provider-requests/response/complaints/${}`,
+        `/admin/provider-requests/response/complaints/${row.requestTypeId}`,
         data
       );
 
@@ -52,35 +51,34 @@ const Respond = () => {
       <h1 style={{ margin: "2rem" }}>{t("Respond to Complaint")}</h1>
       <form onSubmit={handleFormSubmit}>
         <Box style={{ margin: "2rem" }} spacing={2} gap={"10px"}>
-        <TextField
-              size="huge"
-              label={t("Message (English)")}
-              defaultValue={"Marsol new"}
-              variant="outlined"
-              onChange={(e) => {
-                setResponse(e.target.value);
-              }}
-              fullWidth
-              multiline
-              minRows={6}
-              sx={{
-                // mb: 2,
-                border: "none",
-                "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
-                  { borderColor: colors.primary[100] },
-                "& .MuiInputLabel-root.Mui-focused": {
-                  color: colors.primary[100],
-                },
+          <TextField
+            size="huge"
+            label={t("Message (English)")}
+            defaultValue={"Marsol new"}
+            variant="outlined"
+            onChange={(e) => {
+              setResponse(e.target.value);
+            }}
+            fullWidth
+            multiline
+            minRows={6}
+            sx={{
+              // mb: 2,
+              border: "none",
+              "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                { borderColor: colors.primary[100] },
+              "& .MuiInputLabel-root.Mui-focused": {
+                color: colors.primary[100],
+              },
 
-                borderRadius: "8px",
-                color:
-                  theme.palette.mode === "dark" ? "#fff" : colors.grey[200],
-                background:
-                  theme.palette.mode === "dark"
-                    ? colors.primary[500]
-                    : colors.grey[800],
-              }}
-            />
+              borderRadius: "8px",
+              color: theme.palette.mode === "dark" ? "#fff" : colors.grey[200],
+              background:
+                theme.palette.mode === "dark"
+                  ? colors.primary[500]
+                  : colors.grey[800],
+            }}
+          />
         </Box>
         <Box
           // display={"flex"}
