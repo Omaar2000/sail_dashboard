@@ -10,7 +10,7 @@ import { getAll } from "../network/network";
 //   return res.data;
 // };
 
-const BoatsRequests = () => {
+const Complaints = () => {
   const [rows, setRows] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
@@ -58,4 +58,4 @@ const BoatsRequests = () => {
   );
 };
 
-export default BoatsRequests;
+export default Complaints;
