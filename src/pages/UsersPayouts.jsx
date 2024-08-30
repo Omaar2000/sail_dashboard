@@ -7,6 +7,7 @@ import {
   payoutsData,
   providerRequestsColumns,
   providerRequestsData,
+  usersRequestsColumns,
 } from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
 import usePaginationStore from "../stores/usePaginationStore";
@@ -55,9 +56,9 @@ const UsersRequests = () => {
   return (
     <>
       <TableComponent
-        to={"/admin"}
+        to={"/"}
         rows={rows}
-        columns={boatRequestsColumns}
+        columns={usersRequestsColumns}
         loading={loading}
         Endpoint={`https://dev.sailgloble.com/admin/user-requests/approve/payout/`}
       />

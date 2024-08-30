@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
-import { coversColumns, payoutsColumns, payoutsData } from "../data/mockData";
+import {
+  coversColumns,
+  payoutsColumns,
+  payoutsData,
+  usersRequestsColumns,
+} from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
 import { getAllCovers } from "../network/coverServices";
 import { reviewsColumns } from "../data/mockData";
@@ -35,7 +40,7 @@ const Payouts = () => {
       <TableComponent
         to=""
         rows={payoutsData}
-        columns={payoutsColumns}
+        columns={usersRequestsColumns}
         loading={loading}
       />
     </>
