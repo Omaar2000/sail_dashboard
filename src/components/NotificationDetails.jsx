@@ -1,5 +1,5 @@
 const NotificationDetails = ({ text, title }) => {
-  const content = JSON.parse(text);
+  const content = JSON.parse(text.notificationContent);
   console.log("content.title  :", content.title);
   console.log("content.body  :", content.body);
 
