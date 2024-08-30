@@ -98,8 +98,8 @@ function App() {
               <Route path="providerdetails" element={<ProviderDetails />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="orders" element={<Orders />} />
-              <Route path="complaints" element={<Complaints />} />
-              <Route path="respond" element={<Respond />} />
+              {/* <Route path="complaints" element={<Complaints />} /> */}
+              {/* <Route path="respond" element={<Respond />} /> */}
               <Route path="transactions" element={<Transactions />} />
               <Route path="payouts" element={<UsersRequests />} />
               <Route path="payoutrequests" element={<PayoutsRequests />} />
