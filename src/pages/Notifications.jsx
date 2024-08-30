@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
 import {
   notificationsColumns,
+  notificationsData,
   transactionsColumns,
   transactionsData,
 } from "../data/mockData";
@@ -32,7 +33,7 @@ const Notifications = () => {
           `https://dev.sailgloble.com/admin/notifications?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
-        setTotalPages(data.page_count);
+        setTotalPages(data.pageCount);
         console.log(data);
         setLoading(false);
       } catch (error) {

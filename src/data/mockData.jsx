@@ -15,6 +15,7 @@ import AdminDropdown from "../components/adminDropdown";
 import DetailsButton from "../components/Details";
 import Verified from "../components/Verified";
 import { Box, Typography } from "@mui/material";
+import NotificationDetails from "../components/NotificationDetails";
 
 // Ban and Unban for users and providers
 // verify user and provider
@@ -726,33 +727,31 @@ export const featuresListData = [
   },
 ];
 export const notificationsColumns = [
-  { field: "userId", headerName: i18n.t("IddD"), flex: 1 },
+  { field: "userId", headerName: i18n.t("ID"), flex: 1 },
   { field: "createdAt", headerName: i18n.t("Date"), flex: 1 },
   { field: "isRead", headerName: i18n.t("Read?"), flex: 1 },
   {
     field: "title",
     headerName: i18n.t("Title"),
     flex: 1,
-    valueGetter: (params) => {
-      const content = JSON.parse(params.row.notificationContent);
-      return content.title || "";
-    },
+    renderCell: ({ row }) => (
+      <NotificationDetails text={row.notificationContent} title={true} />
+    ),
   },
   {
-    field: "body",
+    field: "message",
     headerName: i18n.t("Message"),
     flex: 1,
-    valueGetter: (params) => {
-      const content = JSON.parse(params.row.notificationContent);
-      return content.body || "";
-    },
+    renderCell: ({ row }) => (
+      <NotificationDetails text={row.notificationContent} title={false} />
+    ),
   },
-  { field: "orderId", headerName: i18n.t("Order ID"), flex: 1 },
-  {
-    field: "providerTransactionId",
-    headerName: i18n.t("Transaction ID"),
-    flex: 1,
-  },
+  // { field: "orderId", headerName: i18n.t("Order ID"), flex: 1 },
+  // {
+  //   field: "providerTransactionId",
+  //   headerName: i18n.t("Transaction ID"),
+  //   flex: 1,
+  // },
 ];
 
 export const transactionsColumns = [
@@ -773,6 +772,16 @@ export const transactionsColumns = [
   // { field: "provider", headerName: i18n.t("Provider"), flex: 1 },
 ];
 
+export const notificationsData = [
+  {
+    id: 1,
+    userId: 1,
+    userType: "string",
+    isRead: true,
+    notificationContent: '{"title": "Hello2", "body": "Hello2, Hello"}',
+    createdAt: "2024-08-30T14:18:20.632Z",
+  },
+];
 export const transactionsData = [
   {
     id: 1,
