@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
-import { transactionsColumns, transactionsData } from "../data/mockData";
+import { transactionsColumns } from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
-import { getAllCovers } from "../network/coverServices";
 import usePaginationStore from "../stores/usePaginationStore";
 import { getAll } from "../network/network";
 

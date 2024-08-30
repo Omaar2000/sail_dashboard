@@ -61,7 +61,7 @@ function App() {
     access: "",
     phone: "",
   });
-  const [data, setData] = useState(mockDataTeam);
+  const [, setData] = useState(mockDataTeam);
   const [loading, setLoading] = useState(true);
   const { token, language } = useUserStore();
   useEffect(() => {

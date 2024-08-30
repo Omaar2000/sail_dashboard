@@ -10,6 +10,7 @@ import {
   Call,
   Category,
   ChecklistRtl,
+  Feedback,
   ForkRight,
   Group,
   Groups,
@@ -408,7 +409,7 @@ const SidebarComponent = ({
           hovered={hovered}
           setHovered={setHovered}
         />
-        {/* <Item
+        <Item
           title={"Complaints"}
           icon={<Feedback />}
           to={"complaints"}
@@ -416,7 +417,7 @@ const SidebarComponent = ({
           setSelected={setSelected}
           hovered={hovered}
           setHovered={setHovered}
-        /> */}
+        />
         <Item
           title={"Transactions"}
           icon={<Receipt />}
