@@ -48,7 +48,7 @@ const ComplaintsComponent = () => {
   return (
     <>
       <TableComponent
-        to={"/admin"}
+        to={"/"}
         rows={rows}
         columns={complaintsColumns}
         loading={loading}

@@ -131,7 +131,47 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
       >
         <SearchBar />
 
-        {to === "/admin" ? (
+        {to === "/" ? (
+          <Box
+            sx={{
+              marginBottom: "1px",
+              display: "flex",
+              flexShrink: "1",
+              // justifyContent: "space-between",
+              alignItems: "center",
+              gap: "1rem",
+              marginInlineEnd: "30px",
+            }}
+          >
+            {/* <Button
+              onClick={handleVerifyClick}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Verify Selected")}
+            </Button> */}
+            {/* <Button
+              onClick={handleAssignClick}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Assign")}
+            </Button>
+            <Button
+              onClick={handleAssignRandom}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Assign Random")}
+            </Button> */}
+          </Box>
+        ) : to === "/admin" ? (
           <Box
             sx={{
               marginBottom: "1px",
