@@ -5,6 +5,7 @@ import {
   coversColumns,
   payoutsColumns,
   payoutsData,
+  payoutsRequestsColumns,
   providerRequestsColumns,
   providerRequestsData,
 } from "../data/mockData";
@@ -57,7 +58,7 @@ const PayoutsRequests = () => {
       <TableComponent
         to={"/admin"}
         rows={rows}
-        columns={boatRequestsColumns}
+        columns={payoutsRequestsColumns}
         loading={loading}
         Endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/payout/`}
       />

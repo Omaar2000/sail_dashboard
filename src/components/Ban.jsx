@@ -13,7 +13,7 @@ const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
   const { t } = useTranslation();
   // const navigate = useNavigate();
   const { token, logout } = useUserStore();
-  const [isBanned, setIsBanned] = useState(row.is_banned);
+  const [isBanned, setIsBanned] = useState(row.banned_at !== null);
   const [loading, setLoading] = useState(false);
   const handleBan = async () => {
     try {

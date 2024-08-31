@@ -69,9 +69,7 @@ function App() {
   }, [language]);
 
   return (
-    <div
-    // style={{ direction: "rtl" }}
-    >
+    <div style={{ transition: "all 2s" }}>
       <ColorModeContext.Provider value={colorMode}>
         <ThemeProvider theme={theme}>
           <CssBaseline />

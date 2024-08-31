@@ -125,7 +125,7 @@ const AddCategoryPage = () => {
               },
             }}
           />
-
+          {/* 
           <FormControl
             fullWidth
             margin="normal"
@@ -155,7 +155,7 @@ const AddCategoryPage = () => {
               <MenuItem value="FISHING">{t("Fishing")}</MenuItem>
               <MenuItem value="JET_SKI">{t("Jet Ski")}</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
         </Box>
         <Box
           // display={"flex"}

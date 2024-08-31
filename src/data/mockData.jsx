@@ -16,6 +16,7 @@ import DetailsButton from "../components/Details";
 import Verified from "../components/Verified";
 import { Box, Typography } from "@mui/material";
 import NotificationDetails from "../components/NotificationDetails";
+import Read from "../components/Read";
 
 // Ban and Unban for users and providers
 // verify user and provider
@@ -156,19 +157,19 @@ export const categoriesColumns = [
     cellClassName: "name-column--cell",
     required: true,
   },
-  {
-    field: "type",
-    headerName: i18n.t("Type"),
-    flex: 1,
-    renderCell: ({ row }) =>
-      row.type === "FISHING"
-        ? i18n.t("Fishing")
-        : row.type === "JET_SKI"
-        ? i18n.t("Jet Ski")
-        : row.type === "TOUR"
-        ? i18n.t("Touring")
-        : i18n.t("Banana Boat"),
-  },
+  // {
+  //   field: "type",
+  //   headerName: i18n.t("Type"),
+  //   flex: 1,
+  //   renderCell: ({ row }) =>
+  //     row.type === "FISHING"
+  //       ? i18n.t("Fishing")
+  //       : row.type === "JET_SKI"
+  //       ? i18n.t("Jet Ski")
+  //       : row.type === "TOUR"
+  //       ? i18n.t("Touring")
+  //       : i18n.t("Banana Boat"),
+  // },
   {
     field: "image_url",
     headerName: i18n.t("Image"),
@@ -297,27 +298,27 @@ export const reviewsData = [
 ];
 
 export const supervisorsColumns = [
-  { field: "name", headerName: i18n.t("Name"), flex: 1 },
-  { field: "phone", headerName: i18n.t("Phone"), flex: 1 },
+  { field: "user_name", headerName: i18n.t("Name"), flex: 1 },
+  { field: "id", headerName: i18n.t("ID"), flex: 1 },
   { field: "email", headerName: i18n.t("Email"), flex: 1 },
 ];
 
 export const supervisorsData = [
   {
     id: 1,
-    name: "John Doe",
-    phone: "+1234567890",
+    name: "Kareem Mohammed",
+    phone: "01097342117",
     email: "john.doe@example.com",
   },
   {
     id: 2,
-    name: "Jane Smith",
-    phone: "+0987654321",
+    name: "Adam Walid",
+    phone: "01098432107",
     email: "jane.smith@example.com",
   },
   {
     id: 3,
-    name: "Emily Johnson",
+    name: "Ahmed Ragab",
     phone: "+1122334455",
     email: "emily.johnson@example.com",
   },
@@ -329,9 +330,9 @@ export const supervisorsData = [
   },
   {
     id: 5,
-    name: "Linda Davis",
+    name: "يوسف علاء",
     phone: "+1334455667",
-    email: "linda.davis@example.com",
+    email: "Mohammed Walid",
   },
 ];
 
@@ -729,7 +730,12 @@ export const featuresListData = [
 export const notificationsColumns = [
   { field: "userId", headerName: i18n.t("ID"), flex: 1 },
   { field: "createdAt", headerName: i18n.t("Date"), flex: 1 },
-  { field: "isRead", headerName: i18n.t("Read?"), flex: 1 },
+  {
+    field: "isRead",
+    headerName: i18n.t("Read?"),
+    flex: 1,
+    renderCell: ({ row }) => <Read row={row} />,
+  },
   {
     field: "title",
     headerName: i18n.t("Title"),
@@ -783,7 +789,7 @@ export const notificationsData = [
     id: 1,
     userId: 1,
     userType: "string",
-    isRead: true,
+    isRead: false,
     notificationContent: '{"title": "Hello2", "body": "Hello2, Hello"}',
     createdAt: "2024-08-30T14:18:20.632Z",
   },

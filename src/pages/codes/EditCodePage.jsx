@@ -158,6 +158,7 @@ const EditCodePage = () => {
               }}
               required
               label="Country Flag"
+              defaultValue={row.flag}
             >
               {flagItems.map((country) => (
                 <MenuItem
@@ -230,6 +231,7 @@ const EditCodePage = () => {
               onChange={handleCodeChange}
               required
               label="country code"
+              defaultValue={row.country_code}
             >
               {codeItems.map((country) => (
                 <MenuItem

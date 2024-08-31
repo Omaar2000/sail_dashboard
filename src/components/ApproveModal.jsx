@@ -52,29 +52,29 @@ const ApproveModal = ({
   //   fetchData();
   // }, []);
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    try {
-      setLoading(true);
-      selectedItems.forEach(async (element) => {
-        if (element.approvedBy !== null) {
+  const handleClick = () => {
+    // e.preventDefault();
+    selectedItems.map(async (element) => {
+      try {
+        setLoading(true);
+        if (element.approvedBy === null) {
           await addItem(
             token,
             logout,
             `${Endpoint}${element.requestTypeId}`,
             {}
           );
+          setTimeout(() => {
+            setVerifyIsOpen(false);
+            // window.location.reload();
+          }, 500);
         }
-      });
-      setTimeout(() => {
-        setVerifyIsOpen(false);
-        window.location.reload();
-      }, 500);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    });
   };
 
   return (

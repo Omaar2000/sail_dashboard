@@ -1,22 +1,9 @@
 import { useEffect, useState } from "react";
 import TableComponent from "../components/Table";
-import {
-  boatRequestsColumns,
-  coversColumns,
-  payoutsColumns,
-  payoutsData,
-  providerRequestsColumns,
-  providerRequestsData,
-  usersRequestsColumns,
-} from "../data/mockData";
+import { usersRequestsColumns } from "../data/mockData";
 import useUserStore from "../stores/useUserStore";
 import usePaginationStore from "../stores/usePaginationStore";
 import { getAll } from "../network/network";
-
-// export const getAllCategories = async () => {
-//   const res = await axios.get("/api/categories");
-//   return res.data;
-// };
 
 const UsersRequests = () => {
   const [rows, setRows] = useState([]);

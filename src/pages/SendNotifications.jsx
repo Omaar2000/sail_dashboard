@@ -31,6 +31,7 @@ const SendNotifications = () => {
   const colors = tokens(theme.palette.mode);
   const [title, setTitle] = useState(null);
   const [message, setMessage] = useState(null);
+  const [For, setFor] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -60,12 +61,21 @@ const SendNotifications = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      await addItem(
-        token,
-        logout,
-        `https://dev.sailgloble.com/admin/notifications/send`,
-        notification
-      );
+      if (For === "Providers") {
+        await addItem(
+          token,
+          logout,
+          `https://dev.sailgloble.com/admin/notifications/send/providers`,
+          notification
+        );
+      } else if (For === "Users") {
+        await addItem(
+          token,
+          logout,
+          `https://dev.sailgloble.com/admin/notifications/send/customers`,
+          notification
+        );
+      }
       setTimeout(() => {
         setIsOpen(false);
         navigate("/notifications");
@@ -131,12 +141,12 @@ const SendNotifications = () => {
             <TextField
               size="huge"
               label={t("Message (English)")}
-              defaultValue={"Marsol new"}
               variant="outlined"
               onChange={(e) => {
                 setMessage(e.target.value);
               }}
               fullWidth
+              required
               multiline
               minRows={6}
               sx={{
@@ -208,7 +218,9 @@ const SendNotifications = () => {
               <Select
                 labelId="code-label"
                 // name="code"
-                // onChange={handleCodeChange}
+                onChange={(e) => {
+                  setFor(e.target.value);
+                }}
                 required
                 label="For"
               >
@@ -247,7 +259,7 @@ const SendNotifications = () => {
           }}
         >
           <Button
-            onClick={() => setIsOpen(true)}
+            type="submit"
             variant="contained"
             color="success"
             size="large"
@@ -256,7 +268,7 @@ const SendNotifications = () => {
             {t("Save")}
           </Button>
         </Box>
-        <Dialog
+        {/* <Dialog
           open={IsOpen}
           onClose={() => {
             // set
@@ -273,8 +285,7 @@ const SendNotifications = () => {
             {/* <Button onClick={() => setAdminRandomIsOpen(false)} color="info">
             Cancel
           </Button> */}
-            <Button
-              type="submit"
+        {/* <Button
               color="success"
               autoFocus
               variant="contained"
@@ -288,7 +299,7 @@ const SendNotifications = () => {
               {isLoading ? t("Loading") : t("Send")}
             </Button>
           </DialogActions>
-        </Dialog>
+        </Dialog> */}
       </form>
       <ToastContainer position="top-center" autoClose="3000" />
     </Box>
