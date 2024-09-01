@@ -280,23 +280,59 @@
 
 // export default EditCategoryPage;
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Grid, Divider, Button } from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
 import * as XLSX from "xlsx";
 import { LocationCity } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
+import { getAll } from "../../network/network";
+import useUserStore from "../../stores/useUserStore";
 
 const ProviderDetails = () => {
   const location = useLocation();
   const row = location.state;
-  const providerInfo = {
-    name: "John Doe",
-    phone: "+1234567890",
-    bankAccount: "123456789012",
-    id: "9876543210",
-  };
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
+
+  const [providerInfo, setProviderInfo] = useState({
+    name: null,
+    phone: null,
+    bankAccount: null,
+    id: null,
+  });
+
+  const [loading, setLoading] = useState(false);
+  const { token, logout } = useUserStore();
+
+  useEffect(() => {
+    const fetchProviderDetails = async () => {
+      try {
+        setLoading(true);
+
+        const data = await getAll(
+          token,
+          logout,
+          `https://dev.sailgloble.com/admin/providers/${row?.requestTypeId}`
+        );
+
+        setProviderInfo(data.data); // Assuming the API returns data in a structure you need
+
+        console.log(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error getting Provider:", error);
+        setLoading(false);
+      }
+    };
+
+    if (!row?.full_name) {
+      fetchProviderDetails();
+    } else {
+      console.error("Provider ID is missing in location state.");
+    }
+  }, [row?.id]);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -356,7 +392,7 @@ const ProviderDetails = () => {
             <Typography variant="body1" fontWeight="bold">
               Bank Account:
             </Typography>
-            <Typography variant="body1">{providerInfo.bankAccount}</Typography>
+            <Typography variant="body1">{row.bank_name}</Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography variant="body1" fontWeight="bold">

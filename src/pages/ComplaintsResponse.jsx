@@ -54,7 +54,6 @@ const Respond = () => {
           <TextField
             size="huge"
             label={t("Message (English)")}
-            defaultValue={"Marsol new"}
             variant="outlined"
             onChange={(e) => {
               setResponse(e.target.value);

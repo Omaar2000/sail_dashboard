@@ -428,7 +428,7 @@ const SidebarComponent = ({
           setHovered={setHovered}
         />
         <Item
-          title={"Payouts"}
+          title={"User Payouts"}
           icon={<Payment />}
           to={"payouts"}
           selected={Selected}

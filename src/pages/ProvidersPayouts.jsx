@@ -20,6 +20,7 @@ import { getAll } from "../network/network";
 
 const PayoutsRequests = () => {
   const [rows, setRows] = useState([]);
+  const [shallowData, setShallowData] = useState([]);
   const { token, logout } = useUserStore();
   const [loading, setLoading] = useState(false);
   const { pageSize, page, setTotalPages, setPage, setPageSize } =
@@ -40,7 +41,9 @@ const PayoutsRequests = () => {
           logout,
           `https://dev.sailgloble.com/admin/provider-requests/payout?limit=${pageSize}&page=${page}`
         );
-        setRows(data.data);
+        setShallowData(data.data);
+
+        // setRows(data.data);
         setTotalPages(data.pageCount);
 
         console.log(data);
@@ -49,8 +52,26 @@ const PayoutsRequests = () => {
         console.error("Error getting Providers:", error);
       }
     };
+    const fetchRealData = async () => {
+      shallowData.map(async (provider) => {
+        try {
+          const res = await getAll(
+            token,
+            logout,
+            `https://dev.sailgloble.com/admin/provider-requests/boat/${provider.requestTypeId}`
+          );
+          setRows([...rows, res]);
+          console.log(rows);
+          console.log("asdfasfasfsfsfsaf", res);
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    };
 
     fetchData();
+    fetchRealData();
+    console.log(rows);
   }, [pageSize, page]);
 
   return (

@@ -17,6 +17,7 @@ import Verified from "../components/Verified";
 import { Box, Typography } from "@mui/material";
 import NotificationDetails from "../components/NotificationDetails";
 import Read from "../components/Read";
+import DetailsBtn from "../components/DetailsBtn";
 
 // Ban and Unban for users and providers
 // verify user and provider
@@ -306,31 +307,31 @@ export const supervisorsColumns = [
 export const supervisorsData = [
   {
     id: 1,
-    name: "Kareem Mohammed",
+    user_name: "Kareem Mohammed",
     phone: "01097342117",
     email: "john.doe@example.com",
   },
   {
     id: 2,
-    name: "Adam Walid",
+    user_name: "Adam Walid",
     phone: "01098432107",
     email: "jane.smith@example.com",
   },
   {
     id: 3,
-    name: "Ahmed Ragab",
+    user_name: "Ahmed Ragab",
     phone: "+1122334455",
     email: "emily.johnson@example.com",
   },
   {
     id: 4,
-    name: "Michael Brown",
+    user_name: "Michael Brown",
     phone: "+1223344556",
     email: "michael.brown@example.com",
   },
   {
     id: 5,
-    name: "يوسف علاء",
+    user_name: "يوسف علاء",
     phone: "+1334455667",
     email: "Mohammed Walid",
   },
@@ -340,7 +341,7 @@ export const complaintsColumns = [
   { field: "id", headerName: i18n.t("ID"), flex: 1 },
   {
     field: "approvedBy",
-    headerName: i18n.t("Approved By"),
+    headerName: i18n.t("Responded By"),
     flex: 1,
     renderCell: ({ row }) => (
       <Typography
@@ -498,6 +499,18 @@ export const boatRequestsColumns = [
       />
     ),
   },
+  {
+    field: "details",
+    headerName: i18n.t("Details"),
+    flex: 1,
+    renderCell: ({ row }) => (
+      <DetailsBtn
+        // endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
+        row={row}
+        to="/boatdetail"
+      />
+    ),
+  },
   // {
   //   field: "details",
   //   headerName: i18n.t("Details"),
@@ -602,6 +615,18 @@ export const providerRequestsColumns = [
       <Control
         endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/account/${row.requestTypeId}`}
         row={row}
+      />
+    ),
+  },
+  {
+    field: "details",
+    headerName: i18n.t("Details"),
+    flex: 1,
+    renderCell: ({ row }) => (
+      <DetailsBtn
+        // endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
+        row={row}
+        to="/providerdetails"
       />
     ),
   },
@@ -730,12 +755,12 @@ export const featuresListData = [
 export const notificationsColumns = [
   { field: "userId", headerName: i18n.t("ID"), flex: 1 },
   { field: "createdAt", headerName: i18n.t("Date"), flex: 1 },
-  {
-    field: "isRead",
-    headerName: i18n.t("Read?"),
-    flex: 1,
-    renderCell: ({ row }) => <Read row={row} />,
-  },
+  // {
+  //   field: "isRead",
+  //   headerName: i18n.t("Read?"),
+  //   flex: 1,
+  //   renderCell: ({ row }) => <Read row={row} />,
+  // },
   {
     field: "title",
     headerName: i18n.t("Title"),

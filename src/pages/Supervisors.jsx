@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supervisorsColumns } from "../data/mockData";
+import { supervisorsColumns, supervisorsData } from "../data/mockData";
 import TableComponent from "../components/Table";
 import useUserStore from "../stores/useUserStore";
 import usePaginationStore from "../stores/usePaginationStore";
@@ -45,10 +45,10 @@ const Supervisors = () => {
   return (
     <>
       <TableComponent
-        to="/"
-        rows={rows}
+        to=""
+        rows={supervisorsData}
         columns={supervisorsColumns}
-        loading={loading}
+        // loading={loading}
       />
     </>
   );

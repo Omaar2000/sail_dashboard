@@ -51,6 +51,7 @@ import BoatsRequests from "./pages/BoatsRequests";
 import UsersRequests from "./pages/UsersPayouts";
 import ComplaintsComponent from "./pages/Complaints";
 import Respond from "./pages/ComplaintsResponse";
+import BoatDetail from "./pages/BoatDetails";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);
@@ -97,7 +98,7 @@ function App() {
               <Route path="reviews" element={<Reviews />} />
               <Route path="orders" element={<Orders />} />
               {/* <Route path="complaints" element={<Co />} /> */}
-              {/* <Route path="respond" element={<Respond />} /> */}
+              <Route path="respond" element={<Respond />} />
               <Route path="complaints" element={<ComplaintsComponent />} />
               <Route path="transactions" element={<Transactions />} />
               <Route path="payouts" element={<UsersRequests />} />
@@ -120,6 +121,7 @@ function App() {
               <Route path="addcategory" element={<AddCategoryPage />} />
               <Route path="boatroutes" element={<TripPaths />} />
               <Route path="boatsrequests" element={<BoatsRequests />} />
+              <Route path="boatdetail" element={<BoatDetail />} />
               <Route path="editpath" element={<EditPathPage />} />
               <Route path="addpath" element={<AddPathPage />} />
               <Route path="settings" element={<Settings />} />
