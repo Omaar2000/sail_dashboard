@@ -41,7 +41,7 @@ const Transactions = () => {
   return (
     <>
       <TableComponent
-        to=""
+        to="transactions"
         rows={rows}
         columns={transactionsColumns}
         loading={loading}

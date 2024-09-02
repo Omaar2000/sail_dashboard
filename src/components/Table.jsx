@@ -45,10 +45,11 @@ import "./layout/style.css";
 import CustomFooter from "./Pagination.jsx";
 import usePaginationStore from "../stores/usePaginationStore.js";
 import SearchBar from "./searchBar.jsx";
-import { assignAdmin, deleteItem } from "../network/network.js";
+import { assignAdmin, deleteItem, getAll } from "../network/network.js";
 import AdminModal from "./adminDropdown.jsx";
 import RandomModal from "./RandomModal.jsx";
 import ApproveModal from "./ApproveModal.jsx";
+import * as XLSX from "xlsx";
 
 const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
   const theme = useTheme();
@@ -61,6 +62,7 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
   const [adminIsOpen, setAdminIsOpen] = useState(false);
   const [verifyIsOpen, setVerifyIsOpen] = useState(false);
   const [adminRandomIsOpen, setAdminRandomIsOpen] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const [filterValues, setFilterValues] = useState(null);
 
@@ -120,6 +122,49 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
     setPage(1); // Reset to the first page whenever the page size changes
   };
 
+  const exportToExcel = async () => {
+    try {
+      // Fetch the transaction data from the endpoint
+      setLoading(true);
+      const data = await getAll(
+        token,
+        logout,
+        `https://dev.sailgloble.com/admin/transactions`
+      );
+
+      // Check if data exists and map it to match the column headers
+      if (data && data.data) {
+        const transactions = data.data.map((transaction) => ({
+          "Provider ID": transaction.provider,
+          Date: transaction.createdAt,
+          Amount: transaction.amount,
+          Status: transaction.status,
+          "Order ID": transaction.orderId,
+          "Transaction ID": transaction.providerTransactionId,
+        }));
+
+        // Create the worksheet and workbook
+        const worksheet = XLSX.utils.json_to_sheet(transactions);
+        const workbook = XLSX.utils.book_new();
+
+        // Append the worksheet to the workbook
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Transactions");
+
+        // Export the workbook to an Excel file
+        XLSX.writeFile(workbook, "transactions.xlsx");
+
+        console.log("Transactions exported to transactions.xlsx");
+        setLoading(false);
+      } else {
+        console.error("No transaction data available");
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+      setLoading(false);
+    }
+  };
+
   return (
     <Box m="10px">
       <Box
@@ -131,7 +176,90 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
       >
         <SearchBar />
 
-        {to === "/" ? (
+        {to === "transactions" ? (
+          <Box
+            sx={{
+              marginBottom: "1px",
+              display: "flex",
+              flexShrink: "1",
+              // justifyContent: "space-between",
+              alignItems: "center",
+              gap: "1rem",
+              marginInlineEnd: "30px",
+            }}
+          >
+            <Button
+              variant="contained"
+              onClick={exportToExcel}
+              color="secondary"
+              disabled={isLoading} // Disable the button while isLoading
+              startIcon={
+                isLoading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : null
+              }
+            >
+              {isLoading ? t("loading") : t("Export to Excel")}
+            </Button>
+            {/* <Button
+              onClick={handleAssignClick}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Assign")}
+            </Button>
+            <Button
+              onClick={handleAssignRandom}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Assign Random")}
+            </Button> */}
+          </Box>
+        ) : to === "/send" ? (
+          <Box
+            sx={{
+              marginBottom: "1px",
+              display: "flex",
+              flexShrink: "1",
+              // justifyContent: "space-between",
+              alignItems: "center",
+              gap: "1rem",
+              marginInlineEnd: "30px",
+            }}
+          >
+            <Button
+              onClick={handleAddClick}
+              variant="contained"
+              color="success"
+              style={{ margin: "0 20px" }}
+            >
+              {t(add)}
+            </Button>
+            {/* <Button
+              onClick={handleAssignClick}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Assign")}
+            </Button>
+            <Button
+              onClick={handleAssignRandom}
+              variant="contained"
+              color="success"
+              disabled={selectedItems.length === 0}
+              // style={{ margin: "20px" }}
+            >
+              {t("Assign Random")}
+            </Button> */}
+          </Box>
+        ) : to === "/" ? (
           <Box
             sx={{
               marginBottom: "1px",

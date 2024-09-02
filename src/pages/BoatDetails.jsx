@@ -12,6 +12,7 @@ import axios from "axios";
 import { getAll } from "../network/network";
 import useUserStore from "../stores/useUserStore";
 import { useLocation } from "react-router-dom";
+import Control from "../components/Control";
 
 const BoatDetail = () => {
   // Hardcoding the boatId for testing purposes
@@ -76,6 +77,7 @@ const BoatDetail = () => {
     boatLocationLat,
     boatLocationLong,
     boatTypeId,
+    id,
     capacity,
     captainLicenseBack,
     captainLicenseFront,
@@ -123,7 +125,7 @@ const BoatDetail = () => {
               <strong>Rating:</strong> {rating}
             </Typography>
             <Typography variant="body1" mb={"10px"}>
-              <strong>Type ID:</strong> {boatTypeId}
+              <strong>Type ID:</strong> {id}
             </Typography>
             <Typography variant="body1" mb={"10px"}>
               <strong>Ship Identifier:</strong> {shipIdentifier}
@@ -199,6 +201,15 @@ const BoatDetail = () => {
                   style={{ width: "100%", borderRadius: 8 }}
                 />
               </Grid>
+              {/* <Box sx={{ mt: 4, textAlign: "center" }}> */}
+              {/* {providerInfo?.full_name && ( */}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Control
+                endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${id}`}
+                row={row}
+              />
+              {/* )} */}
             </Grid>
           </Grid>
         </Grid>

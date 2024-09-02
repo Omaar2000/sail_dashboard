@@ -289,6 +289,7 @@ import { LocationCity } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 import { getAll } from "../../network/network";
 import useUserStore from "../../stores/useUserStore";
+import Control from "../../components/Control";
 
 const ProviderDetails = () => {
   const location = useLocation();
@@ -296,12 +297,7 @@ const ProviderDetails = () => {
   // const theme = useTheme();
   // const colors = tokens(theme.palette.mode);
 
-  const [providerInfo, setProviderInfo] = useState({
-    name: null,
-    phone: null,
-    bankAccount: null,
-    id: null,
-  });
+  const [providerInfo, setProviderInfo] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const { token, logout } = useUserStore();
@@ -317,7 +313,7 @@ const ProviderDetails = () => {
           `https://dev.sailgloble.com/admin/providers/${row?.requestTypeId}`
         );
 
-        setProviderInfo(data.data); // Assuming the API returns data in a structure you need
+        setProviderInfo(data); // Assuming the API returns data in a structure you need
 
         console.log(data);
         setLoading(false);
@@ -359,6 +355,7 @@ const ProviderDetails = () => {
     XLSX.writeFile(workbook, "provider_details.xlsx");
   };
 
+  console.log(providerInfo);
   return (
     <Box sx={{ p: 3, display: "flex", justifyContent: "center" }}>
       <Box
@@ -380,31 +377,106 @@ const ProviderDetails = () => {
             <Typography variant="body1" fontWeight="bold">
               Name:
             </Typography>
-            <Typography variant="body1">{row.full_name}</Typography>
+            <Typography variant="body1">
+              {providerInfo?.full_name || row.full_name}
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography variant="body1" fontWeight="bold">
               Phone:
             </Typography>
-            <Typography variant="body1">{row.phone_number}</Typography>
+            <Typography variant="body1">
+              {providerInfo?.phone_number || row.phone_number}
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography variant="body1" fontWeight="bold">
-              Bank Account:
+              Bank Name:
             </Typography>
-            <Typography variant="body1">{row.bank_name}</Typography>
+            <Typography variant="body1">
+              {providerInfo?.bank_name || row.bank_name}
+            </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <Typography variant="body1" fontWeight="bold">
-              ID:
+              Bank Account Number:
             </Typography>
-            <Typography variant="body1">{row.id}</Typography>
+            <Typography variant="body1">
+              {providerInfo?.bank_account_number || row.bank_account_number}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="body1" fontWeight="bold">
+              IBAN Number:
+            </Typography>
+            <Typography variant="body1">
+              {providerInfo?.iban_number || row.iban_number}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="body1" fontWeight="bold">
+              Email:
+            </Typography>
+            <Typography variant="body1">
+              {providerInfo?.email || row.email}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="body1" fontWeight="bold">
+              Nationality:
+            </Typography>
+            <Typography variant="body1">
+              {providerInfo?.nationality || row.nationality}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="body1" fontWeight="bold">
+              Country Code:
+            </Typography>
+            <Typography variant="body1">
+              {providerInfo?.country_code_Id || row.country_code_Id}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="body1" fontWeight="bold">
+              Profile Image:
+            </Typography>
+            <Typography variant="body1">
+              <img
+                src={providerInfo?.image_url || row.image_url}
+                alt="Provider"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography variant="body1" fontWeight="bold">
+              Created At:
+            </Typography>
+            <Typography variant="body1">
+              {providerInfo?.created_at || row.created_at}
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {/* <Typography variant="body1" fontWeight="bold">
+              Is Verified:
+            </Typography>
+            <Typography variant="body1">
+              {providerInfo?.is_verified ? "Yes" : "No"}
+            </Typography> */}
           </Grid>
         </Grid>
+
         <Box sx={{ mt: 4, textAlign: "center" }}>
-          <Button variant="contained" onClick={exportToExcel}>
+          {providerInfo?.full_name && (
+            <Control
+              endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/account/${providerInfo.requestTypeId}`}
+              row={row}
+            />
+          )}
+          {/* <Button variant="contained" onClick={exportToExcel}>
             Export to Excel
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </Box>

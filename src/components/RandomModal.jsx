@@ -32,28 +32,28 @@ const RandomModal = ({
 
   console.log(selectedItems);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setLoading(true);
 
-        const data = await getAll(
-          token,
-          logout,
-          `https://dev.sailgloble.com/admin/admin/all`
-        );
-        setRows(data.data);
-        // setTotalPages(data.page_count);
+  //       const data = await getAll(
+  //         token,
+  //         logout,
+  //         `https://dev.sailgloble.com/admin/admin/all`
+  //       );
+  //       setRows(data.data);
+  //       // setTotalPages(data.page_count);
 
-        console.log(data);
-      } catch (error) {
-        console.error("Error getting Admin:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  //       console.log(data);
+  //     } catch (error) {
+  //       console.error("Error getting Admin:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   const handleClick = async (e) => {
     e.preventDefault();

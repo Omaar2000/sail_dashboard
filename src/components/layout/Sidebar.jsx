@@ -100,7 +100,7 @@ const SidebarComponent = ({
       ? "/"
       : localStorage.getItem("selected")
       ? params["*"] || `${localStorage.getItem("selected")}`
-      : params["*"]
+      : `${localStorage.getItem("selected")}` || params["*"]
   );
   const { t } = useTranslation();
   const { pinned, toggleSidebar } = useUserStore();
