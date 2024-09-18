@@ -80,7 +80,7 @@ const AddFeaturePage = () => {
 
   return (
     <Box>
-      <h1 style={{ margin: "2rem" }}>{t("Add Cover")}</h1>
+      <h1 style={{ margin: "2rem" }}>{t("Add Feature")}</h1>
 
       <form onSubmit={handleFormSubmit}>
         <Box style={{ margin: "2rem" }} spacing={2} gap={"10px"}>
