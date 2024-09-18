@@ -695,17 +695,17 @@ const ProviderDetails = () => {
             color={colors.grey[100]}
             gutterBottom
           >
-            Additional Information
+            Actions
           </Typography>
-          <Typography variant="body1">
+          {/* <Typography variant="body1">
             Country Code: {row.country_code_Id}
-          </Typography>
+          </Typography> */}
+          <Ban
+            banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
+            unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
+            row={row}
+          />
         </Box>
-        <Ban
-          banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
-          unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
-          row={row}
-        />
       </Paper>
     </Box>
   );
