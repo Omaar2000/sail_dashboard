@@ -48,7 +48,6 @@ const AddCategoryPage = () => {
       image,
       title_en,
       title_ar,
-      type,
     };
 
     try {
