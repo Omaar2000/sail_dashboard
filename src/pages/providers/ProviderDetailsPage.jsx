@@ -592,7 +592,7 @@ const ProviderDetails = () => {
   const colors = tokens(theme.palette.mode);
 
   // Mock data for testing
-  const row = {
+  const data = {
     full_name: "John Doe",
     phone_number: "+1 234 567 8900",
     bank_name: "Global Bank",
