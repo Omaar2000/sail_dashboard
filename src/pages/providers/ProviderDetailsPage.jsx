@@ -701,8 +701,8 @@ const ProviderDetails = () => {
             Country Code: {row.country_code_Id}
           </Typography> */}
           <Ban
-            banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
-            unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
+            banEndpoint={`https://sailgloble.com/admin/providers/ban/${row.id}`}
+            unbanEndpoint={`https://sailgloble.com/admin/providers/unban/${row.id}`}
             row={row}
           />
         </Box>
