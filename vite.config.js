@@ -9,7 +9,7 @@ export default defineConfig({
       "https://sailgloble.com": {
         target: "https://sailgloble.com",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\https://sailgloble.com/, ""),
+        rewrite: (path) => path.replace(/^\/apivite/, ""),
       },
     },
     overlay: "false",
