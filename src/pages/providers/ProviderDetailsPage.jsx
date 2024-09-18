@@ -705,7 +705,7 @@ const ProviderDetails = () => {
       <Ban
         banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
         unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
-        // row={row}
+        row={row}
       />
     </Box>
   );
