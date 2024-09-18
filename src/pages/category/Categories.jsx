@@ -25,7 +25,7 @@ const Categories = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/categories?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/categories?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.page_count);
@@ -44,7 +44,7 @@ const Categories = () => {
     <>
       <TableComponent
         to="/addcategory"
-        // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
+        // Endpoint={`https://sailgloble.com/admin/providers/delete/`}
         rows={rows}
         columns={categoriesColumns}
         loading={loading}

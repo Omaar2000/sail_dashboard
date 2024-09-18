@@ -49,7 +49,7 @@ const AddCityPage = () => {
       await addItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/app_settings/cities`,
+        `https://sailgloble.com/admin/app_settings/cities`,
         city
       );
 
@@ -68,7 +68,7 @@ const AddCityPage = () => {
       const data = await getAll(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/app_settings/countries`
+        `https://sailgloble.com/admin/app_settings/countries`
       );
 
       setRows(data.data);

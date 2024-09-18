@@ -24,7 +24,7 @@ const Transactions = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/transactions?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/transactions?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.page_count);

@@ -7,7 +7,7 @@ import axios from "axios";
 export const login = async (username, password) => {
   try {
     const response = await api
-      .post(`https://dev.sailgloble.com/admin/auth/login`, {
+      .post(`https://sailgloble.com/admin/auth/login`, {
         user_name: username,
         password: password,
       })
@@ -36,7 +36,7 @@ export const api = axios.create({
   // headers : {
   //   "Access-Control-Allow-Origin" : "https://sail-dashboard-evjl.vercel.app"
   // },
-  baseURL: "https://dev.sailgloble.com",
+  baseURL: "https://sailgloble.com",
 });
 
 api.interceptors.request.use(

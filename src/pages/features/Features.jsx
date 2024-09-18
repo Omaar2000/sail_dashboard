@@ -23,7 +23,7 @@ const Features = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/app_settings/features`
+          `https://sailgloble.com/admin/app_settings/features`
         );
 
         setRows(data.data);
@@ -42,11 +42,11 @@ const Features = () => {
     <>
       <TableComponent
         to="/addfeature"
-        // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
+        // Endpoint={`https://sailgloble.com/admin/providers/delete/`}
         rows={rows}
         columns={featuresColumns}
         loading={loading}
-        add={"ADD NEW Feature"}
+        add={"ADD NEW FEATURE"}
       />
     </>
   );

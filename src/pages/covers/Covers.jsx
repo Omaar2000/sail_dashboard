@@ -23,7 +23,7 @@ const Covers = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/sliders`
+          `https://sailgloble.com/admin/sliders`
         );
 
         setRows(data.data);
@@ -42,11 +42,11 @@ const Covers = () => {
     <>
       <TableComponent
         to="/addcover"
-        // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
+        // Endpoint={`https://sailgloble.com/admin/providers/delete/`}
         rows={rows}
         columns={coversColumns}
         loading={loading}
-        add={"ADD NEW Cover"}
+        add={"ADD NEW COVER"}
       />
     </>
   );

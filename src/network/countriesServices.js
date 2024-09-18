@@ -5,7 +5,7 @@ import i18n from "../i18n";
 export const getAllCountries = async (token, logout) => {
   try {
     const res = await api.get(
-      "https://dev.sailgloble.com/admin/app_settings/countries",
+      "https://sailgloble.com/admin/app_settings/countries",
       {
         headers: {
           Authorization: `Bearer ${token}`, // Add the token here
@@ -27,7 +27,7 @@ export const getAllCountries = async (token, logout) => {
 export const addCountry = async (country, token) => {
   try {
     const res = await api.post(
-      `https://dev.sailgloble.com/admin/app_settings/countries`,
+      `https://sailgloble.com/admin/app_settings/countries`,
       country,
       {
         headers: {
@@ -47,7 +47,7 @@ export const addCountry = async (country, token) => {
 export const editCountry = async (id, country, token) => {
   try {
     const res = await api.patch(
-      `https://dev.sailgloble.com/admin/app_settings/countries/${id}`,
+      `https://sailgloble.com/admin/app_settings/countries/${id}`,
       country,
       {
         headers: {

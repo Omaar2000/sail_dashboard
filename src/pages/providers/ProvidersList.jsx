@@ -19,7 +19,7 @@ const ProviderList = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/providers?limit=${pageSize}&page=${page}&keyword=${keyword}`
+          `https://sailgloble.com/admin/providers?limit=${pageSize}&page=${page}&keyword=${keyword}`
         );
         setRows(data.data);
         setTotalPages(data.page_count);
@@ -37,7 +37,7 @@ const ProviderList = () => {
   return (
     <>
       <TableComponent
-        Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
+        Endpoint={`https://sailgloble.com/admin/providers/delete/`}
         to=""
         setRows={setRows}
         rows={rows}

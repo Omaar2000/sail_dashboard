@@ -20,7 +20,7 @@ const Read = ({ row }) => {
       await addItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/notifications/read`,
+        `https://sailgloble.com/admin/notifications/read`,
         {
           ids: [row.id],
         }

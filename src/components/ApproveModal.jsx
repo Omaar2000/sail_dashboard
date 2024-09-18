@@ -38,7 +38,7 @@ const ApproveModal = ({
   //     try {
   //       setLoading(true);
 
-  //       const data = await getAll(token, logout, `https://dev.sailgloble.com/admin/admin/all`);
+  //       const data = await getAll(token, logout, `https://sailgloble.com/admin/admin/all`);
   //       setRows(data.data);
   //       // setTotalPages(data.page_count);
 

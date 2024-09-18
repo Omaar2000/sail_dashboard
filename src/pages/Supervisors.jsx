@@ -30,7 +30,7 @@ const Supervisors = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/admin/all?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/admin/all?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.page_count);

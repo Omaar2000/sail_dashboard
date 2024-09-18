@@ -20,7 +20,7 @@ const Users = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/clients?limit=${pageSize}&page=${page}&keyword=${keyword}`
+          `https://sailgloble.com/admin/clients?limit=${pageSize}&page=${page}&keyword=${keyword}`
         );
         setRows(data.data);
         setTotalPages(data.page_count);
@@ -38,7 +38,7 @@ const Users = () => {
     <>
       <TableComponent
         to=""
-        Endpoint={`https://dev.sailgloble.com/admin/clients/delete/`}
+        Endpoint={`https://sailgloble.com/admin/clients/delete/`}
         rows={rows}
         columns={userColumns}
         loading={loading}

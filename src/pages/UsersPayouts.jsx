@@ -25,7 +25,7 @@ const UsersRequests = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/user-requests?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/user-requests?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.pageCount);
@@ -47,7 +47,7 @@ const UsersRequests = () => {
         rows={rows}
         columns={usersRequestsColumns}
         loading={loading}
-        Endpoint={`https://dev.sailgloble.com/admin/user-requests/approve/payout/`}
+        Endpoint={`https://sailgloble.com/admin/user-requests/approve/payout/`}
       />
     </>
   );

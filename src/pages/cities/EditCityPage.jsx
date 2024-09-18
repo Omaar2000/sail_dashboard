@@ -39,7 +39,7 @@ const EditCityPage = () => {
       await updateItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/app_settings/cities/${row.id}`,
+        `https://sailgloble.com/admin/app_settings/cities/${row.id}`,
         city
       );
       setTimeout(() => {

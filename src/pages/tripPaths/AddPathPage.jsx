@@ -34,7 +34,7 @@ const AddPathPage = () => {
       await addItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/trip_path`,
+        `https://sailgloble.com/admin/trip_path`,
         path
       );
 

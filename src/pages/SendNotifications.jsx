@@ -65,14 +65,14 @@ const SendNotifications = () => {
         await addItem(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/notifications/send/providers`,
+          `https://sailgloble.com/admin/notifications/send/providers`,
           notification
         );
       } else if (For === "Users") {
         await addItem(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/notifications/send/customers`,
+          `https://sailgloble.com/admin/notifications/send/customers`,
           notification
         );
       }

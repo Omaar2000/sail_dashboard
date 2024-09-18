@@ -79,8 +79,8 @@ export const userColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Ban
-        banEndpoint={`https://dev.sailgloble.com/admin/clients/ban/${row.id}`}
-        unbanEndpoint={`https://dev.sailgloble.com/admin/clients/unban/${row.id}`}
+        banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
+        unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
         row={row}
       />
     ),
@@ -135,8 +135,8 @@ export const providerColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Ban
-        banEndpoint={`https://dev.sailgloble.com/admin/providers/ban/${row.id}`}
-        unbanEndpoint={`https://dev.sailgloble.com/admin/providers/unban/${row.id}`}
+        banEndpoint={`https://sailgloble.com/admin/providers/ban/${row.id}`}
+        unbanEndpoint={`https://sailgloble.com/admin/providers/unban/${row.id}`}
         row={row}
       />
     ),
@@ -494,7 +494,7 @@ export const boatRequestsColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Control
-        endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
+        endpoint={`https://sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
         row={row}
       />
     ),
@@ -505,7 +505,7 @@ export const boatRequestsColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <DetailsBtn
-        // endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
+        // endpoint={`https://sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
         row={row}
         to="/boatdetail"
       />
@@ -546,7 +546,7 @@ export const usersRequestsColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Control
-        endpoint={`https://dev.sailgloble.com/admin/user-requests/approve/payout/${row.requestTypeId}`}
+        endpoint={`https://sailgloble.com/admin/user-requests/approve/payout/${row.requestTypeId}`}
         row={row}
       />
     ),
@@ -584,7 +584,7 @@ export const payoutsRequestsColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Control
-        endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/payout/${row.requestTypeId}`}
+        endpoint={`https://sailgloble.com/admin/provider-requests/approve/payout/${row.requestTypeId}`}
         row={row}
       />
     ),
@@ -613,7 +613,7 @@ export const providerRequestsColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <Control
-        endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/account/${row.requestTypeId}`}
+        endpoint={`https://sailgloble.com/admin/provider-requests/approve/account/${row.requestTypeId}`}
         row={row}
       />
     ),
@@ -624,7 +624,7 @@ export const providerRequestsColumns = [
     flex: 1,
     renderCell: ({ row }) => (
       <DetailsBtn
-        // endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
+        // endpoint={`https://sailgloble.com/admin/provider-requests/approve/boat/${row.requestTypeId}`}
         row={row}
         to="/providerdetails"
       />

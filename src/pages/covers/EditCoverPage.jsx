@@ -46,7 +46,7 @@ const EditCoverPage = () => {
       await updateMultipartItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/sliders/${row.id}`,
+        `https://sailgloble.com/admin/sliders/${row.id}`,
         cover
       );
       setTimeout(() => {

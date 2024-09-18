@@ -7,7 +7,7 @@ import axios from "axios";
 export const getAllUsers = async (token, logout, page = 1, pageSize = 10) => {
   try {
     const res = await api.get(
-      `https://dev.sailgloble.com/admin/clients/users?limit=${pageSize}&page=${page}`,
+      `https://sailgloble.com/admin/clients/users?limit=${pageSize}&page=${page}`,
       {
         headers: {
           Authorization: `Bearer ${token}`, // Add the token here
@@ -27,7 +27,7 @@ export const getAllUsers = async (token, logout, page = 1, pageSize = 10) => {
 export const deleteUser = async (token, logout, id) => {
   try {
     const res = await api.delete(
-      `https://dev.sailgloble.com/admin/clients/delete/${id}`,
+      `https://sailgloble.com/admin/clients/delete/${id}`,
       {
         headers: {
           "x-custom-lang": "ar",
@@ -50,7 +50,7 @@ export const deleteUser = async (token, logout, id) => {
 export const banUser = async (token, logout, id) => {
   try {
     const res = await api.post(
-      `https://dev.sailgloble.com/admin/clients/ban/${id}`,
+      `https://sailgloble.com/admin/clients/ban/${id}`,
       {},
       {
         headers: {
@@ -75,7 +75,7 @@ export const banUser = async (token, logout, id) => {
 export const unbanUser = async (token, logout, id) => {
   try {
     const res = await api.post(
-      `https://dev.sailgloble.com/admin/clients/unban/${id}`,
+      `https://sailgloble.com/admin/clients/unban/${id}`,
       {},
       {
         headers: {

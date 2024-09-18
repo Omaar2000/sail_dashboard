@@ -6,7 +6,7 @@ import i18n from "../i18n";
 export const getAllCities = async (token, logout) => {
   try {
     const res = await api.get(
-      "https://dev.sailgloble.com/admin/app_settings/cities",
+      "https://sailgloble.com/admin/app_settings/cities",
       {
         headers: {
           Authorization: `Bearer ${token}`, // Add the token here
@@ -28,7 +28,7 @@ export const getAllCities = async (token, logout) => {
 export const addCity = async (city, token) => {
   try {
     const res = await api.post(
-      `https://dev.sailgloble.com/admin/app_settings/cities`,
+      `https://sailgloble.com/admin/app_settings/cities`,
       city,
       {
         headers: {
@@ -48,7 +48,7 @@ export const addCity = async (city, token) => {
 export const editCity = async (id, city, token) => {
   try {
     const res = await api.patch(
-      `https://dev.sailgloble.com/admin/app_settings/cities/${id}`,
+      `https://sailgloble.com/admin/app_settings/cities/${id}`,
       city,
       {
         headers: {

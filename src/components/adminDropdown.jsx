@@ -36,7 +36,7 @@ const AdminModal = ({ adminIsOpen, setAdminIsOpen, selectedItems }) => {
   //       const data = await getAll(
   //         token,
   //         logout,
-  //         `https://dev.sailgloble.com/admin/admin/all`
+  //         `https://sailgloble.com/admin/admin/all`
   //       );
   //       setRows(data.data);
   //       // setTotalPages(data.page_count);
@@ -58,7 +58,7 @@ const AdminModal = ({ adminIsOpen, setAdminIsOpen, selectedItems }) => {
       await assignAdmin(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/provider-requests?adminId=${admin}&requestId${selectedItems}`,
+        `https://sailgloble.com/admin/provider-requests?adminId=${admin}&requestId${selectedItems}`,
         selectedItems
       );
       setTimeout(() => {

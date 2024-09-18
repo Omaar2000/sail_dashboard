@@ -64,7 +64,7 @@ const AddFeaturePage = () => {
       await addMultipartItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/app_settings/features`,
+        `https://sailgloble.com/admin/app_settings/features`,
         feature
       );
 

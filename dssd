@@ -588,7 +588,7 @@
    try {[m
      const response = await api[m
 [31m-      .post([m
-[31m-        `https://dev.sailgloble.com/admin/auth/login`,[m
+[31m-        `https://sailgloble.com/admin/auth/login`,[m
 [31m-        {[m
 [31m-          user_name: username,[m
 [31m-          password: password,[m
@@ -600,7 +600,7 @@
 [31m-          },[m
 [31m-        }[m
 [31m-      )[m
-[32m+[m[32m      .post(`https://dev.sailgloble.com/admin/auth/login`, {[m
+[32m+[m[32m      .post(`https://sailgloble.com/admin/auth/login`, {[m
 [32m+[m[32m        user_name: username,[m
 [32m+[m[32m        password: password,[m
 [32m+[m[32m      })[m
@@ -617,7 +617,7 @@
 [32m+[m[32m  // headers : {[m
 [32m+[m[32m  //   "Access-Control-Allow-Origin" : "https://sail-dashboard-evjl.vercel.app"[m
 [32m+[m[32m  // },[m
-[32m+[m[32m  baseURL : "https://dev.sailgloble.com"[m
+[32m+[m[32m  baseURL : "https://sailgloble.com"[m
 [32m+[m[32m}[m
 [32m+[m[32m);[m
  [m
@@ -637,4 +637,4 @@
 [31m-      },[m
 [31m-    });[m
 [32m+[m[32m    const res = await api.get([m
-[32m+[m[32m      "https://dev.sailgloble.com/admin/app_settings/cities",
+[32m+[m[32m      "https://sailgloble.com/admin/app_settings/cities",

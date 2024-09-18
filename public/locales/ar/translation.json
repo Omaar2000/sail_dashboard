@@ -1,8 +1,10 @@
 {
   "Add New Row": "إضافة صف جديد",
+
   "Home": "الرئيسية",
   "Users": "المستخدمون",
   "Boats Data": "بيانات القوارب",
+
   "Categories": "التصنيفات",
   "Add Category": "إضافة تصنيف",
   "Edit Category": "تعديل التصنيف",
@@ -55,5 +57,12 @@
   "Verify": "تحقق",
   "Info": "معلومات",
   "Details": "تفاصيل",
-  "Search": "ابحث"
+  "Search": "ابحث",
+  "Boats Requests": "طلبات القوارب",
+  "User Payouts": "دفعات المستخدمين",
+  "ADD NEW CATEGORY": "إضافة فئة جديدة",
+  "ADD NEW COUNTRY": "إضافة دولة جديدة",
+  "ADD NEW CODE": "إضافة رمز جديد",
+  "ADD NEW COVER": "إضافة غلاف جديد",
+  "ADD NEW PATH": "إضافة مسار جديد"
 }

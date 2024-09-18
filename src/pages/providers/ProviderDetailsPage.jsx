@@ -280,205 +280,433 @@
 
 // export default EditCategoryPage;
 
-import React, { useEffect, useState } from "react";
-import { Box, Typography, Grid, Divider, Button } from "@mui/material";
+// import React, { useEffect, useState } from "react";
+// import { Box, Typography, Grid, Divider, Button } from "@mui/material";
+// import { useTheme } from "@emotion/react";
+// import { tokens } from "../../theme";
+// import * as XLSX from "xlsx";
+// import { LocationCity } from "@mui/icons-material";
+// import { useLocation } from "react-router-dom";
+// import { getAll } from "../../network/network";
+// import useUserStore from "../../stores/useUserStore";
+// import Control from "../../components/Control";
+
+// const ProviderDetails = () => {
+//   const location = useLocation();
+//   const row = location.state;
+//   // const theme = useTheme();
+//   // const colors = tokens(theme.palette.mode);
+
+//   const [providerInfo, setProviderInfo] = useState(null);
+
+//   const [loading, setLoading] = useState(false);
+//   const { token, logout } = useUserStore();
+
+//   useEffect(() => {
+//     const fetchProviderDetails = async () => {
+//       try {
+//         setLoading(true);
+
+//         const data = await getAll(
+//           token,
+//           logout,
+//           `https://sailgloble.com/admin/providers/${row?.requestTypeId}`
+//         );
+
+//         setProviderInfo(data); // Assuming the API returns data in a structure you need
+
+//         console.log(data);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error("Error getting Provider:", error);
+//         setLoading(false);
+//       }
+//     };
+
+//     if (!row?.full_name) {
+//       fetchProviderDetails();
+//     } else {
+//       console.error("Provider ID is missing in location state.");
+//     }
+//   }, [row?.id]);
+//   const theme = useTheme();
+//   const colors = tokens(theme.palette.mode);
+
+//   const exportToExcel = () => {
+//     const data = [
+//       {
+//         Name: providerInfo.name,
+//         Phone: providerInfo.phone,
+//         "Bank Account": providerInfo.bankAccount,
+//         ID: providerInfo.id,
+//       },
+//       {
+//         Name: "OMAR",
+//         Phone: "0100000000",
+//         "Bank Account": "104554",
+//         ID: 10,
+//       },
+//     ];
+
+//     const worksheet = XLSX.utils.json_to_sheet(data);
+//     const workbook = XLSX.utils.book_new();
+//     XLSX.utils.book_append_sheet(workbook, worksheet, "Provider Details");
+
+//     XLSX.writeFile(workbook, "provider_details.xlsx");
+//   };
+
+//   console.log(providerInfo);
+//   return (
+//     <Box sx={{ p: 3, display: "flex", justifyContent: "center" }}>
+//       <Box
+//         sx={{
+//           p: 4,
+//           width: "100%",
+//           maxWidth: 600,
+//           bgcolor: colors.primary[400],
+//           borderRadius: 2,
+//           boxShadow: 3,
+//         }}
+//       >
+//         <Typography variant="h5" gutterBottom align="center">
+//           Provider Details
+//         </Typography>
+//         <Divider sx={{ mb: 3 }} />
+//         <Grid container spacing={2}>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Name:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.full_name || row.full_name}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Phone:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.phone_number || row.phone_number}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Bank Name:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.bank_name || row.bank_name}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Bank Account Number:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.bank_account_number || row.bank_account_number}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               IBAN Number:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.iban_number || row.iban_number}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Email:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.email || row.email}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Nationality:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.nationality || row.nationality}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Country Code:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.country_code_Id || row.country_code_Id}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Profile Image:
+//             </Typography>
+//             <Typography variant="body1">
+//               <img
+//                 src={providerInfo?.image_url || row.image_url}
+//                 alt="Provider"
+//                 style={{ maxWidth: "100%", height: "auto" }}
+//               />
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             <Typography variant="body1" fontWeight="bold">
+//               Created At:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.created_at || row.created_at}
+//             </Typography>
+//           </Grid>
+//           <Grid item xs={12} sm={6}>
+//             {/* <Typography variant="body1" fontWeight="bold">
+//               Is Verified:
+//             </Typography>
+//             <Typography variant="body1">
+//               {providerInfo?.is_verified ? "Yes" : "No"}
+//             </Typography> */}
+//           </Grid>
+//         </Grid>
+
+//         <Box sx={{ mt: 4, textAlign: "center" }}>
+//           {providerInfo?.full_name && (
+//             <Control
+//               endpoint={`https://sailgloble.com/admin/provider-requests/approve/account/${providerInfo.requestTypeId}`}
+//               row={row}
+//             />
+//           )}
+//           {/* <Button variant="contained" onClick={exportToExcel}>
+//             Export to Excel
+//           </Button> */}
+//         </Box>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default ProviderDetails;
+
+// import React from "react";
+// import { Box, Typography, Grid, Divider, Avatar } from "@mui/material";
+// import { useTheme } from "@emotion/react";
+// import { tokens } from "../../theme";
+
+// const ProviderDetails = () => {
+//   const theme = useTheme();
+//   const colors = tokens(theme.palette.mode);
+
+//   // Mock data for testing
+//   const mockProviderInfo = {
+//     full_name: "John Doe",
+//     phone_number: "+1 234 567 8900",
+//     bank_name: "Global Bank",
+//     bank_account_number: "1234567890",
+//     iban_number: "GB29NWBK60161331926819",
+//     email: "john.doe@example.com",
+//     nationality: "United States",
+//     country_code_Id: "US",
+//     image_url: "https://example.com/profile.jpg",
+//     created_at: "2023-05-20T10:30:00Z",
+//   };
+
+//   return (
+//     <Box sx={{ p: 3, display: "flex", justifyContent: "center" }}>
+//       <Box
+//         sx={{
+//           p: 4,
+//           width: "100%",
+//           maxWidth: 800,
+//           bgcolor: colors.primary[400],
+//           borderRadius: 4,
+//           boxShadow: 3,
+//         }}
+//       >
+//         <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+//           <Avatar
+//             src={mockProviderInfo.image_url}
+//             sx={{ width: 80, height: 80, mr: 2 }}
+//           />
+//           <Typography variant="h4" fontWeight="bold">
+//             {mockProviderInfo.full_name}
+//           </Typography>
+//         </Box>
+//         <Divider sx={{ mb: 3 }} />
+//         <Grid container spacing={3}>
+//           {Object.entries(mockProviderInfo).map(([key, value]) => (
+//             <Grid item xs={12} sm={6} key={key}>
+//               <Typography
+//                 variant="subtitle1"
+//                 fontWeight="bold"
+//                 color={colors.greenAccent[400]}
+//               >
+//                 {key.replace(/_/g, " ").toUpperCase()}:
+//               </Typography>
+//               <Typography variant="body1">
+//                 {key === "image_url" ? (
+//                   <img
+//                     src={value}
+//                     alt="Provider"
+//                     style={{
+//                       maxWidth: "100%",
+//                       height: "auto",
+//                       borderRadius: 8,
+//                     }}
+//                   />
+//                 ) : (
+//                   value
+//                 )}
+//               </Typography>
+//             </Grid>
+//           ))}
+//         </Grid>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default ProviderDetails;
+import React from "react";
+import {
+  Box,
+  Typography,
+  Grid,
+  Divider,
+  Avatar,
+  Paper,
+  Chip,
+} from "@mui/material";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
-import * as XLSX from "xlsx";
-import { LocationCity } from "@mui/icons-material";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import FlagIcon from "@mui/icons-material/Flag";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
+import Ban from "../../components/Ban";
 import { useLocation } from "react-router-dom";
-import { getAll } from "../../network/network";
-import useUserStore from "../../stores/useUserStore";
-import Control from "../../components/Control";
 
 const ProviderDetails = () => {
   const location = useLocation();
   const row = location.state;
-  // const theme = useTheme();
-  // const colors = tokens(theme.palette.mode);
-
-  const [providerInfo, setProviderInfo] = useState(null);
-
-  const [loading, setLoading] = useState(false);
-  const { token, logout } = useUserStore();
-
-  useEffect(() => {
-    const fetchProviderDetails = async () => {
-      try {
-        setLoading(true);
-
-        const data = await getAll(
-          token,
-          logout,
-          `https://dev.sailgloble.com/admin/providers/${row?.requestTypeId}`
-        );
-
-        setProviderInfo(data); // Assuming the API returns data in a structure you need
-
-        console.log(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error getting Provider:", error);
-        setLoading(false);
-      }
-    };
-
-    if (!row?.full_name) {
-      fetchProviderDetails();
-    } else {
-      console.error("Provider ID is missing in location state.");
-    }
-  }, [row?.id]);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const exportToExcel = () => {
-    const data = [
-      {
-        Name: providerInfo.name,
-        Phone: providerInfo.phone,
-        "Bank Account": providerInfo.bankAccount,
-        ID: providerInfo.id,
-      },
-      {
-        Name: "OMAR",
-        Phone: "0100000000",
-        "Bank Account": "104554",
-        ID: 10,
-      },
-    ];
-
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Provider Details");
-
-    XLSX.writeFile(workbook, "provider_details.xlsx");
+  // Mock data for testing
+  const mockProviderInfo = {
+    full_name: "John Doe",
+    phone_number: "+1 234 567 8900",
+    bank_name: "Global Bank",
+    bank_account_number: "1234567890",
+    iban_number: "GB29NWBK60161331926819",
+    email: "john.doe@example.com",
+    nationality: "United States",
+    country_code_Id: "US",
+    image_url: "https://example.com/profile.jpg",
+    created_at: "2023-05-20T10:30:00Z",
   };
 
-  console.log(providerInfo);
+  const InfoItem = ({ icon, label, value }) => (
+    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+      {icon}
+      <Box sx={{ ml: 2 }}>
+        <Typography variant="body2" color={colors.grey[100]}>
+          {label}
+        </Typography>
+        <Typography variant="body1" fontWeight="bold">
+          {value}
+        </Typography>
+      </Box>
+    </Box>
+  );
+
   return (
     <Box sx={{ p: 3, display: "flex", justifyContent: "center" }}>
-      <Box
+      <Paper
+        elevation={3}
         sx={{
           p: 4,
           width: "100%",
-          maxWidth: 600,
+          maxWidth: 900,
           bgcolor: colors.primary[400],
-          borderRadius: 2,
-          boxShadow: 3,
+          borderRadius: 4,
         }}
       >
-        <Typography variant="h5" gutterBottom align="center">
-          Provider Details
-        </Typography>
-        <Divider sx={{ mb: 3 }} />
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Name:
+        <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
+          <Avatar
+            src={mockProviderInfo.image_url}
+            sx={{ width: 100, height: 100, mr: 3 }}
+          />
+          <Box>
+            <Typography variant="h3" fontWeight="bold" color={colors.grey[100]}>
+              {mockProviderInfo.full_name}
             </Typography>
-            <Typography variant="body1">
-              {providerInfo?.full_name || row.full_name}
-            </Typography>
+            <Chip
+              label={mockProviderInfo.nationality}
+              icon={<FlagIcon />}
+              sx={{ mt: 1, bgcolor: colors.greenAccent[600] }}
+            />
+          </Box>
+        </Box>
+        <Divider sx={{ mb: 4 }} />
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <InfoItem
+              icon={<EmailIcon sx={{ color: colors.greenAccent[500] }} />}
+              label="Email"
+              value={mockProviderInfo.email}
+            />
+            <InfoItem
+              icon={<PhoneIcon sx={{ color: colors.greenAccent[500] }} />}
+              label="Phone"
+              value={mockProviderInfo.phone_number}
+            />
+            <InfoItem
+              icon={
+                <CalendarTodayIcon sx={{ color: colors.greenAccent[500] }} />
+              }
+              label="Joined"
+              value={new Date(mockProviderInfo.created_at).toLocaleDateString()}
+            />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Phone:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.phone_number || row.phone_number}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Bank Name:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.bank_name || row.bank_name}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Bank Account Number:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.bank_account_number || row.bank_account_number}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              IBAN Number:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.iban_number || row.iban_number}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Email:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.email || row.email}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Nationality:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.nationality || row.nationality}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Country Code:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.country_code_Id || row.country_code_Id}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Profile Image:
-            </Typography>
-            <Typography variant="body1">
-              <img
-                src={providerInfo?.image_url || row.image_url}
-                alt="Provider"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Typography variant="body1" fontWeight="bold">
-              Created At:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.created_at || row.created_at}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            {/* <Typography variant="body1" fontWeight="bold">
-              Is Verified:
-            </Typography>
-            <Typography variant="body1">
-              {providerInfo?.is_verified ? "Yes" : "No"}
-            </Typography> */}
+          <Grid item xs={12} md={6}>
+            <InfoItem
+              icon={
+                <AccountBalanceIcon sx={{ color: colors.greenAccent[500] }} />
+              }
+              label="Bank Name"
+              value={mockProviderInfo.bank_name}
+            />
+            <InfoItem
+              icon={<CreditCardIcon sx={{ color: colors.greenAccent[500] }} />}
+              label="Bank Account Number"
+              value={mockProviderInfo.bank_account_number}
+            />
+            <InfoItem
+              icon={<CreditCardIcon sx={{ color: colors.greenAccent[500] }} />}
+              label="IBAN Number"
+              value={mockProviderInfo.iban_number}
+            />
           </Grid>
         </Grid>
-
-        <Box sx={{ mt: 4, textAlign: "center" }}>
-          {providerInfo?.full_name && (
-            <Control
-              endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/account/${providerInfo.requestTypeId}`}
-              row={row}
-            />
-          )}
-          {/* <Button variant="contained" onClick={exportToExcel}>
-            Export to Excel
-          </Button> */}
+        <Box sx={{ mt: 4 }}>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            color={colors.grey[100]}
+            gutterBottom
+          >
+            Additional Information
+          </Typography>
+          <Typography variant="body1">
+            Country Code: {mockProviderInfo.country_code_Id}
+          </Typography>
         </Box>
-      </Box>
+      </Paper>
+      <Ban
+        banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
+        unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
+        // row={row}
+      />
     </Box>
   );
 };

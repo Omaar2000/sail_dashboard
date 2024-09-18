@@ -57,7 +57,7 @@ const AddCategoryPage = () => {
       await addMultipartItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/categories`,
+        `https://sailgloble.com/admin/categories`,
         category
       );
 

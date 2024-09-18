@@ -30,7 +30,7 @@ const ComplaintsComponent = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/provider-requests/complaints?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/provider-requests/complaints?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.pageCount);
@@ -52,7 +52,7 @@ const ComplaintsComponent = () => {
         rows={rows}
         columns={complaintsColumns}
         loading={loading}
-        // Endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/`}
+        // Endpoint={`https://sailgloble.com/admin/provider-requests/approve/boat/`}
       />
     </>
   );

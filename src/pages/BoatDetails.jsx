@@ -33,7 +33,7 @@ const BoatDetail = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/provider-requests/boat/${row.requestTypeId}`
+          `https://sailgloble.com/admin/provider-requests/boat/${row.requestTypeId}`
         );
         setBoatData(data.data);
         // setTotalPages(data.page_count);
@@ -105,7 +105,7 @@ const BoatDetail = () => {
 
           <Grid item xs={12} md={6}>
             <img
-              src={`https://dev.sailgloble.com/${boatCoverImage}`}
+              src={`https://sailgloble.com/${boatCoverImage}`}
               alt="Boat Cover"
               style={{ width: "100%", borderRadius: 8 }}
             />
@@ -148,7 +148,7 @@ const BoatDetail = () => {
               {boatImages.map((image, index) => (
                 <Grid item xs={12} sm={6} md={4} key={index}>
                   <img
-                    src={`https://dev.sailgloble.com/${image}`}
+                    src={`https://sailgloble.com/${image}`}
                     alt={`Boat Image ${index + 1}`}
                     style={{ width: "100%", borderRadius: 8 }}
                   />
@@ -206,7 +206,7 @@ const BoatDetail = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Control
-                endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/${id}`}
+                endpoint={`https://sailgloble.com/admin/provider-requests/approve/boat/${id}`}
                 row={row}
               />
               {/* )} */}

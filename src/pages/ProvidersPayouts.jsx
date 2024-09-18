@@ -39,7 +39,7 @@ const PayoutsRequests = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/provider-requests/payout?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/provider-requests/payout?limit=${pageSize}&page=${page}`
         );
         setShallowData(data.data);
 
@@ -58,7 +58,7 @@ const PayoutsRequests = () => {
           const res = await getAll(
             token,
             logout,
-            `https://dev.sailgloble.com/admin/provider-requests/boat/${provider.requestTypeId}`
+            `https://sailgloble.com/admin/provider-requests/boat/${provider.requestTypeId}`
           );
           setRows([...rows, res]);
           console.log(rows);
@@ -81,7 +81,7 @@ const PayoutsRequests = () => {
         rows={rows}
         columns={payoutsRequestsColumns}
         loading={loading}
-        Endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/payout/`}
+        Endpoint={`https://sailgloble.com/admin/provider-requests/approve/payout/`}
       />
     </>
   );

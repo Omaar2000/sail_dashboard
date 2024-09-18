@@ -40,7 +40,7 @@ const RandomModal = ({
   //       const data = await getAll(
   //         token,
   //         logout,
-  //         `https://dev.sailgloble.com/admin/admin/all`
+  //         `https://sailgloble.com/admin/admin/all`
   //       );
   //       setRows(data.data);
   //       // setTotalPages(data.page_count);
@@ -62,7 +62,7 @@ const RandomModal = ({
       await assignAdmin(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/provider-requests/assign-random`,
+        `https://sailgloble.com/admin/provider-requests/assign-random`,
         selectedItems
       );
       setTimeout(() => {

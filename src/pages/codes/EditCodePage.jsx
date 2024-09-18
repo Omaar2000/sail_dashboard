@@ -64,7 +64,7 @@ const EditCodePage = () => {
       await updateItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/app_settings/country_code/${row.id}`,
+        `https://sailgloble.com/admin/app_settings/country_code/${row.id}`,
         countryCode
       );
       setTimeout(() => {

@@ -6,7 +6,7 @@ import i18n from "../i18n";
 export const getAllProviders = async (token, logout) => {
   try {
     const res = await api.get(
-      "https://dev.sailgloble.com/admin/clients/providers",
+      "https://sailgloble.com/admin/clients/providers",
       {
         headers: {
           "x-custom-lang": "ar",
@@ -29,7 +29,7 @@ export const getAllProviders = async (token, logout) => {
 export const deleteOneProvider = async (token, logout, id) => {
   try {
     const res = await api.delete(
-      `https://dev.sailgloble.com/admin/providers/delete/${id}`,
+      `https://sailgloble.com/admin/providers/delete/${id}`,
       {
         headers: {
           "x-custom-lang": "ar",
@@ -51,7 +51,7 @@ export const deleteOneProvider = async (token, logout, id) => {
 export const banProvider = async (token, logout, id) => {
   try {
     const res = await api.post(
-      `https://dev.sailgloble.com/admin/providers/ban/${id}`,
+      `https://sailgloble.com/admin/providers/ban/${id}`,
       {},
       {
         headers: {
@@ -75,7 +75,7 @@ export const banProvider = async (token, logout, id) => {
 export const unbanProvider = async (token, logout, id) => {
   try {
     const res = await api.post(
-      `https://dev.sailgloble.com/admin/providers/unban/${id}`,
+      `https://sailgloble.com/admin/providers/unban/${id}`,
       {},
       {
         headers: {

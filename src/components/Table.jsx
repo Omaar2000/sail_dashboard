@@ -129,7 +129,7 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
       const data = await getAll(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/transactions`
+        `https://sailgloble.com/admin/transactions`
       );
 
       // Check if data exists and map it to match the column headers

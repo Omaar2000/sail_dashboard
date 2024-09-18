@@ -49,7 +49,7 @@ const EditFeaturePage = () => {
       await updateMultipartItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/app_settings/features/${row.id}`,
+        `https://sailgloble.com/admin/app_settings/features/${row.id}`,
         feature
       );
       setTimeout(() => {

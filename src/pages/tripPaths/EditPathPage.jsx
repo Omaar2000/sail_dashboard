@@ -37,7 +37,7 @@ const EditPathPage = () => {
       await updateItem(
         token,
         logout,
-        `https://dev.sailgloble.com/admin/trip_path/${row.id}`,
+        `https://sailgloble.com/admin/trip_path/${row.id}`,
         path
       );
       setTimeout(() => {

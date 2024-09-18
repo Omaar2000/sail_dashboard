@@ -6,11 +6,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": {
-        target: "https://dev.sailgloble.com",
+      "https://sailgloble.com": {
+        target: "https://sailgloble.com",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/apivite/, ""),
+        rewrite: (path) => path.replace(/^\https://sailgloble.com/, ""),
       },
     },
+    overlay: "false",
   },
 });

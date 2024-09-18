@@ -24,7 +24,7 @@ const Codes = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/app_settings/country_code?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/app_settings/country_code?limit=${pageSize}&page=${page}`
         );
 
         setRows(data.data);
@@ -46,11 +46,11 @@ const Codes = () => {
     <>
       <TableComponent
         to="/addcode"
-        // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
+        // Endpoint={`https://sailgloble.com/admin/providers/delete/`}
         rows={rows}
         columns={codesColumns}
         loading={loading}
-        add={"ADD NEW Code"}
+        add={"ADD NEW CODE"}
       />
     </>
   );

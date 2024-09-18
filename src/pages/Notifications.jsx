@@ -29,7 +29,7 @@ const Notifications = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/notifications?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/notifications?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.pageCount);

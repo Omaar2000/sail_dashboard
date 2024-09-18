@@ -19,7 +19,7 @@ const Cities = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/app_settings/cities?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/app_settings/cities?limit=${pageSize}&page=${page}`
         );
 
         setRows(data.data);
@@ -39,7 +39,7 @@ const Cities = () => {
     <>
       <TableComponent
         to="/addcity"
-        // Endpoint={`https://dev.sailgloble.com/admin/providers/delete/`}
+        // Endpoint={`https://sailgloble.com/admin/providers/delete/`}
         rows={rows}
         columns={citiesColumns}
         loading={loading}

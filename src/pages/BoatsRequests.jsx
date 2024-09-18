@@ -30,7 +30,7 @@ const BoatsRequests = () => {
         const data = await getAll(
           token,
           logout,
-          `https://dev.sailgloble.com/admin/provider-requests/boat?limit=${pageSize}&page=${page}`
+          `https://sailgloble.com/admin/provider-requests/boat?limit=${pageSize}&page=${page}`
         );
         setRows(data.data);
         setTotalPages(data.pageCount);
@@ -52,7 +52,7 @@ const BoatsRequests = () => {
         rows={rows}
         columns={boatRequestsColumns}
         loading={loading}
-        Endpoint={`https://dev.sailgloble.com/admin/provider-requests/approve/boat/`}
+        Endpoint={`https://sailgloble.com/admin/provider-requests/approve/boat/`}
       />
     </>
   );
