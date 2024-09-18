@@ -120,7 +120,7 @@ const EditCategoryPage = () => {
             }}
           />
 
-          {/* <FormControl
+          <FormControl
             fullWidth
             margin="normal"
             sx={{
@@ -144,12 +144,14 @@ const EditCategoryPage = () => {
               }}
               label="Type"
             >
-              <MenuItem value="BANANA">{t("Banana Boat")}</MenuItem>
-              <MenuItem value="TOUR">{t("Touring")}</MenuItem>
-              <MenuItem value="FISHING">{t("Fishing")}</MenuItem>
+              <MenuItem value="BANANA_BOAT">{t("Banana Boat")}</MenuItem>
+              <MenuItem value="OUTING_TRIPS">{t("Touring")}</MenuItem>
+              <MenuItem value="FISHING_TRIPS">{t("Fishing")}</MenuItem>
               <MenuItem value="JET_SKI">{t("Jet Ski")}</MenuItem>
+              <MenuItem value="PARACHUTE">{t("Parachute")}</MenuItem>
+              <MenuItem value="KAYAK">{t("Kayak")}</MenuItem>
             </Select>
-          </FormControl> */}
+          </FormControl>
         </Box>
         <Box
           // display={"flex"}

@@ -28,7 +28,7 @@ const AddCategoryPage = () => {
   const [imageError, setImageError] = useState(false);
   const fileRef = useRef(null);
   const [image, setImage] = useState(null);
-  const [type, setType] = useState(null);
+  const [category, setCategory] = useState(null);
   const [title_ar, setTitle_ar] = useState(null);
   const [title_en, setTitle_en] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,10 +44,11 @@ const AddCategoryPage = () => {
       return;
     }
 
-    const category = {
+    const BODY = {
       image,
       title_en,
       title_ar,
+      category,
     };
 
     try {
@@ -57,7 +58,7 @@ const AddCategoryPage = () => {
         token,
         logout,
         `https://sailgloble.com/admin/categories`,
-        category
+        BODY
       );
 
       setTimeout(() => {
@@ -124,7 +125,7 @@ const AddCategoryPage = () => {
               },
             }}
           />
-          {/* 
+
           <FormControl
             fullWidth
             margin="normal"
@@ -141,20 +142,22 @@ const AddCategoryPage = () => {
             <InputLabel id="type-label">{t("Type")}</InputLabel>
 
             <Select
-              labelId="type-label"
-              name="type"
+              labelId="category-label"
+              name="category"
               onChange={(e) => {
-                setType(e.target.value);
+                setCategory(e.target.value);
               }}
               required
-              label="Type"
+              label="Category"
             >
-              <MenuItem value="BANANA">{t("Banana Boat")}</MenuItem>
-              <MenuItem value="TOUR">{t("Touring")}</MenuItem>
-              <MenuItem value="FISHING">{t("Fishing")}</MenuItem>
+              <MenuItem value="BANANA_BOAT">{t("Banana Boat")}</MenuItem>
+              <MenuItem value="OUTING_TRIPS">{t("Touring")}</MenuItem>
+              <MenuItem value="FISHING_TRIPS">{t("Fishing")}</MenuItem>
               <MenuItem value="JET_SKI">{t("Jet Ski")}</MenuItem>
+              <MenuItem value="PARACHUTE">{t("Parachute")}</MenuItem>
+              <MenuItem value="KAYAK">{t("Kayak")}</MenuItem>
             </Select>
-          </FormControl> */}
+          </FormControl>
         </Box>
         <Box
           // display={"flex"}
