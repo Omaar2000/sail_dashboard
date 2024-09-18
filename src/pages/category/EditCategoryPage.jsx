@@ -38,11 +38,11 @@ const EditCategoryPage = () => {
     e.preventDefault();
     console.log(image);
 
-    const category = {
+    const BODY = {
       image: image,
       nameEn: row.nameEn,
       nameAr: row.nameAr,
-      type: row.type,
+      category: row.category,
     };
     try {
       setIsLoading(true);
@@ -51,7 +51,7 @@ const EditCategoryPage = () => {
         token,
         logout,
         `https://sailgloble.com/admin/categories/${row.id}`,
-        category
+        BODY
       );
       setTimeout(() => {
         navigate("/categories");
@@ -107,7 +107,7 @@ const EditCategoryPage = () => {
             onChange={(e) => {
               row.nameAr = e.target.value;
 
-              console.log(row.type);
+              console.log(row.category);
             }}
             fullWidth
             sx={{
@@ -138,9 +138,9 @@ const EditCategoryPage = () => {
             <Select
               labelId="type-label"
               name="type"
-              defaultValue={row.type}
+              defaultValue={row.category}
               onChange={(e) => {
-                row.type = e.target.value;
+                row.category = e.target.value;
               }}
               label="Type"
             >
