@@ -592,7 +592,7 @@ const ProviderDetails = () => {
   const colors = tokens(theme.palette.mode);
 
   // Mock data for testing
-  const mockProviderInfo = {
+  const row = {
     full_name: "John Doe",
     phone_number: "+1 234 567 8900",
     bank_name: "Global Bank",
@@ -633,15 +633,15 @@ const ProviderDetails = () => {
       >
         <Box sx={{ display: "flex", alignItems: "center", mb: 4 }}>
           <Avatar
-            src={mockProviderInfo.image_url}
+            src={row.image_url || "https://example.com/profile.jpg"}
             sx={{ width: 100, height: 100, mr: 3 }}
           />
           <Box>
             <Typography variant="h3" fontWeight="bold" color={colors.grey[100]}>
-              {mockProviderInfo.full_name}
+              {row.full_name}
             </Typography>
             <Chip
-              label={mockProviderInfo.nationality}
+              label={row.nationality}
               icon={<FlagIcon />}
               sx={{ mt: 1, bgcolor: colors.greenAccent[600] }}
             />
@@ -653,19 +653,19 @@ const ProviderDetails = () => {
             <InfoItem
               icon={<EmailIcon sx={{ color: colors.greenAccent[500] }} />}
               label="Email"
-              value={mockProviderInfo.email}
+              value={row.email}
             />
             <InfoItem
               icon={<PhoneIcon sx={{ color: colors.greenAccent[500] }} />}
               label="Phone"
-              value={mockProviderInfo.phone_number}
+              value={row.phone_number}
             />
             <InfoItem
               icon={
                 <CalendarTodayIcon sx={{ color: colors.greenAccent[500] }} />
               }
               label="Joined"
-              value={new Date(mockProviderInfo.created_at).toLocaleDateString()}
+              value={new Date(row.created_at).toLocaleDateString()}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -674,17 +674,17 @@ const ProviderDetails = () => {
                 <AccountBalanceIcon sx={{ color: colors.greenAccent[500] }} />
               }
               label="Bank Name"
-              value={mockProviderInfo.bank_name}
+              value={row.bank_name}
             />
             <InfoItem
               icon={<CreditCardIcon sx={{ color: colors.greenAccent[500] }} />}
               label="Bank Account Number"
-              value={mockProviderInfo.bank_account_number}
+              value={row.bank_account_number}
             />
             <InfoItem
               icon={<CreditCardIcon sx={{ color: colors.greenAccent[500] }} />}
               label="IBAN Number"
-              value={mockProviderInfo.iban_number}
+              value={row.iban_number}
             />
           </Grid>
         </Grid>
@@ -698,15 +698,15 @@ const ProviderDetails = () => {
             Additional Information
           </Typography>
           <Typography variant="body1">
-            Country Code: {mockProviderInfo.country_code_Id}
+            Country Code: {row.country_code_Id}
           </Typography>
         </Box>
+        <Ban
+          banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
+          unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
+          row={row}
+        />
       </Paper>
-      <Ban
-        banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
-        unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
-        row={row}
-      />
     </Box>
   );
 };
