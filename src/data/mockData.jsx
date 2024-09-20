@@ -140,9 +140,9 @@ export const providerColumns = [
         row={row}
         onApprove={(userId) => {
           // Update the row data with the user's ID for approvedBy column
-          api.setRowMode(row.id, "edit");
+          api.setRowMode(row.email, "edit");
           api.updateRows([{ ...row, email: userId }]);
-          api.setRowMode(row.id, "view");
+          api.setRowMode(row.email, "view");
         }}
       />
     ),
