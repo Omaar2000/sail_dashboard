@@ -19,7 +19,6 @@ const Control = ({ endpoint, row, onApprove }) => {
       setLoading(true);
       await verify(token, logout, endpoint);
       setIsVerified(!isVerified);
-      onApprove("1");
     } catch (error) {
       return;
     } finally {

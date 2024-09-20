@@ -133,11 +133,17 @@ export const providerColumns = [
     headerName: i18n.t("Ban Provider"),
 
     flex: 1,
-    renderCell: ({ row }) => (
+    renderCell: ({ row, api }) => (
       <Ban
         banEndpoint={`https://sailgloble.com/admin/providers/ban/${row.id}`}
         unbanEndpoint={`https://sailgloble.com/admin/providers/unban/${row.id}`}
         row={row}
+        onApprove={(userId) => {
+          // Update the row data with the user's ID for approvedBy column
+          api.setRowMode(row.id, "edit");
+          api.updateRows([{ ...row, email: userId }]);
+          api.setRowMode(row.id, "view");
+        }}
       />
     ),
   },
