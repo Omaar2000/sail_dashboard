@@ -611,10 +611,16 @@ export const providerRequestsColumns = [
     headerName: i18n.t("Verify"),
 
     flex: 1,
-    renderCell: ({ row }) => (
+    renderCell: ({ row, api }) => (
       <Control
         endpoint={`https://sailgloble.com/admin/provider-requests/approve/account/${row.requestTypeId}`}
         row={row}
+        onApprove={(userId) => {
+          // Update the row data with the user's ID for approvedBy column
+          api.setRowMode(row.id, "edit");
+          api.updateRows([{ ...row, approvedBy: userId }]);
+          api.setRowMode(row.id, "view");
+        }}
       />
     ),
   },

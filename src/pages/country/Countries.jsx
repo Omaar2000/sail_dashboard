@@ -47,7 +47,7 @@ const Countries = () => {
         add={"ADD NEW COUNTRY"}
       />
 
-      <ToastContainer autoClose="3000" position="top-center" />
+      {/* <ToastContainer autoClose="3000" position="top-center" /> */}
     </>
   );
 };

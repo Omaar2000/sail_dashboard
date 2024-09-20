@@ -52,7 +52,7 @@ const Supervisors = () => {
         columns={supervisorsColumns}
         // loading={loading}
       />
-      <ToastContainer autoClose="3000" position="top-center" />
+      {/* <ToastContainer autoClose="3000" position="top-center" /> */}
     </>
   );
 };

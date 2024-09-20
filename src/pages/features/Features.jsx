@@ -50,7 +50,7 @@ const Features = () => {
         add={"ADD NEW FEATURE"}
       />
 
-      <ToastContainer autoClose="3000" position="top-center" />
+      {/* <ToastContainer autoClose="3000" position="top-center" /> */}
     </>
   );
 };

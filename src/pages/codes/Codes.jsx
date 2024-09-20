@@ -54,7 +54,7 @@ const Codes = () => {
         add={"ADD NEW CODE"}
       />
 
-      <ToastContainer autoClose="3000" position="top-center" />
+      {/* <ToastContainer autoClose="3000" position="top-center" /> */}
     </>
   );
 };

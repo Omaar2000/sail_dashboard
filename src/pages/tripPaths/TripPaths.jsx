@@ -46,7 +46,7 @@ const TripPaths = () => {
         loading={loading}
         add={"ADD NEW PATH"}
       />
-      <ToastContainer autoClose="3000" position="top-center" />
+      {/* <ToastContainer autoClose="3000" position="top-center" /> */}
     </>
   );
 };

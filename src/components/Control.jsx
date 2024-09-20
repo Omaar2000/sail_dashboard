@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { verify } from "../network/providersServices";
 import useUserStore from "../stores/useUserStore";
 
-const Control = ({ endpoint, row }) => {
+const Control = ({ endpoint, row, onApprove }) => {
   const { t } = useTranslation();
   const { token, logout } = useUserStore();
   const [isVerified, setIsVerified] = useState(row.approvedAt !== null);
@@ -19,6 +19,7 @@ const Control = ({ endpoint, row }) => {
       setLoading(true);
       await verify(token, logout, endpoint);
       setIsVerified(!isVerified);
+      onApprove("1");
     } catch (error) {
       return;
     } finally {
