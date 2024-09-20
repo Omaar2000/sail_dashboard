@@ -4,6 +4,7 @@ import useUserStore from "../../stores/useUserStore";
 import { providerColumns } from "../../data/mockData";
 import { getAll } from "../../network/network";
 import usePaginationStore from "../../stores/usePaginationStore";
+import { ToastContainer } from "react-toastify";
 
 const ProviderList = () => {
   const [rows, setRows] = useState([]);
@@ -44,6 +45,7 @@ const ProviderList = () => {
         columns={providerColumns}
         loading={loading}
       />
+      <ToastContainer autoClose="3000" position="top-center" />
     </>
   );
 };

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import TableComponent from "../components/Table";
-import useUserStore from "../stores/useUserStore";
-import { userColumns } from "../data/mockData";
-import { deleteUser } from "../network/usersServices";
-import usePaginationStore from "../stores/usePaginationStore";
-import { getAll } from "../network/network";
+import TableComponent from "../../components/Table";
+import useUserStore from "../../stores/useUserStore";
+import { userColumns } from "../../data/mockData";
+import { deleteUser } from "../../network/usersServices";
+import usePaginationStore from "../../stores/usePaginationStore";
+import { getAll } from "../../network/network";
 
 const Users = () => {
   const [rows, setRows] = useState([]);

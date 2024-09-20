@@ -21,6 +21,7 @@ const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
       await addItem(token, logout, banEndpoint, {});
 
       setIsBanned(!isBanned);
+      row.phone_number = 1;
     } catch (error) {
       return;
     } finally {

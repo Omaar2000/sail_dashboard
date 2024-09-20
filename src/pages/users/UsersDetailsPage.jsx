@@ -291,7 +291,7 @@
 // import useUserStore from "../../stores/useUserStore";
 // import Control from "../../components/Control";
 
-// const ProviderDetails = () => {
+// const UserDetails = () => {
 //   const location = useLocation();
 //   const row = location.state;
 //   // const theme = useTheme();
@@ -303,7 +303,7 @@
 //   const { token, logout } = useUserStore();
 
 //   useEffect(() => {
-//     const fetchProviderDetails = async () => {
+//     const fetchUserDetails = async () => {
 //       try {
 //         setLoading(true);
 
@@ -324,7 +324,7 @@
 //     };
 
 //     if (!row?.full_name) {
-//       fetchProviderDetails();
+//       fetchUserDetails();
 //     } else {
 //       console.error("Provider ID is missing in location state.");
 //     }
@@ -483,14 +483,14 @@
 //   );
 // };
 
-// export default ProviderDetails;
+// export default UserDetails;
 
 // import React from "react";
 // import { Box, Typography, Grid, Divider, Avatar } from "@mui/material";
 // import { useTheme } from "@emotion/react";
 // import { tokens } from "../../theme";
 
-// const ProviderDetails = () => {
+// const UserDetails = () => {
 //   const theme = useTheme();
 //   const colors = tokens(theme.palette.mode);
 
@@ -563,7 +563,7 @@
 //   );
 // };
 
-// export default ProviderDetails;
+// export default UserDetails;
 import React from "react";
 import {
   Box,
@@ -585,7 +585,7 @@ import CreditCardIcon from "@mui/icons-material/CreditCard";
 import Ban from "../../components/Ban";
 import { useLocation } from "react-router-dom";
 
-const ProviderDetails = () => {
+const UserDetails = () => {
   const location = useLocation();
   const row = location.state;
   const theme = useTheme();
@@ -704,8 +704,8 @@ const ProviderDetails = () => {
             Country Code: {row.country_code_Id}
           </Typography> */}
           <Ban
-            banEndpoint={`https://sailgloble.com/admin/providers/ban/${row.id}`}
-            unbanEndpoint={`https://sailgloble.com/admin/providers/unban/${row.id}`}
+            banEndpoint={`https://sailgloble.com/admin/clients/ban/${row.id}`}
+            unbanEndpoint={`https://sailgloble.com/admin/clients/unban/${row.id}`}
             row={row}
           />
         </Box>
@@ -714,4 +714,4 @@ const ProviderDetails = () => {
   );
 };
 
-export default ProviderDetails;
+export default UserDetails;

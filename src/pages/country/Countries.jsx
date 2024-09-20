@@ -4,6 +4,7 @@ import { countriesColumns } from "../../data/mockData";
 import useUserStore from "../../stores/useUserStore";
 import { getAll } from "../../network/network";
 import usePaginationStore from "../../stores/usePaginationStore";
+import { ToastContainer } from "react-toastify";
 
 const Countries = () => {
   const [rows, setRows] = useState([]);
@@ -40,11 +41,13 @@ const Countries = () => {
       <TableComponent
         to="/addcountry"
         rows={rows}
-        // Endpoint={`https://sailgloble.com/admin/providers/delete/`}
+        // Endpoint={`https://sailgloble.com/admin/app_settings/countries/delete/`}
         columns={countriesColumns}
         loading={loading}
         add={"ADD NEW COUNTRY"}
       />
+
+      <ToastContainer autoClose="3000" position="top-center" />
     </>
   );
 };

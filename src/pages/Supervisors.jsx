@@ -4,6 +4,7 @@ import TableComponent from "../components/Table";
 import useUserStore from "../stores/useUserStore";
 import usePaginationStore from "../stores/usePaginationStore";
 import { getAll } from "../network/network";
+import { ToastContainer } from "react-toastify";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -45,11 +46,13 @@ const Supervisors = () => {
   return (
     <>
       <TableComponent
+        // Endpoint={`https://sailgloble.com/admin/admins/delete/`}
         to=""
         rows={supervisorsData}
         columns={supervisorsColumns}
         // loading={loading}
       />
+      <ToastContainer autoClose="3000" position="top-center" />
     </>
   );
 };

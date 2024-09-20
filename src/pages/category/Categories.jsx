@@ -4,6 +4,7 @@ import { getAll } from "../../network/network";
 import { categoriesColumns } from "../../data/mockData";
 import useUserStore from "../../stores/useUserStore";
 import usePaginationStore from "../../stores/usePaginationStore";
+import { ToastContainer } from "react-toastify";
 
 const Categories = () => {
   const [rows, setRows] = useState([]);
@@ -44,12 +45,14 @@ const Categories = () => {
     <>
       <TableComponent
         to="/addcategory"
-        // Endpoint={`https://sailgloble.com/admin/providers/delete/`}
+        // Endpoint={`https://sailgloble.com/admin/categpries/delete/`}
         rows={rows}
         columns={categoriesColumns}
         loading={loading}
         add={"ADD NEW CATEGORY"}
       />
+
+      <ToastContainer autoClose="3000" position="top-center" />
     </>
   );
 };

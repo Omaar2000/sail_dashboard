@@ -28,7 +28,7 @@ import EditCityPage from "./pages/cities/EditCityPage";
 import Codes from "./pages/codes/Codes";
 import AddCodePage from "./pages/codes/AddCodePage";
 import EditCodePage from "./pages/codes/EditCodePage";
-import Users from "./pages/Users";
+// import Users from "./pages/Users";
 import ProviderList from "./pages/providers/ProvidersList";
 import Settings from "./pages/Settings";
 import Notifications from "./pages/Notifications";
@@ -52,6 +52,7 @@ import UsersRequests from "./pages/UsersPayouts";
 import ComplaintsComponent from "./pages/Complaints";
 import Respond from "./pages/ComplaintsResponse";
 import BoatDetail from "./pages/BoatDetails";
+import Users from "./pages/users/Users";
 function App() {
   const [theme, colorMode] = useMode();
   const [dashboard, setDashboard] = useState(false);

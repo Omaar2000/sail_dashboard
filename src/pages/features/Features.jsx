@@ -4,6 +4,7 @@ import { coversColumns, featuresColumns } from "../../data/mockData";
 import useUserStore from "../../stores/useUserStore";
 import usePaginationStore from "../../stores/usePaginationStore";
 import { getAll } from "../../network/network";
+import { ToastContainer } from "react-toastify";
 
 // export const getAllCategories = async () => {
 //   const res = await axios.get("/api/categories");
@@ -42,12 +43,14 @@ const Features = () => {
     <>
       <TableComponent
         to="/addfeature"
-        // Endpoint={`https://sailgloble.com/admin/providers/delete/`}
+        // Endpoint={`https://sailgloble.com/admin/app_settings/features/delete/`}
         rows={rows}
         columns={featuresColumns}
         loading={loading}
         add={"ADD NEW FEATURE"}
       />
+
+      <ToastContainer autoClose="3000" position="top-center" />
     </>
   );
 };
