@@ -471,6 +471,7 @@ const TableComponent = ({ Endpoint, to, rows, columns, loading, add }) => {
           loading={loading}
           // paginationMode="server"
           sx={{ direction: "ltr !important", textAlign: "start" }}
+          // processRowUpdate={}
         />
         {to !== "/addcover" && (
           <CustomFooter handlePageSizeChange={handlePageSizeChange} />

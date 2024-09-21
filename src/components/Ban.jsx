@@ -21,7 +21,6 @@ const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
       await addItem(token, logout, banEndpoint, {});
 
       setIsBanned(!isBanned);
-      row.banned_at = 1;
     } catch (error) {
       return;
     } finally {
@@ -33,7 +32,6 @@ const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
       setLoading(true);
       await addItem(token, logout, unbanEndpoint, {});
       setIsBanned(!isBanned);
-      row.banned_at = 0;
     } catch (error) {
       return;
     } finally {
