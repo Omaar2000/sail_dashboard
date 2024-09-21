@@ -603,16 +603,7 @@ export const providerRequestsColumns = [
     field: "approvedBy",
     headerName: i18n.t("Approved By"),
     flex: 1,
-    renderCell: ({ row }) => (
-      <Typography
-        mt="0.8rem"
-        fontSize="16px"
-        fontWeight="bold"
-        // color="#83ff63"
-      >
-        {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
-      </Typography>
-    ),
+    // renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
   },
 
   {

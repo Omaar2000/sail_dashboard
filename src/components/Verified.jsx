@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { verify } from "../network/providersServices";
 import useUserStore from "../stores/useUserStore";
@@ -9,6 +9,9 @@ const Verified = ({ row }) => {
   const { token, logout } = useUserStore();
   const [isVerified, setIsVerified] = useState(row.is_verified);
 
+  useEffect(() => {
+    setIsVerified(!isVerified);
+  }, [row.banned_at]);
   return (
     <>
       {!isVerified ? (
