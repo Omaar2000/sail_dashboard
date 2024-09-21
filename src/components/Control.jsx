@@ -19,7 +19,7 @@ const Control = ({ endpoint, row }) => {
       setLoading(true);
       await verify(token, logout, endpoint);
       setIsVerified(!isVerified);
-      row.approvedAt = 1;
+      row.approvedBy = 1;
     } catch (error) {
       return;
     } finally {
