@@ -9,7 +9,7 @@ import { banUser, unbanUser } from "../network/usersServices";
 import useUserStore from "../stores/useUserStore";
 import { addItem } from "../network/network";
 
-const Ban = ({ row, banEndpoint, unbanEndpoint, onApprove }) => {
+const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
   const { t } = useTranslation();
   // const navigate = useNavigate();
   const { token, logout } = useUserStore();
@@ -22,7 +22,6 @@ const Ban = ({ row, banEndpoint, unbanEndpoint, onApprove }) => {
 
       setIsBanned(!isBanned);
       // row.phone_number = 1;
-      onApprove("1asdfasf");
     } catch (error) {
       return;
     } finally {

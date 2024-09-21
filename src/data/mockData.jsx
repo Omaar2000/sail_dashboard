@@ -133,17 +133,11 @@ export const providerColumns = [
     headerName: i18n.t("Ban Provider"),
 
     flex: 1,
-    renderCell: ({ row, api }) => (
+    renderCell: ({ row }) => (
       <Ban
         banEndpoint={`https://sailgloble.com/admin/providers/ban/${row.id}`}
         unbanEndpoint={`https://sailgloble.com/admin/providers/unban/${row.id}`}
         row={row}
-        onApprove={(userId) => {
-          // Update the row data with the user's ID for approvedBy column
-          api.setRowMode(row.email, "edit");
-          api.updateRows([{ ...row, email: userId }]);
-          api.setRowMode(row.email, "view");
-        }}
       />
     ),
   },
@@ -609,7 +603,16 @@ export const providerRequestsColumns = [
     field: "approvedBy",
     headerName: i18n.t("Approved By"),
     flex: 1,
-    // renderCell: ({ row }) => <EditBtn to="/editcover" row={row} />,
+    renderCell: ({ row }) => (
+      <Typography
+        mt="0.8rem"
+        fontSize="16px"
+        fontWeight="bold"
+        // color="#83ff63"
+      >
+        {row.approvedBy !== null ? row.approvedBy : "Not Approved"}
+      </Typography>
+    ),
   },
 
   {
@@ -617,16 +620,10 @@ export const providerRequestsColumns = [
     headerName: i18n.t("Verify"),
 
     flex: 1,
-    renderCell: ({ row, api }) => (
+    renderCell: ({ row }) => (
       <Control
         endpoint={`https://sailgloble.com/admin/provider-requests/approve/account/${row.requestTypeId}`}
         row={row}
-        onApprove={(userId) => {
-          // Update the row data with the user's ID for approvedBy column
-          api.setRowMode(row.id, "edit");
-          api.updateRows([{ ...row, approvedBy: userId }]);
-          api.setRowMode(row.id, "view");
-        }}
       />
     ),
   },
