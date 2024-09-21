@@ -8,36 +8,36 @@ import { useTranslation } from "react-i18next";
 import { banUser, unbanUser } from "../network/usersServices";
 import useUserStore from "../stores/useUserStore";
 import { addItem } from "../network/network";
-
-const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
+const Ban = ({ row, banEndpoint, unbanEndpoint, updateRow }) => {
   const { t } = useTranslation();
-  // const navigate = useNavigate();
   const { token, logout } = useUserStore();
   const [isBanned, setIsBanned] = useState(row.banned_at !== null);
   const [loading, setLoading] = useState(false);
+
   const handleBan = async () => {
     try {
       setLoading(true);
       await addItem(token, logout, banEndpoint, {});
-
-      setIsBanned(!isBanned);
+      setIsBanned(true);
+      updateRow(row.id, "Omar"); // Change name to "Omar" when banned
     } catch (error) {
-      return;
+      console.error("Error banning provider:", error);
     } finally {
       setLoading(false);
     }
   };
+
   const handleUnban = async () => {
     try {
       setLoading(true);
       await addItem(token, logout, unbanEndpoint, {});
-      setIsBanned(!isBanned);
+      setIsBanned(false);
+      updateRow(row.id, "Not Banned"); // Change name to "Not Banned" when unbanned
     } catch (error) {
-      return;
+      console.error("Error unbanning provider:", error);
     } finally {
       setLoading(false);
     }
-    // setIsBanned(!isBanned);
   };
 
   return (
@@ -47,7 +47,7 @@ const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
           variant="contained"
           color="error"
           onClick={handleBan}
-          disabled={loading} // Disable the button while loading
+          disabled={loading}
           startIcon={
             loading ? <CircularProgress size={20} color="inherit" /> : null
           }
@@ -58,9 +58,8 @@ const Ban = ({ row, banEndpoint, unbanEndpoint }) => {
         <Button
           variant="contained"
           color="success"
-          type="button"
           onClick={handleUnban}
-          disabled={loading} // Disable the button while loading
+          disabled={loading}
           startIcon={
             loading ? <CircularProgress size={20} color="inherit" /> : null
           }

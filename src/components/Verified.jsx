@@ -9,9 +9,9 @@ const Verified = ({ row }) => {
   const { token, logout } = useUserStore();
   const [isVerified, setIsVerified] = useState(row.is_verified);
 
-  useEffect(() => {
-    setIsVerified(!isVerified);
-  }, [row.banned_at]);
+  // useEffect(() => {
+  //   setIsVerified(!isVerified);
+  // }, [row.banned_at]);
   return (
     <>
       {!isVerified ? (

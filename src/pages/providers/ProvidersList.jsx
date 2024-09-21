@@ -5,6 +5,7 @@ import { providerColumns } from "../../data/mockData";
 import { getAll } from "../../network/network";
 import usePaginationStore from "../../stores/usePaginationStore";
 import { ToastContainer } from "react-toastify";
+import Ban from "../../components/Ban";
 
 const ProviderList = () => {
   const [rows, setRows] = useState([]);
@@ -35,6 +36,15 @@ const ProviderList = () => {
     fetchData();
   }, [pageSize, page, keyword]);
 
+  // Function to update a specific row's name
+  const updateRow = (id, newName) => {
+    setRows((prevRows) =>
+      prevRows.map((row) =>
+        row.id === id ? { ...row, full_name: newName } : row
+      )
+    );
+  };
+
   return (
     <>
       <TableComponent
@@ -42,10 +52,24 @@ const ProviderList = () => {
         to=""
         setRows={setRows}
         rows={rows}
-        columns={providerColumns}
+        columns={providerColumns.map((col) => {
+          if (col.field === "Ban") {
+            return {
+              ...col,
+              renderCell: ({ row }) => (
+                <Ban
+                  row={row}
+                  banEndpoint={`https://sailgloble.com/admin/providers/ban/${row.id}`}
+                  unbanEndpoint={`https://sailgloble.com/admin/providers/unban/${row.id}`}
+                  updateRow={updateRow}
+                />
+              ),
+            };
+          }
+          return col;
+        })}
         loading={loading}
       />
-      {/* <ToastContainer autoClose="3000" position="top-center" /> */}
     </>
   );
 };
