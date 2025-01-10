@@ -78,7 +78,7 @@ function App() {
           <Routes>
             <Route
               path="/login"
-              element={token ? <Navigate to="/" /> : <Login />}
+              element={ <Login />}
             />
             <Route
               path="/*"
